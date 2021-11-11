@@ -31,6 +31,6 @@ public class DatabaseHelper {
             System.exit(1);
         }
         
-        System.out.println("try out push");
+       
     }
 }
