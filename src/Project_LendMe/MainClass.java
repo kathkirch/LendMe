@@ -20,4 +20,7 @@ public class MainClass {
         DatabaseHelper.connectDB();
     }
     
+    void testBernhard () {
+    System.out.println("Test");
+    };
 }
