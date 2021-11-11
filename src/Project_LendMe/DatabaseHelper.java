@@ -30,6 +30,7 @@ public class DatabaseHelper {
             System.out.println("Connection to DB failed");
             System.exit(1);
         }
+        
+        System.out.println("try out push");
     }
-    
 }

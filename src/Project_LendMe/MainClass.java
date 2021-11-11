@@ -10,6 +10,7 @@ package Project_LendMe;
  * @author Katharina
  */
 public class MainClass {
+    
 
     /**
      * @param args the command line arguments
