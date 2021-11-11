@@ -21,6 +21,6 @@ public class MainClass {
     }
     
     void testBernhard () {
-    System.out.println("Test");
+    System.out.println("Test234");
     };
 }
