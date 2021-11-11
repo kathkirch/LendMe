@@ -19,6 +19,8 @@ public class MainClass {
         // TODO code application logic here
         
         DatabaseHelper.connectDB();
+        DatabaseHelper.initNewRental_DB();
+        
     }
     
 }
