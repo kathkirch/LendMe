@@ -18,6 +18,7 @@ public class MainClass {
         // TODO code application logic here
         
         DatabaseHelper.connectDB();
+        System.out.println("Hello");
     }
     
 }
