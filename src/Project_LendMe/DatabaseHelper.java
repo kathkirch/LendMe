@@ -48,6 +48,8 @@ public class DatabaseHelper {
         }
     }
     
+    // idee, spaeter date, userid usw der methode uebergeben damit rental erzeugen
+    // so weiterarbeiten
     public static void initNewRental_DB() {
         
         // spaeter durch Eingabe aus GUI ersetzen!
@@ -65,7 +67,6 @@ public class DatabaseHelper {
             stmt.executeUpdate(string);
             updateDeviceStatus(rentals.getDevice_inventoryNumber());
             
-  
         } catch(SQLException ex) {
             System.out.println(ex);
             System.out.println("Error with Database");
