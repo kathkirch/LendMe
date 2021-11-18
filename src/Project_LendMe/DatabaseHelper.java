@@ -5,9 +5,12 @@
  */
 package Project_LendMe;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,6 +19,7 @@ import java.sql.SQLException;
 public class DatabaseHelper {
     
     private static Connection con;
+    private static Statement inventoryStatement;
     
     public static void connectDB(){
         con = null;
@@ -32,4 +36,21 @@ public class DatabaseHelper {
         }
     }
     
+    public static void insertInventory (String insertQuery) {
+        try {
+            inventoryStatement = con.createStatement();
+            int result = inventoryStatement.executeUpdate(insertQuery);
+            System.out.println(result + "Datensätze eingefügt");
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void closeConnection() {
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
