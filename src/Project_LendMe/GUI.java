@@ -5,22 +5,40 @@
 package Project_LendMe;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 
 /**
  *
  * @author Anja
  */
 public class GUI extends javax.swing.JFrame {
+    
+    public void switchPanels(JPanel panel)
+   {
+       jLayeredPane1.removeAll();
+       jLayeredPane1.add(panel);
+       jLayeredPane1.repaint();
+       jLayeredPane1.revalidate();
+       
+   }
+    
 
-    /**
+     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
     }
-
+    
+    
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,6 +57,14 @@ public class GUI extends javax.swing.JFrame {
         archive = new javax.swing.JButton();
         inventory = new javax.swing.JButton();
         startpage = new javax.swing.JPanel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        home = new javax.swing.JPanel();
+        newrental_panel = new javax.swing.JPanel();
+        rentallist_panel = new javax.swing.JPanel();
+        archive_panel = new javax.swing.JPanel();
+        inventory_panel = new javax.swing.JPanel();
+        return_panel = new javax.swing.JPanel();
+        newdevice_panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(802, 500));
@@ -87,7 +113,6 @@ public class GUI extends javax.swing.JFrame {
         newrental.setBackground(new java.awt.Color(55, 57, 58));
         newrental.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         newrental.setForeground(new java.awt.Color(255, 255, 255));
-        newrental.setIcon(new javax.swing.ImageIcon("C:\\Users\\linda\\OneDrive\\Dokumente\\NetBeansProjects\\LendMe\\images\\add-button-12018.png")); // NOI18N
         newrental.setText("Neuer Verleih");
         newrental.setBorderPainted(false);
         newrental.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -100,15 +125,12 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         sidepanel.add(newrental);
-        newrental.getAccessibleContext().setAccessibleName("Neuer Verleih");
         newrental.getAccessibleContext().setAccessibleDescription("");
 
         rentallist.setBackground(new java.awt.Color(55, 57, 58));
         rentallist.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rentallist.setForeground(new java.awt.Color(255, 255, 255));
-        rentallist.setIcon(new javax.swing.ImageIcon("C:\\Users\\linda\\OneDrive\\Dokumente\\NetBeansProjects\\LendMe\\images\\opened-book-3159.png")); // NOI18N
         rentallist.setText("Verleihliste");
-        rentallist.setActionCommand("Verleihliste");
         rentallist.setBorderPainted(false);
         rentallist.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         rentallist.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -124,7 +146,6 @@ public class GUI extends javax.swing.JFrame {
         archive.setBackground(new java.awt.Color(55, 57, 58));
         archive.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         archive.setForeground(new java.awt.Color(255, 255, 255));
-        archive.setIcon(new javax.swing.ImageIcon("C:\\Users\\linda\\OneDrive\\Dokumente\\NetBeansProjects\\LendMe\\images\\open-folder-11477.png")); // NOI18N
         archive.setText("Archiv");
         archive.setToolTipText("");
         archive.setActionCommand("Verleihliste");
@@ -143,7 +164,6 @@ public class GUI extends javax.swing.JFrame {
         inventory.setBackground(new java.awt.Color(55, 57, 58));
         inventory.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         inventory.setForeground(new java.awt.Color(255, 255, 255));
-        inventory.setIcon(new javax.swing.ImageIcon("C:\\Users\\linda\\OneDrive\\Dokumente\\NetBeansProjects\\LendMe\\images\\list-6225.png")); // NOI18N
         inventory.setText("Inventar");
         inventory.setToolTipText("");
         inventory.setActionCommand("Verleihliste");
@@ -163,7 +183,150 @@ public class GUI extends javax.swing.JFrame {
         sidepanel.getAccessibleContext().setAccessibleName("");
 
         startpage.setBackground(new java.awt.Color(220, 229, 211));
-        startpage.setLayout(new java.awt.GridBagLayout());
+
+        home.setBackground(new java.awt.Color(220, 229, 211));
+
+        javax.swing.GroupLayout homeLayout = new javax.swing.GroupLayout(home);
+        home.setLayout(homeLayout);
+        homeLayout.setHorizontalGroup(
+            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        homeLayout.setVerticalGroup(
+            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+
+        newrental_panel.setBackground(new java.awt.Color(220, 229, 211));
+        newrental_panel.setLayout(new java.awt.GridLayout(12, 3, 3, 3));
+
+        rentallist_panel.setBackground(new java.awt.Color(220, 229, 211));
+
+        javax.swing.GroupLayout rentallist_panelLayout = new javax.swing.GroupLayout(rentallist_panel);
+        rentallist_panel.setLayout(rentallist_panelLayout);
+        rentallist_panelLayout.setHorizontalGroup(
+            rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        rentallist_panelLayout.setVerticalGroup(
+            rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+
+        archive_panel.setBackground(new java.awt.Color(220, 229, 211));
+
+        javax.swing.GroupLayout archive_panelLayout = new javax.swing.GroupLayout(archive_panel);
+        archive_panel.setLayout(archive_panelLayout);
+        archive_panelLayout.setHorizontalGroup(
+            archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        archive_panelLayout.setVerticalGroup(
+            archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+
+        inventory_panel.setBackground(new java.awt.Color(220, 229, 211));
+
+        javax.swing.GroupLayout inventory_panelLayout = new javax.swing.GroupLayout(inventory_panel);
+        inventory_panel.setLayout(inventory_panelLayout);
+        inventory_panelLayout.setHorizontalGroup(
+            inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        inventory_panelLayout.setVerticalGroup(
+            inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 789, Short.MAX_VALUE)
+        );
+
+        return_panel.setBackground(new java.awt.Color(220, 229, 211));
+
+        javax.swing.GroupLayout return_panelLayout = new javax.swing.GroupLayout(return_panel);
+        return_panel.setLayout(return_panelLayout);
+        return_panelLayout.setHorizontalGroup(
+            return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        return_panelLayout.setVerticalGroup(
+            return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+
+        newdevice_panel.setBackground(new java.awt.Color(220, 229, 211));
+
+        javax.swing.GroupLayout newdevice_panelLayout = new javax.swing.GroupLayout(newdevice_panel);
+        newdevice_panel.setLayout(newdevice_panelLayout);
+        newdevice_panelLayout.setHorizontalGroup(
+            newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        newdevice_panelLayout.setVerticalGroup(
+            newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 789, Short.MAX_VALUE)
+        );
+
+        jLayeredPane1.setLayer(home, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(newrental_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(rentallist_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(archive_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(inventory_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(return_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(newdevice_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(newrental_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(rentallist_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(archive_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(inventory_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(return_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(newdevice_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(newrental_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(rentallist_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(archive_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addComponent(inventory_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(return_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addComponent(newdevice_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout startpageLayout = new javax.swing.GroupLayout(startpage);
+        startpage.setLayout(startpageLayout);
+        startpageLayout.setHorizontalGroup(
+            startpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane1)
+        );
+        startpageLayout.setVerticalGroup(
+            startpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane1)
+        );
+
         parentpanel.add(startpage, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(parentpanel, java.awt.BorderLayout.CENTER);
@@ -177,29 +340,36 @@ public class GUI extends javax.swing.JFrame {
 
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
         // TODO add your handling code here
-        NewRentalGUI nrGUI = new NewRentalGUI();
-        nrGUI.setVisible(true);
-        dispose();
+        //NewRentalGUI nrGUI = new NewRentalGUI();
+        //nrGUI.setVisible(true);
+        //dispose();
+        switchPanels(newrental_panel);
     }//GEN-LAST:event_newrentalActionPerformed
 
     private void rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentallistActionPerformed
         // TODO add your handling code here:
-        RentalListGUI rlGUI = new RentalListGUI();
-        rlGUI.setVisible(true);
-        dispose();
+        //RentalListGUI rlGUI = new RentalListGUI();
+        //rlGUI.setVisible(true);
+        //dispose();
+        
+        switchPanels(rentallist_panel);
     }//GEN-LAST:event_rentallistActionPerformed
 
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
         // TODO add your handling code here:
-        ArchiveGUI arGUI = new ArchiveGUI();
-        arGUI.setVisible(true);
-        dispose();
+        //ArchiveGUI arGUI = new ArchiveGUI();
+        //arGUI.setVisible(true);
+        //dispose();
+        
+        switchPanels(archive_panel);
     }//GEN-LAST:event_archiveActionPerformed
 
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
-        InventoryGUI inGUI = new InventoryGUI();
-        inGUI.setVisible(true);
-        dispose();
+        //InventoryGUI inGUI = new InventoryGUI();
+        //inGUI.setVisible(true);
+        //dispose();
+        
+        switchPanels(inventory_panel);
     }//GEN-LAST:event_inventoryActionPerformed
 
     /**
@@ -240,11 +410,19 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton archive;
+    private javax.swing.JPanel archive_panel;
+    private javax.swing.JPanel home;
     private javax.swing.JButton inventory;
+    private javax.swing.JPanel inventory_panel;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel newdevice_panel;
     private javax.swing.JButton newrental;
+    private javax.swing.JPanel newrental_panel;
     private javax.swing.JPanel parentpanel;
     private javax.swing.JButton rentallist;
+    private javax.swing.JPanel rentallist_panel;
+    private javax.swing.JPanel return_panel;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JPanel startpage;
     private javax.swing.JPanel toppenal;

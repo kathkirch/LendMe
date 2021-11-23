@@ -5,6 +5,9 @@
  */
 package Project_LendMe;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Katharina
@@ -14,7 +17,8 @@ public class MainClass {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {  
+        
         // TODO code application logic here
         
         DatabaseHelper.connectDB();
