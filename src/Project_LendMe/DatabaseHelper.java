@@ -80,10 +80,14 @@ public class DatabaseHelper {
             } 
         }
     }
+    
+    
         
     public static void updateDeviceStatus(int device_inventoryNumber) {
         Statement stmt = null;
         ResultSet rs = null;
+        
+        System.out.println("hello hello");
         
         try {
             stmt = con.createStatement();
@@ -113,4 +117,5 @@ public class DatabaseHelper {
                 }  
             } 
     }
+    
 }
