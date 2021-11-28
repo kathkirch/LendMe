@@ -7,6 +7,7 @@ package Project_LendMe;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -23,8 +24,11 @@ public class MainClass {
         // TODO code application logic here
         
         DatabaseHelper.connectDB();
-        DatabaseHelper.initNewRental_DB();
+        //DatabaseHelper.initNewRental_DB();
+        
+        Runnable runnable = new GUI();
+        Thread thread = new Thread(runnable);
+        thread.start();
         
     }
-    
 }
