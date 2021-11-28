@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -46,6 +48,46 @@ public class DatabaseHelper {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }
+    
+    public static List <Devices> getItems(){
+    
+        List <Devices> devicesList = new ArrayList <>();
+        ResultSet rs = null;
+        Statement stmt = null;
+       
+        try {
+            stmt = con.createStatement();
+            String query = "SELECT * FROM devices";
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()){
+                String productName = rs.getString("productName");
+                String manufacturer = rs.getString("manufacturer");
+                int inventoryNumber = rs.getInt("inventoryNumber");
+                int userID = rs.getInt("users_userID");
+                
+                Devices dev = new Devices();
+                dev.setProductName(productName);
+                dev.setManufacturer(manufacturer);
+                dev.setInventoryNumber(inventoryNumber);
+                dev.setUsers_userID(userID);
+                
+                devicesList.add(dev);
+            }
+        
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        }
+        return devicesList;
     }
     
     
