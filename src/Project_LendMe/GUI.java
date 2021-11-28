@@ -1096,6 +1096,11 @@ public class GUI extends javax.swing.JFrame {
 
     private void newdevice_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newdevice_buttonActionPerformed
         // TODO add your handling code here:
+        
+        layerpane.removeAll();
+        layerpane.add(newdevice_panel);
+        layerpane.repaint();
+        layerpane.revalidate();
     }//GEN-LAST:event_newdevice_buttonActionPerformed
 
     private void searchfilter_rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchfilter_rentallistActionPerformed
