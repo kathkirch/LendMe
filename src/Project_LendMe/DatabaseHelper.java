@@ -48,6 +48,8 @@ public class DatabaseHelper {
         }
     }
     
+    
+    
     // idee, spaeter date, userid usw der methode uebergeben damit rental erzeugen
     // so weiterarbeiten
     public static void initNewRental_DB() {
