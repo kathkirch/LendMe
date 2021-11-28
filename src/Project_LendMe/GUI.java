@@ -20,14 +20,14 @@ import javax.swing.JLayeredPane;
  */
 public class GUI extends javax.swing.JFrame {
     
-    public void switchPanels(JPanel panel)
+    /* public void switchPanels(JPanel panel)
    {
-       jLayeredPane1.removeAll();
-       jLayeredPane1.add(panel);
-       jLayeredPane1.repaint();
-       jLayeredPane1.revalidate();
+       layerpane.removeAll();
+       layerpane.add(panel);
+       layerpane.repaint();
+       layerpane.revalidate();
        
-   }
+   }*/
     
 
      /**
@@ -57,96 +57,94 @@ public class GUI extends javax.swing.JFrame {
         archive = new javax.swing.JButton();
         inventory = new javax.swing.JButton();
         startpage = new javax.swing.JPanel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        layerpane = new javax.swing.JLayeredPane();
         newrental_panel = new javax.swing.JPanel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
+        newrentaltitle = new javax.swing.JLabel();
+        devicename = new javax.swing.JLabel();
+        manufacturername = new javax.swing.JLabel();
+        inventory_number = new javax.swing.JLabel();
+        rentedby = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
-        jComboBox17 = new javax.swing.JComboBox<>();
-        jComboBox18 = new javax.swing.JComboBox<>();
-        jComboBox19 = new javax.swing.JComboBox<>();
-        jComboBox20 = new javax.swing.JComboBox<>();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jComboBox21 = new javax.swing.JComboBox<>();
-        jComboBox22 = new javax.swing.JComboBox<>();
-        jLabel39 = new javax.swing.JLabel();
-        dateChooser1 = new com.raven.datechooser.DateChooser();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        productname_newrental = new javax.swing.JComboBox<>();
+        manufacturer_newrental = new javax.swing.JComboBox<>();
+        inventorynumber_newrental = new javax.swing.JComboBox<>();
+        userID_newrental = new javax.swing.JComboBox<>();
+        userFirstName = new javax.swing.JTextField();
+        userLastName = new javax.swing.JTextField();
+        userEmail = new javax.swing.JTextField();
+        userPhone = new javax.swing.JTextField();
+        year_newrental = new javax.swing.JComboBox<>();
+        administrator_newrental = new javax.swing.JComboBox<>();
+        date = new javax.swing.JLabel();
+        rentalDate_newrental = new com.raven.datechooser.DateChooser();
+        save_newrental = new javax.swing.JToggleButton();
+        cancel_newrental = new javax.swing.JToggleButton();
         rentallist_panel = new javax.swing.JPanel();
-        jLabel31 = new javax.swing.JLabel();
-        jComboBox16 = new javax.swing.JComboBox<>();
-        jLabel32 = new javax.swing.JLabel();
+        rentallist_title = new javax.swing.JLabel();
+        searchfilter_rentallist = new javax.swing.JComboBox<>();
+        filter_options_rentallist = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        rentallist_table = new javax.swing.JTable();
         archive_panel = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
+        archive_title = new javax.swing.JLabel();
+        searchfilter_archive = new javax.swing.JComboBox<>();
+        filter_options_archive = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        archive_table = new javax.swing.JTable();
         inventory_panel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
+        newdevice_button = new javax.swing.JButton();
+        inventory_title = new javax.swing.JLabel();
+        searchfilter_inventory = new javax.swing.JComboBox<>();
+        filter_options_inventory = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        inventory_table = new javax.swing.JTable();
         return_panel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        productname_return = new javax.swing.JLabel();
+        manufacturer_return = new javax.swing.JLabel();
+        return_title = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        dateChooser3 = new com.raven.datechooser.DateChooser();
+        information_return = new javax.swing.JTextArea();
+        imei_return = new javax.swing.JLabel();
+        rentedby_return = new javax.swing.JLabel();
+        date_return = new javax.swing.JLabel();
+        administrator_return = new javax.swing.JLabel();
+        returndate = new com.raven.datechooser.DateChooser();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel17 = new javax.swing.JLabel();
+        withdrawnby = new javax.swing.JComboBox<>();
+        notestitle_return = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jLabel18 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
-        jToggleButton6 = new javax.swing.JToggleButton();
+        notes_return = new javax.swing.JTextArea();
+        defaultsettings = new javax.swing.JLabel();
+        yes = new javax.swing.JRadioButton();
+        no = new javax.swing.JRadioButton();
+        save_return = new javax.swing.JToggleButton();
+        cancel_return = new javax.swing.JToggleButton();
         newdevice_panel = new javax.swing.JPanel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        dateChooser2 = new com.raven.datechooser.DateChooser();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel47 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel48 = new javax.swing.JLabel();
+        newdevice_title = new javax.swing.JLabel();
+        devicename_newdevice = new javax.swing.JLabel();
+        manufacturer_newdevice = new javax.swing.JLabel();
+        inventorynumber_newdevice = new javax.swing.JLabel();
+        IMEInumber_newdevice = new javax.swing.JLabel();
+        acquisitiondate_newdevice = new javax.swing.JLabel();
+        acquisitionDate = new com.raven.datechooser.DateChooser();
+        save_newdevice = new javax.swing.JToggleButton();
+        cancel_newdevice = new javax.swing.JToggleButton();
+        manufacturer = new javax.swing.JTextField();
+        productname = new javax.swing.JTextField();
+        inventoryNumber = new javax.swing.JTextField();
+        imei = new javax.swing.JTextField();
+        room_newdevice = new javax.swing.JLabel();
+        location = new javax.swing.JTextField();
+        notes_newdevice = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jLabel49 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel50 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        home1 = new javax.swing.JPanel();
+        notes = new javax.swing.JTextArea();
+        administrator_newdevice = new javax.swing.JLabel();
+        administrator = new javax.swing.JComboBox<>();
+        acquisitionvalue_newdevice = new javax.swing.JLabel();
+        acquisitionValue = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(802, 500));
         setSize(new java.awt.Dimension(0, 0));
 
         toppenal.setBackground(new java.awt.Color(87, 121, 50));
@@ -166,9 +164,9 @@ public class GUI extends javax.swing.JFrame {
         toppenalLayout.setHorizontalGroup(
             toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toppenalLayout.createSequentialGroup()
-                .addContainerGap(249, Short.MAX_VALUE)
+                .addContainerGap(374, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         toppenalLayout.setVerticalGroup(
             toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,91 +263,91 @@ public class GUI extends javax.swing.JFrame {
 
         newrental_panel.setBackground(new java.awt.Color(220, 229, 211));
 
-        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel33.setText("Neuer Verleih");
+        newrentaltitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        newrentaltitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        newrentaltitle.setText("Neuer Verleih");
 
-        jLabel34.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel34.setText("Gerätename");
+        devicename.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        devicename.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        devicename.setText("Gerätename");
 
-        jLabel35.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel35.setText("Herstellerbezeichnung");
+        manufacturername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        manufacturername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        manufacturername.setText("Herstellerbezeichnung");
 
-        jLabel36.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel36.setText("Inventarnummer");
+        inventory_number.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        inventory_number.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        inventory_number.setText("Inventarnummer");
 
-        jLabel37.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel37.setText("Verliehen von");
+        rentedby.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rentedby.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        rentedby.setText("Verliehen von");
 
         jLabel38.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel38.setText("Verleihen an");
 
-        jComboBox17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox17.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        productname_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        productname_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox18.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        manufacturer_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        manufacturer_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox19.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        inventorynumber_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        inventorynumber_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox20.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        userID_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userID_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField10.setText("Vorname");
-        jTextField10.setToolTipText("");
+        userFirstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userFirstName.setText("Vorname");
+        userFirstName.setToolTipText("");
 
-        jTextField11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField11.setText("Nachname");
-        jTextField11.setToolTipText("");
+        userLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userLastName.setText("Nachname");
+        userLastName.setToolTipText("");
 
-        jTextField12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField12.setText("E-Mail");
-        jTextField12.setToolTipText("");
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        userEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userEmail.setText("E-Mail");
+        userEmail.setToolTipText("");
+        userEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                userEmailActionPerformed(evt);
             }
         });
 
-        jTextField13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField13.setText("Telefonnummer");
-        jTextField13.setToolTipText("");
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        userPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userPhone.setText("Telefonnummer");
+        userPhone.setToolTipText("");
+        userPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                userPhoneActionPerformed(evt);
             }
         });
 
-        jComboBox21.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox21.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GEB17", "GEB18", "GEB19", "GEB20" }));
+        year_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        year_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GEB17", "GEB18", "GEB19", "GEB20" }));
 
-        jComboBox22.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox22.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        administrator_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        administrator_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel39.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel39.setText("Datum");
+        date.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        date.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        date.setText("Datum");
 
-        dateChooser1.setForeground(new java.awt.Color(87, 121, 50));
-        dateChooser1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        rentalDate_newrental.setForeground(new java.awt.Color(87, 121, 50));
+        rentalDate_newrental.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jToggleButton1.setText("Speichern");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        save_newrental.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        save_newrental.setText("Speichern");
+        save_newrental.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                save_newrentalActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jToggleButton2.setText("Abbrechen");
+        cancel_newrental.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cancel_newrental.setText("Abbrechen");
 
         javax.swing.GroupLayout newrental_panelLayout = new javax.swing.GroupLayout(newrental_panel);
         newrental_panel.setLayout(newrental_panelLayout);
@@ -360,105 +358,106 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newrental_panelLayout.createSequentialGroup()
                         .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(manufacturername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(devicename, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inventory_number, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                             .addComponent(jLabel38, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                         .addGap(30, 30, 30)
                         .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(newrental_panelLayout.createSequentialGroup()
-                                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(userPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox21, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jTextField12)
-                            .addComponent(jComboBox20, 0, 307, Short.MAX_VALUE)
+                                .addComponent(year_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(userEmail)
+                            .addComponent(userID_newrental, 0, 307, Short.MAX_VALUE)
                             .addGroup(newrental_panelLayout.createSequentialGroup()
-                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(userFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField11))
-                            .addComponent(jComboBox17, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox18, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox19, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(userLastName))
+                            .addComponent(productname_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manufacturer_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inventorynumber_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(newrentaltitle, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(newrental_panelLayout.createSequentialGroup()
                         .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rentedby, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(newrental_panelLayout.createSequentialGroup()
-                                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(save_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
-                                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox22, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(71, 71, Short.MAX_VALUE))
+                                .addComponent(cancel_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(administrator_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rentalDate_newrental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(111, 279, Short.MAX_VALUE))
         );
         newrental_panelLayout.setVerticalGroup(
             newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newrental_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newrentaltitle, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel34)
-                    .addComponent(jComboBox17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(devicename)
+                    .addComponent(productname_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(jComboBox18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(manufacturername)
+                    .addComponent(manufacturer_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(jComboBox19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inventory_number)
+                    .addComponent(inventorynumber_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
-                    .addComponent(jComboBox20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userID_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(userEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel37)
-                    .addComponent(jComboBox22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(year_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rentedby)
+                    .addComponent(administrator_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel39)
-                    .addComponent(dateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(date)
+                    .addComponent(rentalDate_newrental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
-                .addContainerGap(147, Short.MAX_VALUE))
+                    .addComponent(save_newrental)
+                    .addComponent(cancel_newrental))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
 
         rentallist_panel.setBackground(new java.awt.Color(220, 229, 211));
 
-        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel31.setText("Aktuell verliehen");
+        rentallist_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rentallist_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rentallist_title.setText("Aktuell verliehen");
 
-        jComboBox16.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox16.addActionListener(new java.awt.event.ActionListener() {
+        searchfilter_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchfilter_rentallist.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        searchfilter_rentallist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox16ActionPerformed(evt);
+                searchfilter_rentallistActionPerformed(evt);
             }
         });
 
-        jLabel32.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel32.setText("Filterungs- und Sortiermöglichkeiten:");
+        filter_options_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        filter_options_rentallist.setText("Filterungs- und Sortiermöglichkeiten:");
 
         jScrollPane6.setBackground(new java.awt.Color(220, 229, 211));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        rentallist_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -469,7 +468,7 @@ public class GUI extends javax.swing.JFrame {
                 "Aktuell verliehene Geräte"
             }
         ));
-        jScrollPane6.setViewportView(jTable5);
+        jScrollPane6.setViewportView(rentallist_table);
 
         javax.swing.GroupLayout rentallist_panelLayout = new javax.swing.GroupLayout(rentallist_panel);
         rentallist_panel.setLayout(rentallist_panelLayout);
@@ -479,46 +478,47 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rentallist_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rentallist_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel32)
+                        .addComponent(filter_options_rentallist)
                         .addGap(20, 20, 20)
-                        .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                        .addComponent(searchfilter_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(414, Short.MAX_VALUE))
         );
         rentallist_panelLayout.setVerticalGroup(
             rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rentallist_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rentallist_title, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32))
+                    .addComponent(searchfilter_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filter_options_rentallist))
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
 
         archive_panel.setBackground(new java.awt.Color(220, 229, 211));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Archiv");
+        archive_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        archive_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        archive_title.setText("Archiv");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        searchfilter_archive.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchfilter_archive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        searchfilter_archive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                searchfilter_archiveActionPerformed(evt);
             }
         });
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel14.setText("Filterungs- und Sortiermöglichkeiten:");
+        filter_options_archive.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        filter_options_archive.setText("Filterungs- und Sortiermöglichkeiten:");
 
         jScrollPane3.setBackground(new java.awt.Color(220, 229, 211));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        archive_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -529,7 +529,7 @@ public class GUI extends javax.swing.JFrame {
                 "Archiv"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(archive_table);
 
         javax.swing.GroupLayout archive_panelLayout = new javax.swing.GroupLayout(archive_panel);
         archive_panel.setLayout(archive_panelLayout);
@@ -539,55 +539,55 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(archive_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, archive_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
+                        .addComponent(filter_options_archive)
                         .addGap(20, 20, 20)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(searchfilter_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         archive_panelLayout.setVerticalGroup(
             archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(archive_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(archive_title, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                    .addComponent(searchfilter_archive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filter_options_archive))
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
 
         inventory_panel.setBackground(new java.awt.Color(220, 229, 211));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jButton1.setText("Neues Device anlegen");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        newdevice_button.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        newdevice_button.setText("Neues Device anlegen");
+        newdevice_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                newdevice_buttonActionPerformed(evt);
             }
         });
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Inventar");
+        inventory_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        inventory_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        inventory_title.setText("Inventar");
 
-        jComboBox4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        searchfilter_inventory.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchfilter_inventory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        searchfilter_inventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                searchfilter_inventoryActionPerformed(evt);
             }
         });
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel16.setText("Filterungs- und Sortiermöglichkeiten:");
+        filter_options_inventory.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        filter_options_inventory.setText("Filterungs- und Sortiermöglichkeiten:");
 
         jScrollPane4.setBackground(new java.awt.Color(220, 229, 211));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        inventory_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -598,7 +598,7 @@ public class GUI extends javax.swing.JFrame {
                 "Inventar"
             }
         ));
-        jScrollPane4.setViewportView(jTable3);
+        jScrollPane4.setViewportView(inventory_table);
 
         javax.swing.GroupLayout inventory_panelLayout = new javax.swing.GroupLayout(inventory_panel);
         inventory_panel.setLayout(inventory_panelLayout);
@@ -608,67 +608,67 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane4)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inventory_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, inventory_panelLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel16)
+                        .addComponent(newdevice_button, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(filter_options_inventory)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(searchfilter_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         inventory_panelLayout.setVerticalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inventory_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inventory_title, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel16))
-                    .addComponent(jButton1))
+                        .addComponent(searchfilter_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(filter_options_inventory))
+                    .addComponent(newdevice_button))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         return_panel.setBackground(new java.awt.Color(220, 229, 211));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Typ");
+        productname_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        productname_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        productname_return.setText("Produktname");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Herstellerbezeichnung");
+        manufacturer_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        manufacturer_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        manufacturer_return.setText("Herstellerbezeichnung");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Rückgabe");
+        return_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        return_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        return_title.setText("Rückgabe");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        information_return.setColumns(20);
+        information_return.setRows(5);
+        jScrollPane1.setViewportView(information_return);
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Seriennummer");
+        imei_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imei_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        imei_return.setText("IMEI Nummer");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Verliehen an");
+        rentedby_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rentedby_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        rentedby_return.setText("Verliehen an");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("Datum");
+        date_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        date_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        date_return.setText("Datum");
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Verliehen von");
+        administrator_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        administrator_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        administrator_return.setText("Verliehen von");
 
-        dateChooser3.setForeground(new java.awt.Color(87, 121, 50));
-        dateChooser3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        returndate.setForeground(new java.awt.Color(87, 121, 50));
+        returndate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -678,49 +678,49 @@ public class GUI extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Rückgabedatum");
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        withdrawnby.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        withdrawnby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        withdrawnby.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                withdrawnbyActionPerformed(evt);
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel17.setText("Notizen");
+        notestitle_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        notestitle_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        notestitle_return.setText("Notizen");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane5.setViewportView(jTextArea3);
+        notes_return.setColumns(20);
+        notes_return.setRows(5);
+        jScrollPane5.setViewportView(notes_return);
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel18.setText("Werkseinstellungen");
+        defaultsettings.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        defaultsettings.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        defaultsettings.setText("Werkseinstellungen");
 
-        jRadioButton1.setBackground(new java.awt.Color(220, 229, 211));
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButton1.setText("Ja");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        yes.setBackground(new java.awt.Color(220, 229, 211));
+        yes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        yes.setText("Ja");
+        yes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                yesActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(220, 229, 211));
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButton2.setText("Nein");
+        no.setBackground(new java.awt.Color(220, 229, 211));
+        no.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        no.setText("Nein");
 
-        jToggleButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jToggleButton5.setText("Speichern");
-        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+        save_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        save_return.setText("Speichern");
+        save_return.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton5ActionPerformed(evt);
+                save_returnActionPerformed(evt);
             }
         });
 
-        jToggleButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jToggleButton6.setText("Abbrechen");
+        cancel_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cancel_return.setText("Abbrechen");
 
         javax.swing.GroupLayout return_panelLayout = new javax.swing.GroupLayout(return_panel);
         return_panel.setLayout(return_panelLayout);
@@ -728,7 +728,7 @@ public class GUI extends javax.swing.JFrame {
             return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(return_panelLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(return_title, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(97, 97, 97))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, return_panelLayout.createSequentialGroup()
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -738,32 +738,32 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, return_panelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(productname_return, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manufacturer_return, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                            .addComponent(imei_return, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rentedby_return, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(administrator_return, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(date_return, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(return_panelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(notestitle_return, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(defaultsettings, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(48, 48, 48)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(return_panelLayout.createSequentialGroup()
-                        .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(save_return, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cancel_return, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(return_panelLayout.createSequentialGroup()
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(no, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-                        .addComponent(dateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(returndate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(withdrawnby, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane5)))
                 .addGap(101, 101, 101))
         );
@@ -771,126 +771,126 @@ public class GUI extends javax.swing.JFrame {
             return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(return_panelLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(return_title, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(return_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(productname_return)
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel5)
+                        .addComponent(manufacturer_return)
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel7)
+                        .addComponent(imei_return)
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel8)
+                        .addComponent(rentedby_return)
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel9)
+                        .addComponent(date_return)
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel10))
+                        .addComponent(administrator_return))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
-                    .addComponent(dateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(returndate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(withdrawnby, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
+                    .addComponent(notestitle_return)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
+                    .addComponent(defaultsettings)
                     .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jRadioButton1)
-                        .addComponent(jRadioButton2)))
+                        .addComponent(yes)
+                        .addComponent(no)))
                 .addGap(20, 20, 20)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton5)
-                    .addComponent(jToggleButton6))
+                    .addComponent(save_return)
+                    .addComponent(cancel_return))
                 .addGap(62, 62, 62))
         );
 
         newdevice_panel.setBackground(new java.awt.Color(220, 229, 211));
 
-        jLabel40.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("Neues Gerät");
+        newdevice_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        newdevice_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        newdevice_title.setText("Neues Gerät");
 
-        jLabel41.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel41.setText("Gerätename");
+        devicename_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        devicename_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        devicename_newdevice.setText("Gerätename");
 
-        jLabel42.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel42.setText("Herstellerbezeichnung");
+        manufacturer_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        manufacturer_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        manufacturer_newdevice.setText("Herstellerbezeichnung");
 
-        jLabel43.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel43.setText("Inventarnummer");
+        inventorynumber_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        inventorynumber_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        inventorynumber_newdevice.setText("Inventarnummer");
 
-        jLabel45.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel45.setText("IMEI Nummer");
+        IMEInumber_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        IMEInumber_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        IMEInumber_newdevice.setText("IMEI Nummer");
 
-        jLabel46.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel46.setText("Anschaffungsdatum");
+        acquisitiondate_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        acquisitiondate_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        acquisitiondate_newdevice.setText("Anschaffungsdatum");
 
-        dateChooser2.setForeground(new java.awt.Color(87, 121, 50));
-        dateChooser2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        acquisitionDate.setForeground(new java.awt.Color(87, 121, 50));
+        acquisitionDate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jToggleButton3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jToggleButton3.setText("Speichern");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+        save_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        save_newdevice.setText("Speichern");
+        save_newdevice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                save_newdeviceActionPerformed(evt);
             }
         });
 
-        jToggleButton4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jToggleButton4.setText("Abbrechen");
+        cancel_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cancel_newdevice.setText("Abbrechen");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        manufacturer.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        productname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        inventoryNumber.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        imei.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jLabel47.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel47.setText("Raum");
+        room_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        room_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        room_newdevice.setText("Raum");
 
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        location.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jLabel48.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel48.setText("Notizen");
+        notes_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        notes_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        notes_newdevice.setText("Notizen");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        notes.setColumns(20);
+        notes.setRows(5);
+        jScrollPane2.setViewportView(notes);
 
-        jLabel49.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel49.setText("Administrator");
+        administrator_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        administrator_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        administrator_newdevice.setText("Administrator");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        administrator.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        administrator.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        administrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                administratorActionPerformed(evt);
             }
         });
 
-        jLabel50.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel50.setText("Anschaffungswert");
+        acquisitionvalue_newdevice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        acquisitionvalue_newdevice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        acquisitionvalue_newdevice.setText("Anschaffungswert");
 
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        acquisitionValue.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout newdevice_panelLayout = new javax.swing.GroupLayout(newdevice_panel);
         newdevice_panel.setLayout(newdevice_panelLayout);
@@ -901,166 +901,142 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newdevice_panelLayout.createSequentialGroup()
                         .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel41, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jLabel47, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jLabel50, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                            .addComponent(manufacturer_newdevice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(devicename_newdevice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inventorynumber_newdevice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(IMEInumber_newdevice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(room_newdevice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(notes_newdevice, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(administrator_newdevice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(acquisitionvalue_newdevice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                         .addGap(40, 40, 40)
                         .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                            .addComponent(manufacturer)
+                            .addComponent(productname)
+                            .addComponent(inventoryNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                            .addComponent(imei, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                             .addComponent(jScrollPane2)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
+                            .addComponent(administrator, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(location)
+                            .addComponent(acquisitionValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
                         .addGap(0, 84, Short.MAX_VALUE))
                     .addGroup(newdevice_panelLayout.createSequentialGroup()
                         .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newdevice_title, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(newdevice_panelLayout.createSequentialGroup()
-                                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(acquisitiondate_newdevice, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(40, 40, 40)
                                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(newdevice_panelLayout.createSequentialGroup()
-                                        .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(save_newdevice, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(10, 10, 10)
-                                        .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(dateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(cancel_newdevice, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(acquisitionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(19, 19, 19))))
         );
         newdevice_panelLayout.setVerticalGroup(
             newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newdevice_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newdevice_title, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel41)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(devicename_newdevice)
+                    .addComponent(productname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel42))
+                    .addComponent(manufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manufacturer_newdevice))
                 .addGap(10, 10, 10)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel43)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inventorynumber_newdevice)
+                    .addComponent(inventoryNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel45)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(IMEInumber_newdevice)
+                    .addComponent(imei, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(room_newdevice)
+                    .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel48)
+                    .addComponent(notes_newdevice)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel49))
+                    .addComponent(administrator, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(administrator_newdevice))
                 .addGap(10, 10, 10)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel50)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(acquisitionvalue_newdevice)
+                    .addComponent(acquisitionValue, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel46)
-                    .addComponent(dateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(acquisitiondate_newdevice)
+                    .addComponent(acquisitionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton3)
-                    .addComponent(jToggleButton4))
+                    .addComponent(save_newdevice)
+                    .addComponent(cancel_newdevice))
                 .addGap(172, 172, 172))
         );
 
-        home1.setBackground(new java.awt.Color(220, 229, 211));
+        layerpane.setLayer(newrental_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerpane.setLayer(rentallist_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerpane.setLayer(archive_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerpane.setLayer(inventory_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerpane.setLayer(return_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layerpane.setLayer(newdevice_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout home1Layout = new javax.swing.GroupLayout(home1);
-        home1.setLayout(home1Layout);
-        home1Layout.setHorizontalGroup(
-            home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 595, Short.MAX_VALUE)
-        );
-        home1Layout.setVerticalGroup(
-            home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-
-        jLayeredPane1.setLayer(newrental_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(rentallist_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(archive_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(inventory_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(return_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(newdevice_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(home1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 688, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout layerpaneLayout = new javax.swing.GroupLayout(layerpane);
+        layerpane.setLayout(layerpaneLayout);
+        layerpaneLayout.setHorizontalGroup(
+            layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 803, Short.MAX_VALUE)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(newrental_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(rentallist_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(archive_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(inventory_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(return_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(newdevice_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(home1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(333, 333, 333)))
         );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layerpaneLayout.setVerticalGroup(
+            layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 968, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(newrental_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(rentallist_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(archive_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layerpaneLayout.createSequentialGroup()
                     .addComponent(inventory_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(return_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layerpaneLayout.createSequentialGroup()
                     .addComponent(newdevice_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(home1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(268, 268, 268)))
         );
 
         javax.swing.GroupLayout startpageLayout = new javax.swing.GroupLayout(startpage);
         startpage.setLayout(startpageLayout);
         startpageLayout.setHorizontalGroup(
             startpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(layerpane)
         );
         startpageLayout.setVerticalGroup(
             startpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(layerpane)
         );
 
         parentpanel.add(startpage, java.awt.BorderLayout.CENTER);
@@ -1079,7 +1055,7 @@ public class GUI extends javax.swing.JFrame {
         //NewRentalGUI nrGUI = new NewRentalGUI();
         //nrGUI.setVisible(true);
         //dispose();
-        switchPanels(newrental_panel);
+        //switchPanels(newrental_panel);
     }//GEN-LAST:event_newrentalActionPerformed
 
     private void rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentallistActionPerformed
@@ -1088,7 +1064,7 @@ public class GUI extends javax.swing.JFrame {
         //rlGUI.setVisible(true);
         //dispose();
         
-        switchPanels(rentallist_panel);
+        //switchPanels(rentallist_panel);
     }//GEN-LAST:event_rentallistActionPerformed
 
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
@@ -1097,7 +1073,7 @@ public class GUI extends javax.swing.JFrame {
         //arGUI.setVisible(true);
         //dispose();
         
-        switchPanels(archive_panel);
+        //switchPanels(archive_panel);
     }//GEN-LAST:event_archiveActionPerformed
 
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
@@ -1105,56 +1081,56 @@ public class GUI extends javax.swing.JFrame {
         //inGUI.setVisible(true);
         //dispose();
         
-        switchPanels(inventory_panel);
+        //switchPanels(inventory_panel);
     }//GEN-LAST:event_inventoryActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void searchfilter_archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchfilter_archiveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_searchfilter_archiveActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void searchfilter_inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchfilter_inventoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_searchfilter_inventoryActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void newdevice_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newdevice_buttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_newdevice_buttonActionPerformed
 
-    private void jComboBox16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox16ActionPerformed
+    private void searchfilter_rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchfilter_rentallistActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox16ActionPerformed
+    }//GEN-LAST:event_searchfilter_rentallistActionPerformed
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+    private void userEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    }//GEN-LAST:event_userEmailActionPerformed
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void userPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userPhoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_userPhoneActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void save_newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_newrentalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_save_newrentalActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+    private void save_newdeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_newdeviceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+    }//GEN-LAST:event_save_newdeviceActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void administratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_administratorActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void withdrawnbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawnbyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_withdrawnbyActionPerformed
 
-    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
+    private void save_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_returnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton5ActionPerformed
+    }//GEN-LAST:event_save_returnActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_yesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1193,101 +1169,100 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel IMEInumber_newdevice;
+    private com.raven.datechooser.DateChooser acquisitionDate;
+    private javax.swing.JTextField acquisitionValue;
+    private javax.swing.JLabel acquisitiondate_newdevice;
+    private javax.swing.JLabel acquisitionvalue_newdevice;
+    private javax.swing.JComboBox<String> administrator;
+    private javax.swing.JLabel administrator_newdevice;
+    private javax.swing.JComboBox<String> administrator_newrental;
+    private javax.swing.JLabel administrator_return;
     private javax.swing.JButton archive;
     private javax.swing.JPanel archive_panel;
-    private com.raven.datechooser.DateChooser dateChooser1;
-    private com.raven.datechooser.DateChooser dateChooser2;
-    private com.raven.datechooser.DateChooser dateChooser3;
-    private javax.swing.JPanel home1;
+    private javax.swing.JTable archive_table;
+    private javax.swing.JLabel archive_title;
+    private javax.swing.JToggleButton cancel_newdevice;
+    private javax.swing.JToggleButton cancel_newrental;
+    private javax.swing.JToggleButton cancel_return;
+    private javax.swing.JLabel date;
+    private javax.swing.JLabel date_return;
+    private javax.swing.JLabel defaultsettings;
+    private javax.swing.JLabel devicename;
+    private javax.swing.JLabel devicename_newdevice;
+    private javax.swing.JLabel filter_options_archive;
+    private javax.swing.JLabel filter_options_inventory;
+    private javax.swing.JLabel filter_options_rentallist;
+    private javax.swing.JTextField imei;
+    private javax.swing.JLabel imei_return;
+    private javax.swing.JTextArea information_return;
     private javax.swing.JButton inventory;
+    private javax.swing.JTextField inventoryNumber;
+    private javax.swing.JLabel inventory_number;
     private javax.swing.JPanel inventory_panel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox16;
-    private javax.swing.JComboBox<String> jComboBox17;
-    private javax.swing.JComboBox<String> jComboBox18;
-    private javax.swing.JComboBox<String> jComboBox19;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox20;
-    private javax.swing.JComboBox<String> jComboBox21;
-    private javax.swing.JComboBox<String> jComboBox22;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JTable inventory_table;
+    private javax.swing.JLabel inventory_title;
+    private javax.swing.JLabel inventorynumber_newdevice;
+    private javax.swing.JComboBox<String> inventorynumber_newrental;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton5;
-    private javax.swing.JToggleButton jToggleButton6;
+    private javax.swing.JLayeredPane layerpane;
+    private javax.swing.JTextField location;
+    private javax.swing.JTextField manufacturer;
+    private javax.swing.JLabel manufacturer_newdevice;
+    private javax.swing.JComboBox<String> manufacturer_newrental;
+    private javax.swing.JLabel manufacturer_return;
+    private javax.swing.JLabel manufacturername;
+    private javax.swing.JButton newdevice_button;
     private javax.swing.JPanel newdevice_panel;
+    private javax.swing.JLabel newdevice_title;
     private javax.swing.JButton newrental;
     private javax.swing.JPanel newrental_panel;
+    private javax.swing.JLabel newrentaltitle;
+    private javax.swing.JRadioButton no;
+    private javax.swing.JTextArea notes;
+    private javax.swing.JLabel notes_newdevice;
+    private javax.swing.JTextArea notes_return;
+    private javax.swing.JLabel notestitle_return;
     private javax.swing.JPanel parentpanel;
+    private javax.swing.JTextField productname;
+    private javax.swing.JComboBox<String> productname_newrental;
+    private javax.swing.JLabel productname_return;
+    private com.raven.datechooser.DateChooser rentalDate_newrental;
     private javax.swing.JButton rentallist;
     private javax.swing.JPanel rentallist_panel;
+    private javax.swing.JTable rentallist_table;
+    private javax.swing.JLabel rentallist_title;
+    private javax.swing.JLabel rentedby;
+    private javax.swing.JLabel rentedby_return;
     private javax.swing.JPanel return_panel;
+    private javax.swing.JLabel return_title;
+    private com.raven.datechooser.DateChooser returndate;
+    private javax.swing.JLabel room_newdevice;
+    private javax.swing.JToggleButton save_newdevice;
+    private javax.swing.JToggleButton save_newrental;
+    private javax.swing.JToggleButton save_return;
+    private javax.swing.JComboBox<String> searchfilter_archive;
+    private javax.swing.JComboBox<String> searchfilter_inventory;
+    private javax.swing.JComboBox<String> searchfilter_rentallist;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JPanel startpage;
     private javax.swing.JPanel toppenal;
+    private javax.swing.JTextField userEmail;
+    private javax.swing.JTextField userFirstName;
+    private javax.swing.JComboBox<String> userID_newrental;
+    private javax.swing.JTextField userLastName;
+    private javax.swing.JTextField userPhone;
+    private javax.swing.JComboBox<String> withdrawnby;
+    private javax.swing.JComboBox<String> year_newrental;
+    private javax.swing.JRadioButton yes;
     // End of variables declaration//GEN-END:variables
 }
