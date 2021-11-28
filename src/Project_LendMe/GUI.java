@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -25,10 +26,32 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        
+        productname_newrental.setEditable(true);
+        productname_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(productname_newrental);
+        
+        manufacturer_newrental.setEditable(true);
+        manufacturer_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(manufacturer_newrental);
+        
+        inventorynumber_newrental.setEditable(true);
+        inventorynumber_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(inventorynumber_newrental);
+
+        userID_newrental.setEditable(true);
+        userID_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(userID_newrental);
+
+        year_newrental.setEditable(true);
+        year_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(year_newrental);
+        
+        administrator_newrental.setEditable(true);
+        administrator_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(administrator_newrental);
+        
     }
-    
-    
-    
     
         
     /**
@@ -298,7 +321,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel38.setText("Verleihen an");
 
         productname_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        productname_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        productname_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "iPhone Xs", "iPhone 13 Pro", "iPhone 7", "iPhone 12" }));
         productname_newrental.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 productname_newrentalActionPerformed(evt);
@@ -1155,6 +1178,7 @@ public class GUI extends javax.swing.JFrame {
                 new GUI().setVisible(true);
             }
         });
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
