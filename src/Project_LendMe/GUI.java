@@ -58,6 +58,7 @@ public class GUI extends javax.swing.JFrame {
         inventory = new javax.swing.JButton();
         startpage = new javax.swing.JPanel();
         layerpane = new javax.swing.JLayeredPane();
+        home_panel = new javax.swing.JPanel();
         newrental_panel = new javax.swing.JPanel();
         newrentaltitle = new javax.swing.JLabel();
         devicename = new javax.swing.JLabel();
@@ -261,6 +262,23 @@ public class GUI extends javax.swing.JFrame {
 
         startpage.setBackground(new java.awt.Color(220, 229, 211));
 
+        layerpane.setLayout(new java.awt.CardLayout());
+
+        home_panel.setBackground(new java.awt.Color(220, 229, 211));
+
+        javax.swing.GroupLayout home_panelLayout = new javax.swing.GroupLayout(home_panel);
+        home_panel.setLayout(home_panelLayout);
+        home_panelLayout.setHorizontalGroup(
+            home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 595, Short.MAX_VALUE)
+        );
+        home_panelLayout.setVerticalGroup(
+            home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 957, Short.MAX_VALUE)
+        );
+
+        layerpane.add(home_panel, "card7");
+
         newrental_panel.setBackground(new java.awt.Color(220, 229, 211));
 
         newrentaltitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -438,6 +456,8 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(315, Short.MAX_VALUE))
         );
 
+        layerpane.add(newrental_panel, "card2");
+
         rentallist_panel.setBackground(new java.awt.Color(220, 229, 211));
 
         rentallist_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -499,6 +519,8 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(219, Short.MAX_VALUE))
         );
 
+        layerpane.add(rentallist_panel, "card3");
+
         archive_panel.setBackground(new java.awt.Color(220, 229, 211));
 
         archive_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -559,6 +581,8 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(219, Short.MAX_VALUE))
         );
+
+        layerpane.add(archive_panel, "card4");
 
         inventory_panel.setBackground(new java.awt.Color(220, 229, 211));
 
@@ -632,6 +656,8 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(208, Short.MAX_VALUE))
         );
+
+        layerpane.add(inventory_panel, "card5");
 
         return_panel.setBackground(new java.awt.Color(220, 229, 211));
 
@@ -812,6 +838,8 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(62, 62, 62))
         );
 
+        layerpane.add(return_panel, "card6");
+
         newdevice_panel.setBackground(new java.awt.Color(220, 229, 211));
 
         newdevice_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -982,51 +1010,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(172, 172, 172))
         );
 
-        layerpane.setLayer(newrental_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layerpane.setLayer(rentallist_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layerpane.setLayer(archive_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layerpane.setLayer(inventory_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layerpane.setLayer(return_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layerpane.setLayer(newdevice_panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout layerpaneLayout = new javax.swing.GroupLayout(layerpane);
-        layerpane.setLayout(layerpaneLayout);
-        layerpaneLayout.setHorizontalGroup(
-            layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 803, Short.MAX_VALUE)
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(newrental_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(rentallist_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(archive_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(inventory_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(return_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(newdevice_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layerpaneLayout.setVerticalGroup(
-            layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 968, Short.MAX_VALUE)
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(newrental_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(rentallist_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(archive_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layerpaneLayout.createSequentialGroup()
-                    .addComponent(inventory_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(return_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layerpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layerpaneLayout.createSequentialGroup()
-                    .addComponent(newdevice_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
+        layerpane.add(newdevice_panel, "card7");
 
         javax.swing.GroupLayout startpageLayout = new javax.swing.GroupLayout(startpage);
         startpage.setLayout(startpageLayout);
@@ -1056,6 +1040,12 @@ public class GUI extends javax.swing.JFrame {
         //nrGUI.setVisible(true);
         //dispose();
         //switchPanels(newrental_panel);
+        
+        layerpane.removeAll();
+        layerpane.add(newrental_panel);
+        layerpane.repaint();
+        layerpane.revalidate();
+        
     }//GEN-LAST:event_newrentalActionPerformed
 
     private void rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentallistActionPerformed
@@ -1063,8 +1053,12 @@ public class GUI extends javax.swing.JFrame {
         //RentalListGUI rlGUI = new RentalListGUI();
         //rlGUI.setVisible(true);
         //dispose();
-        
         //switchPanels(rentallist_panel);
+        
+        layerpane.removeAll();
+        layerpane.add(rentallist_panel);
+        layerpane.repaint();
+        layerpane.revalidate();
     }//GEN-LAST:event_rentallistActionPerformed
 
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
@@ -1072,16 +1066,24 @@ public class GUI extends javax.swing.JFrame {
         //ArchiveGUI arGUI = new ArchiveGUI();
         //arGUI.setVisible(true);
         //dispose();
-        
         //switchPanels(archive_panel);
+        
+        layerpane.removeAll();
+        layerpane.add(archive_panel);
+        layerpane.repaint();
+        layerpane.revalidate();
     }//GEN-LAST:event_archiveActionPerformed
 
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
         //InventoryGUI inGUI = new InventoryGUI();
         //inGUI.setVisible(true);
         //dispose();
-        
         //switchPanels(inventory_panel);
+        
+        layerpane.removeAll();
+        layerpane.add(inventory_panel);
+        layerpane.repaint();
+        layerpane.revalidate();
     }//GEN-LAST:event_inventoryActionPerformed
 
     private void searchfilter_archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchfilter_archiveActionPerformed
@@ -1193,6 +1195,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel filter_options_archive;
     private javax.swing.JLabel filter_options_inventory;
     private javax.swing.JLabel filter_options_rentallist;
+    private javax.swing.JPanel home_panel;
     private javax.swing.JTextField imei;
     private javax.swing.JLabel imei_return;
     private javax.swing.JTextArea information_return;
