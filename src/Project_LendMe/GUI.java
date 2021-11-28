@@ -18,17 +18,7 @@ import javax.swing.JLayeredPane;
  *
  * @author Anja
  */
-public class GUI extends javax.swing.JFrame {
-    
-    /* public void switchPanels(JPanel panel)
-   {
-       layerpane.removeAll();
-       layerpane.add(panel);
-       layerpane.repaint();
-       layerpane.revalidate();
-       
-   }*/
-    
+public class GUI extends javax.swing.JFrame {   
 
      /**
      * Creates new form GUI
@@ -36,6 +26,8 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
     }
+    
+    
     
     
         
@@ -307,6 +299,11 @@ public class GUI extends javax.swing.JFrame {
 
         productname_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         productname_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        productname_newrental.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productname_newrentalActionPerformed(evt);
+            }
+        });
 
         manufacturer_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manufacturer_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -1035,12 +1032,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
-        // TODO add your handling code here
-        //NewRentalGUI nrGUI = new NewRentalGUI();
-        //nrGUI.setVisible(true);
-        //dispose();
-        //switchPanels(newrental_panel);
-        
+               
         layerpane.removeAll();
         layerpane.add(newrental_panel);
         layerpane.repaint();
@@ -1049,12 +1041,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_newrentalActionPerformed
 
     private void rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentallistActionPerformed
-        // TODO add your handling code here:
-        //RentalListGUI rlGUI = new RentalListGUI();
-        //rlGUI.setVisible(true);
-        //dispose();
-        //switchPanels(rentallist_panel);
-        
+                
         layerpane.removeAll();
         layerpane.add(rentallist_panel);
         layerpane.repaint();
@@ -1062,11 +1049,6 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_rentallistActionPerformed
 
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
-        // TODO add your handling code here:
-        //ArchiveGUI arGUI = new ArchiveGUI();
-        //arGUI.setVisible(true);
-        //dispose();
-        //switchPanels(archive_panel);
         
         layerpane.removeAll();
         layerpane.add(archive_panel);
@@ -1075,10 +1057,6 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_archiveActionPerformed
 
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
-        //InventoryGUI inGUI = new InventoryGUI();
-        //inGUI.setVisible(true);
-        //dispose();
-        //switchPanels(inventory_panel);
         
         layerpane.removeAll();
         layerpane.add(inventory_panel);
@@ -1138,6 +1116,10 @@ public class GUI extends javax.swing.JFrame {
     private void yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_yesActionPerformed
+
+    private void productname_newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productname_newrentalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productname_newrentalActionPerformed
 
     /**
      * @param args the command line arguments
