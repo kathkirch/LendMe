@@ -24,10 +24,11 @@ import java.util.List;
 public class DatabaseHelper {
     
     private static Connection con;
+    private static ResultSet rs;
+    private static Statement stmt;
     
     public static void connectDB(){
         con = null;
-        
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("JDBC Driver loaded");
@@ -53,9 +54,7 @@ public class DatabaseHelper {
     public static List <Devices> getItems(){
     
         List <Devices> devicesList = new ArrayList <>();
-        ResultSet rs = null;
-        Statement stmt = null;
-       
+        
         try {
             stmt = con.createStatement();
             String query = "SELECT * FROM devices";
@@ -90,7 +89,191 @@ public class DatabaseHelper {
         return devicesList;
     }
     
+    public static List <Devices> getItemByProductName(String productName){
+        
+        List <Devices> items = new ArrayList <>();
+        String query = "SELECT manufacturer, inventoryNumber, users_userID"
+                        + " FROM devices WHERE productName=" + "'" + productName
+                        + "';";
+                
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()){
+                String manufacturer = rs.getString("manufacturer");
+                int inventoryNumber = rs.getInt("inventoryNumber");
+                int userID = rs.getInt("users_userID");
+                
+                Devices d = new Devices();
+                d.setManufacturer(manufacturer);
+                d.setInventoryNumber(inventoryNumber);
+                d.setUsers_userID(userID);
+                
+                items.add(d);
+            }
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        } 
+        return items;
+    }
     
+    public static List <Devices> getItemByManufacturer(String manufacturer){
+        
+        List <Devices> items = new ArrayList <>();
+        String query = "SELECT productName, inventoryNumber, users_userID"
+                        + " FROM devices WHERE manufacturer=" + "'" + manufacturer
+                        + "';";
+                
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()){
+                String productName = rs.getString("productName");
+                int inventoryNumber = rs.getInt("inventoryNumber");
+                int userID = rs.getInt("users_userID");
+                
+                Devices d = new Devices();
+                d.setProductName(productName);
+                d.setInventoryNumber(inventoryNumber);
+                d.setUsers_userID(userID);
+                items.add(d);
+            }
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        } 
+        return items;
+    }
+    
+    public static List <Devices> getItemByInvNumber (String invNumber){
+        
+        List <Devices> items = new ArrayList <>();
+        String query = "SELECT productName, manufacturer, users_userID"
+                        + " FROM devices WHERE inventoryNumber=" + "'" 
+                        + Integer.parseInt(invNumber)
+                        + "';";
+                
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()){
+                String productName = rs.getString("productName");
+                String manufacturer = rs.getString("manufacturer");
+                int userID = rs.getInt("users_userID");
+                
+                Devices d = new Devices();
+                d.setProductName(productName);
+                d.setManufacturer(manufacturer);
+                d.setUsers_userID(userID);
+                items.add(d);
+            }
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        } 
+        return items;
+    }
+    
+     public static List <Devices> getItemByUserID(String UserID){
+        
+        List <Devices> items = new ArrayList <>();
+        String query = "SELECT productName, manufacturer, inventoryNumber"
+                        + " FROM devices WHERE users_userID=" + "'" 
+                        + Integer.parseInt(UserID)
+                        + "';";
+                
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()){
+                String productName = rs.getString("productName");
+                String manufacturer = rs.getString("manufacturer");
+                int inventoryNumber = rs.getInt("inventoryNumber");
+                
+                
+                Devices d = new Devices();
+                d.setProductName(productName);
+                d.setInventoryNumber(inventoryNumber);
+                d.setManufacturer(manufacturer);
+                items.add(d);
+            }
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        } 
+        return items;
+    }
+    
+    public static List <Object> getItemsFromList (List <Devices> list, 
+                                            String itemCategory) {
+        
+        List <Object> itemArray = new ArrayList<>();
+        String string;
+        int i;
+        
+        switch (itemCategory) {
+            case "productName" :
+                for (Devices dev : list){
+                    string = dev.getProductName();
+                    itemArray.add(string);
+                }
+                return itemArray;
+             case "manufacturer" :
+                for (Devices dev : list){
+                    string = dev.getManufacturer();
+                    itemArray.add(string);
+                }
+                return itemArray;
+            case "inventoryNumber" :
+                for (Devices dev : list){
+                    i = dev.getInventoryNumber();
+                    itemArray.add(String.valueOf(i));
+                }
+                return itemArray;
+            case "users_UserID" :
+                for (Devices dev : list){
+                    i = dev.getUsers_userID();
+                    itemArray.add(String.valueOf(i));
+                }
+                return itemArray;
+            default :
+                return itemArray;  
+        } 
+    }
+        
     
     // idee, spaeter date, userid usw der methode uebergeben damit rental erzeugen
     // so weiterarbeiten

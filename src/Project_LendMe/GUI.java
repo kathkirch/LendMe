@@ -25,6 +25,8 @@ import javax.swing.JLayeredPane;
  */
 public class GUI extends javax.swing.JFrame implements Runnable {
     
+    private static final DatabaseHelper hp = new DatabaseHelper();
+    
    public void switchPanels(JPanel panel)
    {
        layerpane.removeAll();
@@ -41,39 +43,150 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         initComponents();
         
         fillDropdown();
+        
+        listenForSelectionPN();
+        listenForSelectionM();
+        listenForSelectionIN();
+        listenForSelectionUID();
     }
     
     
     public void fillDropdown() {
         
-        List <Devices> list = DatabaseHelper.getItems();
+        List <Devices> list = hp.getItems();
         
-        List <String> itemArray = new ArrayList<>();
+        List <Object> nameList = hp.getItemsFromList(list, "productName");
+        productname_newrental.setModel(new DefaultComboBoxModel<>(nameList.toArray((new String[0]))));
         
-        for (Devices dev : list){
-            String productName = dev.getProductName();
-            String manufacturer = dev.getManufacturer();
-            int inventorNumber = dev.getInventoryNumber();
-            int userID = dev.getUsers_userID();
-            
-            itemArray.add(productName);
-            System.out.println(itemArray);
-        }
+        List <Object> manuList = hp.getItemsFromList(list, "manufacturer");
+        manufacturer_newrental.setModel(new DefaultComboBoxModel<>(manuList.toArray((new String[0]))));
         
-        productname_newrental.setModel(new DefaultComboBoxModel<>(itemArray.toArray((new String[0]))));
+        List <Object> invNumbList = hp.getItemsFromList(list, "inventoryNumber");
+        inventorynumber_newrental.setModel(new DefaultComboBoxModel<>(invNumbList.toArray((new String[0]))));
         
-        productname_newrental.addItemListener(new ItemListener () {
-            
-            public void itemStateChanged(ItemEvent e) {
-                String selected = e.getItem().toString();
-                // hier methode man bekommt selected item, dieses gibt man an methode weiter
-                // diese methode frag db an, und holt sich alle passenden datensaetze die das selected item enthalten und
-                // passt so das drop down an
-                
-            }
-        });
+        List <Object> userIDList = hp.getItemsFromList(list, "users_UserID");
+        userID_newrental.setModel(new DefaultComboBoxModel<>(userIDList.toArray((new String[0]))));
         
     }
+    
+    public void listenForSelectionPN () {
+        productname_newrental.addItemListener(new ItemListener () {
+            public void itemStateChanged(ItemEvent e) {
+                String selected = e.getItem().toString();
+                
+                if (selected != null){
+                    List <Devices> list = hp.getItemByProductName(selected);
+                    String [] categories = new String [] {"manufacturer", "inventoryNumber", "users_UserID"};
+                    
+                    for (int i = 0; i < categories.length; i++) {
+                        List <Object> oList = hp.getItemsFromList(list, categories[i]);
+                        if (categories[i].equalsIgnoreCase("manufacturer")){
+                            manufacturer_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                        if (categories[i].equalsIgnoreCase("inventoryNumber")){
+                            inventorynumber_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                        if (categories[i].equalsIgnoreCase("users_UserID")){
+                            userID_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                    }
+                }
+            }
+        }); 
+    }
+    
+    public void listenForSelectionM () {
+        manufacturer_newrental.addItemListener(new ItemListener () {
+            public void itemStateChanged(ItemEvent e) {
+                String selected = e.getItem().toString();
+                
+                if (selected != null){
+                    List <Devices> list = hp.getItemByManufacturer(selected);
+                    String [] categories = new String [] {"productName", "inventoryNumber", "users_UserID"};
+                    
+                    for (int i = 0; i < categories.length; i++) {
+                        List <Object> oList = hp.getItemsFromList(list, categories[i]);
+                        if (categories[i].equalsIgnoreCase("productName")){
+                            productname_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                        if (categories[i].equalsIgnoreCase("inventoryNumber")){
+                            inventorynumber_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                        if (categories[i].equalsIgnoreCase("users_UserID")){
+                            userID_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                    }
+                }
+            }
+        }); 
+    }
+    
+    public void listenForSelectionIN () {
+        
+        inventorynumber_newrental.addItemListener(new ItemListener () {
+            public void itemStateChanged(ItemEvent e) {
+                String selected = e.getItem().toString();
+                
+                if (selected != null){
+                    List <Devices> list = hp.getItemByInvNumber(selected);
+                    String [] categories = new String [] {"productName", "manufacturer", "users_UserID"};
+                    
+                    for (int i = 0; i < categories.length; i++) {
+                        List <Object> oList = hp.getItemsFromList(list, categories[i]);
+                        if (categories[i].equalsIgnoreCase("productName")){
+                            productname_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                        if (categories[i].equalsIgnoreCase("manufacturer")){
+                            manufacturer_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                        if (categories[i].equalsIgnoreCase("users_UserID")){
+                            userID_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                    }
+                }
+            }
+        }); 
+    }
+    
+    public void listenForSelectionUID () {
+        
+        userID_newrental.addItemListener(new ItemListener () {
+            public void itemStateChanged(ItemEvent e) {
+                String selected = e.getItem().toString();
+                
+                if (selected != null){
+                    List <Devices> list = hp.getItemByUserID(selected);
+                    String [] categories = new String [] {"productName", "manufacturer", "inventoryNumber"};
+                    
+                    for (int i = 0; i < categories.length; i++) {
+                        List <Object> oList = hp.getItemsFromList(list, categories[i]);
+                        if (categories[i].equalsIgnoreCase("productName")){
+                            productname_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                        if (categories[i].equalsIgnoreCase("manufacturer")){
+                            manufacturer_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                        if (categories[i].equalsIgnoreCase("inventoryNumber")){
+                            inventorynumber_newrental.setModel
+                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
     
     
         
