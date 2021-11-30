@@ -57,20 +57,18 @@ public class DatabaseHelper {
         
         try {
             stmt = con.createStatement();
-            String query = "SELECT * FROM devices";
+            String query = "SELECT * FROM devices WHERE status =0";
             rs = stmt.executeQuery(query);
             
             while (rs.next()){
                 String productName = rs.getString("productName");
                 String manufacturer = rs.getString("manufacturer");
                 int inventoryNumber = rs.getInt("inventoryNumber");
-                int userID = rs.getInt("users_userID");
                 
                 Devices dev = new Devices();
                 dev.setProductName(productName);
                 dev.setManufacturer(manufacturer);
                 dev.setInventoryNumber(inventoryNumber);
-                dev.setUsers_userID(userID);
                 
                 devicesList.add(dev);
             }
@@ -92,7 +90,7 @@ public class DatabaseHelper {
     public static List <Devices> getItemByProductName(String productName){
         
         List <Devices> items = new ArrayList <>();
-        String query = "SELECT manufacturer, inventoryNumber, users_userID"
+        String query = "SELECT manufacturer, inventoryNumber"
                         + " FROM devices WHERE productName=" + "'" + productName
                         + "';";
                 
@@ -103,13 +101,10 @@ public class DatabaseHelper {
             while (rs.next()){
                 String manufacturer = rs.getString("manufacturer");
                 int inventoryNumber = rs.getInt("inventoryNumber");
-                int userID = rs.getInt("users_userID");
                 
                 Devices d = new Devices();
                 d.setManufacturer(manufacturer);
                 d.setInventoryNumber(inventoryNumber);
-                d.setUsers_userID(userID);
-                
                 items.add(d);
             }
         }catch (SQLException ex){
@@ -129,7 +124,7 @@ public class DatabaseHelper {
     public static List <Devices> getItemByManufacturer(String manufacturer){
         
         List <Devices> items = new ArrayList <>();
-        String query = "SELECT productName, inventoryNumber, users_userID"
+        String query = "SELECT productName, inventoryNumber"
                         + " FROM devices WHERE manufacturer=" + "'" + manufacturer
                         + "';";
                 
@@ -140,12 +135,10 @@ public class DatabaseHelper {
             while (rs.next()){
                 String productName = rs.getString("productName");
                 int inventoryNumber = rs.getInt("inventoryNumber");
-                int userID = rs.getInt("users_userID");
                 
                 Devices d = new Devices();
                 d.setProductName(productName);
                 d.setInventoryNumber(inventoryNumber);
-                d.setUsers_userID(userID);
                 items.add(d);
             }
         }catch (SQLException ex){
@@ -165,7 +158,7 @@ public class DatabaseHelper {
     public static List <Devices> getItemByInvNumber (String invNumber){
         
         List <Devices> items = new ArrayList <>();
-        String query = "SELECT productName, manufacturer, users_userID"
+        String query = "SELECT productName, manufacturer"
                         + " FROM devices WHERE inventoryNumber=" + "'" 
                         + Integer.parseInt(invNumber)
                         + "';";
@@ -177,12 +170,10 @@ public class DatabaseHelper {
             while (rs.next()){
                 String productName = rs.getString("productName");
                 String manufacturer = rs.getString("manufacturer");
-                int userID = rs.getInt("users_userID");
                 
                 Devices d = new Devices();
                 d.setProductName(productName);
                 d.setManufacturer(manufacturer);
-                d.setUsers_userID(userID);
                 items.add(d);
             }
         }catch (SQLException ex){
@@ -199,29 +190,18 @@ public class DatabaseHelper {
         return items;
     }
     
-     public static List <Devices> getItemByUserID(String UserID){
+    public static List <String> getUsersID(){
         
-        List <Devices> items = new ArrayList <>();
-        String query = "SELECT productName, manufacturer, inventoryNumber"
-                        + " FROM devices WHERE users_userID=" + "'" 
-                        + Integer.parseInt(UserID)
-                        + "';";
-                
+        List <String> userIDs = new ArrayList <>();
+        String query = "SELECT userID FROM users";
+        
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             
             while (rs.next()){
-                String productName = rs.getString("productName");
-                String manufacturer = rs.getString("manufacturer");
-                int inventoryNumber = rs.getInt("inventoryNumber");
-                
-                
-                Devices d = new Devices();
-                d.setProductName(productName);
-                d.setInventoryNumber(inventoryNumber);
-                d.setManufacturer(manufacturer);
-                items.add(d);
+                int userID = rs.getInt("userID");
+                userIDs.add(String.valueOf(userID));
             }
         }catch (SQLException ex){
             System.out.println(ex);
@@ -234,7 +214,127 @@ public class DatabaseHelper {
                 }
             } 
         } 
-        return items;
+        return userIDs;
+    }
+    
+    public static List <String> getUserYears(){
+        List <String> userYears = new ArrayList <>();
+        String query = "SELECT userYear FROM users";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()){
+                String userYear = rs.getString("userYear");
+                userYears.add(userYear);
+            }
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        } 
+        return userYears;
+    }
+    
+    public static List <String> getAdminIDs() {
+        String adminID;
+        List <String> adminIDs = new ArrayList<>();
+        
+        String query = "SELECT adminID FROM administrators";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()){
+                adminID = rs.getString("adminID");
+                adminIDs.add(adminID);
+            }
+        
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        }
+        return adminIDs;
+    }
+        
+        
+        
+    public static String getAdminNameByID (String adminID){
+        String adminName = null;
+        String query = "SELECT concat(adminFirstName," + "' '" +", adminLastName)"
+                        + "as " +"'Fullname'" + "FROM administrators "
+                + "WHERE adminID=" + Integer.parseInt(adminID) + ";";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+           
+            while (rs.next()){
+                adminName = rs.getString("Fullname");
+            }
+        
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        }
+        return adminName;
+    }
+    
+    public static Users checkUserID(String userID){
+        
+        Users user = null;
+       
+        String query = "SELECT * FROM users WHERE userID=" + "'" 
+                        + Integer.parseInt(userID)
+                        + "';";      
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()){
+                String userFirstName = rs.getString("userFirstName");
+                String userLastName = rs.getString("userLastName");
+                String userEmail = rs.getString("userEmail");
+                String userPhone = rs.getString("userPhone");
+                String userYear = rs.getString("userYear");
+                
+                user = new Users (Integer.parseInt(userID), userFirstName, 
+                                userLastName, userEmail, userPhone, userYear);
+            }
+        }catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        } 
+        return user;
     }
     
     public static List <Object> getItemsFromList (List <Devices> list, 
@@ -274,25 +374,76 @@ public class DatabaseHelper {
         } 
     }
         
+    public static void insertNewUser(Users user){
+        try{
+            stmt = con.createStatement();
+            String query = "INSERT INTO users (userID, userFirstName, "
+                    + "userLastName, userEmail, userPhone, userYear) values ('"
+                    + user.getUserID() + "', '" + user.getUserFirstName() + "', '"
+                    + user.getUserLastName() + "', '" + user.getUserEmail() 
+                    + "', '" + user.getUserPhone() + "', '" + user.getYear() 
+                    + "');";
+            
+            System.out.println("insertString" + query);
+            
+            stmt.executeUpdate(query);
+            
+            System.out.println("User hinzugefuegt");
+            
+        }catch(SQLException ex) {
+            System.out.println(ex);
+            System.out.println("Error with Database");
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        }  
+    }
     
-    // idee, spaeter date, userid usw der methode uebergeben damit rental erzeugen
-    // so weiterarbeiten
-    public static void initNewRental_DB() {
+    public static boolean isUserNew(String userID){
         
-        // spaeter durch Eingabe aus GUI ersetzen!
-        Rentals rentals = new Rentals(LocalDate.now(), 11111, 123, 121212);
+        boolean userNEW = true;
+        String query = "SELECT * FROM users WHERE userID=" + userID + ";";
         
-        Statement stmt = null;
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            if (rs.next()){
+                userNEW = false;
+            }
+        }catch(SQLException ex) {
+            System.out.println(ex);
+            System.out.println("Error with Database");
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        }  
+        return userNEW;
+    }
+    
+    public static void insertNewRental_DB(Rentals rental) {
         try{ 
             stmt = con.createStatement();
             String string = "insert into rentals (rentalDate, "
                             +"devices_inventoryNumber, administrators_adminID, "
-                            +"users_userID) values ('" + LocalDate.now() 
-                            +"', '" + rentals.getDevice_inventoryNumber() 
-                            + "', '" + rentals.getAdministrators_AdminID()
-                            + "', '" + rentals.getUsers_UserID()+ "');";
+                            +"users_userID) values ('" + rental.getRentalDate() 
+                            +"', '" + rental.getDevice_inventoryNumber() 
+                            + "', '" + rental.getAdministrators_AdminID()
+                            + "', '" + rental.getUsers_UserID()+ "');";
             stmt.executeUpdate(string);
-            updateDeviceStatus(rentals.getDevice_inventoryNumber());
+            updateDeviceStatus(rental.getDevice_inventoryNumber());
+            
+            System.out.println("Datensatz erfolgreich hinzugefuegt");
             
         } catch(SQLException ex) {
             System.out.println(ex);
@@ -306,15 +457,13 @@ public class DatabaseHelper {
                 }
             } 
         }
-    }
+    } 
     
     
         
     public static void updateDeviceStatus(int device_inventoryNumber) {
         Statement stmt = null;
         ResultSet rs = null;
-        
-        System.out.println("hello hello");
         
         try {
             stmt = con.createStatement();
