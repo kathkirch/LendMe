@@ -7,12 +7,14 @@ package Project_LendMe;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Katharina
  */
 public class MainClass {
+    
 
     /**
      * @param args the command line arguments
@@ -22,9 +24,11 @@ public class MainClass {
         // TODO code application logic here
         
         DatabaseHelper.connectDB();
+        //DatabaseHelper.initNewRental_DB();
         
-        System.out.println("Hi!");
-        System.out.println("Hallo");
+        Runnable runnable = new GUI();
+        Thread thread = new Thread(runnable);
+        thread.start();
+        
     }
-    
 }
