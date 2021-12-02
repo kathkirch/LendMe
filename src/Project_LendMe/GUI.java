@@ -4,32 +4,29 @@
  */
 package Project_LendMe;
 
-import com.raven.datechooser.SelectedDate;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
- * @author Anja
+ * @author Anja, Katharina
  */
 public class GUI extends javax.swing.JFrame implements Runnable {
     
-    private static final DatabaseHelper hp = new DatabaseHelper();
+    private final DatabaseHelper hp = new DatabaseHelper();
+    private final Rental_Helper rentalHelper = new Rental_Helper();
     
      /**
      * Creates new form GUI
      */
     public GUI() {
+        
         initComponents();
         
-        fillDropdown();
+        fillDropdowns();
         
         listenForSelectionPN();
         listenForSelectionM();
@@ -39,90 +36,73 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     }
     
     
-    public final void fillDropdown() {
+    public final void fillDropdowns() {
         
-        List <Devices> list = hp.getItems();
-        
-        List <Object> nameList = hp.getItemsFromList(list, "productName");
-        productname_newrental.setModel(new DefaultComboBoxModel<>(nameList.toArray((new String[0]))));
-        productname_newrental.setEditable(true);
-        productname_newrental.setSelectedItem("");
-        AutoCompleteDecorator.decorate(productname_newrental);
-        
-        List <Object> manuList = hp.getItemsFromList(list, "manufacturer");
-        manufacturer_newrental.setModel(new DefaultComboBoxModel<>(manuList.toArray((new String[0]))));manufacturer_newrental.setEditable(true);
-        manufacturer_newrental.setEditable(true);
-        manufacturer_newrental.setSelectedItem("");
-        AutoCompleteDecorator.decorate(manufacturer_newrental);
-        
-        List <Object> invNumbList = hp.getItemsFromList(list, "inventoryNumber");
-        inventorynumber_newrental.setModel(new DefaultComboBoxModel<>(invNumbList.toArray((new String[0]))));
-        inventorynumber_newrental.setEditable(true);
-        inventorynumber_newrental.setSelectedItem("");
-        AutoCompleteDecorator.decorate(inventorynumber_newrental);
-        
-        userID_newrental.setModel(new DefaultComboBoxModel<>(hp.getUsersID().toArray((new String[0]))));
-        //damit man in UserID Matrikelnummer eingeben kann
-        userID_newrental.setEditable(true);
-        userID_newrental.setSelectedItem("");
-        AutoCompleteDecorator.decorate(userID_newrental);
-        
-        year_newrental.setModel(new DefaultComboBoxModel<>(hp.getUserYears().toArray((new String[0]))));
-        // damit man neues Jahr eingeben kann wenn noch nicht in DB vorhanden
-        year_newrental.setEditable(true);
-        year_newrental.setSelectedItem("");
-        AutoCompleteDecorator.decorate(year_newrental);
-        
-        administrator_newrental.setModel(new DefaultComboBoxModel<>(hp.getAdminIDs().toArray((new String[0]))));
-        administrator_newrental.setEditable(true);
-        administrator_newrental.setSelectedItem("");
-        AutoCompleteDecorator.decorate(administrator_newrental);
+        rentalHelper.fillComboBox_Category(productname_newrental, "productName");
+        rentalHelper.fillComboBox_Category(inventorynumber_newrental, "inventoryNumber");
+        rentalHelper.fillComboBox_Category(manufacturer_newrental, "manufacturer");
+        rentalHelper.fillUser_Year_Admin(userID_newrental,
+                                            year_newrental, 
+                                            administrator_newrental);
     }
     
     public final void listenForSelectionPN () {
-        productname_newrental.addItemListener(new ItemListener () {
+            productname_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
-                
+                if (e.getStateChange() == ItemEvent.SELECTED){
+                    
+                    String selected = e.getItem().toString();
                
-                String selected = e.getItem().toString();
+                    if (productname_newrental.getItemCount() == 0 ){
+                        selected = ""; 
+                        List <Devices> list = hp.getDevices();    
+                        List <Object> nameList = hp.makeListForCategory(list, "productName");
+                        productname_newrental.setModel(new DefaultComboBoxModel<>(nameList.toArray((new String[0]))));
+                    }
                 
-                if (!selected.isBlank()){
-                    
-                    System.out.println("y r u trueeeeeeeeeeeeeeeeeeeeeeeee");
-                    
-                    List <Devices> list = hp.getItemByProductName(selected);
-                    String [] categories = new String [] {"manufacturer", "inventoryNumber"};
-                    
-                    for (int i = 0; i < categories.length; i++) {
-                        List <Object> oList = hp.getItemsFromList(list, categories[i]);
-                        if (categories[i].equalsIgnoreCase("manufacturer")){
-                            manufacturer_newrental.setModel
-                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                        }
-                        if (categories[i].equalsIgnoreCase("inventoryNumber")){
-                            inventorynumber_newrental.setModel
-                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                    if (!selected.isBlank()){
+                        List <Devices> list = hp.getItemByProductName(selected);
+                        String [] categories = new String [] {"manufacturer", "inventoryNumber"};
+
+                        for (int i = 0; i < categories.length; i++) {
+                            List <Object> oList = hp.makeListForCategory(list, categories[i]);
+                            if (categories[i].equalsIgnoreCase("manufacturer")){
+                                manufacturer_newrental.setModel
+                            (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                            }
+                            if (categories[i].equalsIgnoreCase("inventoryNumber")){
+                                inventorynumber_newrental.setModel
+                            (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                            }
                         }
                     }
                 }
             }
-        }); 
+        });
     }
     
     public final void listenForSelectionM () {
         manufacturer_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
-                String selected = e.getItem().toString();
+                if (e.getStateChange() == ItemEvent.SELECTED){
+                     String selected = e.getItem().toString();
                 
-                if (!selected.isBlank()){
-                    List <Devices> list = hp.getItemByManufacturer(selected);
-                    String [] categories = new String [] {"productName", "inventoryNumber", "users_UserID"};
-                    
-                    for (int i = 0; i < categories.length; i++) {
-                        List <Object> oList = hp.getItemsFromList(list, categories[i]);
-                        if (categories[i].equalsIgnoreCase("productName")){
-                            productname_newrental.setModel
-                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                    if (manufacturer_newrental.getItemCount() == 0 ){
+                        selected = ""; 
+                        List <Devices> list = hp.getDevices();    
+                        List <Object> manuList = hp.makeListForCategory(list, "manufacturer");
+                        manufacturer_newrental.setModel(new DefaultComboBoxModel<>(manuList.toArray((new String[0]))));
+                    }
+                    if (!selected.isBlank()){
+                        List <Devices> list = hp.getItemByManufacturer(selected);
+                        String [] categories = new String [] {"productName", "inventoryNumber"};
+
+                        for (int i = 0; i < categories.length; i++) {
+                            List <Object> oList = hp.makeListForCategory(list, categories[i]);
+                            if (categories[i].equalsIgnoreCase("productName")){
+                                productname_newrental.setModel
+                            (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                            }
                         }
                     }
                 }
@@ -131,31 +111,39 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     }
     
     public final void listenForSelectionIN () {
-        
         inventorynumber_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
-                String selected = e.getItem().toString();
+                if (e.getStateChange() == ItemEvent.SELECTED){
+                    String selected = e.getItem().toString();
                 
-                if (!selected.isBlank() && hp.isNumeric(selected)){
-                    List <Devices> list = hp.getItemByInvNumber(selected);
-                    String [] categories = new String [] {"productName", "manufacturer", "users_UserID"};
-                    
-                    for (int i = 0; i < categories.length; i++) {
-                        List <Object> oList = hp.getItemsFromList(list, categories[i]);
-                        if (categories[i].equalsIgnoreCase("productName")){
-                            productname_newrental.setModel
-                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                        }
-                        if (categories[i].equalsIgnoreCase("manufacturer")){
-                            manufacturer_newrental.setModel
-                        (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                    if (inventorynumber_newrental.getItemCount() == 0 ){
+                        selected = ""; 
+                        List <Devices> list = hp.getDevices();
+                        List <Object> invNumbList = hp.makeListForCategory(list, "inventoryNumber");
+                        inventorynumber_newrental.setModel(new DefaultComboBoxModel<>
+                                            (invNumbList.toArray((new String[0]))));
+                    }
+                
+                    if (!selected.isBlank() && hp.isNumeric(selected)){
+                        List <Devices> list = hp.getItemByInvNumber(selected);
+                        String [] categories = new String [] {"productName", "manufacturer"};
+
+                        for (int i = 0; i < categories.length; i++) {
+                            List <Object> oList = hp.makeListForCategory(list, categories[i]);
+                            if (categories[i].equalsIgnoreCase("productName")){
+                                productname_newrental.setModel
+                                (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                            }
+                            if (categories[i].equalsIgnoreCase("manufacturer")){
+                                manufacturer_newrental.setModel
+                                (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                            }
                         }
                     }
-                }
+                }  
             }
         }); 
     }
-    
     
     public final void listenForSelectionUID () {
         userID_newrental.addItemListener(new ItemListener () {
@@ -182,6 +170,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             }
         });
     }
+    
+    /*
         
     public Users createUser (){
         
@@ -206,6 +196,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         }
         return user;
     }
+    */
     
     public final void listenForSelectionAID() {
         administrator_newrental.addItemListener(new ItemListener () {
@@ -486,12 +477,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         jLabel38.setText("Verleihen an");
 
         productname_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        productname_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "iPhone Xs", "iPhone 13 Pro", "iPhone 7", "iPhone 12" }));
-        productname_newrental.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productname_newrentalActionPerformed(evt);
-            }
-        });
+        productname_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", " " }));
 
         manufacturer_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manufacturer_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -1296,37 +1282,35 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_userPhoneActionPerformed
 
     private void cancel_newrentalActionPerformed(java.awt.event.ActionEvent evt) {
-    // methode alle eingaben leoschen und neu laden
-    // funktioniert noch nicht
+        deleteAll();
+    }   
+    
+    public void deleteAll(){
         
-        productname_newrental.setSelectedItem("");
-        
-        System.out.println("bbubbbuybb " + productname_newrental.getSelectedItem().toString());
-        manufacturer_newrental.setSelectedItem("");
-        
-        inventorynumber_newrental.setSelectedItem("");
+        productname_newrental.removeAllItems();
+        manufacturer_newrental.removeAllItems();
+        inventorynumber_newrental.removeAllItems();
+           
         userID_newrental.setSelectedItem("");
         year_newrental.setSelectedItem("");
         year_newrental.setEnabled(true);
         administrator_newrental.setSelectedItem("");
-        adminFullName.setText("");
-        userFirstName.setText("");
-        userLastName.setText("");
-        userPhone.setText("");
-        userEmail.setText("");
-        
-        //fillDropdown();
-
-    }    
+        adminFullName.setText("Vor- und Nachname");
+        userFirstName.setText("Vorname");
+        userLastName.setText("Nachname");
+        userPhone.setText("Telefon");
+        userEmail.setText("E-Mail");
+    }
+    
+    
+    
     private void save_newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_newrentalActionPerformed
-        // TODO add your handling code here:
-        
-        // TODO add your handling code here:
         
         if (!userID_newrental.getEditor().getItem().toString().isBlank()){
             boolean createNewUser = true;
             if (hp.isUserNew(userID_newrental.getEditor().getItem().toString())){
-                Users user = createUser();
+                Users user = rentalHelper.createUser(userID_newrental, userFirstName, userLastName,
+                                                        userPhone, userEmail, year_newrental);
                 
                 if (user == null){
                     createNewUser = false;
@@ -1337,47 +1321,23 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 }   
                 
             } else {
-                Users user = createUser();
+                Users user = rentalHelper.createUser(userID_newrental, userFirstName, userLastName,
+                                                        userPhone, userEmail, year_newrental);
                 
                 if (user == null){
                     createNewUser = false;
                 }
             }
             if (createNewUser){
-                createNewRental();
+                rentalHelper.createNewRental(rentalDate_newrental, inventorynumber_newrental,
+                                            userID_newrental, administrator_newrental);
             }
         } else {
             JOptionPane.showMessageDialog(null, "UserID/Matrikelnummer angeben!");
-        }       
+        }
+        deleteAll();
     }//GEN-LAST:event_save_newrentalActionPerformed
 
-    private void createNewRental(){
-        try {
-            Thread.sleep(1000);
-            
-            SelectedDate selectedDate = rentalDate_newrental.getSelectedDate();
-            LocalDate date = 
-                LocalDate.of(selectedDate.getYear(), 
-                selectedDate.getMonth(), selectedDate.getDay());
-        
-            String inventoryNumb = (String) inventorynumber_newrental.getSelectedItem();
-        
-            String userID = (String) userID_newrental.getSelectedItem();
-        
-            String adminID = (String) administrator_newrental.getSelectedItem();
-        
-            Rentals rental = new Rentals(date, Integer.parseInt(inventoryNumb),
-                            Integer.parseInt(adminID),
-                            Integer.parseInt(userID));
-        
-            hp.insertNewRental_DB(rental);
-            
-        } catch (InterruptedException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
-    }
-    
     private void save_newdeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_newdeviceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_save_newdeviceActionPerformed
@@ -1397,10 +1357,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private void yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_yesActionPerformed
-
-    private void productname_newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productname_newrentalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_productname_newrentalActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IMEInumber_newdevice;

@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
@@ -51,7 +50,7 @@ public class DatabaseHelper {
         }
     }
     
-    public static List <Devices> getItems(){
+    public List <Devices> getDevices(){
     
         List <Devices> devicesList = new ArrayList <>();
         
@@ -271,9 +270,7 @@ public class DatabaseHelper {
         }
         return adminIDs;
     }
-        
-        
-        
+         
     public static String getAdminNameByID (String adminID){
         String adminName = null;
         
@@ -338,7 +335,7 @@ public class DatabaseHelper {
         return user;
     }
     
-    public static List <Object> getItemsFromList (List <Devices> list, 
+    public static List <Object> makeListForCategory (List <Devices> list, 
                                             String itemCategory) {
         
         List <Object> itemArray = new ArrayList<>();
