@@ -44,42 +44,52 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         List <Devices> list = hp.getItems();
         
         List <Object> nameList = hp.getItemsFromList(list, "productName");
-        
         productname_newrental.setModel(new DefaultComboBoxModel<>(nameList.toArray((new String[0]))));
         productname_newrental.setEditable(true);
+        productname_newrental.setSelectedItem("");
         AutoCompleteDecorator.decorate(productname_newrental);
         
         List <Object> manuList = hp.getItemsFromList(list, "manufacturer");
         manufacturer_newrental.setModel(new DefaultComboBoxModel<>(manuList.toArray((new String[0]))));manufacturer_newrental.setEditable(true);
         manufacturer_newrental.setEditable(true);
-        //AutoCompleteDecorator.decorate(manufacturer_newrental);
+        manufacturer_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(manufacturer_newrental);
         
         List <Object> invNumbList = hp.getItemsFromList(list, "inventoryNumber");
         inventorynumber_newrental.setModel(new DefaultComboBoxModel<>(invNumbList.toArray((new String[0]))));
         inventorynumber_newrental.setEditable(true);
-        //AutoCompleteDecorator.decorate(inventorynumber_newrental);
+        inventorynumber_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(inventorynumber_newrental);
         
         userID_newrental.setModel(new DefaultComboBoxModel<>(hp.getUsersID().toArray((new String[0]))));
         //damit man in UserID Matrikelnummer eingeben kann
         userID_newrental.setEditable(true);
-        //AutoCompleteDecorator.decorate(userID_newrental);
+        userID_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(userID_newrental);
         
         year_newrental.setModel(new DefaultComboBoxModel<>(hp.getUserYears().toArray((new String[0]))));
         // damit man neues Jahr eingeben kann wenn noch nicht in DB vorhanden
         year_newrental.setEditable(true);
-        //AutoCompleteDecorator.decorate(year_newrental);
+        year_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(year_newrental);
         
         administrator_newrental.setModel(new DefaultComboBoxModel<>(hp.getAdminIDs().toArray((new String[0]))));
         administrator_newrental.setEditable(true);
-        //AutoCompleteDecorator.decorate(administrator_newrental);
+        administrator_newrental.setSelectedItem("");
+        AutoCompleteDecorator.decorate(administrator_newrental);
     }
     
     public final void listenForSelectionPN () {
         productname_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
+                
+               
                 String selected = e.getItem().toString();
                 
-                if (selected != null){
+                if (!selected.isBlank()){
+                    
+                    System.out.println("y r u trueeeeeeeeeeeeeeeeeeeeeeeee");
+                    
                     List <Devices> list = hp.getItemByProductName(selected);
                     String [] categories = new String [] {"manufacturer", "inventoryNumber"};
                     
@@ -104,7 +114,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             public void itemStateChanged(ItemEvent e) {
                 String selected = e.getItem().toString();
                 
-                if (selected != null){
+                if (!selected.isBlank()){
                     List <Devices> list = hp.getItemByManufacturer(selected);
                     String [] categories = new String [] {"productName", "inventoryNumber", "users_UserID"};
                     
@@ -126,7 +136,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             public void itemStateChanged(ItemEvent e) {
                 String selected = e.getItem().toString();
                 
-                if (selected != null){
+                if (!selected.isBlank() && hp.isNumeric(selected)){
                     List <Devices> list = hp.getItemByInvNumber(selected);
                     String [] categories = new String [] {"productName", "manufacturer", "users_UserID"};
                     
@@ -146,39 +156,54 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         }); 
     }
     
+    
     public final void listenForSelectionUID () {
         userID_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 String selected = e.getItem().toString();
-                String editedItem = userID_newrental.getEditor().getItem().toString();
-                System.out.println(selected);
-                if (selected != null){
+                if ((!selected.isBlank() && hp.isNumeric(selected))){
                     Users userToCheck = hp.checkUserID(selected);
-                    if (userToCheck != null && (!hp.isUserNew(editedItem))) {
-                        System.out.println("u doooooooooooo ");
+                    if (userToCheck != null && (!hp.isUserNew(selected))) {
                         userFirstName.setText(userToCheck.getUserFirstName());
                         userLastName.setText(userToCheck.getUserLastName());
                         userPhone.setText(userToCheck.getUserPhone());
                         userEmail.setText(userToCheck.getUserEmail());
                         year_newrental.setSelectedItem(userToCheck.getYear());
                         year_newrental.setEnabled(false);
+                    } else if (hp.isUserNew(selected)) {
+                        userFirstName.setText("");
+                        userLastName.setText("");
+                        userPhone.setText("");
+                        userEmail.setText("");
+                        year_newrental.setSelectedItem("");
+                        year_newrental.setEnabled(true);
                     } 
-                } 
+                }
             }
         });
     }
-    
+        
     public Users createUser (){
+        
+        Users user = null;
+        
         String id = userID_newrental.getEditor().getItem().toString();
         String firstname = userFirstName.getText();
         String lastname = userLastName.getText(); 
         String phone = userPhone.getText();
         String email = userEmail.getText();
         String year = year_newrental.getSelectedItem().toString();
-
-        Users user = new Users(Integer.parseInt(id), firstname, lastname, phone, 
-                                email, year);
         
+        if (firstname.isBlank() || lastname.isBlank() || phone.isBlank() ||
+                email.isBlank()){
+            JOptionPane.showMessageDialog(null, 
+                    "Achtung! Ein oder mehrere Textfelder sind leer!"
+                            + " Bitte alles ausfüllen!");
+        
+        }else {
+            user = new Users(Integer.parseInt(id), firstname, lastname, phone, 
+                                email, year);
+        }
         return user;
     }
     
@@ -186,7 +211,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         administrator_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 String selected = e.getItem().toString();
-                if (selected != null) {
+                if ((!selected.isBlank() && hp.isNumeric(selected))) {
                     adminFullName.setText(hp.getAdminNameByID(selected));
                 }
             }
@@ -480,15 +505,15 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         userFirstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         userFirstName.setText("Vorname");
-        userFirstName.setToolTipText("");
+        userFirstName.setToolTipText("Vorname");
 
         userLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         userLastName.setText("Nachname");
-        userLastName.setToolTipText("");
+        userLastName.setToolTipText("Nachname");
 
         userEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         userEmail.setText("E-Mail");
-        userEmail.setToolTipText("");
+        userEmail.setToolTipText("E-Mail");
         userEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userEmailActionPerformed(evt);
@@ -497,7 +522,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         userPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         userPhone.setText("Telefonnummer");
-        userPhone.setToolTipText("");
+        userPhone.setToolTipText("Telefonnummer");
         userPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userPhoneActionPerformed(evt);
@@ -509,6 +534,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         administrator_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         administrator_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        administrator_newrental.setToolTipText("Admin-ID");
 
         date.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -1271,17 +1297,64 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
     private void cancel_newrentalActionPerformed(java.awt.event.ActionEvent evt) {
     // methode alle eingaben leoschen und neu laden
+    // funktioniert noch nicht
+        
+        productname_newrental.setSelectedItem("");
+        
+        System.out.println("bbubbbuybb " + productname_newrental.getSelectedItem().toString());
+        manufacturer_newrental.setSelectedItem("");
+        
+        inventorynumber_newrental.setSelectedItem("");
+        userID_newrental.setSelectedItem("");
+        year_newrental.setSelectedItem("");
+        year_newrental.setEnabled(true);
+        administrator_newrental.setSelectedItem("");
+        adminFullName.setText("");
+        userFirstName.setText("");
+        userLastName.setText("");
+        userPhone.setText("");
+        userEmail.setText("");
+        
+        //fillDropdown();
+
     }    
     private void save_newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_newrentalActionPerformed
         // TODO add your handling code here:
         
-        if (hp.isUserNew(userID_newrental.getEditor().getItem().toString())){
-            hp.insertNewUser(createUser());
-            JOptionPane.showMessageDialog(null, "Neuen User hinzugefügt");
-        }
+        // TODO add your handling code here:
         
+        if (!userID_newrental.getEditor().getItem().toString().isBlank()){
+            boolean createNewUser = true;
+            if (hp.isUserNew(userID_newrental.getEditor().getItem().toString())){
+                Users user = createUser();
+                
+                if (user == null){
+                    createNewUser = false;
+                }
+                if (createNewUser){
+                    hp.insertNewUser(user);
+                    JOptionPane.showMessageDialog(null, "Neuen User hinzugefügt");
+                }   
+                
+            } else {
+                Users user = createUser();
+                
+                if (user == null){
+                    createNewUser = false;
+                }
+            }
+            if (createNewUser){
+                createNewRental();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "UserID/Matrikelnummer angeben!");
+        }       
+    }//GEN-LAST:event_save_newrentalActionPerformed
+
+    private void createNewRental(){
         try {
             Thread.sleep(1000);
+            
             SelectedDate selectedDate = rentalDate_newrental.getSelectedDate();
             LocalDate date = 
                 LocalDate.of(selectedDate.getYear(), 
@@ -1303,9 +1376,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         } 
         JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
-    }//GEN-LAST:event_save_newrentalActionPerformed
-
-    
+    }
     
     private void save_newdeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_newdeviceActionPerformed
         // TODO add your handling code here:
