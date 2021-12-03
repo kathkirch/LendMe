@@ -4,11 +4,17 @@
  */
 package Project_LendMe;
 
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +24,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     
     private final DatabaseHelper hp = new DatabaseHelper();
     private final Rental_Helper rentalHelper = new Rental_Helper();
+    private final ArchivHelper archHelper = new ArchivHelper();
+    
     
      /**
      * Creates new form GUI
@@ -33,6 +41,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         listenForSelectionIN();
         listenForSelectionUID();
         listenForSelectionAID();
+        
+        
     }
     
     
@@ -441,7 +451,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         home_panel.setLayout(home_panelLayout);
         home_panelLayout.setHorizontalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 595, Short.MAX_VALUE)
+            .addGap(0, 665, Short.MAX_VALUE)
         );
         home_panelLayout.setVerticalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -724,18 +734,17 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         filter_options_archive.setText("Filterungs- und Sortiermöglichkeiten:");
 
         jScrollPane3.setBackground(new java.awt.Color(220, 229, 211));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(600, 680));
 
         archive_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
-                "Archiv"
+
             }
         ));
+        archive_table.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(archive_table);
 
         javax.swing.GroupLayout archive_panelLayout = new javax.swing.GroupLayout(archive_panel);
@@ -1212,6 +1221,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         getContentPane().add(parentpanel, java.awt.BorderLayout.CENTER);
 
+        getAccessibleContext().setAccessibleName("jFrame");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1242,6 +1253,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.add(archive_panel);
         layerpane.repaint();
         layerpane.revalidate();
+        
+        
+        archHelper.populateTable(archive_table, jScrollPane3);
+        //archive_panel.setSize(630, 680);
     }//GEN-LAST:event_archiveActionPerformed
 
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed

@@ -127,6 +127,18 @@ public class Rentals {
     public void setUsers_UserID(int users_UserID) {
         this.users_UserID = users_UserID;
     }
+
+    @Override
+    public String toString() {
+        
+        String string = rentalID + " | " + rentalDate + " | " + returnDate 
+                + " | " +  device_inventoryNumber + " | " + administrators_AdminID 
+                + " | " + users_UserID;
+        
+        return string; 
+    }
+    
+    
     
    
 }

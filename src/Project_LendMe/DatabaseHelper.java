@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,22 +87,35 @@ public class DatabaseHelper {
         return devicesList;
     }
     
-    /*
-    public List <Rentals> readRentals () {
-        List <Rentals> allRentals = new ArrayList <>();
+    
+    public ArrayList <Rentals> readRentals () {
+        
+        ArrayList <Rentals> allRentals = new ArrayList <>();
+        
         String query = "SELECT * FROM rentals WHERE returnDate IS NOT NULL";
         
         try{
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             while(rs.next()){
-                for (Rentals rental : allRentals){
-                    rental.setRentalID(rs.getInt())
-                }
+                
+                int rentalID = rs.getInt("rentalID");
+                LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
+                LocalDate returnDate = rs.getDate("returnDate").toLocalDate();
+                int inventoryNumb = rs.getInt("devices_inventoryNumber");
+                int adminID = rs.getInt("administrators_adminID");
+                int userID = rs.getInt("users_UserID");
+                
+                Rentals rental = new Rentals(rentalDate, inventoryNumb, adminID,
+                                                userID);
+                
+                rental.setRentalID(rentalID);
+                rental.setReturnDate(returnDate);
+                
+                allRentals.add(rental);
             }
-            
-        
         }catch (SQLException ex) {
+            System.out.println(ex);
         }finally {
             if (stmt != null) {
                 try {
@@ -111,12 +125,12 @@ public class DatabaseHelper {
                 }
             }
         }
-    
         
+        return allRentals;
     }
-*/
+
     
-    public static List <Devices> getItemByProductName(String productName){
+    public List <Devices> getItemByProductName(String productName){
         
         List <Devices> items = new ArrayList <>();
         String query = "SELECT manufacturer, inventoryNumber"
@@ -150,7 +164,7 @@ public class DatabaseHelper {
         return items;
     }
     
-    public static List <Devices> getItemByManufacturer(String manufacturer){
+    public List <Devices> getItemByManufacturer(String manufacturer){
         
         List <Devices> items = new ArrayList <>();
         String query = "SELECT productName, inventoryNumber"
@@ -184,7 +198,7 @@ public class DatabaseHelper {
         return items;
     }
     
-    public static List <Devices> getItemByInvNumber (String invNumber){
+    public List <Devices> getItemByInvNumber (String invNumber){
         
         List <Devices> items = new ArrayList <>();
         String query = "SELECT productName, manufacturer"
@@ -219,7 +233,7 @@ public class DatabaseHelper {
         return items;
     }
     
-    public static List <String> getUsersID(){
+    public List <String> getUsersID(){
         
         List <String> userIDs = new ArrayList <>();
         String query = "SELECT userID FROM users";
@@ -246,7 +260,7 @@ public class DatabaseHelper {
         return userIDs;
     }
     
-    public static List <String> getUserYears(){
+    public List <String> getUserYears(){
         List <String> userYears = new ArrayList <>();
         String query = "SELECT userYear FROM users";
         
@@ -272,7 +286,7 @@ public class DatabaseHelper {
         return userYears;
     }
     
-    public static List <String> getAdminIDs() {
+    public List <String> getAdminIDs() {
         String adminID;
         List <String> adminIDs = new ArrayList<>();
         
@@ -301,7 +315,7 @@ public class DatabaseHelper {
         return adminIDs;
     }
          
-    public static String getAdminNameByID (String adminID){
+    public String getAdminNameByID (String adminID){
         String adminName = null;
         
         String query = "SELECT concat(adminFirstName," + "' '" +", adminLastName)"
@@ -330,7 +344,7 @@ public class DatabaseHelper {
         return adminName;
     }
     
-    public static Users checkUserID(String userID){
+    public Users checkUserID(String userID){
         
         Users user = null;
         
@@ -365,7 +379,7 @@ public class DatabaseHelper {
         return user;
     }
     
-    public static List <Object> makeListForCategory (List <Devices> list, 
+    public List <Object> makeListForCategory (List <Devices> list, 
                                             String itemCategory) {
         
         List <Object> itemArray = new ArrayList<>();
@@ -402,7 +416,7 @@ public class DatabaseHelper {
         } 
     }
         
-    public static void insertNewUser(Users user){
+    public void insertNewUser(Users user){
         
         if (user != null){
             try{
@@ -435,7 +449,7 @@ public class DatabaseHelper {
         } 
     }
     
-    public static boolean isUserNew(String userID){
+    public boolean isUserNew(String userID){
         
         boolean userNEW = true;
         String query = "SELECT * FROM users WHERE userID=" + userID + ";";
@@ -462,7 +476,7 @@ public class DatabaseHelper {
         return userNEW;
     }
     
-    public static void insertNewRental_DB(Rentals rental) {
+    public void insertNewRental_DB(Rentals rental) {
         try{ 
             stmt = con.createStatement();
             String string = "insert into rentals (rentalDate, "
@@ -490,7 +504,7 @@ public class DatabaseHelper {
         }
     }
         
-    public static void updateDeviceStatus(int device_inventoryNumber, int userID) {
+    public void updateDeviceStatus(int device_inventoryNumber, int userID) {
         Statement stmt = null;
         ResultSet rs = null;
         
