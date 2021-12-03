@@ -86,6 +86,36 @@ public class DatabaseHelper {
         return devicesList;
     }
     
+    /*
+    public List <Rentals> readRentals () {
+        List <Rentals> allRentals = new ArrayList <>();
+        String query = "SELECT * FROM rentals WHERE returnDate IS NOT NULL";
+        
+        try{
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while(rs.next()){
+                for (Rentals rental : allRentals){
+                    rental.setRentalID(rs.getInt())
+                }
+            }
+            
+        
+        }catch (SQLException ex) {
+        }finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                }catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    
+        
+    }
+*/
+    
     public static List <Devices> getItemByProductName(String productName){
         
         List <Devices> items = new ArrayList <>();
