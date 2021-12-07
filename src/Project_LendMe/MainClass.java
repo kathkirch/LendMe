@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Project_LendMe;
+
+import javax.swing.JScrollPane;
+
 /**
  *
  * @author Katharina
