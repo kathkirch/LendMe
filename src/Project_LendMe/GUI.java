@@ -4,16 +4,18 @@
  */
 package Project_LendMe;
 
-import java.awt.ScrollPane;
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +25,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     
     private final DatabaseHelper hp = new DatabaseHelper();
     private final Rental_Helper rentalHelper = new Rental_Helper();
+    private final ArchivHelper archHelper = new ArchivHelper();
+    
     
      /**
      * Creates new form GUI
@@ -37,10 +41,14 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         listenForSelectionM();
         listenForSelectionIN();
         listenForSelectionUID();
-        listenForSelectionAID();     
+        listenForSelectionAID();
+        
     }
     
-    
+    /**
+    *
+    * @author Katharina
+    */
     public final void fillDropdowns() {
         
         rentalHelper.fillComboBox_Category(productname_newrental, "productName");
@@ -51,6 +59,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                                             administrator_newrental);
     }
     
+    /**
+    *
+    * @author Katharina
+    */
     public final void listenForSelectionPN () {
             productname_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
@@ -60,9 +72,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                
                     if (productname_newrental.getItemCount() == 0 ){
                         selected = ""; 
-                        List <Devices> list = hp.getDevices();    
-                        List <Object> nameList = hp.makeListForCategory(list, "productName");
-                        productname_newrental.setModel(new DefaultComboBoxModel<>(nameList.toArray((new String[0]))));
+                        rentalHelper.fillComboBox_Category(productname_newrental, "productName");
                     }
                 
                     if (!selected.isBlank()){
@@ -86,6 +96,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         });
     }
     
+    /**
+    *
+    * @author Katharina
+    */
     public final void listenForSelectionM () {
         manufacturer_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
@@ -94,9 +108,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 
                     if (manufacturer_newrental.getItemCount() == 0 ){
                         selected = ""; 
-                        List <Devices> list = hp.getDevices();    
-                        List <Object> manuList = hp.makeListForCategory(list, "manufacturer");
-                        manufacturer_newrental.setModel(new DefaultComboBoxModel<>(manuList.toArray((new String[0]))));
+                        rentalHelper.fillComboBox_Category(manufacturer_newrental, "manufacturer");
                     }
                     if (!selected.isBlank()){
                         List <Devices> list = hp.getItemByManufacturer(selected);
@@ -115,6 +127,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         }); 
     }
     
+    /**
+    *
+    * @author Katharina
+    */
     public final void listenForSelectionIN () {
         inventorynumber_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
@@ -123,10 +139,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 
                     if (inventorynumber_newrental.getItemCount() == 0 ){
                         selected = ""; 
-                        List <Devices> list = hp.getDevices();
-                        List <Object> invNumbList = hp.makeListForCategory(list, "inventoryNumber");
-                        inventorynumber_newrental.setModel(new DefaultComboBoxModel<>
-                                            (invNumbList.toArray((new String[0]))));
+                        rentalHelper.fillComboBox_Category(inventorynumber_newrental, "inventoryNumber");
+                        
                     }
                 
                     if (!selected.isBlank() && hp.isNumeric(selected)){
@@ -150,6 +164,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         }); 
     }
     
+    /**
+    *
+    * @author Katharina
+    */
     public final void listenForSelectionUID () {
         userID_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
@@ -176,33 +194,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         });
     }
     
-    /*
-        
-    public Users createUser (){
-        
-        Users user = null;
-        
-        String id = userID_newrental.getEditor().getItem().toString();
-        String firstname = userFirstName.getText();
-        String lastname = userLastName.getText(); 
-        String phone = userPhone.getText();
-        String email = userEmail.getText();
-        String year = year_newrental.getSelectedItem().toString();
-        
-        if (firstname.isBlank() || lastname.isBlank() || phone.isBlank() ||
-                email.isBlank()){
-            JOptionPane.showMessageDialog(null, 
-                    "Achtung! Ein oder mehrere Textfelder sind leer!"
-                            + " Bitte alles ausfüllen!");
-        
-        }else {
-            user = new Users(Integer.parseInt(id), firstname, lastname, phone, 
-                                email, year);
-        }
-        return user;
-    }
+    /**
+    *
+    * @author Katharina
     */
-    
     public final void listenForSelectionAID() {
         administrator_newrental.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
@@ -750,15 +745,13 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         archive_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
-                "Archiv"
+
             }
         ));
+        archive_table.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(archive_table);
 
         javax.swing.GroupLayout archive_panelLayout = new javax.swing.GroupLayout(archive_panel);
@@ -1241,6 +1234,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         getContentPane().add(parentpanel, java.awt.BorderLayout.CENTER);
 
+        getAccessibleContext().setAccessibleName("jFrame");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
         
@@ -1265,12 +1260,19 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.revalidate();
     }//GEN-LAST:event_rentallistActionPerformed
 
+    /**
+    *
+    * @author Katharina
+    */
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
         
         layerpane.removeAll();
         layerpane.add(archive_panel);
         layerpane.repaint();
         layerpane.revalidate();
+        
+        archHelper.populateTable(archive_table, jScrollPane3);
+        
     }//GEN-LAST:event_archiveActionPerformed
 
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
@@ -1297,10 +1299,18 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
     }//GEN-LAST:event_userPhoneActionPerformed
 
+    /**
+    *
+    * @author Katharina
+    */
     private void cancel_newrentalActionPerformed(java.awt.event.ActionEvent evt) {
         deleteAll();
     }   
     
+    /**
+    *
+    * @author Katharina
+    */
     public void deleteAll(){
         
         productname_newrental.removeAllItems();

@@ -5,8 +5,9 @@
         <group>
             <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/DatabaseHelper.java</file>
             <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/MainClass.java</file>
+            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/ArchivHelper.java</file>
             <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/Rentals.java</file>
-            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/GUI.java</file>
+            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/Rental_Helper.java</file>
         </group>
     </open-files>
 </project-private>
