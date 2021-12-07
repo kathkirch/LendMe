@@ -5,7 +5,6 @@
  */
 package Project_LendMe;
 
-import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,7 +20,6 @@ public class ArchivHelper {
     
     private final DatabaseHelper dbH = new DatabaseHelper();
     
-    
     public void  populateTable (JTable table, JScrollPane js){
         
         String [] columns = new String [] {"ID", "Verliehen am", 
@@ -34,38 +32,37 @@ public class ArchivHelper {
         
         DefaultTableModel model = new DefaultTableModel(data, columns);
         
-        //table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        
         table.setModel(model);
         
-        table.setSize(32768, 32768);
-        
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         TableColumnModel colModel = table.getColumnModel();
-        colModel.getColumn(1).setPreferredWidth(3);
-        colModel.getColumn(2).setPreferredWidth(5);
-        colModel.getColumn(3).setPreferredWidth(5);
-        colModel.getColumn(4).setPreferredWidth(7);
+        colModel.getColumn(0).setPreferredWidth(40);
+        colModel.getColumn(1).setPreferredWidth(93);
+        colModel.getColumn(2).setPreferredWidth(91);
+        colModel.getColumn(3).setPreferredWidth(102);
+        colModel.getColumn(4).setPreferredWidth(70);
+        colModel.getColumn(5).setPreferredWidth(102);
+        
         table.setRowHeight(25);
         
-        table.setPreferredScrollableViewportSize(new Dimension (650, 400));
+        //table.setPreferredScrollableViewportSize(new Dimension (3000, 3000));
         table.setFillsViewportHeight(true);
-        table.setAutoCreateRowSorter(true);
-        table.setRowHeight(25);
+        
         if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
             table.setPreferredSize(js.getPreferredSize());
         }
         
-        table.setEnabled(false);
-        js.setVisible(true);
         
+        table.setEnabled(true);
+        js.setVisible(true); 
     }
     
+   
     
     public Object [][] initRentals1 (List <Rentals> rentals){
         Object [][] data = new Object [rentals.size()] [];
         int i = 0;
         for(Rentals r : rentals){
-            System.out.println(r.getRentalID());
             data[i] = new Object []{r.getRentalID(),
                                     r.getRentalDate(),
                                     r.getReturnDate(), 

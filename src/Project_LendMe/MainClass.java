@@ -25,7 +25,5 @@ public class MainClass {
         Thread thread = new Thread(runnable);
         thread.start();
         
-  
-        
     }
 }

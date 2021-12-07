@@ -28,8 +28,8 @@ public class Rental_Helper {
     public void fillComboBox_Category (JComboBox box, String category){
         List <Devices> list = hp.getDevices();
         
-        List <Object> nameList = hp.makeListForCategory(list, category);
-        box.setModel(new DefaultComboBoxModel<>(nameList.toArray((new String[0]))));
+        List <Object> oList = hp.makeListForCategory(list, category);
+        box.setModel(new DefaultComboBoxModel<>(oList.toArray((new String[0]))));
         box.setEditable(true);
         box.setSelectedItem("");
         AutoCompleteDecorator.decorate(box);  

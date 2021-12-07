@@ -51,13 +51,17 @@ public class DatabaseHelper {
         }
     }
     
+    /**
+     *returns all devices from device table with the status 0 (not lent)
+     * @return Devices Objects as a List
+     */
     public List <Devices> getDevices(){
     
         List <Devices> devicesList = new ArrayList <>();
         
         try {
             stmt = con.createStatement();
-            String query = "SELECT * FROM devices WHERE status =0";
+            String query = "SELECT * FROM devices WHERE status=0";
             rs = stmt.executeQuery(query);
             
             while (rs.next()){
@@ -87,7 +91,10 @@ public class DatabaseHelper {
         return devicesList;
     }
     
-    
+    /**
+     * returns all completed rentals, just rentals with a returnDate
+     * @return Rentals Objects as an ArrayList
+     */
     public ArrayList <Rentals> readRentals () {
         
         ArrayList <Rentals> allRentals = new ArrayList <>();
@@ -129,7 +136,11 @@ public class DatabaseHelper {
         return allRentals;
     }
 
-    
+    /**
+     *
+     * @param productName as a String, needed to search in the Database
+     * @return Devices Objects as a List with the given productName 
+     */
     public List <Devices> getItemByProductName(String productName){
         
         List <Devices> items = new ArrayList <>();
@@ -164,6 +175,11 @@ public class DatabaseHelper {
         return items;
     }
     
+    /**
+     *
+     * @param manufacturer as a String needed to search in Database
+     * @return Devices Objects as a List with the given manufacturer
+     */
     public List <Devices> getItemByManufacturer(String manufacturer){
         
         List <Devices> items = new ArrayList <>();
@@ -198,6 +214,11 @@ public class DatabaseHelper {
         return items;
     }
     
+    /**
+     *
+     * @param invNumber as a String needed to search for in the Database
+     * @return Devices Objects as a List with the given invNumber
+     */
     public List <Devices> getItemByInvNumber (String invNumber){
         
         List <Devices> items = new ArrayList <>();
@@ -233,6 +254,10 @@ public class DatabaseHelper {
         return items;
     }
     
+    /**
+     *
+     * @return List of Strings with all the UserID's in the Database
+     */
     public List <String> getUsersID(){
         
         List <String> userIDs = new ArrayList <>();
@@ -260,6 +285,10 @@ public class DatabaseHelper {
         return userIDs;
     }
     
+    /**
+     *
+     * @return List of Strings with all UserYears from the database
+     */
     public List <String> getUserYears(){
         List <String> userYears = new ArrayList <>();
         String query = "SELECT userYear FROM users";
@@ -286,6 +315,10 @@ public class DatabaseHelper {
         return userYears;
     }
     
+    /**
+     *
+     * @return List of Strings with all AdminID's from the database
+     */
     public List <String> getAdminIDs() {
         String adminID;
         List <String> adminIDs = new ArrayList<>();
@@ -315,6 +348,11 @@ public class DatabaseHelper {
         return adminIDs;
     }
          
+    /**
+     *
+     * @param adminID as a String needed to search for in the Database
+     * @return adminName from the database with the given adminID
+     */
     public String getAdminNameByID (String adminID){
         String adminName = null;
         
@@ -344,6 +382,11 @@ public class DatabaseHelper {
         return adminName;
     }
     
+    /**
+     *
+     * @param userID needed as a String to search in the Database
+     * @return Users Object with the given UserID
+     */
     public Users checkUserID(String userID){
         
         Users user = null;
@@ -379,6 +422,12 @@ public class DatabaseHelper {
         return user;
     }
     
+    /**
+     *
+     * @param list List of Devices Objects needed to create a object List 
+     * @param itemCategory needed as a String to create the Objects List with the given itemCategory
+     * @return a Object List for created with the given parameters
+     */
     public List <Object> makeListForCategory (List <Devices> list, 
                                             String itemCategory) {
         
@@ -416,6 +465,11 @@ public class DatabaseHelper {
         } 
     }
         
+    /**
+     *
+     * @param user as a Users Object is needed to insert 
+     * the User-Object with it's Attributes as Data in the Database
+     */
     public void insertNewUser(Users user){
         
         if (user != null){
@@ -449,6 +503,11 @@ public class DatabaseHelper {
         } 
     }
     
+    /**
+     *
+     * @param userID needed to search for in the Database
+     * @return true if the user not exists in the Database, false if the user exists
+     */
     public boolean isUserNew(String userID){
         
         boolean userNEW = true;
@@ -476,6 +535,11 @@ public class DatabaseHelper {
         return userNEW;
     }
     
+    /**
+     *
+     * @param rental as a Rantals Object is needed to insert 
+     * the Rental-Object with it's Attributes as Data in the Database
+     */
     public void insertNewRental_DB(Rentals rental) {
         try{ 
             stmt = con.createStatement();
@@ -504,6 +568,13 @@ public class DatabaseHelper {
         }
     }
         
+    /**
+     *
+     * @param device_inventoryNumber needed as a int to search for in the database
+     * @param userID needed to search for in the database
+     * updates the values for userID and status automatically if the method is called
+     * and a suitable entry for the given parameters in the database was found
+     */
     public void updateDeviceStatus(int device_inventoryNumber, int userID) {
         Statement stmt = null;
         ResultSet rs = null;
@@ -538,6 +609,11 @@ public class DatabaseHelper {
             } 
     }
     
+    /**
+     *
+     * @param str String to proof 
+     * @return true if String is numeric only
+     */
     public static boolean isNumeric(String str) { 
         try {  
             Integer.parseInt(str);  
