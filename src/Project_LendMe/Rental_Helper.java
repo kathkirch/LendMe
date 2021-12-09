@@ -110,5 +110,4 @@ public class Rental_Helper {
         } 
         JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
     }
-     
 }
