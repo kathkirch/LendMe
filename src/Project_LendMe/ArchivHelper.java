@@ -71,6 +71,7 @@ public class ArchivHelper {
         
         ascRadio.setSelected(false);
         descRadio.setSelected(false);
+        filterTF.setText("");
     }
     
     public void fillBox () {
