@@ -6,6 +6,7 @@
 package Project_LendMe;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
 /**
  *
@@ -137,8 +138,4 @@ public class Rentals {
         
         return string; 
     }
-    
-    
-    
-   
 }
