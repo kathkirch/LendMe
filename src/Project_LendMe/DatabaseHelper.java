@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -503,4 +504,59 @@ public class DatabaseHelper {
         }  
     }
     
+    List<Rentallist> displayRentallist() {
+       
+     ArrayList <Rentallist> Rentallist = new ArrayList <>();
+        
+        String query = "SELECT rentalID, rentalDate, rentals.users_UserID, rentals.devices_inventoryNumber, manufacturer, productname from rentals "
+                + "join devices on devices_inventoryNumber = devices.inventoryNumber where status = 1  ";
+        
+        
+        try{
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while(rs.next()){
+                
+                int rentalID = rs.getInt("rentalID");
+                LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
+                int users_UserID = rs.getInt("users_UserID");
+                int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
+                String manufacturer = rs.getString("manufacturer");
+                String productname =rs.getString("productname");
+                
+               
+                
+                Rentallist ren = new Rentallist();
+                ren.setRentalID(rentalID);
+                ren.setDevices_inventoryNumber(devices_inventoryNumber);
+                ren.setProductName(productname);
+                ren.setManufacturer(manufacturer); 
+                ren.setUsers_UserID(users_UserID);
+                ren.setRentalDate(rentalDate);
+
+               
+                
+               
+              
+               
+                Rentallist.add(ren);
+
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex);
+        }finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                }catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        
+        return Rentallist;
+    }
+    
+    
+
 }
