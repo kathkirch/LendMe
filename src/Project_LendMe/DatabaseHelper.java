@@ -5,6 +5,12 @@
  */
 package Project_LendMe;
 
+import Comparators.rentalAdminIDComparatorASC;
+import Comparators.rentalDateComparatorASC;
+import Comparators.rentalIDComparatorASC;
+import Comparators.rentalInvComparatorASC;
+import Comparators.rentalUserIDComparatorASC;
+import Comparators.returnDateComparatorASC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,6 +21,7 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -537,7 +544,7 @@ public class DatabaseHelper {
     
     /**
      *
-     * @param rental as a Rantals Object is needed to insert 
+     * @param rental as a Rentals Object is needed to insert 
      * the Rental-Object with it's Attributes as Data in the Database
      */
     public void insertNewRental_DB(Rentals rental) {
@@ -576,8 +583,8 @@ public class DatabaseHelper {
      * and a suitable entry for the given parameters in the database was found
      */
     public void updateDeviceStatus(int device_inventoryNumber, int userID) {
-        Statement stmt = null;
-        ResultSet rs = null;
+        stmt = null;
+        rs = null;
         
         try {
             stmt = con.createStatement();
@@ -608,6 +615,74 @@ public class DatabaseHelper {
                 }  
             } 
     }
+    
+    public List <Rentals> filterRentals (int whereClause, String filterString){
+        
+        stmt = null;
+        rs = null;
+        String table = "rentals";
+        String where = "";
+        ArrayList <Rentals> filteredRentals = new ArrayList <>();
+        
+        switch (whereClause) {
+            case 0 :
+                where = "rentalID";        
+                break;
+            case 1 :
+                where = "rentalDate";
+                break;
+            case 2 :
+                where = "returnDate";
+                break;
+            case 3 :
+                where = "devices_inventoryNumber";
+                break;
+            case 4 :
+                where = "administrators_adminID";
+                break;
+            case 5 :
+                where = "users_userID";
+                break;
+        }
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM " + table + 
+                    " WHERE " + where + "='" + filterString 
+                    + "' AND returnDate IS NOT NULL");
+            
+            while(rs.next()){
+                
+                int rentalID = rs.getInt("rentalID");
+                LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
+                LocalDate returnDate = rs.getDate("returnDate").toLocalDate();
+                int inventoryNumb = rs.getInt("devices_inventoryNumber");
+                int adminID = rs.getInt("administrators_adminID");
+                int userID = rs.getInt("users_UserID");
+                
+                Rentals rental = new Rentals(rentalDate, inventoryNumb, adminID,
+                                                userID);
+                
+                rental.setRentalID(rentalID);
+                rental.setReturnDate(returnDate);
+                
+                filteredRentals.add(rental);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try { 
+                    stmt.close();
+                } catch (SQLException ex){
+                    System.out.println(ex);
+                }
+            }  
+        } 
+        return filteredRentals;
+    }
+    
     
     /**
      *
