@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -26,6 +27,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private final DatabaseHelper hp = new DatabaseHelper();
     private final Rental_Helper rentalHelper = new Rental_Helper();
     private final ArchivHelper archHelper = new ArchivHelper();
+    
+    
+    private final Rentallist_Helper rentallistHelper = new Rentallist_Helper();
+    private final Return returndata= new Return();
     
     
      /**
