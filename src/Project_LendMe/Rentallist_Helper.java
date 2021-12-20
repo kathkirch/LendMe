@@ -5,65 +5,79 @@
 package Project_LendMe;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author linda
+ * @author Katharina
  */
-public class Rentallist_Helper {
+public class Rentallist_Helper extends MyTableHelper {
     
     private final DatabaseHelper rlH = new DatabaseHelper();
 
-    void initializeRentallist(JTable table, JScrollPane sp) {
+    public Rentallist_Helper(JTable table, JScrollPane js, JComboBox box, 
+                JRadioButton ascRadio, JRadioButton descRadio, 
+                JTextField filterTF, JButton filterBT) {
+        super(table, js, box, ascRadio, descRadio, filterTF, filterBT);
         
-         String [] columns = new String [] {"ID", "Inventarnummer","Produktname", 
+        this.rentalList = rlH.displayRentallist();
+        this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
                                 "Herstellername","Verliehen an" ,"Verleihdatum"};
-                                        
-                                        
-        
-         List <Rentallist> rentallist =rlH.displayRentallist();
-                
-        
-         Object [][] datalist = dataRental(rentallist);
-         
-        DefaultTableModel model = new DefaultTableModel(datalist, columns);
-        
-        table.setModel(model);
-        
-        table.setPreferredScrollableViewportSize(new Dimension (650, 400));
-        table.setFillsViewportHeight(true);
-        table.setAutoCreateRowSorter(true);
-        /*table.setRowHeight(25);
-            if (table.getPreferredSize().getHeight() < sp.getPreferredSize().getHeight()){
-             table.setPreferredSize(sp.getPreferredSize()); */
-        
-       
-        table.setEnabled(false);
-        sp.setVisible(true);
         
     }
     
-    public Object [][] dataRental (List <Rentallist> rentallist){
-        Object [][] datalist = new Object [rentallist.size()] [];
-        int i = 0;
-        for(Rentallist r : rentallist){
-            datalist[i] = new Object []{r.getRentalID(),
-                                        r.getDevices_inventoryNumber(),
-                                        r.getProductName(),
-                                        r.getManufacturer(),
-                                        r.getUsers_UserID(),
-                                        r.getRentalDate()};
-                                        
-                                        
-                                        
-            i = i + 1;
-        }
-        return datalist;
-    }  
+    
+    @Override
+    public Object[][] initRentalList(List<Rentallist> rentallist) {
+        Object [] [] data = super.initRentalList(rentallist);
+        return data; 
+    }
+
+    @Override
+    public void populateTable() {
+        super.populateTable(); 
+        
+    }
+
+    @Override
+    public void fillBox() {
+        super.fillBox(); 
+    }
+    
+    public void filterRentalTable() {
+        filterBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent aev) {
+                int whereClause = box.getSelectedIndex();
+                String filterString = filterTF.getText();
+                List <Rentallist> filteredList = rlH.filterRentals2(whereClause, filterString);
+                if (filteredList != null){
+                    refreshRentalTable(filteredList);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
+                }
+            }
+        });
+    }
+    
+     public void refreshRentalTable (List<Rentallist> list){ 
+        data = initRentalList(list);
+        model = new DefaultTableModel(data, columns);
+        table.setModel(model);
+        table.setEnabled(true);
+        js.setVisible(true); 
+   }    
+    
 }
     
 

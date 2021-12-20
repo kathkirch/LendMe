@@ -5,12 +5,6 @@
  */
 package Project_LendMe;
 
-import Comparators.rentalAdminIDComparatorASC;
-import Comparators.rentalDateComparatorASC;
-import Comparators.rentalIDComparatorASC;
-import Comparators.rentalInvComparatorASC;
-import Comparators.rentalUserIDComparatorASC;
-import Comparators.returnDateComparatorASC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,7 +15,6 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -683,6 +676,79 @@ public class DatabaseHelper {
         return filteredRentals;
     }
     
+    public List <Rentallist> filterRentals2 (int whereClause, String filterString){
+        
+        stmt = null;
+        rs = null;
+        String table = "rentals";
+        String joinTable = "devices";
+        String where = "";
+        ArrayList <Rentallist> filteredRentallist = new ArrayList <>();
+        
+        switch (whereClause) {
+            case 0 :
+                where = "rentalID";        
+                break;
+            case 1 :
+                where = "devices_inventoryNumber";
+                break;
+            case 2 :
+                where = "productname";
+                break;
+            case 3 :
+                where = "manufacturer";
+                break;
+            case 4 :
+                where = "users_userID";
+                break;
+            case 5 :
+                where = "rentalDate";
+                break;
+        }
+        String query = "SELECT rentalID, rentalDate, administrators_adminID, "
+                    + "rentals.users_UserID, devices_inventoryNumber, "
+                    + "manufacturer, productname "
+                    + "FROM " + table
+                    + " JOIN " + joinTable
+                    + " ON devices_inventoryNumber = devices.inventoryNumber "
+                    + "WHERE " + where + "='" + filterString 
+                    + "' AND returnDate IS NULL;";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                int rentalID = rs.getInt("rentalID");
+                LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
+                int users_UserID = rs.getInt("users_UserID");
+                int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
+                int administrators_AdminID = rs.getInt("administrators_adminID");
+                String manufacturer = rs.getString("manufacturer");
+                String productname =rs.getString("productname");
+                
+                Rentallist ren = new Rentallist(productname, manufacturer,
+                                                rentalDate, devices_inventoryNumber,
+                                                administrators_AdminID, users_UserID);
+                ren.setRentalID(rentalID);
+                filteredRentallist.add(ren);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try { 
+                    stmt.close();
+                } catch (SQLException ex){
+                    System.out.println(ex);
+                }
+            }  
+        } 
+        return filteredRentallist;
+    }
+    
+    
     
     /**
      *
@@ -698,13 +764,21 @@ public class DatabaseHelper {
         }  
     }
     
-    List<Rentallist> displayRentallist() {
+/**
+ *
+ * @author linda
+ */
+    public List<Rentallist> displayRentallist() {
        
      ArrayList <Rentallist> Rentallist = new ArrayList <>();
         
-        String query = "SELECT rentalID, rentalDate, rentals.users_UserID, rentals.devices_inventoryNumber, manufacturer, productname from rentals "
-                + "join devices on devices_inventoryNumber = devices.inventoryNumber where status = 1  ";
-        
+        String query = "SELECT rentalID, rentalDate, administrators_adminID "
+                + ",rentals.users_UserID, rentals.devices_inventoryNumber, "
+                + "manufacturer, productname "
+                + "from rentals "
+                + "join devices "
+                + "on devices_inventoryNumber = devices.inventoryNumber "
+                + "where returnDate IS NULL;";
         
         try{
             stmt = con.createStatement();
@@ -715,26 +789,16 @@ public class DatabaseHelper {
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
                 int users_UserID = rs.getInt("users_UserID");
                 int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
+                int administrators_AdminID = rs.getInt("administrators_adminID");
                 String manufacturer = rs.getString("manufacturer");
                 String productname =rs.getString("productname");
                 
-               
-                
-                Rentallist ren = new Rentallist();
+                Rentallist ren = new Rentallist(productname, manufacturer,
+                                                rentalDate, devices_inventoryNumber,
+                                                administrators_AdminID, users_UserID);
                 ren.setRentalID(rentalID);
-                ren.setDevices_inventoryNumber(devices_inventoryNumber);
-                ren.setProductName(productname);
-                ren.setManufacturer(manufacturer); 
-                ren.setUsers_UserID(users_UserID);
-                ren.setRentalDate(rentalDate);
-
-               
                 
-               
-              
-               
                 Rentallist.add(ren);
-
             }
         }catch (SQLException ex) {
             System.out.println(ex);
@@ -747,10 +811,6 @@ public class DatabaseHelper {
                 }
             }
         }
-        
         return Rentallist;
     }
-    
-    
-
 }

@@ -8,66 +8,30 @@ import java.time.LocalDate;
 
 /**
  *
- * @author linda
+ * @author linda, katharina
  */
-public class Rentallist {
+public class Rentallist extends Rentals{
     
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-    private LocalDate rentalDate;
     private String productName;
-    private int devices_inventoryNumber;
-    private int users_UserID;
     private String manufacturer;
-    private boolean status;
-
-    public boolean isStatus() {
-        return status;
+    
+     Rentallist(String productName, String manufacturer, 
+                LocalDate rentalDate, int device_inventoryNumber, 
+                int administrators_AdminID, int users_UserID) {
+       super(rentalDate, device_inventoryNumber, administrators_AdminID, users_UserID);
+       this.productName = productName;
+       this.manufacturer = manufacturer;
+       
     }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public int getRentalID() {
-        return rentalID;
-    }
-
-    public void setRentalID(int rentalID) {
-        this.rentalID = rentalID;
-    }
-        private int rentalID;
-
-    public String getProductName() {
+    
+     public String getProductName() {
         return productName;
     }
 
-    public LocalDate getRentalDate() {
-        return rentalDate;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public void setRentalDate(LocalDate rentalDate) {
-        this.rentalDate = rentalDate;
-    }
-
-
-    public int getDevices_inventoryNumber() {
-        return devices_inventoryNumber;
-    }
-
-    public void setDevices_inventoryNumber(int devices_inventoryNumber) {
-        this.devices_inventoryNumber = devices_inventoryNumber;
-    }
-
-    public int getUsers_UserID() {
-        return users_UserID;
-    }
-
-    public void setUsers_UserID(int users_UserID) {
-        this.users_UserID = users_UserID;
-    }
-      
     public String getManufacturer() {
         return manufacturer;
     }
@@ -75,7 +39,4 @@ public class Rentallist {
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
-    
-    
-    
 }
