@@ -15,17 +15,13 @@ public class MainClass {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {  
+    public static void main(String[] args) {
         
-       
         DatabaseHelper.connectDB();
         
         Runnable runnable = new GUI();
         Thread thread = new Thread(runnable);
         thread.start();
-        
-        
-        
         
     }
 }

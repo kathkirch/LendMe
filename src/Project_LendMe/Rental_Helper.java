@@ -128,7 +128,7 @@ public class Rental_Helper {
     }
     
     /**
-     *adds an listener for userID-JComboBox and sets 
+     * adds an listener for userID-JComboBox and sets 
      * userFirstName, userLastName, userPhone, userMail and userYear 
      * automatically based on selection in userID_JComboBox
      * if userID is not known in the db all the textfields are set empty

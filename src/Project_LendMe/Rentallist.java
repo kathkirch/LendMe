@@ -16,7 +16,7 @@ public class Rentallist extends Rentals{
     private String manufacturer;
     private int lentDays;
     
-     Rentallist(String productName, String manufacturer, 
+    public Rentallist(String productName, String manufacturer, 
                 LocalDate rentalDate, int device_inventoryNumber, 
                 int administrators_AdminID, int users_UserID) {
        super(rentalDate, device_inventoryNumber, administrators_AdminID, users_UserID);
@@ -69,7 +69,5 @@ public class Rentallist extends Rentals{
 
     public void setLentDays(int lentDays) {
         this.lentDays = lentDays;
-    }
-    
-    
+    } 
 }
