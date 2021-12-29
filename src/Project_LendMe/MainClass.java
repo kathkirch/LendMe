@@ -10,14 +10,18 @@ package Project_LendMe;
  * @author Katharina
  */
 public class MainClass {
+    
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         
         DatabaseHelper.connectDB();
+        
+        Runnable runnable = new GUI();
+        Thread thread = new Thread(runnable);
+        thread.start();
+        
     }
-    
 }
