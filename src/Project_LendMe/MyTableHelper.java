@@ -58,7 +58,7 @@ abstract public class MyTableHelper {
     
     /**
      * fills the JComboBox with the Strings 
-     * initialized in the 'String [] columns' 
+     * initialized in the ' String [] columns ' 
      */
     public void fillBox () {
         box.setModel(new DefaultComboBoxModel<> (columns));
@@ -82,6 +82,7 @@ abstract public class MyTableHelper {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         
         table.setFillsViewportHeight(true);
+        table.setRowHeight(25);
         
         if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
             table.setPreferredSize(js.getPreferredSize());

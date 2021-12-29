@@ -4,13 +4,6 @@
  */
 package Project_LendMe;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-
-
 /**
  *
  * @author Anja, Katharina
@@ -20,18 +13,15 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private final DatabaseHelper hp = new DatabaseHelper();
     
   
-     /**
-     * Creates new form GUI
-     */
+    /**
+    * Creates new form GUI
+    */
     public GUI() {
         
         initComponents();
         
     }
-    
-    
-
-      
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -500,6 +490,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         btClear_rentals.setPreferredSize(new java.awt.Dimension(55, 32));
 
         rental_ScrollPane.setBackground(new java.awt.Color(220, 229, 211));
+        rental_ScrollPane.setPreferredSize(new java.awt.Dimension(453, 403));
 
         rentallist_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -512,6 +503,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 "", "", "", "", "", ""
             }
         ));
+        rentallist_table.setMinimumSize(new java.awt.Dimension(514, 428));
+        rentallist_table.setPreferredSize(new java.awt.Dimension(514, 64));
         rentallist_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rentallist_tableMouseClicked(evt);
@@ -547,10 +540,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                                         .addComponent(filterbutton_rentallist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btClear_rentals, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(0, 90, Short.MAX_VALUE)))
+                                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(5, 5, 5)))
                     .addComponent(return_button, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(129, 129, 129))
+                .addGap(50, 50, 50))
         );
         rentallist_panelLayout.setVerticalGroup(
             rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,7 +566,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                         .addComponent(filterbutton_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btClear_rentals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                 .addGap(20, 20, 20)
                 .addComponent(return_button)
                 .addGap(174, 174, 174))
@@ -651,6 +644,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 "Archiv"
             }
         ));
+        archive_table.setMinimumSize(new java.awt.Dimension(514, 64));
+        archive_table.setPreferredSize(new java.awt.Dimension(514, 64));
         archive_ScrollPane.setViewportView(archive_table);
 
         javax.swing.GroupLayout archive_panelLayout = new javax.swing.GroupLayout(archive_panel);
@@ -684,8 +679,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                                 .addComponent(desc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(archive_panelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(archive_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(223, Short.MAX_VALUE))
+                        .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)))
+                .addGap(50, 50, 50))
         );
         archive_panelLayout.setVerticalGroup(
             archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1228,6 +1223,11 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.repaint();
         layerpane.revalidate();
         
+        
+        /**
+        *
+        * @author Katharina
+        */
         Rental_Helper rh = new Rental_Helper(newrental_panel);
         rh.fillBoxes();
         rh.listenForSelectionAID();
@@ -1246,6 +1246,11 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.repaint();
         layerpane.revalidate();
         
+        
+        /**
+        *
+        * @author Katharina
+        */
         Rentallist_Helper rListHelper = new Rentallist_Helper (rentallist_table,
                     rental_ScrollPane, searchfilter_rentallist, asc_rentallist,
                     desc_rentallist, filterText_rentallist, 
@@ -1259,10 +1264,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         rListHelper.clearSelection();
     }//GEN-LAST:event_rentallistActionPerformed
 
-    /**
-    *
-    * @author Katharina
-    */
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
         
         layerpane.removeAll();
@@ -1270,6 +1271,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.repaint();
         layerpane.revalidate();
         
+        /**
+        *
+        * @author Katharina
+        */
         ArchivHelper archHelper = new ArchivHelper(archive_table, archive_ScrollPane, 
                 searchfilter_archive, asc_archive, desc_archive,
                 filterText_archive, filterButton_archive, btClear_archive);
@@ -1366,6 +1371,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         
     }//GEN-LAST:event_rentallist_tableMouseClicked
 
+    /**
+    *
+    * @author Katharina
+    */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         hp.closeDB();
         System.out.println("Connection to Database closed");
@@ -1487,9 +1496,12 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JComboBox<String> year_newrental;
     private javax.swing.JRadioButton yes;
     // End of variables declaration//GEN-END:variables
-       
-   
-      
+
+    
+    /**
+    *
+    * @author Katharina
+    */
     @Override
     public void run() {
         

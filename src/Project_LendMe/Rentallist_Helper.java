@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -38,7 +39,7 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         
         this.rentalList = rlH.displayRentallist();
         this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
-                                "Herstellername","Verliehen an" ,"Verliehene Tage"};
+                                "Hersteller","Verliehen an" ,"Verliehene Tage"};
         
     }
     
@@ -53,6 +54,19 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
     @Override
     public void populateTable() {
         super.populateTable();
+        
+        TableColumnModel colModel = table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(35);
+        colModel.getColumn(1).setPreferredWidth(102);
+        colModel.getColumn(2).setPreferredWidth(85);
+        colModel.getColumn(3).setPreferredWidth(70);
+        colModel.getColumn(4).setPreferredWidth(90);
+        colModel.getColumn(5).setPreferredWidth(105);
+        
+        
+        System.out.println(table.getSize() + " rl table ");
+        
+        table.setEnabled(true);
     }
 
     @Override
@@ -70,6 +84,20 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         data = initRentalList(list);
         model = new DefaultTableModel(data, columns);
         table.setModel(model);
+        TableColumnModel colModel = table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(35);
+        colModel.getColumn(1).setPreferredWidth(102);
+        colModel.getColumn(2).setPreferredWidth(85);
+        colModel.getColumn(3).setPreferredWidth(70);
+        colModel.getColumn(4).setPreferredWidth(100);
+        colModel.getColumn(5).setPreferredWidth(105);
+        
+        table.setRowHeight(25);
+        
+        table.setFillsViewportHeight(true);
+        if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
+            table.setPreferredSize(js.getPreferredSize());
+        }
         table.setEnabled(true);
         js.setVisible(true); 
     }  
