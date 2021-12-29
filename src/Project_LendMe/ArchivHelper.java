@@ -8,85 +8,55 @@ package Project_LendMe;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import Comparators.rentalIDComparatorASC;
-import Comparators.rentalDateComparatorASC;
-import Comparators.returnDateComparatorASC;
-import Comparators.rentalInvComparatorASC;
-import Comparators.rentalAdminIDComparatorASC;
-import Comparators.rentalUserIDComparatorASC;
-import Comparators.rentalIDComparatorDESC;
-import Comparators.rentalDateComparatorDESC;
-import Comparators.returnDateComparatorDESC;
-import Comparators.rentalInvComparatorDESC;
-import Comparators.rentalAdminIDComparatorDESC;
-import Comparators.rentalUserIDComparatorDESC;
+import Comparators.RentalIDComparator;
+import Comparators.RentalDateComparator;
+import Comparators.ReturnDateComparator;
+import Comparators.RentalInvComparator;
+import Comparators.RentalAdminIDComparator;
+import Comparators.RentalUserIDComparator;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
  *
  * @author Katharina
  */
-public class ArchivHelper {
+public class ArchivHelper extends MyTableHelper implements FilterSortModel {
     
     
     private final DatabaseHelper dbH = new DatabaseHelper();
-    List <Rentals> allRentals = dbH.readRentals();
-    private final String [] columns = new String [] {"ID", "Verliehen am", 
+    
+   
+    public ArchivHelper(JTable table, JScrollPane js, 
+                    JComboBox box, JRadioButton ascRadio, JRadioButton descRadio, 
+                    JTextField filterTF, JButton filterBT, JButton clearBT) {
+        super( table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
+        
+        this.allRentals = dbH.readRentals();
+        this.columns =  new String [] {"ID", "Verliehen am", 
                                         "Zurück am",  "Inventarnummer", 
                                         "AdminID", "Matrikelnummer"};
-    
-    Object [][] data;
-    JTable table;
-    JScrollPane js;
-    DefaultTableModel model;
-    JComboBox box;
-    JRadioButton ascRadio;
-    JRadioButton descRadio;
-    JTextField filterTF;
-    JButton filterBT;
-    
-    
-    public ArchivHelper(JTable table, JScrollPane js, JComboBox box,
-                        JRadioButton ascRadio, JRadioButton descRadio,
-                        JTextField filterTF, JButton filterBT){
-        this.table = table;
-        this.js = js;
-        this.box = box;
-        this.ascRadio = ascRadio;
-        this.descRadio = descRadio;
-        this.filterTF = filterTF;
-        this.filterBT = filterBT;
-        
-        ascRadio.setSelected(false);
-        descRadio.setSelected(false);
-        filterTF.setText("");
     }
-    
-    public void fillBox () {
-        box.setModel(new DefaultComboBoxModel<>(columns));
+
+    @Override
+    public Object[][] initRentals(List<Rentals> rentals) {
+        Object [] [] data = super.initRentals(rentals); 
+        return data;
     }
-    
-    public void  populateTable (){
-         
-        data = initRentals(allRentals);
+
+    @Override
+    public void populateTable() {
+        super.populateTable(); 
         
-        model = new DefaultTableModel(data, columns);
-        
-        table.setModel(model);
-        
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         TableColumnModel colModel = table.getColumnModel();
         colModel.getColumn(0).setPreferredWidth(40);
         colModel.getColumn(1).setPreferredWidth(93);
@@ -96,124 +66,20 @@ public class ArchivHelper {
         colModel.getColumn(5).setPreferredWidth(102);
         
         table.setRowHeight(25);
-        
-        table.setFillsViewportHeight(true);
-        
-        if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
-            table.setPreferredSize(js.getPreferredSize());
-        }
-        
-        table.setEnabled(false);
-        js.setVisible(true); 
+    }
+
+    @Override
+    public void fillBox() {
+        super.fillBox(); 
     }
     
-    public Object [][] initRentals (List <Rentals> rentals){
-        Object [][] data = new Object [rentals.size()] [];
-        int i = 0;
-        for(Rentals r : rentals){
-            data[i] = new Object []{r.getRentalID(),
-                                    r.getRentalDate(),
-                                    r.getReturnDate(), 
-                                    r.getDevice_inventoryNumber(),
-                                    r.getAdministrators_AdminID(), 
-                                    r.getUsers_UserID()};
-            i = i + 1;
-        }
-        return data;
-    }
     
-    public void filterArchiveTable() {
-        filterBT.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent aev) {
-                int whereClause = box.getSelectedIndex();
-                String filterString = filterTF.getText();
-                List <Rentals> filteredList = dbH.filterRentals(whereClause, filterString);
-                if (filteredList != null){
-                    refreshTable(filteredList);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
-                }
-            }
-        });
-    }
-    
-    public void sortArchiveTable (){
-        
-        ascRadio.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent aev) {
-                if(ascRadio.isSelected()){
-                    descRadio.setSelected(false);
-                    int selected = box.getSelectedIndex(); 
-                    switch (selected) {
-                        case 0 :
-                            Collections.sort(allRentals, new rentalIDComparatorASC());
-                            refreshTable(allRentals);
-                            break;
-                        case 1 :
-                            Collections.sort(allRentals, new rentalDateComparatorASC());
-                            refreshTable(allRentals);
-                            break;
-                        case 2 :
-                            Collections.sort(allRentals, new returnDateComparatorASC());
-                            refreshTable(allRentals);
-                            break;
-                        case 3 :
-                            Collections.sort(allRentals, new rentalInvComparatorASC());
-                            refreshTable(allRentals);
-                            break;
-                        case 4 :
-                            Collections.sort(allRentals, new rentalAdminIDComparatorASC());
-                            refreshTable(allRentals);
-                            break;
-                        case 5 :
-                            Collections.sort(allRentals, new rentalUserIDComparatorASC());
-                            refreshTable(allRentals);
-                            break;
-                    }
-                }  
-            }
-        }); 
-        
-        descRadio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent aev) {
-                if (descRadio.isSelected()){
-                    ascRadio.setSelected(false);
-                    int selected = box.getSelectedIndex();
-                    switch (selected) {
-                        case 0 :
-                            Collections.sort(allRentals, new rentalIDComparatorDESC());
-                            refreshTable(allRentals);
-                            break;
-                        case 1 :
-                            Collections.sort(allRentals, new rentalDateComparatorDESC());
-                            refreshTable(allRentals);
-                            break;
-                        case 2 :
-                            Collections.sort(allRentals, new returnDateComparatorDESC());
-                            refreshTable(allRentals);
-                            break;
-                        case 3 :
-                            Collections.sort(allRentals, new rentalInvComparatorDESC());
-                            refreshTable(allRentals);
-                            break;
-                        case 4 :
-                            Collections.sort(allRentals, new rentalAdminIDComparatorDESC());
-                            refreshTable(allRentals);
-                            break;
-                        case 5 :
-                            Collections.sort(allRentals, new rentalUserIDComparatorDESC());
-                            refreshTable(allRentals);
-                            break;
-                    }
-                }
-            }
-        }); 
-    }
-    
-    public void refreshTable (List<Rentals> list){
+     /**
+     *
+     * @param list refresh the table with objects from the given list 
+     * of Rentals-Objects
+     */ 
+    public void refreshArchiveTable (List<Rentals> list){ 
         data = initRentals(list);
         model = new DefaultTableModel(data, columns);
         table.setModel(model);
@@ -231,5 +97,120 @@ public class ArchivHelper {
         }
         table.setEnabled(false);
         js.setVisible(true); 
-    }    
+   }    
+    
+
+    
+    /**
+     * filters the data from database with the 
+     * whereClause(JComboBox) and filterString(JTextField) 
+     * and displays them in the table
+     */
+    @Override
+    public void filterTable() {
+        filterBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent aev) {
+                int whereClause = box.getSelectedIndex();
+                String filterString = filterTF.getText();
+                List <Rentals> filteredList = dbH.filterRentals(whereClause, filterString);
+                if (filteredList.size() > 0){
+                    refreshArchiveTable(filteredList);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
+                }
+            }
+        });
+    }
+
+    
+    /**
+     * adds an listener for radioButton asc and desc, depending on selection
+     * it sorts the data in table
+     */
+    @Override
+    public void sortTable() {
+         ascRadio.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent aev) {
+                if(ascRadio.isSelected()){
+                    descRadio.setSelected(false);
+                    int selected = box.getSelectedIndex(); 
+                    switch (selected) {
+                        case 0 :
+                            Collections.sort(allRentals, new RentalIDComparator());
+                            break;
+                        case 1 :
+                            Collections.sort(allRentals, new RentalDateComparator());
+                            break;
+                        case 2 :
+                            Collections.sort(allRentals, new ReturnDateComparator());
+                            break;
+                        case 3 :
+                            Collections.sort(allRentals, new RentalInvComparator());
+                            break;
+                        case 4 :
+                            Collections.sort(allRentals, new RentalAdminIDComparator());
+                            break;
+                        case 5 :
+                            Collections.sort(allRentals, new RentalUserIDComparator());
+                            break;
+                    }
+                    refreshArchiveTable(allRentals);
+                }  
+            }
+        }); 
+        
+        descRadio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent aev) {
+                if (descRadio.isSelected()){
+                    ascRadio.setSelected(false);
+                    int selected = box.getSelectedIndex();
+                    switch (selected) {
+                         case 0 :
+                            Collections.sort(allRentals, new RentalIDComparator().reversed());
+                            break;
+                        case 1 :
+                            Collections.sort(allRentals, new RentalDateComparator().reversed());
+                            break;
+                        case 2 :
+                            Collections.sort(allRentals, new ReturnDateComparator().reversed());
+                            break;
+                        case 3 :
+                            Collections.sort(allRentals, new RentalInvComparator().reversed());
+                            break;
+                        case 4 :
+                            Collections.sort(allRentals, new RentalAdminIDComparator().reversed());
+                            break;
+                        case 5 :
+                            Collections.sort(allRentals, new RentalUserIDComparator().reversed());
+                            break;
+                    }
+                    refreshArchiveTable(allRentals);
+                }
+            }
+        });
+    }
+
+    
+     /**
+     * adds an Listener for the clearBT, deletes all filter and search options 
+     * in the frame
+     */
+    @Override
+    public void clearSelection() {
+        clearBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent aEv){
+                box.setSelectedIndex(0);
+                ascRadio.setSelected(false);
+                descRadio.setSelected(false);
+                filterTF.setText("");
+                List <Rentals> wholeRentals = dbH.readRentals();
+                System.out.println(wholeRentals.toString());
+                refreshArchiveTable(wholeRentals);
+            }
+        }); 
+    }
 }

@@ -12,10 +12,17 @@ import java.util.Comparator;
  *
  * @author Katharina
  */
-public class rentalDateComparatorASC implements Comparator<Rentals>{
+public class RentalAdminIDComparator implements Comparator<Rentals>{
     @Override
     public int compare(Rentals r1, Rentals r2) {
-        int c = r1.getRentalDate().compareTo(r2.getRentalDate());
+        int c = r1.getAdministrators_AdminID() - r2.getAdministrators_AdminID();
         return c;
     }
+
+    @Override
+    public Comparator<Rentals> reversed() {
+        return Comparator.super.reversed(); 
+    }
+    
+    
 }

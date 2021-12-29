@@ -18,7 +18,6 @@ public class Devices {
     private String productName;
     private String notes;
     private String location;
-    private boolean status;
     private int imei;
     private int users_userID;
     private double aquisitionValue;
@@ -26,14 +25,6 @@ public class Devices {
     
 
     public Devices() {
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public int getInventoryNumber() {

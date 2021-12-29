@@ -5,12 +5,6 @@
  */
 package Project_LendMe;
 
-import Comparators.rentalAdminIDComparatorASC;
-import Comparators.rentalDateComparatorASC;
-import Comparators.rentalIDComparatorASC;
-import Comparators.rentalInvComparatorASC;
-import Comparators.rentalUserIDComparatorASC;
-import Comparators.returnDateComparatorASC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,7 +15,6 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,7 +41,7 @@ public class DatabaseHelper {
         }
     }
     
-    public static void closeDB() {
+    public void closeDB() {
         try {
             if (con != null) {
                 con.close();
@@ -298,7 +291,7 @@ public class DatabaseHelper {
      */
     public List <String> getUserYears(){
         List <String> userYears = new ArrayList <>();
-        String query = "SELECT userYear FROM users";
+        String query = "SELECT DISTINCT userYear FROM users ORDER BY userYear ASC";
         
         try {
             stmt = con.createStatement();
@@ -429,48 +422,7 @@ public class DatabaseHelper {
         return user;
     }
     
-    /**
-     *
-     * @param list List of Devices Objects needed to create a object List 
-     * @param itemCategory needed as a String to create the Objects List with the given itemCategory
-     * @return a Object List for created with the given parameters
-     */
-    public List <Object> makeListForCategory (List <Devices> list, 
-                                            String itemCategory) {
-        
-        List <Object> itemArray = new ArrayList<>();
-        String string;
-        int i;
-        
-        switch (itemCategory) {
-            case "productName" :
-                for (Devices dev : list){
-                    string = dev.getProductName();
-                    itemArray.add(string);
-                }
-                return itemArray;
-             case "manufacturer" :
-                for (Devices dev : list){
-                    string = dev.getManufacturer();
-                    itemArray.add(string);
-                }
-                return itemArray;
-            case "inventoryNumber" :
-                for (Devices dev : list){
-                    i = dev.getInventoryNumber();
-                    itemArray.add(String.valueOf(i));
-                }
-                return itemArray;
-            case "users_UserID" :
-                for (Devices dev : list){
-                    i = dev.getUsers_userID();
-                    itemArray.add(String.valueOf(i));
-                }
-                return itemArray;
-            default :
-                return itemArray;  
-        } 
-    }
+    
         
     /**
      *
@@ -616,6 +568,15 @@ public class DatabaseHelper {
             } 
     }
     
+    /**
+     * method for filter- and search functions in the archive table
+     * 
+     * @param whereClause as an int for the whereClause means 
+     * in which column should be filtered
+     * @param filterString as an String means on which data should be filtered
+     * @return the filtered list of Rentals-Objects if filtering was successful
+     * or an empty list if filtering had no result
+     */
     public List <Rentals> filterRentals (int whereClause, String filterString){
         
         stmt = null;
@@ -685,26 +646,105 @@ public class DatabaseHelper {
     
     
     /**
-     *
-     * @param str String to proof 
-     * @return true if String is numeric only
+     * the method for filter- and search functions in the rentallist table
+     * 
+     * @param whereClause as an int for the whereClause means 
+     * in which column should be filtered
+     * @param filterString as an String means on which data should be filtered
+     * @return the filtered list of Rentals-Objects if filtering was successful
+     * or an empty list if filtering had no result
      */
-    public static boolean isNumeric(String str) { 
-        try {  
-            Integer.parseInt(str);  
-            return true;
-        } catch(NumberFormatException e){  
-            return false;  
-        }  
+    public List <Rentallist> filterRentals2 (int whereClause, String filterString){
+        
+        stmt = null;
+        rs = null;
+        String table = "rentals";
+        String joinTable = "devices";
+        String where = "";
+        ArrayList <Rentallist> filteredRentallist = new ArrayList <>();
+        
+        switch (whereClause) {
+            case 0 :
+                where = "rentalID";        
+                break;
+            case 1 :
+                where = "devices_inventoryNumber";
+                break;
+            case 2 :
+                where = "productname";
+                break;
+            case 3 :
+                where = "manufacturer";
+                break;
+            case 4 :
+                where = "users_userID";
+                break;
+            case 5 :
+                where = "rentalDate";
+                break;
+        }
+        String query = "SELECT rentalID, rentalDate, administrators_adminID, "
+                    + "rentals.users_UserID, devices_inventoryNumber, "
+                    + "manufacturer, productname "
+                    + "FROM " + table
+                    + " JOIN " + joinTable
+                    + " ON devices_inventoryNumber = devices.inventoryNumber "
+                    + "WHERE " + where + "='" + filterString 
+                    + "' AND returnDate IS NULL;";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                int rentalID = rs.getInt("rentalID");
+                LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
+                int users_UserID = rs.getInt("users_UserID");
+                int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
+                int administrators_AdminID = rs.getInt("administrators_adminID");
+                String manufacturer = rs.getString("manufacturer");
+                String productname =rs.getString("productname");
+                
+                Rentallist ren = new Rentallist(productname, manufacturer,
+                                                rentalDate, devices_inventoryNumber,
+                                                administrators_AdminID, users_UserID);
+                ren.setRentalID(rentalID);
+                filteredRentallist.add(ren);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try { 
+                    stmt.close();
+                } catch (SQLException ex){
+                    System.out.println(ex);
+                }
+            }  
+        } 
+        return filteredRentallist;
     }
     
-    List<Rentallist> displayRentallist() {
+    
+    
+    
+    
+/**
+ *
+ * @author linda
+ */
+    public List<Rentallist> displayRentallist() {
        
      ArrayList <Rentallist> Rentallist = new ArrayList <>();
         
-        String query = "SELECT rentalID, rentalDate, rentals.users_UserID, rentals.devices_inventoryNumber, manufacturer, productname from rentals "
-                + "join devices on devices_inventoryNumber = devices.inventoryNumber where status = 1  ";
-        
+        String query = "SELECT rentalID, rentalDate, administrators_adminID "
+                + ",rentals.users_UserID, rentals.devices_inventoryNumber, "
+                + "manufacturer, productname "
+                + "from rentals "
+                + "join devices "
+                + "on devices_inventoryNumber = devices.inventoryNumber "
+                + "where returnDate IS NULL;";
         
         try{
             stmt = con.createStatement();
@@ -715,26 +755,16 @@ public class DatabaseHelper {
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
                 int users_UserID = rs.getInt("users_UserID");
                 int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
+                int administrators_AdminID = rs.getInt("administrators_adminID");
                 String manufacturer = rs.getString("manufacturer");
                 String productname =rs.getString("productname");
                 
-               
-                
-                Rentallist ren = new Rentallist();
+                Rentallist ren = new Rentallist(productname, manufacturer,
+                                                rentalDate, devices_inventoryNumber,
+                                                administrators_AdminID, users_UserID);
                 ren.setRentalID(rentalID);
-                ren.setDevices_inventoryNumber(devices_inventoryNumber);
-                ren.setProductName(productname);
-                ren.setManufacturer(manufacturer); 
-                ren.setUsers_UserID(users_UserID);
-                ren.setRentalDate(rentalDate);
-
-               
                 
-               
-              
-               
                 Rentallist.add(ren);
-
             }
         }catch (SQLException ex) {
             System.out.println(ex);
@@ -747,10 +777,6 @@ public class DatabaseHelper {
                 }
             }
         }
-        
         return Rentallist;
     }
-    
-    
-
 }
