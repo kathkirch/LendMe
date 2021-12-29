@@ -12,10 +12,17 @@ import java.util.Comparator;
  *
  * @author Katharina
  */
-public class rentalInvComparatorDESC implements Comparator<Rentals>{
+public class RentalDateComparator implements Comparator<Rentals>{
     @Override
     public int compare(Rentals r1, Rentals r2) {
-        int c = r2.getDevice_inventoryNumber() - r1.getDevice_inventoryNumber();
+        int c = r1.getRentalDate().compareTo(r2.getRentalDate());
         return c;
     }
+
+    @Override
+    public Comparator<Rentals> reversed() {
+        return Comparator.super.reversed(); 
+    }
+    
+    
 }

@@ -12,12 +12,17 @@ import java.util.Comparator;
  *
  * @author Katharina
  */
-public class rentalAdminIDComparatorDESC implements Comparator<Rentals>{
-    
+public class RentalUserIDComparator implements Comparator<Rentals>{
     @Override
     public int compare(Rentals r1, Rentals r2) {
-        int c = r2.getAdministrators_AdminID() - r1.getAdministrators_AdminID();
+        int c = r1.getUsers_UserID() - r2.getUsers_UserID();
         return c;
     }
+
+    @Override
+    public Comparator<Rentals> reversed() {
+        return Comparator.super.reversed(); 
+    }
+    
     
 }

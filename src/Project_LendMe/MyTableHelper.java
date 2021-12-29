@@ -20,8 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Katharina
  */
 abstract public class MyTableHelper {
-    
-    
+  
     JTable table;
     JScrollPane js;
     JComboBox box;
@@ -29,6 +28,7 @@ abstract public class MyTableHelper {
     JRadioButton descRadio;
     JTextField filterTF;
     JButton filterBT;
+    JButton clearBT;
     
     static List <Rentallist> rentalList;
     static List <Rentals> allRentals;
@@ -39,7 +39,7 @@ abstract public class MyTableHelper {
 
     public MyTableHelper(JTable table, JScrollPane js, JComboBox box, 
                         JRadioButton ascRadio, JRadioButton descRadio, 
-                        JTextField filterTF, JButton filterBT) {
+                        JTextField filterTF, JButton filterBT, JButton clearBT) {
         
         this.table = table;
         this.js = js;
@@ -48,6 +48,7 @@ abstract public class MyTableHelper {
         this.descRadio = descRadio;
         this.filterTF = filterTF;
         this.filterBT = filterBT;
+        this.clearBT = clearBT;
         
         ascRadio.setSelected(false);
         descRadio.setSelected(false);
@@ -55,11 +56,17 @@ abstract public class MyTableHelper {
 
     }
     
-    
+    /**
+     * fills the JComboBox with the Strings 
+     * initialized in the 'String [] columns' 
+     */
     public void fillBox () {
         box.setModel(new DefaultComboBoxModel<> (columns));
     }
     
+    /**
+     * initializes the table with its data and populates the table
+     */
     public void  populateTable (){
         
         if (allRentals != null){
@@ -84,6 +91,14 @@ abstract public class MyTableHelper {
         js.setVisible(true); 
     }
     
+    
+     /**
+     *
+     * @param rentals as a List of Rentals-Objects 
+     * needed to put items within the list 
+     * into a double object array to display for each Object it's attributes
+     * @return Object [][]
+     */
     public Object [][] initRentals (List <Rentals> rentals){
        Object [][] data = new Object [rentals.size()] [];
        int i = 0;
@@ -99,6 +114,14 @@ abstract public class MyTableHelper {
        return data;
     } 
     
+    
+     /**
+     *
+     * @param rentallist as a List of Rentallist-Objects 
+     * needed to put items within the list 
+     * into a double object array to display for each Object it's attributes
+     * @return Object [][]
+     */
     public Object [][] initRentalList (List <Rentallist> rentallist){
         Object [][] datalist = new Object [rentallist.size()] [];
         int i = 0;
@@ -108,7 +131,7 @@ abstract public class MyTableHelper {
                                         r.getProductName(),
                                         r.getManufacturer(),
                                         r.getUsers_UserID(),
-                                        r.getRentalDate()};                
+                                        r.getLentDays()};                
             i = i + 1;
         }
         return datalist;

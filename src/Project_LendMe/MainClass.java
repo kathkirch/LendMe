@@ -5,8 +5,6 @@
  */
 package Project_LendMe;
 
-import javax.swing.JScrollPane;
-
 /**
  *
  * @author Katharina
@@ -19,14 +17,15 @@ public class MainClass {
      */
     public static void main(String[] args) {  
         
-        // TODO code application logic here
-        
+       
         DatabaseHelper.connectDB();
-        //DatabaseHelper.initNewRental_DB();
         
         Runnable runnable = new GUI();
         Thread thread = new Thread(runnable);
         thread.start();
+        
+        
+        
         
     }
 }

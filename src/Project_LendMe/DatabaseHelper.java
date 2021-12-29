@@ -41,7 +41,7 @@ public class DatabaseHelper {
         }
     }
     
-    public static void closeDB() {
+    public void closeDB() {
         try {
             if (con != null) {
                 con.close();
@@ -291,7 +291,7 @@ public class DatabaseHelper {
      */
     public List <String> getUserYears(){
         List <String> userYears = new ArrayList <>();
-        String query = "SELECT userYear FROM users";
+        String query = "SELECT DISTINCT userYear FROM users ORDER BY userYear ASC";
         
         try {
             stmt = con.createStatement();
@@ -422,48 +422,7 @@ public class DatabaseHelper {
         return user;
     }
     
-    /**
-     *
-     * @param list List of Devices Objects needed to create a object List 
-     * @param itemCategory needed as a String to create the Objects List with the given itemCategory
-     * @return a Object List for created with the given parameters
-     */
-    public List <Object> makeListForCategory (List <Devices> list, 
-                                            String itemCategory) {
-        
-        List <Object> itemArray = new ArrayList<>();
-        String string;
-        int i;
-        
-        switch (itemCategory) {
-            case "productName" :
-                for (Devices dev : list){
-                    string = dev.getProductName();
-                    itemArray.add(string);
-                }
-                return itemArray;
-             case "manufacturer" :
-                for (Devices dev : list){
-                    string = dev.getManufacturer();
-                    itemArray.add(string);
-                }
-                return itemArray;
-            case "inventoryNumber" :
-                for (Devices dev : list){
-                    i = dev.getInventoryNumber();
-                    itemArray.add(String.valueOf(i));
-                }
-                return itemArray;
-            case "users_UserID" :
-                for (Devices dev : list){
-                    i = dev.getUsers_userID();
-                    itemArray.add(String.valueOf(i));
-                }
-                return itemArray;
-            default :
-                return itemArray;  
-        } 
-    }
+    
         
     /**
      *
@@ -609,6 +568,15 @@ public class DatabaseHelper {
             } 
     }
     
+    /**
+     * method for filter- and search functions in the archive table
+     * 
+     * @param whereClause as an int for the whereClause means 
+     * in which column should be filtered
+     * @param filterString as an String means on which data should be filtered
+     * @return the filtered list of Rentals-Objects if filtering was successful
+     * or an empty list if filtering had no result
+     */
     public List <Rentals> filterRentals (int whereClause, String filterString){
         
         stmt = null;
@@ -676,6 +644,16 @@ public class DatabaseHelper {
         return filteredRentals;
     }
     
+    
+    /**
+     * the method for filter- and search functions in the rentallist table
+     * 
+     * @param whereClause as an int for the whereClause means 
+     * in which column should be filtered
+     * @param filterString as an String means on which data should be filtered
+     * @return the filtered list of Rentals-Objects if filtering was successful
+     * or an empty list if filtering had no result
+     */
     public List <Rentallist> filterRentals2 (int whereClause, String filterString){
         
         stmt = null;
@@ -750,19 +728,7 @@ public class DatabaseHelper {
     
     
     
-    /**
-     *
-     * @param str String to proof 
-     * @return true if String is numeric only
-     */
-    public static boolean isNumeric(String str) { 
-        try {  
-            Integer.parseInt(str);  
-            return true;
-        } catch(NumberFormatException e){  
-            return false;  
-        }  
-    }
+    
     
 /**
  *

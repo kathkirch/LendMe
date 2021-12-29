@@ -14,6 +14,7 @@ public class Rentallist extends Rentals{
     
     private String productName;
     private String manufacturer;
+    private int lentDays;
     
      Rentallist(String productName, String manufacturer, 
                 LocalDate rentalDate, int device_inventoryNumber, 
@@ -21,7 +22,7 @@ public class Rentallist extends Rentals{
        super(rentalDate, device_inventoryNumber, administrators_AdminID, users_UserID);
        this.productName = productName;
        this.manufacturer = manufacturer;
-       
+       this.lentDays = countDays(rentalDate);
     }
     
      public String getProductName() {
@@ -39,4 +40,36 @@ public class Rentallist extends Rentals{
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
+    
+    /**
+     *
+     * @param rentalDate as a LocalDate object needed to get difference
+     * between rentalDate and currentDate
+     * @return difference between rentalDate and currentDate as int
+     */
+    public int countDays (LocalDate rentalDate) {
+        
+        LocalDate currentDate = LocalDate.now();
+        int curYearDay = currentDate.getDayOfYear(); 
+        int rentYearDay = rentalDate.getDayOfYear();
+        int lentDays = 0;
+        
+        lentDays = curYearDay - rentYearDay;
+        
+        if (lentDays < 0) {
+            lentDays = lentDays * (-1);
+        }
+        
+        return lentDays;
+    }
+
+    public int getLentDays() {
+        return lentDays;
+    }
+
+    public void setLentDays(int lentDays) {
+        this.lentDays = lentDays;
+    }
+    
+    
 }
