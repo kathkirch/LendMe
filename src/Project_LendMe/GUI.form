@@ -269,12 +269,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="740" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="778" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1110" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1112" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -342,7 +342,7 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="215" max="32767" attributes="0"/>
+                                  <EmptySpace pref="244" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -351,7 +351,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="newrentaltitle" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="devicename" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="productname_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -390,7 +390,7 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="adminFullName" min="-2" pref="28" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="date" min="-2" max="-2" attributes="0"/>
                                       <Component id="rentalDate_newrental" max="-2" attributes="0"/>
@@ -400,7 +400,7 @@
                                       <Component id="cancel_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="save_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="408" max="32767" attributes="0"/>
+                                  <EmptySpace pref="425" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -659,7 +659,79 @@
                         </Constraint>
                       </Constraints>
 
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="return_button" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rental_ScrollPane" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="filter_options_rentallist" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="filterString_rentallist" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="filterText_rentallist" pref="129" max="32767" attributes="0"/>
+                                              <Component id="searchfilter_rentallist" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="asc_rentallist" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="desc_rentallist" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="filterbutton_rentallist" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="btClear_rentals" min="-2" pref="63" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Component id="rentallist_title" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="239" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="rentallist_title" pref="281" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="searchfilter_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="asc_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="desc_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="filter_options_rentallist" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                          <Component id="filterString_rentallist" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="filterbutton_rentallist" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="btClear_rentals" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="filterText_rentallist" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="rental_ScrollPane" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="return_button" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="262" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="rentallist_title">
                           <Properties>
@@ -706,6 +778,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Ger&#xe4;ter&#xfc;ckgabe"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="return_buttonActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="filterString_rentallist">
                           <Properties>
@@ -879,51 +954,50 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="archive_title" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="filter_options_archive" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                          <Component id="search_options_archive" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="filterText_archive" pref="125" max="32767" attributes="0"/>
-                                              <Component id="searchfilter_archive" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="filterButton_archive" min="-2" pref="117" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                                  <Component id="btClear_archive" min="-2" pref="65" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="filter_options_archive" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="search_options_archive" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="asc_archive" min="-2" pref="55" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                                  <Component id="desc_archive" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="filterText_archive" pref="125" max="32767" attributes="0"/>
+                                                  <Component id="searchfilter_archive" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="filterButton_archive" min="-2" pref="117" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                                      <Component id="btClear_archive" min="-2" pref="65" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="asc_archive" min="-2" pref="55" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="desc_archive" min="-2" pref="60" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
+                                          <Component id="archive_title" alignment="1" min="-2" pref="546" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                           <Component id="archive_ScrollPane" min="-2" pref="514" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="229" max="32767" attributes="0"/>
+                                  <EmptySpace pref="232" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="archive_title" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="search_options_archive" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="searchfilter_archive" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -937,9 +1011,9 @@
                                       <Component id="filterButton_archive" alignment="3" max="32767" attributes="0"/>
                                       <Component id="btClear_archive" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="archive_ScrollPane" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="434" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1144,24 +1218,17 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="inventory_title" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jScrollPane4" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jScrollPane4" pref="496" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="filter_options_inventory" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                  <Component id="searchfilter_inventory" min="-2" pref="172" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="newdevice_button" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="20" pref="302" max="32767" attributes="0"/>
+                                          <Component id="filter_options_inventory" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Component id="searchfilter_inventory" min="-2" pref="172" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="newdevice_button" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
+                                      <Component id="inventory_title" alignment="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <EmptySpace pref="252" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1170,7 +1237,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="inventory_title" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Component id="newdevice_button" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1178,8 +1245,8 @@
                                       <Component id="searchfilter_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" pref="741" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane4" min="-2" pref="623" max="-2" attributes="0"/>
+                                  <EmptySpace pref="314" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1284,44 +1351,37 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="return_title" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                                  <Component id="rentedby_return" alignment="0" pref="380" max="32767" attributes="0"/>
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                      <Group type="103" groupAlignment="1" attributes="0">
-                                                          <Component id="manufacturer_return" alignment="1" min="-2" pref="242" max="-2" attributes="0"/>
-                                                          <Component id="productname_return" alignment="1" min="-2" pref="190" max="-2" attributes="0"/>
-                                                          <Component id="inventorynumber" alignment="1" min="-2" pref="188" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                              <Component id="notestitle_return" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                                              <Component id="defaultsettings" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                                              <Component id="jLabel12" alignment="1" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Component id="productname_return" min="-2" pref="190" max="-2" attributes="0"/>
+                                              <Component id="productname_return1" min="-2" pref="190" max="-2" attributes="0"/>
+                                              <Component id="productname_return2" min="-2" pref="190" max="-2" attributes="0"/>
+                                              <Component id="productname_return3" min="-2" pref="190" max="-2" attributes="0"/>
+                                              <Component id="productname_return4" min="-2" pref="190" max="-2" attributes="0"/>
+                                              <Component id="productname_return5" min="-2" pref="190" max="-2" attributes="0"/>
+                                              <Component id="productname_return6" min="-2" pref="190" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="48" pref="48" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="re_manufacturer" min="-2" pref="272" max="-2" attributes="0"/>
+                                              <Component id="re_productname" min="-2" pref="272" max="-2" attributes="0"/>
+                                              <Component id="re_user" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
+                                              <Component id="re_inventorynumber" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
+                                              <Component id="returndate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPane5" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
+                                              <Component id="yes" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
                                                   <Component id="save_return" min="-2" pref="105" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                                   <Component id="cancel_return" min="-2" pref="105" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="yes" min="-2" pref="55" max="-2" attributes="0"/>
-                                              <Component id="re_productname" max="32767" attributes="0"/>
-                                              <Component id="re_manufacturer" max="32767" attributes="0"/>
-                                              <Component id="re_user" max="32767" attributes="0"/>
-                                              <Component id="re_inventorynumber" max="32767" attributes="0"/>
-                                              <Component id="returndate" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="return_title" alignment="0" min="-2" pref="550" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace pref="334" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1329,52 +1389,48 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="return_title" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="re_productname" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="productname_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="re_manufacturer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="manufacturer_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="re_user" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="rentedby_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="return_title" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="re_productname" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="productname_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="re_manufacturer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="productname_return1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="re_user" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="productname_return2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="re_inventorynumber" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="inventorynumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="productname_return3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                       <Component id="returndate" max="-2" attributes="0"/>
+                                      <Component id="productname_return4" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="notestitle_return" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPane5" min="-2" pref="147" max="-2" attributes="0"/>
+                                      <Component id="productname_return5" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="defaultsettings" min="-2" max="-2" attributes="0"/>
-                                      <Component id="yes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="yes" min="-2" max="-2" attributes="0"/>
+                                      <Component id="productname_return6" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="save_return" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="cancel_return" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                  <EmptySpace pref="148" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1396,15 +1452,6 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="manufacturer_return">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="Herstellerbezeichnung"/>
-                          </Properties>
-                        </Component>
                         <Component class="javax.swing.JLabel" name="return_title">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1412,15 +1459,6 @@
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="R&#xfc;ckgabe"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="rentedby_return">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="Verliehen an"/>
                           </Properties>
                         </Component>
                         <Component class="com.raven.datechooser.DateChooser" name="returndate">
@@ -1431,24 +1469,6 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel12">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="R&#xfc;ckgabedatum"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="notestitle_return">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="Notizen"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPane5">
@@ -1466,15 +1486,6 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JLabel" name="defaultsettings">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="Werkseinstellungen"/>
-                          </Properties>
-                        </Component>
                         <Component class="javax.swing.JRadioButton" name="yes">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1516,7 +1527,32 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="inventorynumber">
+                        <Component class="javax.swing.JTextField" name="re_inventorynumber">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="productname_return1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Herstellerbezeichnung"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="productname_return2">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Verliehen an"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="productname_return3">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
@@ -1525,11 +1561,31 @@
                             <Property name="text" type="java.lang.String" value="Inventarnummer"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="re_inventorynumber">
+                        <Component class="javax.swing.JLabel" name="productname_return4">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="12" style="0"/>
+                              <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="R&#xfc;ckgabedatum"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="productname_return5">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Notizen"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="productname_return6">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Werkseinstellungen?"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -1552,47 +1608,47 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="acquisitiondate_newdevice" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="save_newdevice" min="-2" pref="105" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                  <Component id="cancel_newdevice" min="-2" pref="105" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="acquisitionDate" alignment="0" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="manufacturer_newdevice" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="devicename_newdevice" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="inventorynumber_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                              <Component id="IMEInumber_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                              <Component id="room_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                              <Component id="notes_newdevice" alignment="1" pref="144" max="32767" attributes="0"/>
-                                              <Component id="administrator_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                              <Component id="acquisitionvalue_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="manufacturer" max="32767" attributes="0"/>
-                                              <Component id="productname" max="32767" attributes="0"/>
-                                              <Component id="inventoryNumber" alignment="1" pref="307" max="32767" attributes="0"/>
-                                              <Component id="imei" alignment="0" pref="307" max="32767" attributes="0"/>
-                                              <Component id="jScrollPane2" max="32767" attributes="0"/>
-                                              <Component id="administrator" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="location" max="32767" attributes="0"/>
-                                              <Component id="acquisitionValue" alignment="1" pref="307" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="0" pref="228" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="newdevice_title" alignment="0" min="-2" pref="504" max="-2" attributes="0"/>
+                                              <Component id="newdevice_title" alignment="0" max="32767" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="acquisitiondate_newdevice" min="-2" pref="144" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="save_newdevice" min="-2" pref="105" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                          <Component id="cancel_newdevice" min="-2" pref="105" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="acquisitionDate" alignment="0" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="manufacturer_newdevice" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="devicename_newdevice" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="inventorynumber_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
+                                                      <Component id="IMEInumber_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
+                                                      <Component id="room_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
+                                                      <Component id="notes_newdevice" alignment="1" pref="144" max="32767" attributes="0"/>
+                                                      <Component id="administrator_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
+                                                      <Component id="acquisitionvalue_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="manufacturer" max="32767" attributes="0"/>
+                                                      <Component id="productname" max="32767" attributes="0"/>
+                                                      <Component id="inventoryNumber" alignment="1" pref="307" max="32767" attributes="0"/>
+                                                      <Component id="imei" alignment="0" pref="307" max="32767" attributes="0"/>
+                                                      <Component id="jScrollPane2" max="32767" attributes="0"/>
+                                                      <Component id="administrator" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="location" max="32767" attributes="0"/>
+                                                      <Component id="acquisitionValue" alignment="1" pref="307" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="267" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
