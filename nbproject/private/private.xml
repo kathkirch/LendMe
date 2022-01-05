@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/MainClass.java</file>
+            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/Rentallist.java</file>
             <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/DatabaseHelper.java</file>
             <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/Rentallist_Helper.java</file>
-            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/ArchivHelper.java</file>
             <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/Validator.java</file>
-            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Comparators/RentallistManuNameComparator.java</file>
-            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/Rental_Helper.java</file>
-            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/MyTableHelper.java</file>
             <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/GUI.java</file>
+            <file>file:/C:/Users/Katharina/Documents/NetBeansProjects/Project_LendMe/src/Project_LendMe/MyTableHelper.java</file>
         </group>
     </open-files>
 </project-private>

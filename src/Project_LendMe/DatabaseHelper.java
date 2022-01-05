@@ -545,7 +545,7 @@ public class DatabaseHelper {
                     " WHERE inventoryNumber= '" + device_inventoryNumber + "'");
             
             while(rs.next()){
-                String s = "UPDATE " + table + " SET status = ?, users_UserID "
+                String s = "UPDATE " + table + " SET status = ?, users_UserID = ?"
                         + "WHERE inventoryNumber= ?";
                 PreparedStatement prepStat = con.prepareStatement(s);
                 prepStat.setInt(1, 1);
