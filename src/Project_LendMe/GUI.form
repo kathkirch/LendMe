@@ -668,31 +668,32 @@
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="rentallist_title" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="filter_options_rentallist" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="filterString_rentallist" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="searchfilter_rentallist" min="-2" pref="125" max="-2" attributes="0"/>
-                                                  <Component id="filterText_rentallist" min="-2" pref="125" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="asc_rentallist" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="filter_options_rentallist" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="filterString_rentallist" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="searchfilter_rentallist" min="-2" pref="125" max="-2" attributes="0"/>
+                                                          <Component id="filterText_rentallist" min="-2" pref="125" max="-2" attributes="0"/>
+                                                      </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="desc_rentallist" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <Component id="asc_rentallist" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="desc_rentallist" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Component id="filterbutton_rentallist" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="btClear_rentals" min="-2" pref="60" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="filterbutton_rentallist" max="32767" attributes="0"/>
+                                                  <Component id="rental_ScrollPane" alignment="0" pref="504" max="32767" attributes="0"/>
                                               </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="btClear_rentals" min="-2" pref="60" max="-2" attributes="0"/>
-                                              <EmptySpace pref="187" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="rental_ScrollPane" min="-2" pref="504" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Component id="return_button" min="-2" pref="124" max="-2" attributes="0"/>
@@ -989,11 +990,11 @@
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="archive_ScrollPane" min="-2" pref="514" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Component id="archive_ScrollPane" pref="514" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="229" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
