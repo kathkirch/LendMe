@@ -27,7 +27,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private final DatabaseHelper hp = new DatabaseHelper();
     private final Rental_Helper rentalHelper = new Rental_Helper();
     private final Rentallist_Helper rentallistHelper = new Rentallist_Helper();
-    private final Return returndata= new Return();
+    //private final Return returndata= new Return();
     
      /**
      * Creates new form GUI
@@ -288,24 +288,17 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         manufacturer_return = new javax.swing.JLabel();
         return_title = new javax.swing.JLabel();
         rentedby_return = new javax.swing.JLabel();
-        date_return = new javax.swing.JLabel();
-        administrator_return = new javax.swing.JLabel();
         returndate = new com.raven.datechooser.DateChooser();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        re_withdrawnby = new javax.swing.JComboBox<>();
         notestitle_return = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         re_notes = new javax.swing.JTextArea();
         defaultsettings = new javax.swing.JLabel();
         yes = new javax.swing.JRadioButton();
-        no = new javax.swing.JRadioButton();
         save_return = new javax.swing.JToggleButton();
         cancel_return = new javax.swing.JToggleButton();
         re_manufacturer = new javax.swing.JTextField();
         re_user = new javax.swing.JTextField();
-        re_rentaldate = new javax.swing.JTextField();
-        re_administrator = new javax.swing.JTextField();
         inventorynumber = new javax.swing.JLabel();
         re_inventorynumber = new javax.swing.JTextField();
         newdevice_panel = new javax.swing.JPanel();
@@ -444,7 +437,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         home_panel.setLayout(home_panelLayout);
         home_panelLayout.setHorizontalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 665, Short.MAX_VALUE)
+            .addGap(0, 740, Short.MAX_VALUE)
         );
         home_panelLayout.setVerticalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -699,7 +692,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGap(20, 20, 20)
                 .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
                         .addComponent(rentallist_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rentallist_panelLayout.createSequentialGroup()
                             .addComponent(filter_options_rentallist)
@@ -767,7 +760,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             .addGroup(archive_panelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(archive_title, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+                    .addComponent(archive_title, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
                     .addGroup(archive_panelLayout.createSequentialGroup()
                         .addComponent(filter_options_archive)
                         .addGap(20, 20, 20)
@@ -850,7 +843,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                                 .addGap(10, 10, 10)
                                 .addComponent(searchfilter_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(newdevice_button, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 239, Short.MAX_VALUE))))
+                        .addGap(20, 302, Short.MAX_VALUE))))
         );
         inventory_panelLayout.setVerticalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -895,32 +888,12 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         rentedby_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rentedby_return.setText("Verliehen an");
 
-        date_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        date_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        date_return.setText("Datum");
-
-        administrator_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        administrator_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        administrator_return.setText("Verliehen von");
-
         returndate.setForeground(new java.awt.Color(87, 121, 50));
         returndate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Rücknahme durch");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Rückgabedatum");
-
-        re_withdrawnby.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        re_withdrawnby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        re_withdrawnby.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                re_withdrawnbyActionPerformed(evt);
-            }
-        });
 
         notestitle_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         notestitle_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -942,10 +915,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 yesActionPerformed(evt);
             }
         });
-
-        no.setBackground(new java.awt.Color(220, 229, 211));
-        no.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        no.setText("Nein");
 
         save_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         save_return.setText("Speichern");
@@ -972,20 +941,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        re_rentaldate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        re_rentaldate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                re_rentaldateActionPerformed(evt);
-            }
-        });
-
-        re_administrator.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        re_administrator.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                re_administratorActionPerformed(evt);
-            }
-        });
-
         inventorynumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         inventorynumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         inventorynumber.setText("Inventarnummer");
@@ -1001,54 +956,37 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         return_panel.setLayout(return_panelLayout);
         return_panelLayout.setHorizontalGroup(
             return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, return_panelLayout.createSequentialGroup()
-                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(return_panelLayout.createSequentialGroup()
+            .addGroup(return_panelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, return_panelLayout.createSequentialGroup()
                         .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(return_panelLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(productname_return, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(manufacturer_return, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rentedby_return, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inventorynumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, return_panelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(notestitle_return, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(defaultsettings, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(rentedby_return, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                                .addGroup(return_panelLayout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(manufacturer_return, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(productname_return, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(inventorynumber, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(notestitle_return, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(defaultsettings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(48, 48, 48)
                         .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(return_panelLayout.createSequentialGroup()
                                 .addComponent(save_return, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(cancel_return, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(return_panelLayout.createSequentialGroup()
-                                .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(no, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(re_productname)
                             .addComponent(re_manufacturer)
                             .addComponent(re_user)
                             .addComponent(re_inventorynumber)
-                            .addComponent(re_withdrawnby, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(returndate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane5)))
-                    .addGroup(return_panelLayout.createSequentialGroup()
-                        .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(administrator_return, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(date_return, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(48, 48, 48)
-                        .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(re_rentaldate, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(re_administrator, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(234, 234, 234))
-            .addGroup(return_panelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(return_title, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(return_title, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         return_panelLayout.setVerticalGroup(
             return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1073,32 +1011,18 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(re_inventorynumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inventorynumber))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(re_rentaldate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(date_return))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(re_administrator, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(administrator_return))
-                .addGap(31, 31, 31)
+                .addGap(15, 15, 15)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(returndate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(re_withdrawnby, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(15, 15, 15)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(notestitle_return)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(defaultsettings)
-                    .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(yes)
-                        .addComponent(no)))
+                    .addComponent(yes))
                 .addGap(20, 20, 20)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(save_return)
@@ -1215,7 +1139,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                             .addComponent(administrator, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(location)
                             .addComponent(acquisitionValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
-                        .addGap(0, 144, Short.MAX_VALUE))
+                        .addGap(0, 219, Short.MAX_VALUE))
                     .addGroup(newdevice_panelLayout.createSequentialGroup()
                         .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newdevice_title, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1416,31 +1340,21 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
     }//GEN-LAST:event_administratorActionPerformed
 
-    private void re_withdrawnbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_withdrawnbyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_withdrawnbyActionPerformed
-
-    private void save_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_returnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_save_returnActionPerformed
-
-    private void yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yesActionPerformed
-
     private void return_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_buttonActionPerformed
-        TableModel model = rentallist_table.getModel();
-        //int indexs[] = rentallist_table.getSelectedRows();
-        
-        //Object[] row = new Object[5];
-        
+        DefaultTableModel model = (DefaultTableModel) rentallist_table.getModel();
+            
         int index = rentallist_table.getSelectedRow();
         
         String ret_productname = model.getValueAt(index, 2).toString();
         String ret_manufacturer = model.getValueAt(index, 3).toString();
         String ret_user = model.getValueAt(index, 4).toString();
         String ret_inventorynumber = model.getValueAt(index, 1).toString();
-        String ret_rentaldate = model.getValueAt(index, 5).toString();
+        //String ret_rentaldate = model.getValueAt(index, 5).toString(); 
+        
+        re_productname.setText(ret_productname);
+        //Textfelder nicht bearbeitbar stellen - Textfeld not editable
+        //oder über ID Daten auslesen
+        //eigene Klasse Helper
         
         layerpane.removeAll();
         layerpane.add(return_panel);
@@ -1468,30 +1382,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.revalidate();
     }//GEN-LAST:event_newdevice_buttonActionPerformed
 
-    private void re_productnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_productnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_productnameActionPerformed
-
-    private void re_manufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_manufacturerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_manufacturerActionPerformed
-
-    private void re_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_userActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_userActionPerformed
-
-    private void re_rentaldateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_rentaldateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_rentaldateActionPerformed
-
-    private void re_administratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_administratorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_administratorActionPerformed
-
-    private void re_inventorynumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_inventorynumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_inventorynumberActionPerformed
-
     private void rentallist_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rentallist_tableMouseClicked
         /* int index = rentallist_table.getSelectedRow();
         TableModel model = rentallist_table.getModel();
@@ -1507,6 +1397,30 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             
         
     }//GEN-LAST:event_rentallist_tableMouseClicked
+
+    private void re_inventorynumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_inventorynumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_re_inventorynumberActionPerformed
+
+    private void re_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_re_userActionPerformed
+
+    private void re_manufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_manufacturerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_re_manufacturerActionPerformed
+
+    private void save_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_returnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_save_returnActionPerformed
+
+    private void yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yesActionPerformed
+
+    private void re_productnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_productnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_re_productnameActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IMEInumber_newdevice;
@@ -1518,7 +1432,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JComboBox<String> administrator;
     private javax.swing.JLabel administrator_newdevice;
     private javax.swing.JComboBox<String> administrator_newrental;
-    private javax.swing.JLabel administrator_return;
     private javax.swing.JButton archive;
     private javax.swing.JPanel archive_panel;
     private javax.swing.JTable archive_table;
@@ -1527,7 +1440,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JToggleButton cancel_newrental;
     private javax.swing.JToggleButton cancel_return;
     private javax.swing.JLabel date;
-    private javax.swing.JLabel date_return;
     private javax.swing.JLabel defaultsettings;
     private javax.swing.JLabel devicename;
     private javax.swing.JLabel devicename_newdevice;
@@ -1545,7 +1457,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel inventorynumber;
     private javax.swing.JLabel inventorynumber_newdevice;
     private javax.swing.JComboBox<String> inventorynumber_newrental;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1566,7 +1477,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton newrental;
     private javax.swing.JPanel newrental_panel;
     private javax.swing.JLabel newrentaltitle;
-    private javax.swing.JRadioButton no;
     private javax.swing.JTextArea notes;
     private javax.swing.JLabel notes_newdevice;
     private javax.swing.JLabel notestitle_return;
@@ -1574,14 +1484,11 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField productname;
     private javax.swing.JComboBox<String> productname_newrental;
     private javax.swing.JLabel productname_return;
-    private javax.swing.JTextField re_administrator;
     private javax.swing.JTextField re_inventorynumber;
     private javax.swing.JTextField re_manufacturer;
     private javax.swing.JTextArea re_notes;
     private javax.swing.JTextField re_productname;
-    private javax.swing.JTextField re_rentaldate;
     private javax.swing.JTextField re_user;
-    private javax.swing.JComboBox<String> re_withdrawnby;
     private com.raven.datechooser.DateChooser rentalDate_newrental;
     private javax.swing.JButton rentallist;
     private javax.swing.JPanel rentallist_panel;
