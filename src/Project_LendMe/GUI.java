@@ -5,7 +5,7 @@
 package Project_LendMe;
 
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 /**
  *
@@ -709,7 +709,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addComponent(archive_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(244, 244, 244))
+                .addGap(80, 80, 80))
         );
 
         layerpane.add(archive_panel, "card4");
@@ -1406,7 +1406,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         
         // moeglichkeit 1
         re_productname.setText(ret_productname);
-        //usw. fuer alle Textfelder und eingaben..
+        // usw. fuer alle Textfelder und eingaben..
         // Textfelder non editable machen
         // vorher listener oder abfrage ob auch wirklich eine reihe markiert
         // sonst null pointer exception
@@ -1422,6 +1422,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         // methode schreiben die aus den geliehen tagen das verleihdatum rueckberechnet
         // werte in textfelder speichern
                 
+        // entweder hier alles machen also in gui klasse oder eigenen helper klasse schreiben
         
         layerpane.removeAll();
         layerpane.add(return_panel);

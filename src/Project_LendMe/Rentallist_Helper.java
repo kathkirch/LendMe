@@ -63,9 +63,6 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         colModel.getColumn(4).setPreferredWidth(90);
         colModel.getColumn(5).setPreferredWidth(105);
         
-        
-        System.out.println(table.getSize() + " rl table ");
-        
         table.setEnabled(true);
     }
 
