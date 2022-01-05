@@ -32,101 +32,71 @@ public class Rentals {
         this.users_UserID = users_UserID;
     }
 
-    /**
-     *
-     * @return
-     */
+   
     public int getRentalID() {
         return rentalID;
     }
 
-    /**
-     *
-     * @param rentalID 
-     */
     public void setRentalID(int rentalID) {
         this.rentalID = rentalID;
     }
 
-    /**
-     *
-     * @return
-     */
+   
     public LocalDate getRentalDate() {
         return rentalDate;
     }
 
-    /**
-     *
-     * @param rentalDate
-     */
+   
     public void setRentalDate(LocalDate rentalDate) {
         this.rentalDate = rentalDate;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    /**
-     *
-     * @param returnDate
-     */
+    
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
-    /**
-     *
-     * @return
-     */
+   
     public int getDevice_inventoryNumber() {
         return device_inventoryNumber;
     }
 
-    /**
-     *
-     * @param device_inventoryNumber
-     */
+    
     public void setDevice_inventoryNumber(int device_inventoryNumber) {
         this.device_inventoryNumber = device_inventoryNumber;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getAdministrators_AdminID() {
         return administrators_AdminID;
     }
 
-    /**
-     *
-     * @param administrators_AdminID
-     */
+   
     public void setAdministrators_AdminID(int administrators_AdminID) {
         this.administrators_AdminID = administrators_AdminID;
     }
 
-    /**
-     *
-     * @return
-     */
+   
     public int getUsers_UserID() {
         return users_UserID;
     }
 
-    /**
-     *
-     * @param users_UserID
-     */
+   
     public void setUsers_UserID(int users_UserID) {
         this.users_UserID = users_UserID;
     }
-    
-   
+
+    @Override
+    public String toString() {
+        
+        String string = rentalID + " | " + rentalDate + " | " + returnDate 
+                + " | " +  device_inventoryNumber + " | " + administrators_AdminID 
+                + " | " + users_UserID;
+        
+        return string; 
+    }
 }

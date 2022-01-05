@@ -40,8 +40,6 @@ public class Administrators {
 
     public void setAdminLastName(String adminLastName) {
         this.adminLastName = adminLastName;
-    }
-    
-    
+    } 
     
 }

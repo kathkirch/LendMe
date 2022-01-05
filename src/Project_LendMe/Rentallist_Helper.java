@@ -4,66 +4,211 @@
  */
 package Project_LendMe;
 
-import java.awt.Dimension;
+import Comparators.RentalIDComparator;
+import Comparators.RentalInvComparator;
+import Comparators.RentalUserIDComparator;
+import Comparators.RentallistLentDaysComparator;
+import Comparators.RentallistManuNameComparator;
+import Comparators.RentallistProNameComparator;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author linda
+ * @author Katharina
  */
-public class Rentallist_Helper {
+public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
     
     private final DatabaseHelper rlH = new DatabaseHelper();
 
-    void initializeRentallist(JTable table, JScrollPane sp) {
+    public Rentallist_Helper(JTable table, JScrollPane js, JComboBox box, 
+                JRadioButton ascRadio, JRadioButton descRadio, 
+                JTextField filterTF, JButton filterBT, JButton clearBT) {
+        super(table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
         
-         String [] columns = new String [] {"ID", "Inventarnummer","Produktname", 
-                                "Herstellername","Verliehen an" ,"Verleihdatum"};
-                                        
-                                        
-        
-         List <Rentallist> rentallist =rlH.displayRentallist();
-                
-        
-         Object [][] datalist = dataRental(rentallist);
-         
-        DefaultTableModel model = new DefaultTableModel(datalist, columns);
-        
-        table.setModel(model);
-        
-        table.setPreferredScrollableViewportSize(new Dimension (650, 400));
-        table.setFillsViewportHeight(true);
-        table.setAutoCreateRowSorter(true);
-        /*table.setRowHeight(25);
-            if (table.getPreferredSize().getHeight() < sp.getPreferredSize().getHeight()){
-             table.setPreferredSize(sp.getPreferredSize()); */
-        
-       
-        table.setEnabled(false);
-        sp.setVisible(true);
+        this.rentalList = rlH.displayRentallist();
+        this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
+                                "Hersteller","Verliehen an" ,"Verliehene Tage"};
         
     }
     
-    public Object [][] dataRental (List <Rentallist> rentallist){
-        Object [][] datalist = new Object [rentallist.size()] [];
-        int i = 0;
-        for(Rentallist r : rentallist){
-            datalist[i] = new Object []{r.getRentalID(),
-                                        r.getDevices_inventoryNumber(),
-                                        r.getProductName(),
-                                        r.getManufacturer(),
-                                        r.getUsers_UserID(),
-                                        r.getRentalDate()};
-                                        
-                                        
-                                        
-            i = i + 1;
+
+    @Override
+    public Object[][] initRentalList(List<Rentallist> rentallist) {
+        Object [] [] data = super.initRentalList(rentallist);
+        return data; 
+    }
+
+    
+    @Override
+    public void populateTable() {
+        super.populateTable();
+        
+        TableColumnModel colModel = table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(35);
+        colModel.getColumn(1).setPreferredWidth(102);
+        colModel.getColumn(2).setPreferredWidth(85);
+        colModel.getColumn(3).setPreferredWidth(70);
+        colModel.getColumn(4).setPreferredWidth(90);
+        colModel.getColumn(5).setPreferredWidth(105);
+        
+        table.setEnabled(true);
+    }
+
+    @Override
+    public void fillBox() {
+        super.fillBox(); 
+    }
+    
+     
+    /**
+     *
+     * @param list refresh the table with objects from the given list 
+     * of Rentallist-Objects
+     */
+    public void refreshRentalTable (List<Rentallist> list){ 
+        data = initRentalList(list);
+        model = new DefaultTableModel(data, columns);
+        table.setModel(model);
+        TableColumnModel colModel = table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(35);
+        colModel.getColumn(1).setPreferredWidth(102);
+        colModel.getColumn(2).setPreferredWidth(85);
+        colModel.getColumn(3).setPreferredWidth(70);
+        colModel.getColumn(4).setPreferredWidth(100);
+        colModel.getColumn(5).setPreferredWidth(105);
+        
+        table.setRowHeight(25);
+        
+        table.setFillsViewportHeight(true);
+        if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
+            table.setPreferredSize(js.getPreferredSize());
         }
-        return datalist;
+        table.setEnabled(true);
+        js.setVisible(true); 
     }  
+    
+    /**
+     * adds an Listener for the clearBT, deletes all filter and search options 
+     * in the frame
+     */
+    @Override
+    public void clearSelection(){
+        clearBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent aEv){
+                box.setSelectedIndex(0);
+                ascRadio.setSelected(false);
+                descRadio.setSelected(false);
+                filterTF.setText("");
+                List <Rentallist> wholeList = rlH.displayRentallist();
+                refreshRentalTable(wholeList);  
+            }
+        });
+    }
+    
+  
+    /**
+     * filters the data from database with the 
+     * whereClause(JComboBox) and filterString(JTextField) 
+     * and displays them in the table
+     */
+    @Override
+    public void filterTable() {
+         filterBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent aEv) {
+                int whereClause = box.getSelectedIndex();
+                String filterString = filterTF.getText();
+                List <Rentallist> filteredList = rlH.filterRentals2(whereClause, filterString);
+                if (filteredList.size() >  0){
+                    refreshRentalTable(filteredList);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
+                }
+            }
+        });
+    }
+    
+    
+    /**
+     * adds an listener for radioButton asc and desc, depending on selection
+     * it sorts the data in table
+     */
+    @Override
+    public void sortTable() {
+         ascRadio.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if (ascRadio.isSelected()){
+                    descRadio.setSelected(false);
+                    int selected = box.getSelectedIndex();
+                     switch (selected){
+                        case 0:
+                            Collections.sort(rentalList, new RentalIDComparator());
+                            break;
+                        case 1:
+                            Collections.sort(rentalList, new RentalInvComparator());
+                            break;
+                        case 2:
+                            Collections.sort(rentalList, new RentallistProNameComparator());
+                            break;
+                        case 3:
+                            Collections.sort(rentalList, new RentallistManuNameComparator());
+                            break;
+                        case 4:
+                            Collections.sort(rentalList, new RentalUserIDComparator());
+                            break;
+                        case 5:
+                            Collections.sort(rentalList, new RentallistLentDaysComparator());
+                            break;
+                    }
+                    refreshRentalTable(rentalList);     
+                }
+            }
+        });
+        descRadio.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (descRadio.isSelected()){
+                    ascRadio.setSelected(false);
+                    int selected = box.getSelectedIndex();
+                    switch (selected){
+                        case 0:
+                            Collections.sort(rentalList, new RentalIDComparator().reversed());
+                            break;
+                        case 1:
+                            Collections.sort(rentalList, new RentalInvComparator().reversed());
+                            break;
+                        case 2:
+                            Collections.sort(rentalList, new RentallistProNameComparator().reversed());
+                            break;
+                        case 3:
+                            Collections.sort(rentalList, new RentallistManuNameComparator().reversed());
+                            break;
+                        case 4:
+                            Collections.sort(rentalList, new RentalUserIDComparator().reversed());
+                            break;
+                        case 5:
+                            Collections.sort(rentalList, new RentallistLentDaysComparator().reversed());
+                            break;
+                    }
+                    refreshRentalTable(rentalList);
+                }
+            } 
+        });
+    }
 }
     
 

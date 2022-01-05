@@ -4,19 +4,8 @@
  */
 package Project_LendMe;
 
-import java.awt.ScrollPane;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import org.jdesktop.swingx.JXTipOfTheDay;
+
 
 /**
  *
@@ -25,201 +14,17 @@ import org.jdesktop.swingx.JXTipOfTheDay;
 public class GUI extends javax.swing.JFrame implements Runnable {
     
     private final DatabaseHelper hp = new DatabaseHelper();
-    private final Rental_Helper rentalHelper = new Rental_Helper();
-    private final Rentallist_Helper rentallistHelper = new Rentallist_Helper();
-    //private final Return returndata= new Return();
     
-     /**
-     * Creates new form GUI
-     */
+  
+    /**
+    * Creates new form GUI
+    */
     public GUI() {
         
         initComponents();
         
-        fillDropdowns();
-        
-        listenForSelectionPN();
-        listenForSelectionM();
-        listenForSelectionIN();
-        listenForSelectionUID();
-        listenForSelectionAID();   
-       
     }
-    
-    
-    public final void fillDropdowns() {
-        
-        rentalHelper.fillComboBox_Category(productname_newrental, "productName");
-        rentalHelper.fillComboBox_Category(inventorynumber_newrental, "inventoryNumber");
-        rentalHelper.fillComboBox_Category(manufacturer_newrental, "manufacturer");
-        rentalHelper.fillUser_Year_Admin(userID_newrental,
-                                            year_newrental, 
-                                            administrator_newrental);
-    }
-    
-    public final void listenForSelectionPN () {
-            productname_newrental.addItemListener(new ItemListener () {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED){
-                    
-                    String selected = e.getItem().toString();
-               
-                    if (productname_newrental.getItemCount() == 0 ){
-                        selected = ""; 
-                        List <Devices> list = hp.getDevices();    
-                        List <Object> nameList = hp.makeListForCategory(list, "productName");
-                        productname_newrental.setModel(new DefaultComboBoxModel<>(nameList.toArray((new String[0]))));
-                    }
-                
-                    if (!selected.isBlank()){
-                        List <Devices> list = hp.getItemByProductName(selected);
-                        String [] categories = new String [] {"manufacturer", "inventoryNumber"};
-
-                        for (int i = 0; i < categories.length; i++) {
-                            List <Object> oList = hp.makeListForCategory(list, categories[i]);
-                            if (categories[i].equalsIgnoreCase("manufacturer")){
-                                manufacturer_newrental.setModel
-                            (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                            }
-                            if (categories[i].equalsIgnoreCase("inventoryNumber")){
-                                inventorynumber_newrental.setModel
-                            (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-    
-    public final void listenForSelectionM () {
-        manufacturer_newrental.addItemListener(new ItemListener () {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED){
-                     String selected = e.getItem().toString();
-                
-                    if (manufacturer_newrental.getItemCount() == 0 ){
-                        selected = ""; 
-                        List <Devices> list = hp.getDevices();    
-                        List <Object> manuList = hp.makeListForCategory(list, "manufacturer");
-                        manufacturer_newrental.setModel(new DefaultComboBoxModel<>(manuList.toArray((new String[0]))));
-                    }
-                    if (!selected.isBlank()){
-                        List <Devices> list = hp.getItemByManufacturer(selected);
-                        String [] categories = new String [] {"productName", "inventoryNumber"};
-
-                        for (int i = 0; i < categories.length; i++) {
-                            List <Object> oList = hp.makeListForCategory(list, categories[i]);
-                            if (categories[i].equalsIgnoreCase("productName")){
-                                productname_newrental.setModel
-                            (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                            }
-                        }
-                    }
-                }
-            }
-        }); 
-    }
-    
-    public final void listenForSelectionIN () {
-        inventorynumber_newrental.addItemListener(new ItemListener () {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED){
-                    String selected = e.getItem().toString();
-                
-                    if (inventorynumber_newrental.getItemCount() == 0 ){
-                        selected = ""; 
-                        List <Devices> list = hp.getDevices();
-                        List <Object> invNumbList = hp.makeListForCategory(list, "inventoryNumber");
-                        inventorynumber_newrental.setModel(new DefaultComboBoxModel<>
-                                            (invNumbList.toArray((new String[0]))));
-                    }
-                
-                    if (!selected.isBlank() && hp.isNumeric(selected)){
-                        List <Devices> list = hp.getItemByInvNumber(selected);
-                        String [] categories = new String [] {"productName", "manufacturer"};
-
-                        for (int i = 0; i < categories.length; i++) {
-                            List <Object> oList = hp.makeListForCategory(list, categories[i]);
-                            if (categories[i].equalsIgnoreCase("productName")){
-                                productname_newrental.setModel
-                                (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                            }
-                            if (categories[i].equalsIgnoreCase("manufacturer")){
-                                manufacturer_newrental.setModel
-                                (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                            }
-                        }
-                    }
-                }  
-            }
-        }); 
-    }
-    
-    public final void listenForSelectionUID () {
-        userID_newrental.addItemListener(new ItemListener () {
-            public void itemStateChanged(ItemEvent e) {
-                String selected = e.getItem().toString();
-                if ((!selected.isBlank() && hp.isNumeric(selected))){
-                    Users userToCheck = hp.checkUserID(selected);
-                    if (userToCheck != null && (!hp.isUserNew(selected))) {
-                        userFirstName.setText(userToCheck.getUserFirstName());
-                        userLastName.setText(userToCheck.getUserLastName());
-                        userPhone.setText(userToCheck.getUserPhone());
-                        userEmail.setText(userToCheck.getUserEmail());
-                        year_newrental.setSelectedItem(userToCheck.getYear());
-                        year_newrental.setEnabled(false);
-                    } else if (hp.isUserNew(selected)) {
-                        userFirstName.setText("");
-                        userLastName.setText("");
-                        userPhone.setText("");
-                        userEmail.setText("");
-                        year_newrental.setSelectedItem("");
-                        year_newrental.setEnabled(true);
-                    } 
-                }
-            }
-        });
-    }
-    
-    /*
-        
-    public Users createUser (){
-        
-        Users user = null;
-        
-        String id = userID_newrental.getEditor().getItem().toString();
-        String firstname = userFirstName.getText();
-        String lastname = userLastName.getText(); 
-        String phone = userPhone.getText();
-        String email = userEmail.getText();
-        String year = year_newrental.getSelectedItem().toString();
-        
-        if (firstname.isBlank() || lastname.isBlank() || phone.isBlank() ||
-                email.isBlank()){
-            JOptionPane.showMessageDialog(null, 
-                    "Achtung! Ein oder mehrere Textfelder sind leer!"
-                            + " Bitte alles ausfüllen!");
-        
-        }else {
-            user = new Users(Integer.parseInt(id), firstname, lastname, phone, 
-                                email, year);
-        }
-        return user;
-    }
-    */
-    
-    public final void listenForSelectionAID() {
-        administrator_newrental.addItemListener(new ItemListener () {
-            public void itemStateChanged(ItemEvent e) {
-                String selected = e.getItem().toString();
-                if ((!selected.isBlank() && hp.isNumeric(selected))) {
-                    adminFullName.setText(hp.getAdminNameByID(selected));
-                }
-            }
-        });
-    }
-      
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -246,7 +51,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         manufacturername = new javax.swing.JLabel();
         inventory_number = new javax.swing.JLabel();
         rentedby = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
+        rentTo = new javax.swing.JLabel();
         productname_newrental = new javax.swing.JComboBox<>();
         manufacturer_newrental = new javax.swing.JComboBox<>();
         inventorynumber_newrental = new javax.swing.JComboBox<>();
@@ -259,21 +64,33 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         administrator_newrental = new javax.swing.JComboBox<>();
         date = new javax.swing.JLabel();
         rentalDate_newrental = new com.raven.datechooser.DateChooser();
-        save_newrental = new javax.swing.JToggleButton();
-        cancel_newrental = new javax.swing.JToggleButton();
         adminFullName = new javax.swing.JTextField();
+        save_newrental = new javax.swing.JButton();
+        cancel_newrental = new javax.swing.JButton();
         rentallist_panel = new javax.swing.JPanel();
         rentallist_title = new javax.swing.JLabel();
         searchfilter_rentallist = new javax.swing.JComboBox<>();
         filter_options_rentallist = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        rentallist_table = new javax.swing.JTable();
         return_button = new javax.swing.JButton();
+        filterString_rentallist = new javax.swing.JLabel();
+        filterText_rentallist = new javax.swing.JTextField();
+        asc_rentallist = new javax.swing.JRadioButton();
+        desc_rentallist = new javax.swing.JRadioButton();
+        filterbutton_rentallist = new javax.swing.JButton();
+        btClear_rentals = new javax.swing.JButton();
+        rental_ScrollPane = new javax.swing.JScrollPane();
+        rentallist_table = new javax.swing.JTable();
         archive_panel = new javax.swing.JPanel();
         archive_title = new javax.swing.JLabel();
         searchfilter_archive = new javax.swing.JComboBox<>();
+        search_options_archive = new javax.swing.JLabel();
         filter_options_archive = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        filterText_archive = new javax.swing.JTextField();
+        asc_archive = new javax.swing.JRadioButton();
+        desc_archive = new javax.swing.JRadioButton();
+        filterButton_archive = new javax.swing.JButton();
+        btClear_archive = new javax.swing.JButton();
+        archive_ScrollPane = new javax.swing.JScrollPane();
         archive_table = new javax.swing.JTable();
         inventory_panel = new javax.swing.JPanel();
         newdevice_button = new javax.swing.JButton();
@@ -327,6 +144,11 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         toppenal.setBackground(new java.awt.Color(87, 121, 50));
         toppenal.setPreferredSize(new java.awt.Dimension(802, 110));
@@ -441,7 +263,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         );
         home_panelLayout.setVerticalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 973, Short.MAX_VALUE)
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
 
         layerpane.add(home_panel, "card9");
@@ -468,9 +290,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         rentedby.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rentedby.setText("Verliehen von");
 
-        jLabel38.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel38.setText("Verleihen an");
+        rentTo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rentTo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        rentTo.setText("Verleihen an");
 
         productname_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         productname_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", " " }));
@@ -496,20 +318,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         userEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         userEmail.setText("E-Mail");
         userEmail.setToolTipText("E-Mail");
-        userEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userEmailActionPerformed(evt);
-            }
-        });
 
         userPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         userPhone.setText("Telefonnummer");
-        userPhone.setToolTipText("Telefonnummer");
-        userPhone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userPhoneActionPerformed(evt);
-            }
-        });
+        userPhone.setToolTipText("Telefonnummer\n Bsp. 0660/111111");
 
         year_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         year_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jahrgang" }));
@@ -525,25 +337,13 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         rentalDate_newrental.setForeground(new java.awt.Color(87, 121, 50));
         rentalDate_newrental.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        save_newrental.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        save_newrental.setText("Speichern");
-        save_newrental.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save_newrentalActionPerformed(evt);
-            }
-        });
-
-        cancel_newrental.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        cancel_newrental.setText("Abbrechen");
-        cancel_newrental.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancel_newrentalActionPerformed(evt);
-            }
-        });
-
         adminFullName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         adminFullName.setText("Vor- und Nachname");
         adminFullName.setToolTipText("");
+
+        save_newrental.setText("Speichern");
+
+        cancel_newrental.setText("Abbrechen");
 
         javax.swing.GroupLayout newrental_panelLayout = new javax.swing.GroupLayout(newrental_panel);
         newrental_panel.setLayout(newrental_panelLayout);
@@ -553,24 +353,11 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGap(30, 30, 30)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newrental_panelLayout.createSequentialGroup()
-                        .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rentedby, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(newrental_panelLayout.createSequentialGroup()
-                                .addComponent(save_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(cancel_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(administrator_newrental, 0, 307, Short.MAX_VALUE)
-                            .addComponent(rentalDate_newrental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(adminFullName)))
-                    .addGroup(newrental_panelLayout.createSequentialGroup()
                         .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(manufacturername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(devicename, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(inventory_number, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jLabel38, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                            .addComponent(rentTo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                         .addGap(30, 30, 30)
                         .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(newrental_panelLayout.createSequentialGroup()
@@ -586,8 +373,21 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                             .addComponent(productname_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(manufacturer_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(inventorynumber_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(newrentaltitle, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(newrentaltitle, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(newrental_panelLayout.createSequentialGroup()
+                        .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rentedby, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(administrator_newrental, 0, 307, Short.MAX_VALUE)
+                            .addComponent(rentalDate_newrental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(adminFullName)
+                            .addGroup(newrental_panelLayout.createSequentialGroup()
+                                .addComponent(save_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cancel_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         newrental_panelLayout.setVerticalGroup(
             newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,7 +408,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(inventorynumber_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
+                    .addComponent(rentTo)
                     .addComponent(userID_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -632,31 +432,71 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(rentalDate_newrental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(save_newrental)
-                    .addComponent(cancel_newrental))
-                .addContainerGap(290, Short.MAX_VALUE))
+                    .addComponent(cancel_newrental)
+                    .addComponent(save_newrental))
+                .addContainerGap(408, Short.MAX_VALUE))
         );
 
         layerpane.add(newrental_panel, "card2");
 
         rentallist_panel.setBackground(new java.awt.Color(220, 229, 211));
+        rentallist_panel.setPreferredSize(new java.awt.Dimension(600, 680));
 
         rentallist_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rentallist_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         rentallist_title.setText("Aktuell verliehen");
+        rentallist_panel.add(rentallist_title);
 
         searchfilter_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchfilter_rentallist.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        searchfilter_rentallist.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchfilter_rentallistActionPerformed(evt);
-            }
-        });
+        searchfilter_rentallist.setMaximumSize(new java.awt.Dimension(125, 30));
+        rentallist_panel.add(searchfilter_rentallist);
 
         filter_options_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        filter_options_rentallist.setText("Filterungs- und Sortiermöglichkeiten:");
+        filter_options_rentallist.setText("Filter- und Sortieroptionen:");
+        rentallist_panel.add(filter_options_rentallist);
 
-        jScrollPane6.setBackground(new java.awt.Color(220, 229, 211));
+        return_button.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        return_button.setText("Geräterückgabe");
+        rentallist_panel.add(return_button);
+
+        filterString_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        filterString_rentallist.setText("Filern nach:");
+        rentallist_panel.add(filterString_rentallist);
+
+        filterText_rentallist.setToolTipText("Wert nach dem gefiltert werden soll");
+        filterText_rentallist.setMaximumSize(new java.awt.Dimension(125, 30));
+        filterText_rentallist.setMinimumSize(new java.awt.Dimension(70, 30));
+        filterText_rentallist.setPreferredSize(new java.awt.Dimension(125, 30));
+        rentallist_panel.add(filterText_rentallist);
+
+        asc_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        asc_rentallist.setText("ASC");
+        asc_rentallist.setMaximumSize(new java.awt.Dimension(55, 30));
+        asc_rentallist.setMinimumSize(new java.awt.Dimension(55, 30));
+        asc_rentallist.setPreferredSize(new java.awt.Dimension(55, 30));
+        rentallist_panel.add(asc_rentallist);
+
+        desc_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        desc_rentallist.setText("DESC");
+        desc_rentallist.setMaximumSize(new java.awt.Dimension(60, 30));
+        desc_rentallist.setMinimumSize(new java.awt.Dimension(60, 30));
+        desc_rentallist.setPreferredSize(new java.awt.Dimension(60, 30));
+        rentallist_panel.add(desc_rentallist);
+
+        filterbutton_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        filterbutton_rentallist.setText("Filter anwenden");
+        rentallist_panel.add(filterbutton_rentallist);
+
+        btClear_rentals.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btClear_rentals.setText("Clear");
+        btClear_rentals.setMaximumSize(new java.awt.Dimension(60, 32));
+        btClear_rentals.setMinimumSize(new java.awt.Dimension(55, 32));
+        btClear_rentals.setPreferredSize(new java.awt.Dimension(55, 32));
+        rentallist_panel.add(btClear_rentals);
+
+        rental_ScrollPane.setBackground(new java.awt.Color(220, 229, 211));
+        rental_ScrollPane.setPreferredSize(new java.awt.Dimension(453, 403));
 
         rentallist_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -669,53 +509,16 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 "", "", "", "", "", ""
             }
         ));
+        rentallist_table.setMinimumSize(new java.awt.Dimension(514, 64));
+        rentallist_table.setPreferredSize(new java.awt.Dimension(514, 64));
         rentallist_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rentallist_tableMouseClicked(evt);
             }
         });
-        jScrollPane6.setViewportView(rentallist_table);
+        rental_ScrollPane.setViewportView(rentallist_table);
 
-        return_button.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        return_button.setText("Geräterückgabe");
-        return_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                return_buttonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout rentallist_panelLayout = new javax.swing.GroupLayout(rentallist_panel);
-        rentallist_panel.setLayout(rentallist_panelLayout);
-        rentallist_panelLayout.setHorizontalGroup(
-            rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(rentallist_panelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
-                        .addComponent(rentallist_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rentallist_panelLayout.createSequentialGroup()
-                            .addComponent(filter_options_rentallist)
-                            .addGap(20, 20, 20)
-                            .addComponent(searchfilter_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(return_button, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(141, 141, 141))
-        );
-        rentallist_panelLayout.setVerticalGroup(
-            rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(rentallist_panelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(rentallist_title, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchfilter_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filter_options_rentallist))
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
-                .addGap(20, 20, 20)
-                .addComponent(return_button)
-                .addGap(174, 174, 174))
-        );
+        rentallist_panel.add(rental_ScrollPane);
 
         layerpane.add(rentallist_panel, "card3");
 
@@ -727,18 +530,56 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         searchfilter_archive.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchfilter_archive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        searchfilter_archive.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchfilter_archiveActionPerformed(evt);
-            }
-        });
+        searchfilter_archive.setToolTipText("Tabelle in der gefiltert/sortiert werden soll ");
+
+        search_options_archive.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        search_options_archive.setText("Filter- und Sortieroptionen");
+        search_options_archive.setToolTipText("");
 
         filter_options_archive.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        filter_options_archive.setText("Filterungs- und Sortiermöglichkeiten:");
+        filter_options_archive.setText("Filtern nach:");
+        filter_options_archive.setToolTipText("");
+        filter_options_archive.setMaximumSize(new java.awt.Dimension(90, 20));
+        filter_options_archive.setMinimumSize(new java.awt.Dimension(90, 20));
 
-        jScrollPane3.setBackground(new java.awt.Color(220, 229, 211));
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(800, 500));
-        jScrollPane3.setRequestFocusEnabled(false);
+        filterText_archive.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        filterText_archive.setToolTipText("Wert nach dem gefiltert werden soll");
+        filterText_archive.setMaximumSize(new java.awt.Dimension(125, 30));
+        filterText_archive.setMinimumSize(new java.awt.Dimension(70, 30));
+        filterText_archive.setPreferredSize(new java.awt.Dimension(70, 30));
+
+        asc_archive.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        asc_archive.setText("ASC");
+        asc_archive.setToolTipText("aufsteigende Sortierung");
+        asc_archive.setAlignmentX(0.5F);
+        asc_archive.setMaximumSize(new java.awt.Dimension(55, 30));
+        asc_archive.setMinimumSize(new java.awt.Dimension(55, 30));
+        asc_archive.setPreferredSize(new java.awt.Dimension(55, 30));
+
+        desc_archive.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        desc_archive.setText("DESC");
+        desc_archive.setToolTipText("absteigende Sortierung");
+        desc_archive.setMaximumSize(new java.awt.Dimension(60, 30));
+        desc_archive.setMinimumSize(new java.awt.Dimension(60, 30));
+        desc_archive.setPreferredSize(new java.awt.Dimension(60, 30));
+
+        filterButton_archive.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        filterButton_archive.setText("Filter anwenden");
+        filterButton_archive.setPreferredSize(new java.awt.Dimension(125, 32));
+
+        btClear_archive.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btClear_archive.setText("Clear");
+        btClear_archive.setAlignmentX(0.2F);
+        btClear_archive.setAlignmentY(0.2F);
+        btClear_archive.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btClear_archive.setIconTextGap(2);
+        btClear_archive.setMaximumSize(new java.awt.Dimension(65, 30));
+        btClear_archive.setMinimumSize(new java.awt.Dimension(65, 30));
+        btClear_archive.setPreferredSize(new java.awt.Dimension(65, 30));
+
+        archive_ScrollPane.setBackground(new java.awt.Color(220, 229, 211));
+        archive_ScrollPane.setPreferredSize(new java.awt.Dimension(800, 500));
+        archive_ScrollPane.setRequestFocusEnabled(false);
 
         archive_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -751,36 +592,63 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 "Archiv"
             }
         ));
-        jScrollPane3.setViewportView(archive_table);
+        archive_table.setMinimumSize(new java.awt.Dimension(514, 64));
+        archive_table.setPreferredSize(new java.awt.Dimension(514, 64));
+        archive_ScrollPane.setViewportView(archive_table);
 
         javax.swing.GroupLayout archive_panelLayout = new javax.swing.GroupLayout(archive_panel);
         archive_panel.setLayout(archive_panelLayout);
         archive_panelLayout.setHorizontalGroup(
             archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, archive_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(archive_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(149, 149, 149))
             .addGroup(archive_panelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(archive_title, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
                     .addGroup(archive_panelLayout.createSequentialGroup()
-                        .addComponent(filter_options_archive)
+                        .addComponent(filter_options_archive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(searchfilter_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(143, 143, 143))
+                        .addComponent(search_options_archive)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(filterText_archive, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(searchfilter_archive, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(5, 5, 5)
+                        .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(archive_panelLayout.createSequentialGroup()
+                                .addComponent(filterButton_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
+                                .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(archive_panelLayout.createSequentialGroup()
+                                .addComponent(asc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(desc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(archive_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(archive_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         archive_panelLayout.setVerticalGroup(
             archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(archive_panelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(38, 38, 38)
                 .addComponent(archive_title, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchfilter_archive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filter_options_archive))
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
-                .addGap(223, 223, 223))
+                .addGap(4, 4, 4)
+                .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(search_options_archive)
+                    .addComponent(searchfilter_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(asc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(desc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filter_options_archive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterText_archive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterButton_archive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
 
         layerpane.add(archive_panel, "card4");
@@ -857,7 +725,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(filter_options_inventory)
                     .addComponent(searchfilter_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
                 .addGap(186, 186, 186))
         );
 
@@ -870,11 +738,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         productname_return.setText("Produktname");
 
         re_productname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        re_productname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                re_productnameActionPerformed(evt);
-            }
-        });
 
         manufacturer_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manufacturer_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -910,47 +773,22 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         yes.setBackground(new java.awt.Color(220, 229, 211));
         yes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         yes.setText("Ja");
-        yes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yesActionPerformed(evt);
-            }
-        });
 
         save_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         save_return.setText("Speichern");
-        save_return.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save_returnActionPerformed(evt);
-            }
-        });
 
         cancel_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancel_return.setText("Abbrechen");
 
         re_manufacturer.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        re_manufacturer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                re_manufacturerActionPerformed(evt);
-            }
-        });
 
         re_user.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        re_user.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                re_userActionPerformed(evt);
-            }
-        });
 
         inventorynumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         inventorynumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         inventorynumber.setText("Inventarnummer");
 
         re_inventorynumber.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        re_inventorynumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                re_inventorynumberActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout return_panelLayout = new javax.swing.GroupLayout(return_panel);
         return_panel.setLayout(return_panelLayout);
@@ -1139,7 +977,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                             .addComponent(administrator, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(location)
                             .addComponent(acquisitionValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
-                        .addGap(0, 219, Short.MAX_VALUE))
+                        .addGap(0, 228, Short.MAX_VALUE))
                     .addGroup(newdevice_panelLayout.createSequentialGroup()
                         .addGroup(newdevice_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newdevice_title, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1221,6 +1059,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         getContentPane().add(parentpanel, java.awt.BorderLayout.CENTER);
 
+        getAccessibleContext().setAccessibleName("jFrame");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
         
@@ -1231,6 +1071,20 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.repaint();
         layerpane.revalidate();
         
+        
+        /**
+        *
+        * @author Katharina
+        */
+        Rental_Helper rh = new Rental_Helper(newrental_panel);
+        rh.fillBoxes();
+        rh.listenForSelectionAID();
+        rh.listenForSelectionPN();
+        rh.listenForSelectionM();
+        rh.listenForSelectionIN();
+        rh.listenForSelectionUID();
+        rh.cancelButton();  
+        rh.saveNewRental();
     }//GEN-LAST:event_newrentalActionPerformed
 
     private void rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentallistActionPerformed
@@ -1240,7 +1094,22 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.repaint();
         layerpane.revalidate();
         
-        rentallistHelper.initializeRentallist(rentallist_table, jScrollPane6);
+        
+        /**
+        *
+        * @author Katharina
+        */
+        Rentallist_Helper rListHelper = new Rentallist_Helper (rentallist_table,
+                    rental_ScrollPane, searchfilter_rentallist, asc_rentallist,
+                    desc_rentallist, filterText_rentallist, 
+                    filterbutton_rentallist, btClear_rentals);
+        
+        MyTableHelper.allRentals = null;
+        rListHelper.populateTable();
+        rListHelper.fillBox();
+        rListHelper.filterTable();
+        rListHelper.sortTable();
+        rListHelper.clearSelection();
     }//GEN-LAST:event_rentallistActionPerformed
 
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
@@ -1249,6 +1118,21 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.add(archive_panel);
         layerpane.repaint();
         layerpane.revalidate();
+        
+        /**
+        *
+        * @author Katharina
+        */
+        ArchivHelper archHelper = new ArchivHelper(archive_table, archive_ScrollPane, 
+                searchfilter_archive, asc_archive, desc_archive,
+                filterText_archive, filterButton_archive, btClear_archive);
+        
+        MyTableHelper.rentalList = null;
+        archHelper.populateTable();
+        archHelper.fillBox();
+        archHelper.sortTable();
+        archHelper.filterTable();
+        archHelper.clearSelection();
     }//GEN-LAST:event_archiveActionPerformed
 
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
@@ -1259,79 +1143,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.revalidate();
     }//GEN-LAST:event_inventoryActionPerformed
 
-    private void searchfilter_archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchfilter_archiveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchfilter_archiveActionPerformed
-
-    private void searchfilter_rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchfilter_rentallistActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchfilter_rentallistActionPerformed
-
-    private void userEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userEmailActionPerformed
-
-    private void userPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userPhoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userPhoneActionPerformed
-
-    private void cancel_newrentalActionPerformed(java.awt.event.ActionEvent evt) {
-        deleteAll();
-    }   
     
-    public void deleteAll(){
-        
-        productname_newrental.removeAllItems();
-        manufacturer_newrental.removeAllItems();
-        inventorynumber_newrental.removeAllItems();
-           
-        userID_newrental.setSelectedItem("");
-        year_newrental.setSelectedItem("");
-        year_newrental.setEnabled(true);
-        administrator_newrental.setSelectedItem("");
-        adminFullName.setText("Vor- und Nachname");
-        userFirstName.setText("Vorname");
-        userLastName.setText("Nachname");
-        userPhone.setText("Telefon");
-        userEmail.setText("E-Mail");
-    }
-    
-    
-    
-    private void save_newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_newrentalActionPerformed
-        
-        if (!userID_newrental.getEditor().getItem().toString().isBlank()){
-            boolean createNewUser = true;
-            if (hp.isUserNew(userID_newrental.getEditor().getItem().toString())){
-                Users user = rentalHelper.createUser(userID_newrental, userFirstName, userLastName,
-                                                        userPhone, userEmail, year_newrental);
-                
-                if (user == null){
-                    createNewUser = false;
-                }
-                if (createNewUser){
-                    hp.insertNewUser(user);
-                    JOptionPane.showMessageDialog(null, "Neuen User hinzugefügt");
-                }   
-                
-            } else {
-                Users user = rentalHelper.createUser(userID_newrental, userFirstName, userLastName,
-                                                        userPhone, userEmail, year_newrental);
-                
-                if (user == null){
-                    createNewUser = false;
-                }
-            }
-            if (createNewUser){
-                rentalHelper.createNewRental(rentalDate_newrental, inventorynumber_newrental,
-                                            userID_newrental, administrator_newrental);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "UserID/Matrikelnummer angeben!");
-        }
-        deleteAll();
-    }//GEN-LAST:event_save_newrentalActionPerformed
-
     private void save_newdeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_newdeviceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_save_newdeviceActionPerformed
@@ -1340,7 +1152,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
     }//GEN-LAST:event_administratorActionPerformed
 
-    private void return_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_buttonActionPerformed
+    private void return_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         DefaultTableModel model = (DefaultTableModel) rentallist_table.getModel();
             
         int index = rentallist_table.getSelectedRow();
@@ -1367,7 +1179,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
    
         
         
-    }//GEN-LAST:event_return_buttonActionPerformed
+    }                                             
 
     private void searchfilter_inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchfilter_inventoryActionPerformed
         // TODO add your handling code here:
@@ -1398,29 +1210,55 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         
     }//GEN-LAST:event_rentallist_tableMouseClicked
 
-    private void re_inventorynumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_inventorynumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_inventorynumberActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        hp.closeDB();
+        System.out.println("Connection to Database closed");
+        
+       /*         DefaultTableModel model = (DefaultTableModel) rentallist_table.getModel();
+        //int indexs[] = rentallist_table.getSelectedRows();
 
-    private void re_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_userActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_userActionPerformed
+        //Object[] row = new Object[5];
 
-    private void re_manufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_manufacturerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_manufacturerActionPerformed
+        int index = rentallist_table.getSelectedRow();
 
-    private void save_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_returnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_save_returnActionPerformed
+        String ret_productname = model.getValueAt(index, 2).toString();
+        String ret_manufacturer = model.getValueAt(index, 3).toString();
+        String ret_user = model.getValueAt(index, 4).toString();
+        String ret_inventorynumber = model.getValueAt(index, 1).toString();
+        String ret_rentaldate = model.getValueAt(index, 5).toString();
 
-    private void yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yesActionPerformed
+        // moeglichkeit 1
+        re_productname.setText(ret_productname);
+        // usw. fuer alle Textfelder und eingaben..
+        // Textfelder non editable machen
+        // vorher listener oder abfrage ob auch wirklich eine reihe markiert
+        // sonst null pointer exception
 
-    private void re_productnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_productnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_re_productnameActionPerformed
+//moeglichkeit 2
+// abfrage DB select rental mit join where id = idVonRow
+// mit diesem Datensatz Rentallistobject erstellen
+//Rentallist rl = new Rentallist(eee, eeee, eee, usw. );
+// mit getter die Textfelder fuellen.
+
+//moeglichkeit 3
+// mit methode von moeglichkeit 1 spalten auslesen
+// methode schreiben die aus den geliehen tagen das verleihdatum rueckberechnet
+// werte in textfelder speichern
+
+// entweder hier alles machen also in gui klasse oder eigenen helper klasse schreiben
+
+layerpane.removeAll();
+layerpane.add(return_panel);
+layerpane.repaint();
+layerpane.revalidate();
+
+
+
+
+//DefaultTableModel model1 = (DefaultTableModel)return_panel.rentallist_table.getModel(); */
+        
+        
+    }//GEN-LAST:event_formWindowClosing
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IMEInumber_newdevice;
@@ -1433,19 +1271,31 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel administrator_newdevice;
     private javax.swing.JComboBox<String> administrator_newrental;
     private javax.swing.JButton archive;
+    private javax.swing.JScrollPane archive_ScrollPane;
     private javax.swing.JPanel archive_panel;
     private javax.swing.JTable archive_table;
     private javax.swing.JLabel archive_title;
+    private javax.swing.JRadioButton asc_archive;
+    private javax.swing.JRadioButton asc_rentallist;
+    private javax.swing.JButton btClear_archive;
+    private javax.swing.JButton btClear_rentals;
     private javax.swing.JToggleButton cancel_newdevice;
-    private javax.swing.JToggleButton cancel_newrental;
+    private javax.swing.JButton cancel_newrental;
     private javax.swing.JToggleButton cancel_return;
     private javax.swing.JLabel date;
     private javax.swing.JLabel defaultsettings;
+    private javax.swing.JRadioButton desc_archive;
+    private javax.swing.JRadioButton desc_rentallist;
     private javax.swing.JLabel devicename;
     private javax.swing.JLabel devicename_newdevice;
+    private javax.swing.JButton filterButton_archive;
+    private javax.swing.JLabel filterString_rentallist;
+    private javax.swing.JTextField filterText_archive;
+    private javax.swing.JTextField filterText_rentallist;
     private javax.swing.JLabel filter_options_archive;
     private javax.swing.JLabel filter_options_inventory;
     private javax.swing.JLabel filter_options_rentallist;
+    private javax.swing.JButton filterbutton_rentallist;
     private javax.swing.JPanel home_panel;
     private javax.swing.JTextField imei;
     private javax.swing.JButton inventory;
@@ -1458,12 +1308,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel inventorynumber_newdevice;
     private javax.swing.JComboBox<String> inventorynumber_newrental;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JTextField location;
     private javax.swing.JTextField manufacturer;
@@ -1489,7 +1336,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextArea re_notes;
     private javax.swing.JTextField re_productname;
     private javax.swing.JTextField re_user;
+    private javax.swing.JLabel rentTo;
     private com.raven.datechooser.DateChooser rentalDate_newrental;
+    private javax.swing.JScrollPane rental_ScrollPane;
     private javax.swing.JButton rentallist;
     private javax.swing.JPanel rentallist_panel;
     private javax.swing.JTable rentallist_table;
@@ -1502,9 +1351,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private com.raven.datechooser.DateChooser returndate;
     private javax.swing.JLabel room_newdevice;
     private javax.swing.JToggleButton save_newdevice;
-    private javax.swing.JToggleButton save_newrental;
+    private javax.swing.JButton save_newrental;
     private javax.swing.JToggleButton save_return;
     private javax.swing.JScrollPane scrollpane_startpage;
+    private javax.swing.JLabel search_options_archive;
     private javax.swing.JComboBox<String> searchfilter_archive;
     private javax.swing.JComboBox<String> searchfilter_inventory;
     private javax.swing.JComboBox<String> searchfilter_rentallist;
@@ -1519,7 +1369,12 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JComboBox<String> year_newrental;
     private javax.swing.JRadioButton yes;
     // End of variables declaration//GEN-END:variables
-       
+
+    
+    /**
+    *
+    * @author Katharina
+    */
     @Override
     public void run() {
         

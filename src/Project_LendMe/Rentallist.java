@@ -8,66 +8,31 @@ import java.time.LocalDate;
 
 /**
  *
- * @author linda
+ * @author linda, katharina
  */
-public class Rentallist {
+public class Rentallist extends Rentals{
     
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-    private LocalDate rentalDate;
     private String productName;
-    private int devices_inventoryNumber;
-    private int users_UserID;
     private String manufacturer;
-    private boolean status;
-
-    public boolean isStatus() {
-        return status;
+    private int lentDays;
+    
+    public Rentallist(String productName, String manufacturer, 
+                LocalDate rentalDate, int device_inventoryNumber, 
+                int administrators_AdminID, int users_UserID) {
+       super(rentalDate, device_inventoryNumber, administrators_AdminID, users_UserID);
+       this.productName = productName;
+       this.manufacturer = manufacturer;
+       this.lentDays = countDays(rentalDate);
     }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public int getRentalID() {
-        return rentalID;
-    }
-
-    public void setRentalID(int rentalID) {
-        this.rentalID = rentalID;
-    }
-        private int rentalID;
-
-    public String getProductName() {
+    
+     public String getProductName() {
         return productName;
     }
 
-    public LocalDate getRentalDate() {
-        return rentalDate;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public void setRentalDate(LocalDate rentalDate) {
-        this.rentalDate = rentalDate;
-    }
-
-
-    public int getDevices_inventoryNumber() {
-        return devices_inventoryNumber;
-    }
-
-    public void setDevices_inventoryNumber(int devices_inventoryNumber) {
-        this.devices_inventoryNumber = devices_inventoryNumber;
-    }
-
-    public int getUsers_UserID() {
-        return users_UserID;
-    }
-
-    public void setUsers_UserID(int users_UserID) {
-        this.users_UserID = users_UserID;
-    }
-      
     public String getManufacturer() {
         return manufacturer;
     }
@@ -76,6 +41,44 @@ public class Rentallist {
         this.manufacturer = manufacturer;
     }
     
-    
-    
+    /**
+     *
+     * @param rentalDate as a LocalDate object needed to get difference
+     * between rentalDate and currentDate
+     * calls the isLeapYear method to proof if currentYear is Leap year 
+     * to get the difference
+     * @return difference between rentalDate and currentDate as int
+     */
+    public int countDays (LocalDate rentalDate) {
+        Validator val = new Validator();
+        
+        LocalDate currentDate = LocalDate.now();
+        int year = currentDate.getYear();
+        int curYearDay = currentDate.getDayOfYear(); 
+        int rentYearDay = rentalDate.getDayOfYear();
+        int lentDays = 0;
+        
+        if(curYearDay > rentYearDay){
+            lentDays = curYearDay - rentYearDay;
+        } else if (curYearDay < rentYearDay) {
+            if (val.isLeapYear(year)){
+                curYearDay = curYearDay + 366;
+                lentDays = curYearDay - rentYearDay;
+            } else if (!val.isLeapYear(year)){
+                curYearDay = curYearDay + 365;
+                lentDays = curYearDay - rentYearDay;
+            }
+        } else if (curYearDay == rentYearDay) {
+            lentDays = 0;
+        }
+        return lentDays;
+    }
+
+    public int getLentDays() {
+        return lentDays;
+    }
+
+    public void setLentDays(int lentDays) {
+        this.lentDays = lentDays;
+    } 
 }
