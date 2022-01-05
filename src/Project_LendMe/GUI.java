@@ -1223,80 +1223,34 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         hp.closeDB();
-        System.out.println("Connection to Database closed");
-        
-       /*         DefaultTableModel model = (DefaultTableModel) rentallist_table.getModel();
-        //int indexs[] = rentallist_table.getSelectedRows();
-
-        //Object[] row = new Object[5];
-
-        int index = rentallist_table.getSelectedRow();
-
-        String ret_productname = model.getValueAt(index, 2).toString();
-        String ret_manufacturer = model.getValueAt(index, 3).toString();
-        String ret_user = model.getValueAt(index, 4).toString();
-        String ret_inventorynumber = model.getValueAt(index, 1).toString();
-        String ret_rentaldate = model.getValueAt(index, 5).toString();
-
-        // moeglichkeit 1
-        re_productname.setText(ret_productname);
-        // usw. fuer alle Textfelder und eingaben..
-        // Textfelder non editable machen
-        // vorher listener oder abfrage ob auch wirklich eine reihe markiert
-        // sonst null pointer exception
-
-//moeglichkeit 2
-// abfrage DB select rental mit join where id = idVonRow
-// mit diesem Datensatz Rentallistobject erstellen
-//Rentallist rl = new Rentallist(eee, eeee, eee, usw. );
-// mit getter die Textfelder fuellen.
-
-//moeglichkeit 3
-// mit methode von moeglichkeit 1 spalten auslesen
-// methode schreiben die aus den geliehen tagen das verleihdatum rueckberechnet
-// werte in textfelder speichern
-
-// entweder hier alles machen also in gui klasse oder eigenen helper klasse schreiben
-
-layerpane.removeAll();
-layerpane.add(return_panel);
-layerpane.repaint();
-layerpane.revalidate();
-
-
-
-
-//DefaultTableModel model1 = (DefaultTableModel)return_panel.rentallist_table.getModel(); */
-        
-        
+        System.out.println("Connection to Database closed"); 
     }//GEN-LAST:event_formWindowClosing
 
     private void return_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_buttonActionPerformed
         DefaultTableModel model = (DefaultTableModel) rentallist_table.getModel();
-            
+     
         int index = rentallist_table.getSelectedRow();
         
         String ret_productname = model.getValueAt(index, 2).toString();
         String ret_manufacturer = model.getValueAt(index, 3).toString();
         String ret_user = model.getValueAt(index, 4).toString();
         String ret_inventorynumber = model.getValueAt(index, 1).toString();
-        //String ret_rentaldate = model.getValueAt(index, 5).toString(); 
         
         re_productname.setText(ret_productname);
         re_manufacturer.setText(ret_manufacturer);
         re_user.setText(ret_user);
         re_inventorynumber.setText(ret_inventorynumber);
-        //Textfelder nicht bearbeitbar stellen - Textfeld not editable
-        //oder über ID Daten auslesen
-        //eigene Klasse Helper
+        
+        re_productname.setEditable(false);
+        re_manufacturer.setEditable(false);
+        re_user.setEditable(false);
+        re_inventorynumber.setEditable(false);
         
         layerpane.removeAll();
         layerpane.add(return_panel);
         layerpane.repaint();
         layerpane.revalidate();
 
-        
-        //DefaultTableModel model1 = (DefaultTableModel)return_panel.rentallist_table.getModel();
     }//GEN-LAST:event_return_buttonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
