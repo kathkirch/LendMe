@@ -20,7 +20,7 @@ class Return {
     private int inventoryNumber;
     private int users_userID;
 
-    public Return(LocalDate returnDate, int administrators_adminID, String notes, String productName, String manufacturer, int inventoryNumber, int users_userID) {
+    /*public Return(LocalDate returnDate, int administrators_adminID, String notes, String productName, String manufacturer, int inventoryNumber, int users_userID) {
         this.returnDate = returnDate;
         this.administrators_adminID = administrators_adminID;
         this.notes = notes;
@@ -28,7 +28,12 @@ class Return {
         this.manufacturer = manufacturer;
         this.inventoryNumber = inventoryNumber;
         this.users_userID = users_userID;
-    }
+    }*/
+
+    public Return(LocalDate returnDate, String notes) {
+        this.returnDate = returnDate;
+        this.notes = notes;
+    }    
 
     public LocalDate getReturnDate() {
         return returnDate;
@@ -94,6 +99,8 @@ class Return {
         
         return string; 
     }
+    
+    
     
     
     

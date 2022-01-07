@@ -781,16 +781,12 @@ public class DatabaseHelper {
     }
     
     
-    public static void insertNewReturn_DB(Return return_data) {
+    public void insertNewReturn_DB (Return return_data) {
         try{ 
             stmt = con.createStatement();
-            String string = "BEGIN TRANSACTION;"
-                    + "insert into rentals (returnDate, "
-                            +"administrators_adminID) values ('" + return_data.getReturnDate()
-                            + "', '" + return_data.getAdministrators_adminID() + "');"
-                    + "insert into devices (notes) values ('" +  return_data.getNotes()
-                    + "');"
-                    + "COMMIT;";
+            String string = " update rentals set returnDate = " + return_data.getReturnDate() + " where devices_inventoryNumber = " + return_data.getInventoryNumber() + ";"
+            + " update devices set notes = concat(notes , ' | ' " + return_data.getNotes() + " ' ' where inventoryNumber = " + return_data.getInventoryNumber() + ";";
+                    
             stmt.executeUpdate(string);
             updateRentalStatus(return_data.getInventoryNumber());
             
@@ -810,7 +806,7 @@ public class DatabaseHelper {
         }
     }
     
-        public static void updateRentalStatus(int inventoryNumber) {
+        public static void updateRentalStatus (int inventoryNumber) {
         Statement stmt = null;
         ResultSet rs = null;
         

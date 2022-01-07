@@ -4,6 +4,7 @@
  */
 package Project_LendMe;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -801,6 +802,11 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         save_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         save_return.setText("Speichern");
+        save_return.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_returnActionPerformed(evt);
+            }
+        });
 
         cancel_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancel_return.setText("Abbrechen");
@@ -1111,10 +1117,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.revalidate();
         
         
-        /**
-        *
-        * @author Katharina
-        */
         Rental_Helper rh = new Rental_Helper(newrental_panel);
         rh.fillBoxes();
         rh.listenForSelectionAID();
@@ -1252,6 +1254,18 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.revalidate();
 
     }//GEN-LAST:event_return_buttonActionPerformed
+
+    private void save_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_returnActionPerformed
+        //DatabaseHelper dh = new DatabaseHelper();
+        
+        //dh.insertNewReturn_DB();
+        
+        
+        if (!yes.isEnabled()){
+            JOptionPane.showMessageDialog(null, "Bitte Gerät auf Werkseinstellungen zurücksetzen!");
+        } else {  }
+        
+    }//GEN-LAST:event_save_returnActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IMEInumber_newdevice;

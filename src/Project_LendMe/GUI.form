@@ -1504,6 +1504,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Speichern"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="save_returnActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JToggleButton" name="cancel_return">
                           <Properties>
