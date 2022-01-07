@@ -474,7 +474,7 @@ public class Rental_Helper {
         
         List <Object> itemArray = new ArrayList<>();
         String string;
-        int i;
+        long i;
         
         switch (itemCategory) {
             case "productName" :

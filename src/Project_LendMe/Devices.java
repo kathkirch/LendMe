@@ -13,13 +13,14 @@ import java.time.LocalDate;
  */
 public class Devices {
     
-    private int inventoryNumber;
+    private long inventoryNumber;
     private String manufacturer;
     private String productName;
     private String notes;
     private String location;
-    private int imei;
-    private int users_userID;
+    private int status;
+    private long imei;
+    private long users_userID;
     private double aquisitionValue;
     private LocalDate aquistionDate;
     
@@ -27,11 +28,11 @@ public class Devices {
     public Devices() {
     }
 
-    public int getInventoryNumber() {
+    public long getInventoryNumber() {
         return inventoryNumber;
     }
 
-    public void setInventoryNumber(int inventoryNumber) {
+    public void setInventoryNumber(long inventoryNumber) {
         this.inventoryNumber = inventoryNumber;
     }
 
@@ -67,19 +68,19 @@ public class Devices {
         this.location = location;
     }
 
-    public int getImei() {
+    public long getImei() {
         return imei;
     }
 
-    public void setImei(int imei) {
+    public void setImei(long imei) {
         this.imei = imei;
     }
 
-    public int getUsers_userID() {
+    public long getUsers_userID() {
         return users_userID;
     }
 
-    public void setUsers_userID(int users_userID) {
+    public void setUsers_userID(long users_userID) {
         this.users_userID = users_userID;
     }
 
@@ -97,5 +98,13 @@ public class Devices {
 
     public void setAquistionDate(LocalDate aquistionDate) {
         this.aquistionDate = aquistionDate;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

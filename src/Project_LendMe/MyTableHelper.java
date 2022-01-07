@@ -32,6 +32,7 @@ abstract public class MyTableHelper {
     
     static List <Rentallist> rentalList;
     static List <Rentals> allRentals;
+    static List <Devices> allDevices;
     String [] columns;
     
     Object [][] data;
@@ -73,6 +74,8 @@ abstract public class MyTableHelper {
             data = initRentals(allRentals);
         } else if (rentalList != null){
             data = initRentalList(rentalList);
+        } else if (allDevices != null) {
+            data = initDeviceList(allDevices);
         }
         
         model = new DefaultTableModel(data, columns);
@@ -136,5 +139,32 @@ abstract public class MyTableHelper {
             i = i + 1;
         }
         return datalist;
+    }
+    
+    /**
+     * 
+     * @param devicelist
+     * @return 
+     */
+    public Object [][] initDeviceList (List <Devices> devicelist) {
+        
+        Object [][] deviceData = new Object [devicelist.size()] [];
+        int i = 0;
+        
+        for (Devices dl : devicelist) {
+            deviceData[i] = new Object [] {dl.getInventoryNumber(),
+                                           dl.getManufacturer(),
+                                           dl.getProductName(),
+                                           dl.getNotes(),
+                                           dl.getLocation(),
+                                           dl.getStatus(),
+                                           dl.getImei(),
+                                           dl.getUsers_userID(),
+                                           dl.getAquisitionValue(),
+                                           dl.getAquistionDate()};
+            
+           i = i + 1;         
+        }
+        return deviceData;
     }
 }
