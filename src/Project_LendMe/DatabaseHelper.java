@@ -779,4 +779,65 @@ public class DatabaseHelper {
         }
         return Rentallist;
     }
+    
+    
+    public void insertNewReturn_DB (Return return_data) {
+        try{ 
+            stmt = con.createStatement();
+            String string = " update rentals set returnDate = " + return_data.getReturnDate() + " where devices_inventoryNumber = " + return_data.getInventoryNumber() + ";"
+            + " update devices set notes = concat(notes , ' | ' " + return_data.getNotes() + " ' ' where inventoryNumber = " + return_data.getInventoryNumber() + ";";
+                    
+            stmt.executeUpdate(string);
+            updateRentalStatus(return_data.getInventoryNumber());
+            
+            System.out.println("Datensatz erfolgreich hinzugefuegt");
+            
+        } catch(SQLException ex) {
+            System.out.println(ex);
+            System.out.println("Error with Database");
+        } finally {
+            if (stmt != null) {
+                try{
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            } 
+        }
+    }
+    
+        public static void updateRentalStatus (int inventoryNumber) {
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = con.createStatement();
+            String table = "devices";
+            rs = stmt.executeQuery("SELECT * FROM " + table + 
+                    " WHERE inventoryNumber= '" + inventoryNumber + "'");
+            
+            while(rs.next()){
+                String s = "UPDATE " + table + " SET status = ?"
+                        + "WHERE inventoryNumber= ?";
+                PreparedStatement prepStat = con.prepareStatement(s);
+                prepStat.setInt(1, 0);
+                prepStat.setInt(2, inventoryNumber);
+                System.out.println(s);
+                prepStat.executeUpdate();
+                System.out.println("Device status was successfully changed");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+                if (stmt != null) {
+                    try { 
+                        stmt.close();
+                    } catch (SQLException ex){
+                        System.out.println(ex);
+                    }
+                }  
+            } 
+    }
+    
+
 }

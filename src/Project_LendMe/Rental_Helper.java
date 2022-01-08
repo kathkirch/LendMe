@@ -112,7 +112,12 @@ public class Rental_Helper {
         fillComboBox_Category(jCBinvnumber, "inventoryNumber");
         fillComboBox_Category(jCBmanufacturer, "manufacturer");
         
+        fillComboBox_Category(jCBname, "productName");
+        fillComboBox_Category(jCBinvnumber, "inventoryNumber");
+        fillComboBox_Category(jCBmanufacturer, "manufacturer");
+        
     }
+   
     
     /**
      * adds an listener for adminID-JComboBox and sets the adminFullName
