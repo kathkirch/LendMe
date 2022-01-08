@@ -1236,6 +1236,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         *
         * @author Katharina
         */
+        
+        
         Rental_Helper rh = new Rental_Helper(newrental_panel);
         rh.fillBoxes();
         rh.listenForSelectionAID();

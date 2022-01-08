@@ -18,13 +18,13 @@ public class Rentals {
     private int rentalID;
     private LocalDate rentalDate;
     private LocalDate returnDate; 
-    private int device_inventoryNumber;
+    private long device_inventoryNumber;
     private int administrators_AdminID;
-    private int users_UserID;
+    private long users_UserID;
 
     
-    public Rentals(LocalDate rentalDate, int device_inventoryNumber, 
-                        int administrators_AdminID, int users_UserID) {
+    public Rentals(LocalDate rentalDate, long device_inventoryNumber, 
+                        int administrators_AdminID, long users_UserID) {
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
         this.device_inventoryNumber = device_inventoryNumber;
@@ -62,12 +62,12 @@ public class Rentals {
     }
 
    
-    public int getDevice_inventoryNumber() {
+    public long getDevice_inventoryNumber() {
         return device_inventoryNumber;
     }
 
     
-    public void setDevice_inventoryNumber(int device_inventoryNumber) {
+    public void setDevice_inventoryNumber(long device_inventoryNumber) {
         this.device_inventoryNumber = device_inventoryNumber;
     }
 
@@ -81,12 +81,12 @@ public class Rentals {
     }
 
    
-    public int getUsers_UserID() {
+    public long getUsers_UserID() {
         return users_UserID;
     }
 
    
-    public void setUsers_UserID(int users_UserID) {
+    public void setUsers_UserID(long users_UserID) {
         this.users_UserID = users_UserID;
     }
 

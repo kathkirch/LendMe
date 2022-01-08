@@ -67,7 +67,7 @@ public class DatabaseHelper {
             while (rs.next()){
                 String productName = rs.getString("productName");
                 String manufacturer = rs.getString("manufacturer");
-                int inventoryNumber = rs.getInt("inventoryNumber");
+                long inventoryNumber = rs.getLong("inventoryNumber");
                 
                 Devices dev = new Devices();
                 dev.setProductName(productName);
@@ -109,9 +109,9 @@ public class DatabaseHelper {
                 int rentalID = rs.getInt("rentalID");
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
                 LocalDate returnDate = rs.getDate("returnDate").toLocalDate();
-                int inventoryNumb = rs.getInt("devices_inventoryNumber");
+                long inventoryNumb = rs.getLong("devices_inventoryNumber");
                 int adminID = rs.getInt("administrators_adminID");
-                int userID = rs.getInt("users_UserID");
+                long userID = rs.getLong("users_UserID");
                 
                 Rentals rental = new Rentals(rentalDate, inventoryNumb, adminID,
                                                 userID);
@@ -154,7 +154,7 @@ public class DatabaseHelper {
             
             while (rs.next()){
                 String manufacturer = rs.getString("manufacturer");
-                int inventoryNumber = rs.getInt("inventoryNumber");
+                long inventoryNumber = rs.getLong("inventoryNumber");
                 
                 Devices d = new Devices();
                 d.setManufacturer(manufacturer);
@@ -392,7 +392,7 @@ public class DatabaseHelper {
         Users user = null;
         
         String query = "SELECT * FROM users WHERE userID=" + "'" 
-                    + Integer.parseInt(userID)
+                    + Long.parseLong(userID)
                     + "';";      
         try {
             stmt = con.createStatement();
@@ -405,7 +405,7 @@ public class DatabaseHelper {
                 String userPhone = rs.getString("userPhone");
                 String userYear = rs.getString("userYear");
 
-                user = new Users (Integer.parseInt(userID), userFirstName, 
+                user = new Users (Long.parseLong(userID), userFirstName, 
                                 userLastName, userEmail, userPhone, userYear);
             }
         }catch (SQLException ex){
@@ -467,7 +467,7 @@ public class DatabaseHelper {
      * @param userID needed to search for in the Database
      * @return true if the user not exists in the Database, false if the user exists
      */
-    public boolean isUserNew(String userID){
+    public boolean isUserNew(long userID){
         
         boolean userNEW = true;
         String query = "SELECT * FROM users WHERE userID=" + userID + ";";
@@ -529,12 +529,12 @@ public class DatabaseHelper {
         
     /**
      *
-     * @param device_inventoryNumber needed as a int to search for in the database
+     * @param device_inventoryNumber needed to search for in the database
      * @param userID needed to search for in the database
      * updates the values for userID and status automatically if the method is called
      * and a suitable entry for the given parameters in the database was found
      */
-    public void updateDeviceStatus(int device_inventoryNumber, int userID) {
+    public void updateDeviceStatus(long device_inventoryNumber, long userID) {
         stmt = null;
         rs = null;
         
@@ -549,8 +549,8 @@ public class DatabaseHelper {
                         + "WHERE inventoryNumber= ?";
                 PreparedStatement prepStat = con.prepareStatement(s);
                 prepStat.setInt(1, 1);
-                prepStat.setInt(2, userID);
-                prepStat.setInt(3, device_inventoryNumber);
+                prepStat.setLong(2, userID);
+                prepStat.setLong(3, device_inventoryNumber);
                 System.out.println(s);
                 prepStat.executeUpdate();
                 System.out.println("Device status was successfully changed");
@@ -617,9 +617,9 @@ public class DatabaseHelper {
                 int rentalID = rs.getInt("rentalID");
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
                 LocalDate returnDate = rs.getDate("returnDate").toLocalDate();
-                int inventoryNumb = rs.getInt("devices_inventoryNumber");
+                long inventoryNumb = rs.getLong("devices_inventoryNumber");
                 int adminID = rs.getInt("administrators_adminID");
-                int userID = rs.getInt("users_UserID");
+                long userID = rs.getLong("users_UserID");
                 
                 Rentals rental = new Rentals(rentalDate, inventoryNumb, adminID,
                                                 userID);
@@ -753,8 +753,8 @@ public class DatabaseHelper {
                 
                 int rentalID = rs.getInt("rentalID");
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
-                int users_UserID = rs.getInt("users_UserID");
-                int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
+                long users_UserID = rs.getLong("users_UserID");
+                long devices_inventoryNumber = rs.getLong("devices_inventoryNumber");
                 int administrators_AdminID = rs.getInt("administrators_adminID");
                 String manufacturer = rs.getString("manufacturer");
                 String productname =rs.getString("productname");

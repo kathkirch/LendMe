@@ -17,8 +17,8 @@ public class Rentallist extends Rentals{
     private int lentDays;
     
     public Rentallist(String productName, String manufacturer, 
-                LocalDate rentalDate, int device_inventoryNumber, 
-                int administrators_AdminID, int users_UserID) {
+                LocalDate rentalDate, long device_inventoryNumber, 
+                int administrators_AdminID, long users_UserID) {
        super(rentalDate, device_inventoryNumber, administrators_AdminID, users_UserID);
        this.productName = productName;
        this.manufacturer = manufacturer;
