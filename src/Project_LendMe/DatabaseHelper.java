@@ -92,12 +92,14 @@ public class DatabaseHelper {
         return devicesList;
     }
     
+    /**
+     * @return returns all Devices saved in the database
+     */
     public ArrayList <Devices> getAllDevices() {
         
         ArrayList <Devices> allDevices = new ArrayList<>();
         
-        String query = "SELECT * FROM devices;";
-        
+        String query = "SELECT * FROM devices"; 
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
@@ -128,6 +130,7 @@ public class DatabaseHelper {
                 device.setAquistionDate(acD);
                 
                 allDevices.add(device);
+                System.out.println(device.toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,7 +176,7 @@ public class DatabaseHelper {
                 rental.setReturnDate(returnDate);
                 
                 allRentals.add(rental);
-            }
+            }            
         }catch (SQLException ex) {
             System.out.println(ex);
         }finally {
@@ -780,7 +783,90 @@ public class DatabaseHelper {
     }
     
     
-    
+    public List<Devices> filterInventory(int column, String filterBy) {
+        
+        stmt = null;
+        rs = null;
+        String where = "";
+        ArrayList <Devices> filteredInventory = new ArrayList <>();
+        
+        switch (column) {
+            case 0:
+                where = "inventoryNumber";
+                break;
+            case 1:
+                where = "manufacturer";
+                break;
+            case 2:
+                where = "productname";
+                break;
+            case 3:
+                where = "location";
+                break;
+            case 4:
+                where = "status";
+                break;
+            case 5:
+                where = "users_userID";
+                break;
+            case 6:
+                where = "acquisitionValue";
+                break;
+            case 7:
+                where = "acquisitionDate";
+                break;
+        }
+        
+        String query = "SELECT * FROM devices WHERE " + where + " LIKE '%" +
+                filterBy + "%'";
+        
+         try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                
+                long invNo = rs.getLong(1);
+                String manuf = rs.getString(2);
+                String prodN = rs.getString(3);
+                String notes = rs.getString(4);
+                String location = rs.getString(5);
+                int stat = rs.getInt(6);
+                long im = rs.getLong(7);
+                long usID = rs.getLong(8);
+                double acV = rs.getDouble(9);
+                LocalDate acD = rs.getDate(10).toLocalDate();
+                
+                Devices device = new Devices();
+                
+                device.setInventoryNumber(invNo);
+                device.setManufacturer(manuf);
+                device.setProductName(prodN);
+                device.setNotes(notes);
+                device.setLocation(location);
+                device.setStatus(stat);
+                device.setImei(im);
+                device.setUsers_userID(usID);
+                device.setAquisitionValue(acV);
+                device.setAquistionDate(acD);
+                
+                filteredInventory.add(device);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try { 
+                    stmt.close();
+                } catch (SQLException ex){
+                    System.out.println(ex);
+                }
+            }  
+        } 
+        
+        return filteredInventory;
+    }
     
     
 /**

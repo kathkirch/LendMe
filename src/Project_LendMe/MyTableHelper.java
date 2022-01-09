@@ -5,6 +5,7 @@
  */
 package Project_LendMe;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -82,6 +84,17 @@ abstract public class MyTableHelper {
         
         table.setModel(model);
         
+        /**
+        * simple implementation of a TableRowSorter to sort the table with a clock on the columns
+        */
+        
+        //initialize a new Sorter
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
+        //tell the table about the sorter
+        table.setRowSorter(sorter);
+        //tell the sorter about the data to be sorted
+        sorter.setModel(model);
+        
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         
         table.setFillsViewportHeight(true);
@@ -90,12 +103,12 @@ abstract public class MyTableHelper {
         if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
             table.setPreferredSize(js.getPreferredSize());
         }
-        
+   
         table.setEnabled(false);
         js.setVisible(true); 
     }
     
-    
+       
      /**
      *
      * @param rentals as a List of Rentals-Objects 
@@ -151,19 +164,19 @@ abstract public class MyTableHelper {
         Object [][] deviceData = new Object [devicelist.size()] [];
         int i = 0;
         
-        for (Devices dl : devicelist) {
-            deviceData[i] = new Object [] {dl.getInventoryNumber(),
-                                           dl.getManufacturer(),
-                                           dl.getProductName(),
-                                           dl.getNotes(),
-                                           dl.getLocation(),
-                                           dl.getStatus(),
-                                           dl.getImei(),
-                                           dl.getUsers_userID(),
-                                           dl.getAquisitionValue(),
-                                           dl.getAquistionDate()};
+        for (Devices d : devicelist) {
+            deviceData[i] = new Object [] {d.getInventoryNumber(),
+                                           d.getManufacturer(),
+                                           d.getProductName(),
+                                           d.getNotes(),
+                                           d.getLocation(),
+                                           d.getStatus(),
+                                           d.getImei(),
+                                           d.getUsers_userID(),
+                                           d.getAquisitionValue(),
+                                           d.getAquistionDate()};
             
-           i = i + 1;         
+           i = i + 1;  
         }
         return deviceData;
     }

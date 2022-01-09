@@ -1222,14 +1222,14 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="inventory_ScrollPane1" min="-2" pref="506" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
                                       <Component id="inventory_title" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Component id="newdevice_button" min="-2" pref="174" max="-2" attributes="0"/>
                                           <EmptySpace min="262" pref="553" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="inventory_ScrollPane1" max="32767" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1273,9 +1273,9 @@
                                   <Component id="inventory_title" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="newdevice_button" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                                  <Component id="inventory_ScrollPane1" pref="741" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                  <Component id="inventory_ScrollPane1" min="-2" pref="282" max="-2" attributes="0"/>
+                                  <EmptySpace pref="632" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">

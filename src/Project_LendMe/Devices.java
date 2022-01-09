@@ -5,6 +5,7 @@
  */
 package Project_LendMe;
 
+import java.lang.invoke.VarHandle;
 import java.time.LocalDate;
 
 /**
@@ -21,8 +22,8 @@ public class Devices {
     private int status;
     private long imei;
     private long users_userID;
-    private double aquisitionValue;
-    private LocalDate aquistionDate;
+    private double acquisitionValue;
+    private LocalDate acquistionDate;
     
 
     public Devices() {
@@ -85,19 +86,19 @@ public class Devices {
     }
 
     public double getAquisitionValue() {
-        return aquisitionValue;
+        return acquisitionValue;
     }
 
     public void setAquisitionValue(double aquisitionValue) {
-        this.aquisitionValue = aquisitionValue;
+        this.acquisitionValue = aquisitionValue;
     }
 
     public LocalDate getAquistionDate() {
-        return aquistionDate;
+        return acquistionDate;
     }
 
-    public void setAquistionDate(LocalDate aquistionDate) {
-        this.aquistionDate = aquistionDate;
+    public void setAquistionDate(LocalDate acquistionDate) {
+        this.acquistionDate = acquistionDate;
     }
 
     public int getStatus() {
@@ -107,4 +108,14 @@ public class Devices {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return inventoryNumber + " | " + manufacturer + " | " + productName + 
+                " | " + notes + " | " + location + " | " + status + " | " + 
+                imei + " | " + users_userID + " | " + acquisitionValue + 
+                " | " +  acquistionDate;
+    }
+    
+    
 }

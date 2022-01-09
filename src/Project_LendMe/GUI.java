@@ -796,13 +796,13 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             .addGroup(inventory_panelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inventory_panelLayout.createSequentialGroup()
+                        .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(inventory_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(inventory_panelLayout.createSequentialGroup()
                         .addComponent(newdevice_button, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(262, 553, Short.MAX_VALUE))
-                    .addGroup(inventory_panelLayout.createSequentialGroup()
-                        .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(262, 553, Short.MAX_VALUE))))
             .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(inventory_panelLayout.createSequentialGroup()
                     .addGap(37, 37, 37)
@@ -834,9 +834,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addComponent(inventory_title, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addComponent(newdevice_button)
-                .addGap(88, 88, 88)
-                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
-                .addGap(177, 177, 177))
+                .addGap(92, 92, 92)
+                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(632, Short.MAX_VALUE))
             .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(inventory_panelLayout.createSequentialGroup()
                     .addGap(129, 129, 129)
@@ -1336,6 +1336,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     filterbutton_rentallist, btClear_rentals);
         
         MyTableHelper.allRentals = null;
+        MyTableHelper.allDevices = null;
         rListHelper.populateTable();
         rListHelper.fillBox();
         rListHelper.filterTable();
@@ -1359,6 +1360,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 filterText_archive, filterButton_archive, btClear_archive);
         
         MyTableHelper.rentalList = null;
+        MyTableHelper.allDevices = null;
         archHelper.populateTable();
         archHelper.fillBox();
         archHelper.sortTable();
@@ -1376,9 +1378,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         Inventory_Helper devHelper = new Inventory_Helper (inventory_table1, 
                 inventory_ScrollPane1, inventory_searchfilter, inventory_asc,
                 inventory_desc, inventory_filterText, inventory_btFilter, 
-                inventory_btClear);
+                inventory_btClear, inventory_btupdateRow);
         
-        MyTableHelper.allDevices = null;
+        MyTableHelper.rentalList = null;
+        MyTableHelper.allRentals = null;
         devHelper.populateTable();
         devHelper.fillBox();
         devHelper.sortTable();
