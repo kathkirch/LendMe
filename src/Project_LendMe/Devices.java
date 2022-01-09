@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  * @author Katharina
  */
-public class Devices {
+public class Devices implements Rentable {
     
     private long inventoryNumber;
     private String manufacturer;
@@ -22,11 +22,17 @@ public class Devices {
     private int users_userID;
     private double aquisitionValue;
     private LocalDate aquistionDate;
+    private int status;
     
 
     public Devices() {
+    
     }
 
+    public int getStatus() {
+        return status;
+    }
+    
     public long getInventoryNumber() {
         return inventoryNumber;
     }
@@ -98,4 +104,18 @@ public class Devices {
     public void setAquistionDate(LocalDate aquistionDate) {
         this.aquistionDate = aquistionDate;
     }
+    
+    
+}   
+
+interface Rentable {
+
+    static final int lent = 1;
+
+    static final int not_lent = 0;
+
+  
 }
+    
+
+

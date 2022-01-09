@@ -64,8 +64,6 @@ public class Rental_Helper {
         this.jBcancel = (JButton) panel.getComponent(20);
         
         
-        System.out.println(hp.getDevices().toString());
-        
     }
     
     /**
@@ -145,23 +143,25 @@ public class Rental_Helper {
         jCBuserID.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 String selected = e.getItem().toString();
-                if ((!selected.isBlank() && val.isNumeric(selected))){
+                if (e.getStateChange() == ItemEvent.SELECTED){
+                    if ((!selected.isBlank() && val.isNumeric(selected))){
                     Users userToCheck = hp.checkUserID(selected);
-                    if (userToCheck != null && (!hp.isUserNew(Long.parseLong(selected)))) {
-                        jTFfirstname.setText(userToCheck.getUserFirstName());
-                        jTFlastname.setText(userToCheck.getUserLastName());
-                        jTFphone.setText(userToCheck.getUserPhone());
-                        jTFmail.setText(userToCheck.getUserEmail());
-                        jCByear.setSelectedItem(userToCheck.getYear());
-                        jCByear.setEnabled(false);
-                    } else if (hp.isUserNew(Long.parseLong(selected))) {
-                        jTFfirstname.setText("");
-                        jTFlastname.setText("");
-                        jTFphone.setText("");
-                        jTFmail.setText("");
-                        jCByear.setSelectedItem("");
-                        jCByear.setEnabled(true);
-                    } 
+                        if (userToCheck != null && (!hp.isUserNew(Long.parseLong(selected)))) {
+                            jTFfirstname.setText(userToCheck.getUserFirstName());
+                            jTFlastname.setText(userToCheck.getUserLastName());
+                            jTFphone.setText(userToCheck.getUserPhone());
+                            jTFmail.setText(userToCheck.getUserEmail());
+                            jCByear.setSelectedItem(userToCheck.getYear());
+                            jCByear.setEnabled(false);
+                        } else if (hp.isUserNew(Long.parseLong(selected))) {
+                            jTFfirstname.setText("");
+                            jTFlastname.setText("");
+                            jTFphone.setText("");
+                            jTFmail.setText("");
+                            jCByear.setSelectedItem("");
+                            jCByear.setEnabled(true);
+                        } 
+                    }
                 }
             }
         });
@@ -302,6 +302,7 @@ public class Rental_Helper {
         jCBname.removeAllItems();
         jCBmanufacturer.removeAllItems();
         jCBinvnumber.removeAllItems();
+        
            
         jCBuserID.setSelectedItem("");
         jCByear.setSelectedItem("");
@@ -366,7 +367,7 @@ public class Rental_Helper {
                 yearV = true;
             }
             if ( val.isNumeric(id)) {
-                idV = false;
+                idV = true;
             }
             
             if (nameV && emailV && phoneV && yearV && idV) {
@@ -414,6 +415,7 @@ public class Rental_Helper {
                 Rentals rental = new Rentals(date, Integer.parseInt(inventoryNumb),
                             Integer.parseInt(adminID),
                             Integer.parseInt(userID));
+                
                 hp.insertNewRental_DB(rental);
             }
             

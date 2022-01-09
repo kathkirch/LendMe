@@ -16,7 +16,9 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -31,15 +33,28 @@ import javax.swing.table.TableColumnModel;
 public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
     
     private final DatabaseHelper rlH = new DatabaseHelper();
-
+    
+    public JButton returnBT;
+    
+    public static int RETURN_ID;
+    public static String RETURN_PRODUCTNAME;
+    public static String RETURN_MANUFACTURER;
+    public static long RETURN_INVNUMBER;
+    public static long RETURN_USERID;
+    
     public Rentallist_Helper(JTable table, JScrollPane js, JComboBox box, 
                 JRadioButton ascRadio, JRadioButton descRadio, 
-                JTextField filterTF, JButton filterBT, JButton clearBT) {
+                JTextField filterTF, JButton filterBT, JButton clearBT, 
+                JButton returnBT) {
         super(table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
         
+        this.returnBT = returnBT;
+        
         this.rentalList = rlH.displayRentallist();
+        
         this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
                                 "Hersteller","Verliehen an" ,"Verliehene Tage"};
+        
         
     }
     
@@ -209,6 +224,41 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
             } 
         });
     }
+    
+    public void newReturn (JLayeredPane layeredpane, JPanel return_panel) {
+        returnBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+               
+                if (!table.getSelectionModel().isSelectionEmpty()) {
+                    
+                    int index = table.getSelectedRow();
+                    int id = (int) model.getValueAt(index, 0);
+                    long inventorynumber = (long) model.getValueAt(index, 1);
+                    String productname = (String) model.getValueAt(index, 2);
+                    String manufacturer = (String) model.getValueAt(index, 3);
+                    long user = (long) model.getValueAt(index, 4);
+                    
+                    RETURN_ID = id;
+                    RETURN_PRODUCTNAME = productname;
+                    RETURN_MANUFACTURER = manufacturer;
+                    RETURN_INVNUMBER = inventorynumber;
+                    RETURN_USERID = user;
+                    
+                    layeredpane.removeAll();
+                    layeredpane.add(return_panel);
+                    layeredpane.repaint();
+                    layeredpane.revalidate();
+                    
+                    ReturnHelper returnHelper = new ReturnHelper(return_panel);
+                    returnHelper.notEditable();
+                    returnHelper.showData();
+                    returnHelper.saveReturn();
+                    
+                }
+            }
+        });
+    } 
 }
     
 

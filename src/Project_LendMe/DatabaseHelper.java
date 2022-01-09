@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -68,17 +69,20 @@ public class DatabaseHelper {
                 String productName = rs.getString("productName");
                 String manufacturer = rs.getString("manufacturer");
                 long inventoryNumber = rs.getLong("inventoryNumber");
+                String notes = rs.getString("notes");
                 
                 Devices dev = new Devices();
                 dev.setProductName(productName);
                 dev.setManufacturer(manufacturer);
                 dev.setInventoryNumber(inventoryNumber);
+                dev.setNotes(notes);
                 
                 devicesList.add(dev);
             }
         
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("getDevices");
         } finally {
             if (stmt != null) {
                 try{
@@ -123,6 +127,7 @@ public class DatabaseHelper {
             }
         }catch (SQLException ex) {
             System.out.println(ex);
+            System.out.println("readRentals");
         }finally {
             if (stmt != null) {
                 try {
@@ -163,6 +168,7 @@ public class DatabaseHelper {
             }
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("getItemByProductName");
         } finally {
             if (stmt != null) {
                 try{
@@ -202,6 +208,7 @@ public class DatabaseHelper {
             }
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("getItemByManufacturer");
         } finally {
             if (stmt != null) {
                 try{
@@ -242,6 +249,7 @@ public class DatabaseHelper {
             }
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("getItemByInvNumber");
         } finally {
             if (stmt != null) {
                 try{
@@ -273,6 +281,7 @@ public class DatabaseHelper {
             }
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("getUsersID");
         } finally {
             if (stmt != null) {
                 try{
@@ -303,6 +312,7 @@ public class DatabaseHelper {
             }
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("getUserYear");
         } finally {
             if (stmt != null) {
                 try{
@@ -336,6 +346,7 @@ public class DatabaseHelper {
         
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("getAdminIDs");
         } finally {
             if (stmt != null) {
                 try{
@@ -370,6 +381,7 @@ public class DatabaseHelper {
 
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("getAdminByID");
         } finally {
             if (stmt != null) {
                 try{
@@ -410,6 +422,7 @@ public class DatabaseHelper {
             }
         }catch (SQLException ex){
             System.out.println(ex);
+            System.out.println("checkUserID");
         } finally {
             if (stmt != null) {
                 try{
@@ -449,7 +462,7 @@ public class DatabaseHelper {
             
             }catch(SQLException ex) {
                 System.out.println(ex);
-                System.out.println("Error with Database");
+                System.out.println("insertNewUser");
             } finally {
                 if (stmt != null) {
                     try{
@@ -481,7 +494,7 @@ public class DatabaseHelper {
             }
         }catch(SQLException ex) {
             System.out.println(ex);
-            System.out.println("Error with Database");
+            System.out.println("isUserNew");
         } finally {
             if (stmt != null) {
                 try{
@@ -509,13 +522,15 @@ public class DatabaseHelper {
                             + "', '" + rental.getAdministrators_AdminID()
                             + "', '" + rental.getUsers_UserID()+ "');";
             stmt.executeUpdate(string);
-            updateDeviceStatus(rental.getDevice_inventoryNumber(), rental.getUsers_UserID());
+            
+            setDevice_Lent(rental.getDevice_inventoryNumber(), 
+                    rental.getUsers_UserID());
             
             System.out.println("Datensatz erfolgreich hinzugefuegt");
             
         } catch(SQLException ex) {
             System.out.println(ex);
-            System.out.println("Error with Database");
+            System.out.println("insertNewRental_DB");
         } finally {
             if (stmt != null) {
                 try{
@@ -534,9 +549,52 @@ public class DatabaseHelper {
      * updates the values for userID and status automatically if the method is called
      * and a suitable entry for the given parameters in the database was found
      */
-    public void updateDeviceStatus(long device_inventoryNumber, long userID) {
+    
+    public void setDevice_Lent(long device_inventoryNumber, long userID) {
+        
         stmt = null;
         rs = null;
+        
+        try {
+            stmt = con.createStatement();
+            String table = "devices";
+            rs = stmt.executeQuery("SELECT * FROM " + table + 
+                    " WHERE inventoryNumber = '" + device_inventoryNumber + "';");
+            
+            while(rs.next()){
+                
+                String s = "UPDATE " + table + " SET status = ?, users_UserID = ?"
+                        + " WHERE inventoryNumber = ?;";
+                PreparedStatement prepStat = con.prepareStatement(s);
+                prepStat.setInt(1, Devices.lent);
+                prepStat.setLong(2, userID);
+                prepStat.setLong(3, device_inventoryNumber);
+                System.out.println(s);
+                prepStat.executeUpdate();
+                System.out.println("Device status was successfully changed");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("setDevice_Lent");
+        } finally {
+            if (stmt != null) {
+                try { 
+                    stmt.close();
+                } catch (SQLException ex){
+                    System.out.println(ex);
+                }
+            }  
+        } 
+    }
+    
+    
+    
+    public void setDevice_NotLent(long device_inventoryNumber, String notes) {
+        
+        stmt = null;
+        rs = null;
+        Long nullLong = null;
         
         try {
             stmt = con.createStatement();
@@ -545,27 +603,39 @@ public class DatabaseHelper {
                     " WHERE inventoryNumber= '" + device_inventoryNumber + "'");
             
             while(rs.next()){
-                String s = "UPDATE " + table + " SET status = ?, users_UserID = ?"
-                        + "WHERE inventoryNumber= ?";
+                
+                //String existingNotes = rs.getString("notes");
+                
+                String s = "UPDATE " + table + 
+                            " SET "
+                                + "status = ?, "
+                                + "users_UserID = ?,"
+                                + "notes = ?"
+                            + "WHERE inventoryNumber = ?";
+                
                 PreparedStatement prepStat = con.prepareStatement(s);
-                prepStat.setInt(1, 1);
-                prepStat.setLong(2, userID);
-                prepStat.setLong(3, device_inventoryNumber);
+                prepStat.setInt(1, Devices.not_lent);
+                prepStat.setObject(2, nullLong);
+                prepStat.setString(3, notes);
+                //prepStat.setString(3, existingNotes + "; " + notes);
+                prepStat.setLong(4, device_inventoryNumber);
                 System.out.println(s);
                 prepStat.executeUpdate();
                 System.out.println("Device status was successfully changed");
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("setDevice_NotLent");
         } finally {
-                if (stmt != null) {
-                    try { 
-                        stmt.close();
-                    } catch (SQLException ex){
-                        System.out.println(ex);
-                    }
-                }  
-            } 
+            if (stmt != null) {
+                try { 
+                    stmt.close();
+                } catch (SQLException ex){
+                    System.out.println(ex);
+                }
+            }  
+        } 
     }
     
     /**
@@ -727,16 +797,50 @@ public class DatabaseHelper {
     }
     
     
+    public void updateRentals (int rentalID, LocalDate returnDate) {
+        
+        String table = "rentals";
+        stmt = null;
+        rs = null;
+        
+        String query = "SELECT * FROM " + table + 
+                        " WHERE rentalID = '" + rentalID + "';";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                String s = "UPDATE " + table + " SET returnDate= ? "
+                        + "WHERE rentalID= ?;";
+                PreparedStatement prepStat = con.prepareStatement(s);
+                prepStat.setString(1, returnDate.toString());
+                prepStat.setInt(2, rentalID);
+                prepStat.executeUpdate();
+                System.out.println("RentalDate was set successfully");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try { 
+                    stmt.close();
+                } catch (SQLException ex){
+                    System.out.println(ex);
+                }
+            }  
+        }
+    }
     
     
     
-/**
- *
- * @author linda
- */
+    /**
+     *
+     * @author linda
+     */
     public List<Rentallist> displayRentallist() {
        
-     ArrayList <Rentallist> Rentallist = new ArrayList <>();
+    ArrayList <Rentallist> Rentallist = new ArrayList <>();
         
         String query = "SELECT rentalID, rentalDate, administrators_adminID "
                 + ",rentals.users_UserID, rentals.devices_inventoryNumber, "
@@ -779,65 +883,4 @@ public class DatabaseHelper {
         }
         return Rentallist;
     }
-    
-    
-    public void insertNewReturn_DB (Return return_data) {
-        try{ 
-            stmt = con.createStatement();
-            String string = " update rentals set returnDate = " + return_data.getReturnDate() + " where devices_inventoryNumber = " + return_data.getInventoryNumber() + ";"
-            + " update devices set notes = concat(notes , ' | ' " + return_data.getNotes() + " ' ' where inventoryNumber = " + return_data.getInventoryNumber() + ";";
-                    
-            stmt.executeUpdate(string);
-            updateRentalStatus(return_data.getInventoryNumber());
-            
-            System.out.println("Datensatz erfolgreich hinzugefuegt");
-            
-        } catch(SQLException ex) {
-            System.out.println(ex);
-            System.out.println("Error with Database");
-        } finally {
-            if (stmt != null) {
-                try{
-                    stmt.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            } 
-        }
-    }
-    
-        public static void updateRentalStatus (int inventoryNumber) {
-        Statement stmt = null;
-        ResultSet rs = null;
-        
-        try {
-            stmt = con.createStatement();
-            String table = "devices";
-            rs = stmt.executeQuery("SELECT * FROM " + table + 
-                    " WHERE inventoryNumber= '" + inventoryNumber + "'");
-            
-            while(rs.next()){
-                String s = "UPDATE " + table + " SET status = ?"
-                        + "WHERE inventoryNumber= ?";
-                PreparedStatement prepStat = con.prepareStatement(s);
-                prepStat.setInt(1, 0);
-                prepStat.setInt(2, inventoryNumber);
-                System.out.println(s);
-                prepStat.executeUpdate();
-                System.out.println("Device status was successfully changed");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-                if (stmt != null) {
-                    try { 
-                        stmt.close();
-                    } catch (SQLException ex){
-                        System.out.println(ex);
-                    }
-                }  
-            } 
-    }
-    
-
 }
