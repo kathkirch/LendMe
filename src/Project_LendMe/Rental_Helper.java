@@ -63,6 +63,9 @@ public class Rental_Helper {
         this.jBsave = (JButton) panel.getComponent(19);
         this.jBcancel = (JButton) panel.getComponent(20);
         
+        
+        System.out.println(hp.getDevices().toString());
+        
     }
     
     /**
@@ -109,7 +112,12 @@ public class Rental_Helper {
         fillComboBox_Category(jCBinvnumber, "inventoryNumber");
         fillComboBox_Category(jCBmanufacturer, "manufacturer");
         
+        fillComboBox_Category(jCBname, "productName");
+        fillComboBox_Category(jCBinvnumber, "inventoryNumber");
+        fillComboBox_Category(jCBmanufacturer, "manufacturer");
+        
     }
+   
     
     /**
      * adds an listener for adminID-JComboBox and sets the adminFullName
@@ -139,14 +147,14 @@ public class Rental_Helper {
                 String selected = e.getItem().toString();
                 if ((!selected.isBlank() && val.isNumeric(selected))){
                     Users userToCheck = hp.checkUserID(selected);
-                    if (userToCheck != null && (!hp.isUserNew(selected))) {
+                    if (userToCheck != null && (!hp.isUserNew(Long.parseLong(selected)))) {
                         jTFfirstname.setText(userToCheck.getUserFirstName());
                         jTFlastname.setText(userToCheck.getUserLastName());
                         jTFphone.setText(userToCheck.getUserPhone());
                         jTFmail.setText(userToCheck.getUserEmail());
                         jCByear.setSelectedItem(userToCheck.getYear());
                         jCByear.setEnabled(false);
-                    } else if (hp.isUserNew(selected)) {
+                    } else if (hp.isUserNew(Long.parseLong(selected))) {
                         jTFfirstname.setText("");
                         jTFlastname.setText("");
                         jTFphone.setText("");
@@ -430,9 +438,11 @@ public class Rental_Helper {
             public void actionPerformed(ActionEvent e) {
                 
                 boolean validUser = true;
+                
+                String userID = jCBuserID.getEditor().getItem().toString();
+                long id = Long.parseLong(userID);
 
-                if (hp.isUserNew(jCBuserID.getEditor().getItem()
-                        .toString())){
+                if (hp.isUserNew(id)){
                     
                     Users user = createUser(jCBuserID, jTFfirstname, 
                                 jTFlastname, jTFphone, jTFmail, jCByear);
@@ -474,7 +484,7 @@ public class Rental_Helper {
         
         List <Object> itemArray = new ArrayList<>();
         String string;
-        int i;
+        long i;
         
         switch (itemCategory) {
             case "productName" :

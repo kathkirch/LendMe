@@ -13,7 +13,7 @@ import java.time.LocalDate;
  */
 public class Devices {
     
-    private int inventoryNumber;
+    private long inventoryNumber;
     private String manufacturer;
     private String productName;
     private String notes;
@@ -27,11 +27,11 @@ public class Devices {
     public Devices() {
     }
 
-    public int getInventoryNumber() {
+    public long getInventoryNumber() {
         return inventoryNumber;
     }
 
-    public void setInventoryNumber(int inventoryNumber) {
+    public void setInventoryNumber(long inventoryNumber) {
         this.inventoryNumber = inventoryNumber;
     }
 
