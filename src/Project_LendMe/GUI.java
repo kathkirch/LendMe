@@ -4,7 +4,7 @@
  */
 package Project_LendMe;
 
-import javax.swing.UIManager;
+
 import javax.swing.UnsupportedLookAndFeelException;
 
 
@@ -1179,31 +1179,18 @@ public class GUI extends javax.swing.JFrame {
         
         Rental_Helper rh = new Rental_Helper(newrental_panel);
         
-        
-//        Component [] comps = newrental_panel.getComponents();
-//        for (Component field : comps){
-//            if (field instanceof JComboBox){
-//                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
-//                    System.out.println("u do");
-//                    ((JComboBox) field).removeActionListener(al);
-//                }
-//            }
-//        }
-        
-        
        
-        
-//        rh.listenForSelectionPN();
-//        rh.listenForSelectionM();
-//        rh.listenForSelectionIN();
-//        
-//        rh.listenForSelectionUID();
-//        rh.listenForSelectionAID();
-        
         rh.fillBoxes();
         
-//        rh.cancelButton();  
-//        rh.saveNewRental();
+        rh.listenForSelectionPN();
+        rh.listenForSelectionM();
+        rh.listenForSelectionIN();
+        
+        rh.listenForSelectionUID();
+        rh.listenForSelectionAID();
+        
+        rh.cancelButton();
+        rh.saveNewRental();
         
     }//GEN-LAST:event_newrentalActionPerformed
 

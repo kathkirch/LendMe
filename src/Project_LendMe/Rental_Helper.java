@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import com.raven.datechooser.SelectedDate;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -65,15 +64,7 @@ public final class Rental_Helper {
         this.jBsave = (JButton) panel.getComponent(19);
         this.jBcancel = (JButton) panel.getComponent(20);
         
-        listenForSelectionPN();
-        listenForSelectionM();
-        listenForSelectionIN();
         
-        listenForSelectionUID();
-        listenForSelectionAID();
-        
-        cancelButton();
-        saveNewRental();
         
     }
     
@@ -101,8 +92,6 @@ public final class Rental_Helper {
      * suitable items
      */
     public void fillBoxes (){
-        
-        System.out.println("fillBoxes");
         
         fillComboBox_Category(jCBname, "productName");
         fillComboBox_Category(jCBinvnumber, "inventoryNumber");
@@ -211,7 +200,8 @@ public final class Rental_Helper {
         jCBname.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 
-                if (! e.getItem().equals(lastItem)){
+                if (!e.getItem().equals(lastItem)){
+                    
                     if (e.getStateChange() == ItemEvent.SELECTED
                             && (e.getStateChange() != ItemEvent.ITEM_LAST)){
 
@@ -253,7 +243,7 @@ public final class Rental_Helper {
         jCBmanufacturer.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 
-                if (!e.equals(lastItem)){
+                if ( !e.getItem().equals(lastItem)){
                     
                     if (e.getStateChange() == ItemEvent.SELECTED
                         && e.getStateChange() != ItemEvent.ITEM_LAST){
@@ -291,9 +281,13 @@ public final class Rental_Helper {
      * selection for inventoryNumber
      */
     public void listenForSelectionIN () {
+        
         jCBinvnumber.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
-                if (e.getItem().equals(lastItem)) {
+                
+                if ( !e.getItem().equals(lastItem) && 
+                        jCBmanufacturer.getSelectedItem().equals(lastItem)
+                        && jCBname.getSelectedItem().equals(lastItem)) {
                 
                     if (e.getStateChange() == ItemEvent.SELECTED
                         && e.getStateChange() != ItemEvent.ITEM_LAST){
@@ -326,24 +320,24 @@ public final class Rental_Helper {
         }); 
     }
     
-    public void removeListener() {
-        
-        Component [] comps = panel.getComponents();
-        for (Component field : comps){
-            if (field instanceof JComboBox){
-                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
-                    ((JComboBox) field).removeActionListener(al);
-                }
-            }
-        }
-    }
+//    public void removeListener() {
+//        
+//        Component [] comps = panel.getComponents();
+//        for (Component field : comps){
+//            if (field instanceof JComboBox){
+//                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
+//                    ((JComboBox) field).removeActionListener(al);
+//                }
+//            }
+//        }
+//    }
     
     /**
      * adds an listener for the cancel-JButton and calls the deleteAll() Method
      * if button is clicked
      */
     public void cancelButton () {
-        System.out.println("cancelButton");
+        
         jBcancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent aev) {
@@ -357,12 +351,6 @@ public final class Rental_Helper {
      * JTextFields and clears all the selections in the JComboBoxes 
      */
     public void deleteAll(){
-        
-        System.out.println("deleteAll");
-        
-        jCBname.setSelectedIndex(jCBname.getItemCount()-1);
-        jCBmanufacturer.setSelectedIndex(jCBmanufacturer.getItemCount() -1);
-        jCBinvnumber.setSelectedIndex(jCBinvnumber.getItemCount() -1);
         
         jCBname.removeAllItems();
         jCBmanufacturer.removeAllItems();
@@ -571,12 +559,6 @@ public final class Rental_Helper {
                     itemArray.add(String.valueOf(i));
                 }
                 return itemArray;
-//            case "users_UserID" :
-//                for (Devices dev : list){
-//                    i = dev.getUsers_userID();
-//                    itemArray.add(String.valueOf(i));
-//                }
-//                return itemArray;
             default :
                 return itemArray;  
         } 

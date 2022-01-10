@@ -186,6 +186,8 @@ public class DatabaseHelper {
      * @param manufacturer as a String needed to search in Database
      * @return Devices Objects as a List with the given manufacturer
      */
+    
+    //fehler
     public List <Devices> getItemByManufacturer(String manufacturer){
         
         List <Devices> items = new ArrayList <>();
@@ -199,7 +201,7 @@ public class DatabaseHelper {
             
             while (rs.next()){
                 String productName = rs.getString("productName");
-                int inventoryNumber = rs.getInt("inventoryNumber");
+                long inventoryNumber = rs.getInt("inventoryNumber");
                 
                 Devices d = new Devices();
                 d.setProductName(productName);
@@ -231,7 +233,7 @@ public class DatabaseHelper {
         List <Devices> items = new ArrayList <>();
         String query = "SELECT productName, manufacturer"
                         + " FROM devices WHERE inventoryNumber=" + "'" 
-                        + Integer.parseInt(invNumber)
+                        + Long.parseLong(invNumber)
                         + "';";
                 
         try {
@@ -276,7 +278,7 @@ public class DatabaseHelper {
             rs = stmt.executeQuery(query);
             
             while (rs.next()){
-                int userID = rs.getInt("userID");
+                long userID = rs.getInt("userID");
                 userIDs.add(String.valueOf(userID));
             }
         }catch (SQLException ex){
