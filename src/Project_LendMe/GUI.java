@@ -4,8 +4,8 @@
  */
 package Project_LendMe;
 
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 
 
@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  *
  * @author Anja, Katharina
  */
-public class GUI extends javax.swing.JFrame implements Runnable {
+public class GUI extends javax.swing.JFrame {
     
     private final DatabaseHelper hp = new DatabaseHelper();
     
@@ -23,10 +23,32 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     */
     public GUI() {
         
+        updateLAF();
+        
         initComponents();
-        System.out.println("lululu " + return_panel.getComponentZOrder(re_userName));
-       
+        
     }
+    
+    private void updateLAF(){ //Methode um Look and Feel einzustellen.
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (UnsupportedLookAndFeelException ue){ 
+                System.err.println(ue.toString());
+        } catch (ClassNotFoundException ce){
+                System.err.println(ce.toString());
+        } catch (InstantiationException ie){
+                System.err.println(ie.toString());
+        } catch (IllegalAccessException iae){
+                System.err.println(iae.toString());
+        }
+    }
+    
+    
      
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1143,26 +1165,45 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
         
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
-               
+         
+        
         layerpane.removeAll();
         layerpane.add(newrental_panel);
         layerpane.repaint();
         layerpane.revalidate();
         
-        
         /**
         *
         * @author Katharina
         */
+        
         Rental_Helper rh = new Rental_Helper(newrental_panel);
+        
+        
+//        Component [] comps = newrental_panel.getComponents();
+//        for (Component field : comps){
+//            if (field instanceof JComboBox){
+//                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
+//                    System.out.println("u do");
+//                    ((JComboBox) field).removeActionListener(al);
+//                }
+//            }
+//        }
+        
+        
+       
+        
+//        rh.listenForSelectionPN();
+//        rh.listenForSelectionM();
+//        rh.listenForSelectionIN();
+//        
+//        rh.listenForSelectionUID();
+//        rh.listenForSelectionAID();
+        
         rh.fillBoxes();
-        rh.listenForSelectionAID();
-        rh.listenForSelectionPN();
-        rh.listenForSelectionM();
-        rh.listenForSelectionIN();
-        rh.listenForSelectionUID();
-        rh.cancelButton();  
-        rh.saveNewRental();
+        
+//        rh.cancelButton();  
+//        rh.saveNewRental();
         
     }//GEN-LAST:event_newrentalActionPerformed
 
@@ -1287,13 +1328,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
     }//GEN-LAST:event_btClear_archiveActionPerformed
 
-    public JPanel getReturn_panel() {
-        return return_panel;
-    }
     
-    public JLayeredPane getLayerpane() {
-        return layerpane;
-    }
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IMEInumber_newdevice;
@@ -1412,30 +1449,5 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     // End of variables declaration//GEN-END:variables
 
     
-    /**
-    *
-    * @author Katharina
-    */
-    @Override
-    public void run() {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-        new GUI().setVisible(true);
-    }
+   
 }
