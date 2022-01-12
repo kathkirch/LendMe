@@ -35,7 +35,8 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
     private final DatabaseHelper rlH = new DatabaseHelper();
     
     public JButton returnBT;
-    
+    public JLayeredPane lp;
+    public JPanel home;
     public static int RETURN_ID;
     public static String RETURN_PRODUCTNAME;
     public static String RETURN_MANUFACTURER;
@@ -45,7 +46,7 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
     public Rentallist_Helper(JTable table, JScrollPane js, JComboBox box, 
                 JRadioButton ascRadio, JRadioButton descRadio, 
                 JTextField filterTF, JButton filterBT, JButton clearBT, 
-                JButton returnBT) {
+                JButton returnBT, JLayeredPane lp, JPanel home) {
         super(table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
         
         this.returnBT = returnBT;
@@ -55,6 +56,8 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
                                 "Hersteller","Verliehen an" ,"Verliehene Tage"};
         
+        this.lp = lp;
+        this.home = home;
         
     }
     
@@ -156,6 +159,14 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         });
     }
     
+    public static void backToStart (JLayeredPane layeredpane, JPanel home_panel) {
+        layeredpane.removeAll();
+        layeredpane.add(home_panel);
+        layeredpane.repaint();
+        layeredpane.revalidate();
+
+    }
+    
     
     /**
      * adds an listener for radioButton asc and desc, depending on selection
@@ -225,6 +236,8 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         });
     }
     
+    
+    
     public void newReturn (JLayeredPane layeredpane, JPanel return_panel) {
         returnBT.addActionListener(new ActionListener() {
             @Override
@@ -250,10 +263,12 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
                     layeredpane.repaint();
                     layeredpane.revalidate();
                     
-                    ReturnHelper returnHelper = new ReturnHelper(return_panel);
+                    ReturnHelper returnHelper = new ReturnHelper(return_panel, lp, home);
                     returnHelper.notEditable();
                     returnHelper.showData();
+                    
                     returnHelper.saveReturn();
+                    returnHelper.cancel();
                     
                 }
             }

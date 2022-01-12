@@ -16,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -507,7 +506,7 @@ public final class Rental_Helper {
             
             if (inventoryNumb.isBlank() || userID.isBlank() || adminID.isBlank()){
                 JOptionPane.showMessageDialog(null, "Ein oder mehrere Felder sind leer!"
-                        + " Bitte ausfuellen!");
+                        + " Bitte ausfüllen!");
             } else {
                 Rentals rental = new Rentals(date, Long.parseLong(inventoryNumb),
                             Integer.parseInt(adminID),
@@ -521,7 +520,7 @@ public final class Rental_Helper {
                 } catch (UserException ex){
                     System.out.println(ex);
                     System.out.println("createNewRental in Rental_Helper");
-                    JOptionPane.showMessageDialog(null, "Ueberpruefen der Eingabe notwendig!");
+                    JOptionPane.showMessageDialog(null, "Überprüfen der Eingabe notwendig!");
                 }
             }
             

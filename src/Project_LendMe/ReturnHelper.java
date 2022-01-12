@@ -10,19 +10,14 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-
-
-
 
 /**
  *
@@ -43,16 +38,18 @@ public class ReturnHelper {
     JButton rSave;
     JButton rCancel;
     JRadioButton yesBT;
-    JScrollPane scrollPane;
-    
+    JLayeredPane lp;
+    JPanel home;
+ 
     private final static DatabaseHelper dbH = new DatabaseHelper();
     
     List <Devices> devices = dbH.getDevices();
+   
+    
 
-    public ReturnHelper(JPanel panel) {
+    public ReturnHelper(JPanel panel, JLayeredPane lp, JPanel home) {
         
         this.panel = panel;
-        
         this.productname = (JTextField) panel.getComponent(12);
         this.manufacturer = (JTextField) panel.getComponent(11);
         this.inventoryNumber = (JTextField) panel.getComponent(13);
@@ -65,7 +62,8 @@ public class ReturnHelper {
         this.yesBT = (JRadioButton) panel.getComponent(16);
         this.rSave = (JButton) panel.getComponent(17);
         this.rCancel = (JButton) panel.getComponent(18);
-        
+        this.lp = lp;
+        this.home = home;
     }
     
     public void notEditable () {
@@ -97,7 +95,7 @@ public class ReturnHelper {
         
         for (Devices dev : devices) {
             if (dev.getInventoryNumber() == Rentallist_Helper.RETURN_INVNUMBER){
-                System.out.println("ttt?");
+                
                 notes = dev.getNotes();
             }
         }
@@ -116,7 +114,23 @@ public class ReturnHelper {
         });
     }
     
+    public void cancel () {
+        rCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                backToStart();
+            }
+        });
+    }
     
+    public void backToStart () {
+        
+        lp.removeAll();
+        lp.add(home);
+        lp.repaint();
+        lp.revalidate();
+        
+    }
     
     
     public void createNewReturn (){
@@ -129,17 +143,28 @@ public class ReturnHelper {
                                 selectedDate.getMonth(),
                                 selectedDate.getDay()); 
         
-        String notes = rNotes.getText().toString();
+        String notes = rNotes.getText();
         
-        long invNumb = Long.valueOf(inventoryNumber.getText().toString());
+        long invNumb = Long.valueOf(inventoryNumber.getText());
         
         if (yesBT.isSelected()) {
-            dbH.updateRentals(returnID, returnDate);
-            dbH.setDevice_NotLent(invNumb, notes);
+            
+            try {
+                dbH.updateRentals(returnID, returnDate);
+                dbH.setDevice_NotLent(invNumb, notes);
+                JOptionPane.showMessageDialog(null, "Gerätestatus aktualisert"
+                        + "\n Rückgabe gespeichert");
+                backToStart();
+                
+            } catch (UserException ex){
+                JOptionPane.showMessageDialog(null, "Fehler bei Rückgabe \n"
+                        + "Eingabe prüfen");
+                System.out.println(ex + "\n createNewReturn in ReturnHelper");
+            }
+            
         } else {
           JOptionPane.showMessageDialog(null, 
                   "Bitte Gerät auf Werkseinstellungen zurücksetzen!");
         }
-    }
-    
+    } 
 }

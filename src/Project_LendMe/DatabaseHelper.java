@@ -125,6 +125,7 @@ public class DatabaseHelper {
                 
                 allRentals.add(rental);
             }
+            
         }catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("readRentals");
@@ -597,7 +598,8 @@ public class DatabaseHelper {
     
     
     
-    public void setDevice_NotLent(long device_inventoryNumber, String notes) {
+    public void setDevice_NotLent (long device_inventoryNumber, String notes) 
+            throws UserException {
         
         stmt = null;
         rs = null;
@@ -624,7 +626,6 @@ public class DatabaseHelper {
                 prepStat.setInt(1, Devices.not_lent);
                 prepStat.setObject(2, nullLong);
                 prepStat.setString(3, notes);
-                //prepStat.setString(3, existingNotes + "; " + notes);
                 prepStat.setLong(4, device_inventoryNumber);
                 System.out.println(s);
                 prepStat.executeUpdate();
@@ -634,6 +635,7 @@ public class DatabaseHelper {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("setDevice_NotLent");
+            throw new UserException();
         } finally {
             if (stmt != null) {
                 try { 
@@ -790,7 +792,8 @@ public class DatabaseHelper {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, 
+                    null, ex);
         } finally {
             if (stmt != null) {
                 try { 
@@ -804,7 +807,8 @@ public class DatabaseHelper {
     }
     
     
-    public void updateRentals (int rentalID, LocalDate returnDate) {
+    public void updateRentals (int rentalID, LocalDate returnDate) 
+            throws UserException {
         
         String table = "rentals";
         stmt = null;
@@ -828,6 +832,7 @@ public class DatabaseHelper {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+            throw new UserException();
         } finally {
             if (stmt != null) {
                 try { 

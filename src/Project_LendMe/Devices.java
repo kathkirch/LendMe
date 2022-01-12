@@ -19,7 +19,7 @@ public class Devices implements Rentable {
     private String notes;
     private String location;
     private long imei;
-    private int users_userID;
+    private long users_userID;
     private double aquisitionValue;
     private LocalDate aquistionDate;
     private int status;
@@ -81,11 +81,11 @@ public class Devices implements Rentable {
         this.imei = imei;
     }
 
-    public int getUsers_userID() {
+    public long getUsers_userID() {
         return users_userID;
     }
 
-    public void setUsers_userID(int users_userID) {
+    public void setUsers_userID(long users_userID) {
         this.users_userID = users_userID;
     }
 
