@@ -4,15 +4,16 @@
  */
 package Project_LendMe;
 
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
+import javax.swing.UnsupportedLookAndFeelException;
+
 
 
 /**
  *
  * @author Anja, Katharina
  */
-public class GUI extends javax.swing.JFrame implements Runnable {
+public class GUI extends javax.swing.JFrame {
     
     private final DatabaseHelper hp = new DatabaseHelper();
     
@@ -22,9 +23,32 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     */
     public GUI() {
         
+        updateLAF();
         initComponents();
         
     }
+    
+    private void updateLAF(){ //Methode um Look and Feel einzustellen.
+        
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (UnsupportedLookAndFeelException ue){ 
+                System.err.println(ue.toString());
+        } catch (ClassNotFoundException ce){
+                System.err.println(ce.toString());
+        } catch (InstantiationException ie){
+                System.err.println(ie.toString());
+        } catch (IllegalAccessException iae){
+                System.err.println(iae.toString());
+        }
+    }
+
+    
      
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,6 +59,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         toppenal = new javax.swing.JPanel();
         parentpanel = new javax.swing.JPanel();
         sidepanel = new javax.swing.JPanel();
@@ -89,15 +114,12 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         jScrollPane4 = new javax.swing.JScrollPane();
         inventory_table = new javax.swing.JTable();
         return_panel = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
         re_notes = new javax.swing.JTextArea();
         productname_return = new javax.swing.JLabel();
         re_productname = new javax.swing.JTextField();
         return_title = new javax.swing.JLabel();
         returndate = new com.raven.datechooser.DateChooser();
         yes = new javax.swing.JRadioButton();
-        save_return = new javax.swing.JToggleButton();
-        cancel_return = new javax.swing.JToggleButton();
         re_manufacturer = new javax.swing.JTextField();
         re_inventroyNumber = new javax.swing.JTextField();
         re_UserID = new javax.swing.JTextField();
@@ -113,6 +135,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         re_userName = new javax.swing.JTextField();
         re_userPhone = new javax.swing.JTextField();
         re_userMail = new javax.swing.JTextField();
+        save_return = new javax.swing.JButton();
+        cancel_return = new javax.swing.JButton();
         newdevice_panel = new javax.swing.JPanel();
         newdevice_title = new javax.swing.JLabel();
         devicename_newdevice = new javax.swing.JLabel();
@@ -148,6 +172,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         btClear_archive = new javax.swing.JButton();
         archive_ScrollPane = new javax.swing.JScrollPane();
         archive_table = new javax.swing.JTable();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(826, 878));
@@ -274,7 +300,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         );
         home_panelLayout.setVerticalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 812, Short.MAX_VALUE)
+            .addGap(0, 879, Short.MAX_VALUE)
         );
 
         layerpane.add(home_panel, "card9");
@@ -446,7 +472,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancel_newrental)
                     .addComponent(save_newrental))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         layerpane.add(newrental_panel, "card2");
@@ -470,11 +496,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         return_button.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         return_button.setText("Geräterückgabe");
-        return_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                return_buttonActionPerformed(evt);
-            }
-        });
 
         filterString_rentallist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filterString_rentallist.setText("Filern nach:");
@@ -529,7 +550,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rentallist_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(return_button)
                     .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                     .addGroup(rentallist_panelLayout.createSequentialGroup()
@@ -551,13 +572,13 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                         .addGap(6, 6, 6)
                         .addComponent(btClear_rentals, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(rentallist_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                .addGap(42, 42, 42))
         );
         rentallist_panelLayout.setVerticalGroup(
             rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rentallist_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(rentallist_title, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(rentallist_title, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addGap(10, 10, 10)
                 .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(rentallist_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -573,10 +594,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(filterText_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterString_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                 .addGap(21, 21, 21)
                 .addComponent(return_button)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
         );
 
         layerpane.add(rentallist_panel, "card3");
@@ -641,7 +662,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(searchfilter_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         layerpane.add(inventory_panel, "card5");
@@ -651,7 +672,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         re_notes.setColumns(20);
         re_notes.setRows(5);
-        jScrollPane5.setViewportView(re_notes);
 
         productname_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         productname_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -669,17 +689,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         yes.setBackground(new java.awt.Color(220, 229, 211));
         yes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         yes.setText("Ja");
-
-        save_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        save_return.setText("Speichern");
-        save_return.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save_returnActionPerformed(evt);
-            }
-        });
-
-        cancel_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cancel_return.setText("Abbrechen");
 
         re_manufacturer.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
@@ -723,6 +732,12 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         userMail_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         userMail_return.setText("E-Mail");
 
+        save_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        save_return.setText("Speichern");
+
+        cancel_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cancel_return.setText("Abbrechen");
+
         javax.swing.GroupLayout return_panelLayout = new javax.swing.GroupLayout(return_panel);
         return_panel.setLayout(return_panelLayout);
         return_panelLayout.setHorizontalGroup(
@@ -753,14 +768,14 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                                     .addComponent(re_inventroyNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                                     .addComponent(re_UserID, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                                     .addComponent(returndate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                                     .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(return_panelLayout.createSequentialGroup()
                                         .addComponent(save_return, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)
+                                        .addGap(41, 41, 41)
                                         .addComponent(cancel_return, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(re_userName, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
-                                .addComponent(re_userMail, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(re_userMail, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(re_notes, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(userName_return, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -801,11 +816,14 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(returndate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(returnDate_return))
-                .addGap(10, 10, 10)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(notes_return))
-                .addGap(10, 10, 10)
+                    .addGroup(return_panelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(notes_return))
+                    .addGroup(return_panelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(re_notes, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(yes)
                     .addComponent(factorysettings_return))
@@ -813,7 +831,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(save_return)
                     .addComponent(cancel_return))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         layerpane.add(return_panel, "card6");
@@ -1036,11 +1054,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         btClear_archive.setMaximumSize(new java.awt.Dimension(65, 30));
         btClear_archive.setMinimumSize(new java.awt.Dimension(65, 30));
         btClear_archive.setPreferredSize(new java.awt.Dimension(65, 30));
-        btClear_archive.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btClear_archiveActionPerformed(evt);
-            }
-        });
 
         archive_ScrollPane.setBackground(new java.awt.Color(220, 229, 211));
         archive_ScrollPane.setRequestFocusEnabled(false);
@@ -1080,21 +1093,19 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                                 .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(searchfilter_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(filterText_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6)
                                 .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(archive_panelLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
                                         .addComponent(asc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, 0)
                                         .addComponent(desc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(archive_panelLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(filterButton_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(filterButton_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(6, 6, 6)
                                 .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(archive_panelLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15)))
+                                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)))
+                        .addGap(36, 36, 36)))
                 .addContainerGap())
         );
         archive_panelLayout.setVerticalGroup(
@@ -1115,7 +1126,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(filterButton_archive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                 .addGap(100, 100, 100))
         );
 
@@ -1131,7 +1142,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         );
         startpageLayout.setVerticalGroup(
             startpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollpane_startpage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollpane_startpage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
         );
 
         parentpanel.add(startpage, java.awt.BorderLayout.CENTER);
@@ -1144,25 +1155,30 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
         
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
-               
+         
+        
         layerpane.removeAll();
         layerpane.add(newrental_panel);
         layerpane.repaint();
         layerpane.revalidate();
         
-        
         /**
         *
         * @author Katharina
         */
+        
         Rental_Helper rh = new Rental_Helper(newrental_panel);
+        
+       
         rh.fillBoxes();
-        rh.listenForSelectionAID();
+        
         rh.listenForSelectionPN();
         rh.listenForSelectionM();
         rh.listenForSelectionIN();
         rh.listenForSelectionUID();
-        rh.cancelButton();  
+        rh.listenForSelectionAID();
+        
+        rh.cancelButton();
         rh.saveNewRental();
         
     }//GEN-LAST:event_newrentalActionPerformed
@@ -1175,6 +1191,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.revalidate();
         
         
+        
         /**
         *
         * @author Katharina
@@ -1182,7 +1199,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         Rentallist_Helper rListHelper = new Rentallist_Helper (rentallist_table,
                     rental_ScrollPane, searchfilter_rentallist, asc_rentallist,
                     desc_rentallist, filterText_rentallist, 
-                    filterbutton_rentallist, btClear_rentals);
+                    filterbutton_rentallist, btClear_rentals, return_button, 
+                    layerpane, home_panel);
+        
         
         MyTableHelper.allRentals = null;
         rListHelper.populateTable();
@@ -1190,6 +1209,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         rListHelper.filterTable();
         rListHelper.sortTable();
         rListHelper.clearSelection();
+        rListHelper.newReturn(layerpane, return_panel);
     }//GEN-LAST:event_rentallistActionPerformed
 
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
@@ -1221,6 +1241,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         layerpane.add(inventory_panel);
         layerpane.repaint();
         layerpane.revalidate();
+        
     }//GEN-LAST:event_inventoryActionPerformed
 
     
@@ -1251,48 +1272,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         System.out.println("Connection to Database closed");
     }//GEN-LAST:event_formWindowClosing
 
-    private void save_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_returnActionPerformed
-        //DatabaseHelper dh = new DatabaseHelper();
-        
-        //dh.insertNewReturn_DB();
-        
-        
-        if (!yes.isEnabled()){
-            JOptionPane.showMessageDialog(null, "Bitte Gerät auf Werkseinstellungen zurücksetzen!");
-        } else {  }
-        
-    }//GEN-LAST:event_save_returnActionPerformed
-
-    private void return_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_buttonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) rentallist_table.getModel();
-
-        int index = rentallist_table.getSelectedRow();
-
-        String ret_productname = model.getValueAt(index, 2).toString();
-        String ret_manufacturer = model.getValueAt(index, 3).toString();
-        String ret_user = model.getValueAt(index, 4).toString();
-        String ret_inventorynumber = model.getValueAt(index, 1).toString();
-
-        re_productname.setText(ret_productname);
-        re_manufacturer.setText(ret_manufacturer);
-        re_inventroyNumber.setText(ret_user);
-        re_UserID.setText(ret_inventorynumber);
-
-        re_productname.setEditable(false);
-        re_manufacturer.setEditable(false);
-        re_inventroyNumber.setEditable(false);
-        re_UserID.setEditable(false);
-
-        layerpane.removeAll();
-        layerpane.add(return_panel);
-        layerpane.repaint();
-        layerpane.revalidate();
-    }//GEN-LAST:event_return_buttonActionPerformed
-
-    private void btClear_archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClear_archiveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btClear_archiveActionPerformed
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IMEInumber_newdevice;
     private com.raven.datechooser.DateChooser acquisitionDate;
@@ -1314,7 +1293,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton btClear_rentals;
     private javax.swing.JToggleButton cancel_newdevice;
     private javax.swing.JButton cancel_newrental;
-    private javax.swing.JToggleButton cancel_return;
+    private javax.swing.JButton cancel_return;
     private javax.swing.JLabel date;
     private javax.swing.JRadioButton desc_archive;
     private javax.swing.JRadioButton desc_rentallist;
@@ -1340,9 +1319,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel inventorynumber_newdevice;
     private javax.swing.JComboBox<String> inventorynumber_newrental;
     private javax.swing.JLabel inventorynumber_return;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JTextField location;
     private javax.swing.JTextField manufacturer;
@@ -1387,7 +1366,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel room_newdevice;
     private javax.swing.JToggleButton save_newdevice;
     private javax.swing.JButton save_newrental;
-    private javax.swing.JToggleButton save_return;
+    private javax.swing.JButton save_return;
     private javax.swing.JScrollPane scrollpane_startpage;
     private javax.swing.JLabel search_options_archive;
     private javax.swing.JComboBox<String> searchfilter_archive;
@@ -1409,31 +1388,5 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JRadioButton yes;
     // End of variables declaration//GEN-END:variables
 
-    
-    /**
-    *
-    * @author Katharina
-    */
-    @Override
-    public void run() {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-        new GUI().setVisible(true);
-    }
+
 }

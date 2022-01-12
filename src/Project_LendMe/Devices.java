@@ -11,22 +11,28 @@ import java.time.LocalDate;
  *
  * @author Katharina
  */
-public class Devices {
+public class Devices implements Rentable {
     
     private long inventoryNumber;
     private String manufacturer;
     private String productName;
     private String notes;
     private String location;
-    private int imei;
-    private int users_userID;
+    private long imei;
+    private long users_userID;
     private double aquisitionValue;
     private LocalDate aquistionDate;
+    private int status;
     
 
     public Devices() {
+    
     }
 
+    public int getStatus() {
+        return status;
+    }
+    
     public long getInventoryNumber() {
         return inventoryNumber;
     }
@@ -67,19 +73,19 @@ public class Devices {
         this.location = location;
     }
 
-    public int getImei() {
+    public long getImei() {
         return imei;
     }
 
-    public void setImei(int imei) {
+    public void setImei(long imei) {
         this.imei = imei;
     }
 
-    public int getUsers_userID() {
+    public long getUsers_userID() {
         return users_userID;
     }
 
-    public void setUsers_userID(int users_userID) {
+    public void setUsers_userID(long users_userID) {
         this.users_userID = users_userID;
     }
 
@@ -98,4 +104,18 @@ public class Devices {
     public void setAquistionDate(LocalDate aquistionDate) {
         this.aquistionDate = aquistionDate;
     }
+    
+    
+}   
+
+interface Rentable {
+
+    static final int lent = 1;
+
+    static final int not_lent = 0;
+
+  
 }
+    
+
+
