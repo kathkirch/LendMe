@@ -1185,7 +1185,6 @@ public class GUI extends javax.swing.JFrame {
         rh.listenForSelectionPN();
         rh.listenForSelectionM();
         rh.listenForSelectionIN();
-        
         rh.listenForSelectionUID();
         rh.listenForSelectionAID();
         

@@ -29,11 +29,15 @@ public class Validator {
      */
     public boolean isNumeric(String str) { 
         try {  
-            Integer.parseInt(str);  
+            Long.parseLong(str);  
             return true;
         } catch(NumberFormatException e){  
             return false;  
         }  
+    }
+    
+    public boolean isAlphaNumeric (String str){
+        return str != null && str.matches("^[a-zA-Z0-9 ]*$");
     }
     
     /**

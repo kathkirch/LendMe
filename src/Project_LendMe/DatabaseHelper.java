@@ -151,7 +151,7 @@ public class DatabaseHelper {
         List <Devices> items = new ArrayList <>();
         String query = "SELECT manufacturer, inventoryNumber"
                         + " FROM devices WHERE productName=" + "'" + productName
-                        + "';";
+                        + "' AND status=0;";
                 
         try {
             stmt = con.createStatement();
@@ -193,7 +193,7 @@ public class DatabaseHelper {
         List <Devices> items = new ArrayList <>();
         String query = "SELECT productName, inventoryNumber"
                         + " FROM devices WHERE manufacturer=" + "'" + manufacturer
-                        + "';";
+                        + "' AND status=0;";
                 
         try {
             stmt = con.createStatement();
@@ -201,7 +201,7 @@ public class DatabaseHelper {
             
             while (rs.next()){
                 String productName = rs.getString("productName");
-                long inventoryNumber = rs.getInt("inventoryNumber");
+                long inventoryNumber = rs.getLong("inventoryNumber");
                 
                 Devices d = new Devices();
                 d.setProductName(productName);
@@ -234,7 +234,7 @@ public class DatabaseHelper {
         String query = "SELECT productName, manufacturer"
                         + " FROM devices WHERE inventoryNumber=" + "'" 
                         + Long.parseLong(invNumber)
-                        + "';";
+                        + "' AND status=0;";
                 
         try {
             stmt = con.createStatement();
@@ -444,7 +444,7 @@ public class DatabaseHelper {
      * @param user as a Users Object is needed to insert 
      * the User-Object with it's Attributes as Data in the Database
      */
-    public void insertNewUser(Users user){
+    public void insertNewUser(Users user) throws UserException {
         
         if (user != null){
             try{
@@ -465,6 +465,7 @@ public class DatabaseHelper {
             }catch(SQLException ex) {
                 System.out.println(ex);
                 System.out.println("insertNewUser");
+                throw new UserException();
             } finally {
                 if (stmt != null) {
                     try{
@@ -513,8 +514,10 @@ public class DatabaseHelper {
      *
      * @param rental as a Rentals Object is needed to insert 
      * the Rental-Object with it's Attributes as Data in the Database
+     * @throws Project_LendMe.UserException
+     * 
      */
-    public void insertNewRental_DB(Rentals rental) {
+    public void insertNewRental_DB(Rentals rental) throws UserException{
         try{ 
             stmt = con.createStatement();
             String string = "insert into rentals (rentalDate, "
@@ -533,6 +536,8 @@ public class DatabaseHelper {
         } catch(SQLException ex) {
             System.out.println(ex);
             System.out.println("insertNewRental_DB");
+            throw new UserException();
+            
         } finally {
             if (stmt != null) {
                 try{

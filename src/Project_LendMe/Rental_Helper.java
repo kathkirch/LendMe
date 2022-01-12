@@ -11,10 +11,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import com.raven.datechooser.SelectedDate;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -45,6 +47,8 @@ public final class Rental_Helper {
     private final Validator val = new Validator();
     private final String lastItem_e = "";
     private final String lastItem = "";
+    private static final String USER_CHANGE = "user_change";
+    private static final String PROGRAM_CHANGE = "program_change";
    
     public Rental_Helper(JPanel panel) {
         
@@ -63,8 +67,6 @@ public final class Rental_Helper {
         this.dcDate = (DateChooser) panel.getComponent(17);
         this.jBsave = (JButton) panel.getComponent(19);
         this.jBcancel = (JButton) panel.getComponent(20);
-        
-        
         
     }
     
@@ -116,6 +118,11 @@ public final class Rental_Helper {
         jCBadminID.addItem(lastItem_e);
         jCBadminID.setSelectedIndex(jCBadminID.getItemCount()-1);
         AutoCompleteDecorator.decorate(jCBadminID);
+        
+        
+        jCBname.setActionCommand(PROGRAM_CHANGE);
+        jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
+        jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
         
     }
    
@@ -200,32 +207,42 @@ public final class Rental_Helper {
         jCBname.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 
-                if (!e.getItem().equals(lastItem)){
+                String selected = "";
+                
+                if (e.getStateChange() == ItemEvent.SELECTED &&
+                       (  !jCBname.getSelectedItem().equals(lastItem))) {
                     
-                    if (e.getStateChange() == ItemEvent.SELECTED
-                            && (e.getStateChange() != ItemEvent.ITEM_LAST)){
+                    selected = e.getItem().toString();
+                
+                    if ( !e.getItem().equals(lastItem) && 
+                        (!jCBmanufacturer.getActionCommand().equals(USER_CHANGE)) &&
+                        (!jCBinvnumber.getActionCommand().equals(USER_CHANGE))) {
 
-                        String selected = e.getItem().toString(); 
+                        jCBname.setActionCommand(USER_CHANGE);
+                    }
+                }
+                if ( ! jCBname.getActionCommand().equals(PROGRAM_CHANGE)){
+                    if (jCBname.getItemCount() == 0 ){
+                        fillComboBox_Category(jCBname, "productName");
 
-                        if (jCBname.getItemCount() == 0 ){
-                            fillComboBox_Category(jCBname, "productName");
-                        }
+                    }
 
-                        if (!selected.isBlank() && val.isAlpha(selected)){
+                    if (!selected.isBlank() && val.isAlphaNumeric(selected)){
 
-                            List <Devices> list = hp.getItemByProductName(selected);
-                            String [] categories = new String [] {"manufacturer", "inventoryNumber"};
+                        List <Devices> list = hp.getItemByProductName(selected);
+                        String [] categories = new String [] {"manufacturer", "inventoryNumber"};
 
-                            for (int i = 0; i < categories.length; i++) {
-                                List <Object> oList = makeListForCategory(list, categories[i]);
-                                if (categories[i].equalsIgnoreCase("manufacturer")){
-                                    jCBmanufacturer.setModel
+                        for (int i = 0; i < categories.length; i++) {
+                            List <Object> oList = makeListForCategory(list, categories[i]);
+                            if (categories[i].equalsIgnoreCase("manufacturer")){
+                                jCBmanufacturer.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                                }
-                                if (categories[i].equalsIgnoreCase("inventoryNumber")){
-                                    jCBinvnumber.setModel
+                                jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
+                            }
+                            if (categories[i].equalsIgnoreCase("inventoryNumber")){
+                                jCBinvnumber.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                                }
+                                jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
                             }
                         }
                     }
@@ -243,30 +260,41 @@ public final class Rental_Helper {
         jCBmanufacturer.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 
-                if ( !e.getItem().equals(lastItem)){
-                    
-                    if (e.getStateChange() == ItemEvent.SELECTED
-                        && e.getStateChange() != ItemEvent.ITEM_LAST){
-                    
-                    String selected = e.getItem().toString();
+                String selected = "";
                 
-                        if (jCBmanufacturer.getItemCount() == 0 ){
-                            fillComboBox_Category(jCBmanufacturer, "manufacturer");
-                        }
-                        if (!selected.isBlank() && val.isAlpha(selected)){
-                            List <Devices> list = hp.getItemByManufacturer(selected);
-                            String [] categories = new String [] {"productName", "inventoryNumber"};
+                if (e.getStateChange() == ItemEvent.SELECTED &&
+                       (! jCBmanufacturer.getSelectedItem().equals(lastItem))){
+                    
+                    selected = e.getItem().toString();
+                    
+                    if ( !e.getItem().equals(lastItem) && 
+                        ( !jCBname.getActionCommand().equals(USER_CHANGE)) &&
+                        ( !jCBinvnumber.getActionCommand().equals(USER_CHANGE))){
+                         
+                        jCBmanufacturer.setActionCommand(USER_CHANGE);
+                    }
+                }
+                
+                if ( ! jCBmanufacturer.getActionCommand().equals(PROGRAM_CHANGE)){
+                    if (jCBmanufacturer.getItemCount() == 0 ){
+                        fillComboBox_Category(jCBmanufacturer, "manufacturer");
+                    }
+                    if (!selected.isBlank() && val.isAlphaNumeric(selected) ){
 
-                            for (int i = 0; i < categories.length; i++) {
-                                List <Object> oList = makeListForCategory(list, categories[i]);
-                                if (categories[i].equalsIgnoreCase("productName")){
-                                    jCBname.setModel
+                        List <Devices> list = hp.getItemByManufacturer(selected);
+                        String [] categories = new String [] {"productName", "inventoryNumber"};
+
+                        for (int i = 0; i < categories.length; i++) {
+                            List <Object> oList = makeListForCategory(list, categories[i]);
+                            if (categories[i].equalsIgnoreCase("productName")){
+                                jCBname.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                                }
-                                if (categories[i].equalsIgnoreCase("inventoryNumber")){
-                                    jCBinvnumber.setModel
+                                jCBname.setActionCommand(PROGRAM_CHANGE);
+                            }
+                            if (categories[i].equalsIgnoreCase("inventoryNumber")){
+                                jCBinvnumber.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                                }
+                                jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
                             }
                         }
                     }
@@ -285,52 +313,62 @@ public final class Rental_Helper {
         jCBinvnumber.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 
-                if ( !e.getItem().equals(lastItem) && 
-                        jCBmanufacturer.getSelectedItem().equals(lastItem)
-                        && jCBname.getSelectedItem().equals(lastItem)) {
+                String selected = "";
                 
-                    if (e.getStateChange() == ItemEvent.SELECTED
-                        && e.getStateChange() != ItemEvent.ITEM_LAST){
+                if (e.getStateChange() == ItemEvent.SELECTED 
+                        && !jCBinvnumber.getSelectedItem().equals(lastItem)){
                     
-                        String selected = e.getItem().toString();
+                    selected = e.getItem().toString();
 
-                        if (jCBinvnumber.getItemCount() == 0 ){
-                            fillComboBox_Category(jCBinvnumber, "inventoryNumber");
-                        }
+                    if ( !e.getItem().equals(lastItem) && 
+                        (!jCBname.getActionCommand().equals(USER_CHANGE)) &&
+                        (!jCBmanufacturer.getActionCommand().equals(USER_CHANGE))){
+                    
+                        jCBinvnumber.setActionCommand(USER_CHANGE);
+                    }
+                }
+                 
+                if ( ! jCBinvnumber.getActionCommand().equals(PROGRAM_CHANGE)){
+                    
+                    if (jCBinvnumber.getItemCount() == 0 ){
+                        fillComboBox_Category(jCBinvnumber, "inventoryNumber");
+                    }
+                    
+                    if (!selected.isBlank() && val.isNumeric(selected)){
 
-                        if (!selected.isBlank() && val.isNumeric(selected)){
-                            List <Devices> list = hp.getItemByInvNumber(selected);
-                            String [] categories = new String [] {"productName", "manufacturer"};
+                        List <Devices> list = hp.getItemByInvNumber(selected);
+                        String [] categories = new String [] {"productName", "manufacturer"};
 
-                            for (int i = 0; i < categories.length; i++) {
-                                List <Object> oList = makeListForCategory(list, categories[i]);
-                                if (categories[i].equalsIgnoreCase("productName")){
-                                    jCBname.setModel
-                                    (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                                }
-                                if (categories[i].equalsIgnoreCase("manufacturer")){
-                                    jCBmanufacturer.setModel
-                                    (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
-                                }
+                        for (int i = 0; i < categories.length; i++) {
+                            List <Object> oList = makeListForCategory(list, categories[i]);
+                            if (categories[i].equalsIgnoreCase("productName")){
+                                jCBname.setModel
+                                (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                                jCBname.setActionCommand(PROGRAM_CHANGE);
+                            }
+                            if (categories[i].equalsIgnoreCase("manufacturer")){
+                                jCBmanufacturer.setModel
+                                (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
+                                jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
                             }
                         }
                     }
-                }
+                }  
             }
-        }); 
+        });
     }
     
-//    public void removeListener() {
-//        
-//        Component [] comps = panel.getComponents();
-//        for (Component field : comps){
-//            if (field instanceof JComboBox){
-//                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
-//                    ((JComboBox) field).removeActionListener(al);
-//                }
-//            }
-//        }
-//    }
+    public void removeListener() {
+        
+        Component [] comps = panel.getComponents();
+        for (Component field : comps){
+            if (field instanceof JComboBox){
+                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
+                    ((JComboBox) field).removeActionListener(al);
+                }
+            }
+        }
+    }
     
     /**
      * adds an listener for the cancel-JButton and calls the deleteAll() Method
@@ -346,6 +384,8 @@ public final class Rental_Helper {
         });
     }
     
+    
+    
     /**
      * method to delete all 
      * JTextFields and clears all the selections in the JComboBoxes 
@@ -356,6 +396,10 @@ public final class Rental_Helper {
         jCBmanufacturer.removeAllItems();
         jCBinvnumber.removeAllItems();
         
+        jCBname.setActionCommand(PROGRAM_CHANGE);
+        jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
+        jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
+        
         jCByear.setEnabled(true);
         jCByear.setSelectedIndex(jCByear.getItemCount()-1);
         jTFadminName.setText("Vor- und Nachname");
@@ -365,6 +409,7 @@ public final class Rental_Helper {
         jTFmail.setText("E-Mail");
         
         fillBoxes();
+         
     }
     
     /**
@@ -464,17 +509,25 @@ public final class Rental_Helper {
                 JOptionPane.showMessageDialog(null, "Ein oder mehrere Felder sind leer!"
                         + " Bitte ausfuellen!");
             } else {
-                Rentals rental = new Rentals(date, Integer.parseInt(inventoryNumb),
+                Rentals rental = new Rentals(date, Long.parseLong(inventoryNumb),
                             Integer.parseInt(adminID),
-                            Integer.parseInt(userID));
+                           Long.parseLong(userID));
                 
-                hp.insertNewRental_DB(rental);
+                
+                try {
+                    hp.insertNewRental_DB(rental);
+                    JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
+                
+                } catch (UserException ex){
+                    System.out.println(ex);
+                    System.out.println("createNewRental in Rental_Helper");
+                    JOptionPane.showMessageDialog(null, "Ueberpruefen der Eingabe notwendig!");
+                }
             }
             
         } catch (InterruptedException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         } 
-        JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
     }
     
     /**
@@ -493,34 +546,49 @@ public final class Rental_Helper {
                 
                 boolean validUser = true;
                 
-                String userID = jCBuserID.getEditor().getItem().toString();
-                long id = Long.parseLong(userID);
+                if (jCBuserID.getSelectedItem().toString().isBlank()){
+                    JOptionPane
+                            .showMessageDialog(null, "Bitte UserID angeben!");
+                }else {
+                
+                    String userID = jCBuserID.getEditor().getItem().toString();
+                    long id = Long.parseLong(userID);
 
-                if (hp.isUserNew(id)){
-                    
-                    Users user = createUser(jCBuserID, jTFfirstname, 
-                                jTFlastname, jTFphone, jTFmail, jCByear);
+                    if (hp.isUserNew(id)){
 
-                    if (user == null){
-                        validUser = false;
+                        Users user = createUser(jCBuserID, jTFfirstname, 
+                                    jTFlastname, jTFphone, jTFmail, jCByear);
+
+                        if (user == null){
+                            validUser = false;
+                        }
+                        if (validUser){
+                            try {
+                                hp.insertNewUser(user);
+                                JOptionPane
+                                .showMessageDialog(null, "Neuen User hinzugefügt");
+
+                            }catch(UserException ex) {
+                                System.out.println(ex);
+                                System.out.println("saveNewRental in Rental_Helper");
+                                JOptionPane
+                                .showMessageDialog(null, "Fehler beim hinzufügen "
+                                        + "eines neuen Users");
+                            }
+                        }
+
+                    } else {
+                        Users user = createUser(jCBuserID, jTFfirstname, 
+                                    jTFlastname, jTFphone, jTFmail, jCByear);
+
+                        if (user == null){
+                            validUser = false;
+                        }
                     }
                     if (validUser){
-                        hp.insertNewUser(user);
-                        JOptionPane
-                            .showMessageDialog(null, "Neuen User hinzugefügt");
+                        createNewRental(dcDate, jCBinvnumber, jCBuserID, jCBadminID);
+                        deleteAll();
                     }
-                
-                } else {
-                    Users user = createUser(jCBuserID, jTFfirstname, 
-                                jTFlastname, jTFphone, jTFmail, jCByear);
-
-                    if (user == null){
-                        validUser = false;
-                    }
-                }
-                if (validUser){
-                    createNewRental(dcDate, jCBinvnumber, jCBuserID, jCBadminID);
-                    deleteAll();
                 }
             }
         });

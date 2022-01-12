@@ -18,7 +18,7 @@ public class Devices implements Rentable {
     private String productName;
     private String notes;
     private String location;
-    private int imei;
+    private long imei;
     private int users_userID;
     private double aquisitionValue;
     private LocalDate aquistionDate;
@@ -73,11 +73,11 @@ public class Devices implements Rentable {
         this.location = location;
     }
 
-    public int getImei() {
+    public long getImei() {
         return imei;
     }
 
-    public void setImei(int imei) {
+    public void setImei(long imei) {
         this.imei = imei;
     }
 
