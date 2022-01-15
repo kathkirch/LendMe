@@ -5,28 +5,37 @@
  */
 package Project_LendMe;
 
-import java.lang.invoke.VarHandle;
 import java.time.LocalDate;
 
 /**
+ * Helper-Class for building Devices Objects has same properties as devices
+ * table in the database variables are accessable via getter and setter methods
  *
  * @author Katharina
  */
 public class Devices {
-    
+
     private long inventoryNumber;
     private String manufacturer;
     private String productName;
     private String notes;
     private String location;
+    private String admin;
     private int status;
-    private long imei;
+    private String imei;
     private long users_userID;
     private double acquisitionValue;
     private LocalDate acquistionDate;
-    
 
     public Devices() {
+    }
+
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 
     public long getInventoryNumber() {
@@ -69,11 +78,11 @@ public class Devices {
         this.location = location;
     }
 
-    public long getImei() {
+    public String getImei() {
         return imei;
     }
 
-    public void setImei(long imei) {
+    public void setImei(String imei) {
         this.imei = imei;
     }
 
@@ -111,11 +120,10 @@ public class Devices {
 
     @Override
     public String toString() {
-        return inventoryNumber + " | " + manufacturer + " | " + productName + 
-                " | " + notes + " | " + location + " | " + status + " | " + 
-                imei + " | " + users_userID + " | " + acquisitionValue + 
-                " | " +  acquistionDate;
+        return inventoryNumber + " | " + manufacturer + " | " + productName
+                + " | " + notes + " | " + location + " | " + status + " | "
+                + imei + " | " + users_userID + " | " + acquisitionValue
+                + " | " + acquistionDate;
     }
-    
-    
+
 }

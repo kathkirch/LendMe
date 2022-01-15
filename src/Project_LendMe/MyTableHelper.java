@@ -174,7 +174,8 @@ abstract public class MyTableHelper {
                                            d.getImei(),
                                            d.getUsers_userID(),
                                            d.getAquisitionValue(),
-                                           d.getAquistionDate()};
+                                           d.getAquistionDate(),
+                                           d.getAdmin()};
             
            i = i + 1;  
         }
