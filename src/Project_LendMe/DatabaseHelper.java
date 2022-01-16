@@ -6,7 +6,6 @@
 package Project_LendMe;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -486,7 +485,7 @@ public class DatabaseHelper {
             rs = stmt.executeQuery(query);
             
             while (rs.next()){
-                long userID = rs.getInt("userID");
+                long userID = rs.getLong("userID");
                 userIDs.add(String.valueOf(userID));
             }
         } catch (SQLException ex) {
