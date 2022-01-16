@@ -688,8 +688,8 @@ public class DatabaseHelper {
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery("SELECT * FROM " + table + 
-                    " WHERE " + where + "='" + filterString 
-                    + "' AND returnDate IS NOT NULL");
+                    " WHERE " + where + " LIKE '%" + filterString 
+                    + "%' AND returnDate IS NOT NULL;");
             
             while(rs.next()){
                 
@@ -768,8 +768,8 @@ public class DatabaseHelper {
                     + "FROM " + table
                     + " JOIN " + joinTable
                     + " ON devices_inventoryNumber = devices.inventoryNumber "
-                    + "WHERE " + where + "='" + filterString 
-                    + "' AND returnDate IS NULL;";
+                    + "WHERE " + where + " LIKE '%" + filterString 
+                    + "%' AND returnDate IS NULL;";
         
         try {
             stmt = con.createStatement();
