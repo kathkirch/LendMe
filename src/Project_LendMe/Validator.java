@@ -29,11 +29,15 @@ public class Validator {
      */
     public boolean isNumeric(String str) { 
         try {  
-            Integer.parseInt(str);  
+            Long.parseLong(str);  
             return true;
         } catch(NumberFormatException e){  
             return false;  
         }  
+    }
+    
+    public boolean isAlphaNumeric (String str){
+        return str != null && str.matches("^[a-zA-Z0-9 ]*$");
     }
     
     /**
@@ -71,4 +75,21 @@ public class Validator {
         return year.matches("[GEB0-9 ]+");
     }
     
+    /**
+     *
+     * @param year as int to proof if given year is a leap year
+     * @return true if given year is a leap year, false if given year is not a 
+     * leap year
+     */
+    public boolean isLeapYear (int year){
+        boolean isLeap = false;
+        
+        if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0)){
+            isLeap = true;
+        }
+        else{ 
+            isLeap = false;
+        }
+        return isLeap;
+    }
 }

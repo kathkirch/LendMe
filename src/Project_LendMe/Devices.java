@@ -13,8 +13,8 @@ import java.time.LocalDate;
  *
  * @author Katharina
  */
-public class Devices {
-
+public class Devices implements Rentable {
+    
     private long inventoryNumber;
     private String manufacturer;
     private String productName;
@@ -28,6 +28,7 @@ public class Devices {
     private LocalDate acquistionDate;
 
     public Devices() {
+    
     }
 
     public String getAdmin() {
@@ -126,4 +127,18 @@ public class Devices {
                 + " | " + acquistionDate;
     }
 
+    
+    
+}   
+
+interface Rentable {
+
+    static final int lent = 1;
+
+    static final int not_lent = 0;
+
+  
 }
+    
+
+

@@ -66,8 +66,6 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(4).setPreferredWidth(70);
         colModel.getColumn(5).setPreferredWidth(102);
         
-        System.out.println(table.getSize() + " arc table ");
-        
     }
 
     @Override

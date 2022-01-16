@@ -57,6 +57,7 @@ abstract public class MyTableHelper {
         descRadio.setSelected(false);
         filterTF.setText("");
 
+        
     }
     
     /**
