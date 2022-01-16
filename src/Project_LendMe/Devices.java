@@ -8,6 +8,8 @@ package Project_LendMe;
 import java.time.LocalDate;
 
 /**
+ * Helper-Class for building Devices Objects has same properties as devices
+ * table in the database variables are accessable via getter and setter methods
  *
  * @author Katharina
  */
@@ -18,21 +20,25 @@ public class Devices implements Rentable {
     private String productName;
     private String notes;
     private String location;
-    private long imei;
-    private long users_userID;
-    private double aquisitionValue;
-    private LocalDate aquistionDate;
+    private String admin;
     private int status;
-    
+    private String imei;
+    private long users_userID;
+    private double acquisitionValue;
+    private LocalDate acquistionDate;
 
     public Devices() {
     
     }
 
-    public int getStatus() {
-        return status;
+    public String getAdmin() {
+        return admin;
     }
-    
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+
     public long getInventoryNumber() {
         return inventoryNumber;
     }
@@ -73,11 +79,11 @@ public class Devices implements Rentable {
         this.location = location;
     }
 
-    public long getImei() {
+    public String getImei() {
         return imei;
     }
 
-    public void setImei(long imei) {
+    public void setImei(String imei) {
         this.imei = imei;
     }
 
@@ -90,20 +96,37 @@ public class Devices implements Rentable {
     }
 
     public double getAquisitionValue() {
-        return aquisitionValue;
+        return acquisitionValue;
     }
 
     public void setAquisitionValue(double aquisitionValue) {
-        this.aquisitionValue = aquisitionValue;
+        this.acquisitionValue = aquisitionValue;
     }
 
     public LocalDate getAquistionDate() {
-        return aquistionDate;
+        return acquistionDate;
     }
 
-    public void setAquistionDate(LocalDate aquistionDate) {
-        this.aquistionDate = aquistionDate;
+    public void setAquistionDate(LocalDate acquistionDate) {
+        this.acquistionDate = acquistionDate;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return inventoryNumber + " | " + manufacturer + " | " + productName
+                + " | " + notes + " | " + location + " | " + status + " | "
+                + imei + " | " + users_userID + " | " + acquisitionValue
+                + " | " + acquistionDate;
+    }
+
     
     
 }   

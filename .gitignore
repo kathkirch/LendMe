@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+/nbproject/private/
+/dist/
+/build/
+=======
 /nbproject/private/
 /dist/
 build/classes/Project_LendMe/ArchivHelper$1.class
@@ -52,4 +57,7 @@ build/classes/Comparators/RentalAdminIDComparator.class
 build/classes/Project_LendMe/Validator.class
 build/classes/Comparators/RentalAdminIDComparator.class
 build/built-jar.properties
+>>>>>>> GUI_development
 *.properties
+*.properties
+nbproject/private/private.xml

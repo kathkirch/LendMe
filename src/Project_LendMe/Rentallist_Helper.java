@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -115,6 +116,10 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         }
         table.setEnabled(true);
         js.setVisible(true); 
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
+        table.setRowSorter(sorter);
+        sorter.setModel(model);
     }  
     
     /**

@@ -6,6 +6,7 @@
 package Project_LendMe;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,7 +16,6 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,12 +23,12 @@ import java.util.List;
  * @author Katharina
  */
 public class DatabaseHelper {
-    
+
     private static Connection con;
     private static ResultSet rs;
     private static Statement stmt;
-    
-    public static void connectDB(){
+
+    public static void connectDB() {
         con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -41,7 +41,7 @@ public class DatabaseHelper {
             System.exit(1);
         }
     }
-    
+
     public void closeDB() {
         try {
             if (con != null) {
@@ -51,21 +51,22 @@ public class DatabaseHelper {
             System.out.println(ex);
         }
     }
-    
+
     /**
-     *returns all devices from device table with the status 0 (not lent)
+     * returns all devices from device table with the status 0 (not lent)
+     *
      * @return Devices Objects as a List
      */
-    public List <Devices> getDevices(){
-    
-        List <Devices> devicesList = new ArrayList <>();
-        
+    public List<Devices> getDevices() {
+
+        List<Devices> devicesList = new ArrayList<>();
+
         try {
             stmt = con.createStatement();
             String query = "SELECT * FROM devices WHERE status=0";
             rs = stmt.executeQuery(query);
-            
-            while (rs.next()){
+
+            while (rs.next()) {
                 String productName = rs.getString("productName");
                 String manufacturer = rs.getString("manufacturer");
                 long inventoryNumber = rs.getLong("inventoryNumber");
@@ -79,37 +80,243 @@ public class DatabaseHelper {
                 
                 devicesList.add(dev);
             }
-        
-        }catch (SQLException ex){
+
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("getDevices");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
+            }
         }
         return devicesList;
+    }
+
+    
+    /****************** QUERYS HANDLING INVENTORY/DEVICES ********************/
+    
+    /**
+     * @return returns all Devices saved in the database
+     */
+    public ArrayList<Devices> getAllDevices() {
+
+        ArrayList<Devices> allDevices = new ArrayList<>();
+
+        String query = "SELECT inventoryNumber, manufacturer, productname, "
+                + "notes, location, status, imei, users_userID, "
+                + "acquisitionValue, acquisitionDate, administrators_adminID "
+                + "FROM devices LEFT JOIN administrators_has_devices "
+                + "ON devices.inventoryNumber = "
+                + "administrators_has_devices.devices_inventoryNumber";
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+
+                long invNo = rs.getLong(1);
+                String manuf = rs.getString(2);
+                String prodN = rs.getString(3);
+                String notes = rs.getString(4);
+                String location = rs.getString(5);
+                int stat = rs.getInt(6);
+                String im = rs.getString(7);
+                long usID = rs.getLong(8);
+                double acV = rs.getDouble(9);
+                LocalDate acD = rs.getDate(10).toLocalDate();
+                String admin = rs.getString(11);
+
+                Devices device = new Devices();
+
+                device.setInventoryNumber(invNo);
+                device.setManufacturer(manuf);
+                device.setProductName(prodN);
+                device.setNotes(notes);
+                device.setLocation(location);
+                device.setStatus(stat);
+                device.setImei(im);
+                device.setUsers_userID(usID);
+                device.setAquisitionValue(acV);
+                device.setAquistionDate(acD);
+                device.setAdmin(admin);
+
+                allDevices.add(device);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+
+        return allDevices;
+    }
+
+    public void updateDevice(String toUpdate, String invNo) throws SQLException {
+
+        String query = "UPDATE devices SET " + toUpdate
+                + " WHERE inventoryNumber = " + invNo + ";";
+
+        stmt = con.createStatement();
+        stmt.executeUpdate(query);
+        System.out.println(query);
+
+        if (stmt != null) {
+            stmt.close();
+        }
+    }
+
+    public void updateAdminHasDevice(String toUpdate, String adminID, String invNo) throws SQLException {
+
+        String query = "UPDATE administrators_has_devices SET administrators_adminID = "
+                + toUpdate + " WHERE administrators_adminID = " + adminID
+                + " AND devices_inventoryNumber = " + invNo + ";";
+
+        stmt = con.createStatement();
+        stmt.executeUpdate(query);
+        System.out.println(query);
+
+        if (stmt != null) {
+            stmt.close();
+        }
+    }
+
+    public void insertAdminHasDevice(String toInsert) throws SQLException {
+
+        String query = "INSERT INTO administrators_has_devices VALUES ("
+                + toInsert + ");";
+
+        stmt = con.createStatement();
+        stmt.executeUpdate(query);
+        System.out.println(query);
+
+        if (stmt != null) {
+            stmt.close();
+        }
+
+    }
+
+    //inserts new entry into devices table
+    //SQLExceptions are handled in caller method
+    public void insertNewDevice(String toInsert, boolean noImei) throws SQLException {
+
+        String query;
+
+        if (noImei) {
+            query = "INSERT INTO devices (inventoryNumber, manufacturer, "
+                    + "productname, notes, location, acquisitionValue, "
+                    + "acquisitionDate) VALUES (" + toInsert + ");";
+
+        } else {
+            query = "INSERT INTO devices (inventoryNumber, manufacturer, "
+                    + "productname, notes, location, acquisitionValue, "
+                    + "acquisitionDate, imei) VALUES (" + toInsert + ");";
+        }
+
+        //System.out.println(query);
+        stmt = con.createStatement();
+        stmt.executeUpdate(query);
+
+        if (stmt != null) {
+            stmt.close();
+        }
+
+    }
+
+    public void deleteDevice(String deviceToDelete, String adminHasDevToDelete,
+            boolean hasAdminID) throws SQLException {
+
+        stmt = con.createStatement();
+
+        if (hasAdminID) {
+
+            String queryAdminHasDev = "DELETE FROM administrators_has_devices"
+                    + " WHERE (administrators_adminID = " + adminHasDevToDelete
+                    + " AND devices_inventoryNumber = " + deviceToDelete + ");";
+            stmt.executeUpdate(queryAdminHasDev);
+            System.out.println(queryAdminHasDev);
+
+            String queryDevice = "DELETE FROM devices WHERE "
+                    + "(inventoryNumber = " + deviceToDelete + ");";
+            stmt.executeUpdate(queryDevice);
+            System.out.println(queryDevice);
+
+        } else {
+            String queryDevice = "DELETE FROM devices WHERE "
+                    + "(inventoryNumber = " + deviceToDelete + ");";
+            stmt = con.createStatement();
+            stmt.executeUpdate(queryDevice);
+            System.out.println(queryDevice);
+        }
+
+        if (stmt != null) {
+            stmt.close();
+        }
+
+    }
+
+    public ArrayList<String> allInventoryNumbers () {
+        
+        ArrayList <String> allInvNos = new ArrayList<>();
+        
+        try {
+            String query = "SELECT inventoryNumber FROM devices;";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                String in = rs.getString(1);
+                allInvNos.add(in);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return allInvNos;
+    }
+    
+    public ArrayList<String> allImeiNumbers () {
+        
+        ArrayList <String> allImeis = new ArrayList<>();
+        
+        try {
+            String query = "SELECT imei FROM devices;";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String in = rs.getString(1);
+                allImeis.add(in);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return allImeis;
     }
     
     /**
      * returns all completed rentals, just rentals with a returnDate
+     *
      * @return Rentals Objects as an ArrayList
      */
-    public ArrayList <Rentals> readRentals () {
-        
-        ArrayList <Rentals> allRentals = new ArrayList <>();
-        
+    public ArrayList<Rentals> readRentals() {
+
+        ArrayList<Rentals> allRentals = new ArrayList<>();
+
         String query = "SELECT * FROM rentals WHERE returnDate IS NOT NULL";
-        
-        try{
+
+        try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            while(rs.next()){
-                
+            while (rs.next()) {
+
                 int rentalID = rs.getInt("rentalID");
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
                 LocalDate returnDate = rs.getDate("returnDate").toLocalDate();
@@ -118,11 +325,11 @@ public class DatabaseHelper {
                 long userID = rs.getLong("users_UserID");
                 
                 Rentals rental = new Rentals(rentalDate, inventoryNumb, adminID,
-                                                userID);
-                
+                        userID);
+
                 rental.setRentalID(rentalID);
                 rental.setReturnDate(returnDate);
-                
+
                 allRentals.add(rental);
             }
             
@@ -133,23 +340,23 @@ public class DatabaseHelper {
             if (stmt != null) {
                 try {
                     stmt.close();
-                }catch (SQLException ex) {
+                } catch (SQLException ex) {
                     System.out.println(ex);
                 }
             }
         }
-        
+
         return allRentals;
     }
 
     /**
      *
      * @param productName as a String, needed to search in the Database
-     * @return Devices Objects as a List with the given productName 
+     * @return Devices Objects as a List with the given productName
      */
-    public List <Devices> getItemByProductName(String productName){
-        
-        List <Devices> items = new ArrayList <>();
+    public List<Devices> getItemByProductName(String productName) {
+
+        List<Devices> items = new ArrayList<>();
         String query = "SELECT manufacturer, inventoryNumber"
                         + " FROM devices WHERE productName=" + "'" + productName
                         + "' AND status=0;";
@@ -157,8 +364,8 @@ public class DatabaseHelper {
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            
-            while (rs.next()){
+
+            while (rs.next()) {
                 String manufacturer = rs.getString("manufacturer");
                 long inventoryNumber = rs.getLong("inventoryNumber");
                 
@@ -167,21 +374,21 @@ public class DatabaseHelper {
                 d.setInventoryNumber(inventoryNumber);
                 items.add(d);
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("getItemByProductName");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
-        } 
+            }
+        }
         return items;
     }
-    
+
     /**
      *
      * @param manufacturer as a String needed to search in Database
@@ -199,8 +406,8 @@ public class DatabaseHelper {
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            
-            while (rs.next()){
+
+            while (rs.next()) {
                 String productName = rs.getString("productName");
                 long inventoryNumber = rs.getLong("inventoryNumber");
                 
@@ -209,29 +416,29 @@ public class DatabaseHelper {
                 d.setInventoryNumber(inventoryNumber);
                 items.add(d);
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("getItemByManufacturer");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
-        } 
+            }
+        }
         return items;
     }
-    
+
     /**
      *
      * @param invNumber as a String needed to search for in the Database
      * @return Devices Objects as a List with the given invNumber
      */
-    public List <Devices> getItemByInvNumber (String invNumber){
-        
-        List <Devices> items = new ArrayList <>();
+    public List<Devices> getItemByInvNumber(String invNumber) {
+
+        List<Devices> items = new ArrayList<>();
         String query = "SELECT productName, manufacturer"
                         + " FROM devices WHERE inventoryNumber=" + "'" 
                         + Long.parseLong(invNumber)
@@ -240,40 +447,40 @@ public class DatabaseHelper {
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            
-            while (rs.next()){
+
+            while (rs.next()) {
                 String productName = rs.getString("productName");
                 String manufacturer = rs.getString("manufacturer");
-                
+
                 Devices d = new Devices();
                 d.setProductName(productName);
                 d.setManufacturer(manufacturer);
                 items.add(d);
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("getItemByInvNumber");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
-        } 
+            }
+        }
         return items;
     }
-    
+
     /**
      *
      * @return List of Strings with all the UserID's in the Database
      */
-    public List <String> getUsersID(){
-        
-        List <String> userIDs = new ArrayList <>();
+    public List<String> getUsersID() {
+
+        List<String> userIDs = new ArrayList<>();
         String query = "SELECT userID FROM users";
-        
+
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
@@ -282,128 +489,128 @@ public class DatabaseHelper {
                 long userID = rs.getInt("userID");
                 userIDs.add(String.valueOf(userID));
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("getUsersID");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
-        } 
+            }
+        }
         return userIDs;
     }
-    
+
     /**
      *
      * @return List of Strings with all UserYears from the database
      */
-    public List <String> getUserYears(){
-        List <String> userYears = new ArrayList <>();
+    public List<String> getUserYears() {
+        List<String> userYears = new ArrayList<>();
         String query = "SELECT DISTINCT userYear FROM users ORDER BY userYear ASC";
-        
+
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            
-            while (rs.next()){
+
+            while (rs.next()) {
                 String userYear = rs.getString("userYear");
                 userYears.add(userYear);
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("getUserYear");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
-        } 
+            }
+        }
         return userYears;
     }
-    
+
     /**
      *
      * @return List of Strings with all AdminID's from the database
      */
-    public List <String> getAdminIDs() {
+    public List<String> getAdminIDs() {
         String adminID;
-        List <String> adminIDs = new ArrayList<>();
-        
-        String query = "SELECT adminID FROM administrators";
-        
+        List<String> adminIDs = new ArrayList<>();
+
+        String query = "SELECT adminID FROM administrators ORDER BY adminID ASC";
+
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            
-            while (rs.next()){
+
+            while (rs.next()) {
                 adminID = rs.getString("adminID");
                 adminIDs.add(adminID);
             }
-        
-        }catch (SQLException ex){
+
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("getAdminIDs");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
+            }
         }
         return adminIDs;
     }
-         
+
     /**
      *
      * @param adminID as a String needed to search for in the Database
      * @return adminName from the database with the given adminID
      */
-    public String getAdminNameByID (String adminID){
+    public String getAdminNameByID(String adminID) {
         String adminName = null;
-        
-        String query = "SELECT concat(adminFirstName," + "' '" +", adminLastName)"
-                    + "as " +"'Fullname'" + "FROM administrators "
-            + "WHERE adminID=" + Integer.parseInt(adminID) + ";";
+
+        String query = "SELECT concat(adminFirstName," + "' '" + ", adminLastName)"
+                + "as " + "'Fullname'" + "FROM administrators "
+                + "WHERE adminID=" + Integer.parseInt(adminID) + ";";
 
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
 
-            while (rs.next()){
+            while (rs.next()) {
                 adminName = rs.getString("Fullname");
             }
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("getAdminByID");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
-        }  
+            }
+        }
         return adminName;
     }
-    
+
     /**
      *
      * @param userID needed as a String to search in the Database
      * @return Users Object with the given UserID
      */
-    public Users checkUserID(String userID){
-        
+    public Users checkUserID(String userID) {
+
         Users user = null;
         
         String query = "SELECT * FROM users WHERE userID=" + "'" 
@@ -413,7 +620,7 @@ public class DatabaseHelper {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
 
-            while (rs.next()){
+            while (rs.next()) {
                 String userFirstName = rs.getString("userFirstName");
                 String userLastName = rs.getString("userLastName");
                 String userEmail = rs.getString("userEmail");
@@ -423,27 +630,25 @@ public class DatabaseHelper {
                 user = new Users (Long.parseLong(userID), userFirstName, 
                                 userLastName, userEmail, userPhone, userYear);
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("checkUserID");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
-        }  
+            }
+        }
         return user;
     }
-    
-    
-        
+
     /**
      *
-     * @param user as a Users Object is needed to insert 
-     * the User-Object with it's Attributes as Data in the Database
+     * @param user as a Users Object is needed to insert the User-Object with
+     * it's Attributes as Data in the Database
      */
     public void insertNewUser(Users user) throws UserException {
         
@@ -469,48 +674,49 @@ public class DatabaseHelper {
                 throw new UserException();
             } finally {
                 if (stmt != null) {
-                    try{
+                    try {
                         stmt.close();
                     } catch (SQLException ex) {
                         System.out.println(ex);
                     }
-                } 
+                }
             }
-        } 
+        }
     }
-    
+
     /**
      *
      * @param userID needed to search for in the Database
-     * @return true if the user not exists in the Database, false if the user exists
+     * @return true if the user not exists in the Database, false if the user
+     * exists
      */
     public boolean isUserNew(long userID){
         
         boolean userNEW = true;
         String query = "SELECT * FROM users WHERE userID=" + userID + ";";
-        
+
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            
-            if (rs.next()){
+
+            if (rs.next()) {
                 userNEW = false;
             }
-        }catch(SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("isUserNew");
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
-        }  
+            }
+        }
         return userNEW;
     }
-    
+
     /**
      *
      * @param rental as a Rentals Object is needed to insert 
@@ -522,34 +728,34 @@ public class DatabaseHelper {
         try{ 
             stmt = con.createStatement();
             String string = "insert into rentals (rentalDate, "
-                            +"devices_inventoryNumber, administrators_adminID, "
-                            +"users_userID) values ('" + rental.getRentalDate() 
-                            +"', '" + rental.getDevice_inventoryNumber() 
-                            + "', '" + rental.getAdministrators_AdminID()
-                            + "', '" + rental.getUsers_UserID()+ "');";
+                    + "devices_inventoryNumber, administrators_adminID, "
+                    + "users_userID) values ('" + rental.getRentalDate()
+                    + "', '" + rental.getDevice_inventoryNumber()
+                    + "', '" + rental.getAdministrators_AdminID()
+                    + "', '" + rental.getUsers_UserID() + "');";
             stmt.executeUpdate(string);
             
             setDevice_Lent(rental.getDevice_inventoryNumber(), 
                     rental.getUsers_UserID());
             
             System.out.println("Datensatz erfolgreich hinzugefuegt");
-            
-        } catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             System.out.println(ex);
             System.out.println("insertNewRental_DB");
             throw new UserException();
             
         } finally {
             if (stmt != null) {
-                try{
+                try {
                     stmt.close();
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            } 
+            }
         }
     }
-        
+
     /**
      *
      * @param device_inventoryNumber needed to search for in the database
@@ -646,45 +852,45 @@ public class DatabaseHelper {
             }  
         } 
     }
-    
+
     /**
      * method for filter- and search functions in the archive table
-     * 
-     * @param whereClause as an int for the whereClause means 
-     * in which column should be filtered
+     *
+     * @param whereClause as an int for the whereClause means in which column
+     * should be filtered
      * @param filterString as an String means on which data should be filtered
      * @return the filtered list of Rentals-Objects if filtering was successful
      * or an empty list if filtering had no result
      */
-    public List <Rentals> filterRentals (int whereClause, String filterString){
-        
+    public List<Rentals> filterRentals(int whereClause, String filterString) {
+
         stmt = null;
         rs = null;
         String table = "rentals";
         String where = "";
-        ArrayList <Rentals> filteredRentals = new ArrayList <>();
-        
+        ArrayList<Rentals> filteredRentals = new ArrayList<>();
+
         switch (whereClause) {
-            case 0 :
-                where = "rentalID";        
+            case 0:
+                where = "rentalID";
                 break;
-            case 1 :
+            case 1:
                 where = "rentalDate";
                 break;
-            case 2 :
+            case 2:
                 where = "returnDate";
                 break;
-            case 3 :
+            case 3:
                 where = "devices_inventoryNumber";
                 break;
-            case 4 :
+            case 4:
                 where = "administrators_adminID";
                 break;
-            case 5 :
+            case 5:
                 where = "users_userID";
                 break;
         }
-        
+
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery("SELECT * FROM " + table + 
@@ -701,64 +907,63 @@ public class DatabaseHelper {
                 long userID = rs.getLong("users_UserID");
                 
                 Rentals rental = new Rentals(rentalDate, inventoryNumb, adminID,
-                                                userID);
-                
+                        userID);
+
                 rental.setRentalID(rentalID);
                 rental.setReturnDate(returnDate);
-                
+
                 filteredRentals.add(rental);
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (stmt != null) {
-                try { 
+                try {
                     stmt.close();
-                } catch (SQLException ex){
+                } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            }  
-        } 
+            }
+        }
         return filteredRentals;
     }
-    
-    
+
     /**
      * the method for filter- and search functions in the rentallist table
-     * 
-     * @param whereClause as an int for the whereClause means 
-     * in which column should be filtered
+     *
+     * @param whereClause as an int for the whereClause means in which column
+     * should be filtered
      * @param filterString as an String means on which data should be filtered
      * @return the filtered list of Rentals-Objects if filtering was successful
      * or an empty list if filtering had no result
      */
-    public List <Rentallist> filterRentals2 (int whereClause, String filterString){
-        
+    public List<Rentallist> filterRentals2(int whereClause, String filterString) {
+
         stmt = null;
         rs = null;
         String table = "rentals";
         String joinTable = "devices";
         String where = "";
-        ArrayList <Rentallist> filteredRentallist = new ArrayList <>();
-        
+        ArrayList<Rentallist> filteredRentallist = new ArrayList<>();
+
         switch (whereClause) {
-            case 0 :
-                where = "rentalID";        
+            case 0:
+                where = "rentalID";
                 break;
-            case 1 :
+            case 1:
                 where = "devices_inventoryNumber";
                 break;
-            case 2 :
+            case 2:
                 where = "productname";
                 break;
-            case 3 :
+            case 3:
                 where = "manufacturer";
                 break;
-            case 4 :
+            case 4:
                 where = "users_userID";
                 break;
-            case 5 :
+            case 5:
                 where = "rentalDate";
                 break;
         }
@@ -774,35 +979,35 @@ public class DatabaseHelper {
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 int rentalID = rs.getInt("rentalID");
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
                 int users_UserID = rs.getInt("users_UserID");
                 int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
                 int administrators_AdminID = rs.getInt("administrators_adminID");
                 String manufacturer = rs.getString("manufacturer");
-                String productname =rs.getString("productname");
-                
+                String productname = rs.getString("productname");
+
                 Rentallist ren = new Rentallist(productname, manufacturer,
-                                                rentalDate, devices_inventoryNumber,
-                                                administrators_AdminID, users_UserID);
+                        rentalDate, devices_inventoryNumber,
+                        administrators_AdminID, users_UserID);
                 ren.setRentalID(rentalID);
                 filteredRentallist.add(ren);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, 
                     null, ex);
         } finally {
             if (stmt != null) {
-                try { 
+                try {
                     stmt.close();
-                } catch (SQLException ex){
+                } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-            }  
-        } 
+            }
+        }
         return filteredRentallist;
     }
     
@@ -845,6 +1050,93 @@ public class DatabaseHelper {
     }
     
     
+    public List<Devices> filterInventory(int column, String filterBy) {
+
+        stmt = null;
+        rs = null;
+        String where = "";
+        ArrayList<Devices> filteredInventory = new ArrayList<>();
+
+        switch (column) {
+            case 0:
+                where = "inventoryNumber";
+                break;
+            case 1:
+                where = "manufacturer";
+                break;
+            case 2:
+                where = "productname";
+                break;
+            case 3:
+                where = "location";
+                break;
+            case 4:
+                where = "status";
+                break;
+            case 5:
+                where = "users_userID";
+                break;
+            case 6:
+                where = "acquisitionValue";
+                break;
+            case 7:
+                where = "acquisitionDate";
+                break;
+
+        }
+
+        String query = "SELECT * FROM devices WHERE " + where + " LIKE '%"
+                + filterBy + "%'";
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+
+                long invNo = rs.getLong(1);
+                String manuf = rs.getString(2);
+                String prodN = rs.getString(3);
+                String notes = rs.getString(4);
+                String location = rs.getString(5);
+                int stat = rs.getInt(6);
+                String im = rs.getString(7);
+                long usID = rs.getLong(8);
+                double acV = rs.getDouble(9);
+                LocalDate acD = rs.getDate(10).toLocalDate();
+
+                Devices device = new Devices();
+
+                device.setInventoryNumber(invNo);
+                device.setManufacturer(manuf);
+                device.setProductName(prodN);
+                device.setNotes(notes);
+                device.setLocation(location);
+                device.setStatus(stat);
+                device.setImei(im);
+                device.setUsers_userID(usID);
+                device.setAquisitionValue(acV);
+                device.setAquistionDate(acD);
+
+                filteredInventory.add(device);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+
+        return filteredInventory;
+    }
+    
+    
     
     /**
      *
@@ -861,34 +1153,34 @@ public class DatabaseHelper {
                 + "join devices "
                 + "on devices_inventoryNumber = devices.inventoryNumber "
                 + "where returnDate IS NULL;";
-        
-        try{
+
+        try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            while(rs.next()){
-                
+            while (rs.next()) {
+
                 int rentalID = rs.getInt("rentalID");
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
                 long users_UserID = rs.getLong("users_UserID");
                 long devices_inventoryNumber = rs.getLong("devices_inventoryNumber");
                 int administrators_AdminID = rs.getInt("administrators_adminID");
                 String manufacturer = rs.getString("manufacturer");
-                String productname =rs.getString("productname");
-                
+                String productname = rs.getString("productname");
+
                 Rentallist ren = new Rentallist(productname, manufacturer,
-                                                rentalDate, devices_inventoryNumber,
-                                                administrators_AdminID, users_UserID);
+                        rentalDate, devices_inventoryNumber,
+                        administrators_AdminID, users_UserID);
                 ren.setRentalID(rentalID);
-                
+
                 Rentallist.add(ren);
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
-        }finally {
+        } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
-                }catch (SQLException ex) {
+                } catch (SQLException ex) {
                     System.out.println(ex);
                 }
             }

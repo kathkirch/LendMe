@@ -37,7 +37,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-22,0,0,3,34"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-114,0,0,3,34"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -249,7 +249,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollpane_startpage" alignment="1" pref="892" max="32767" attributes="0"/>
+                  <Component id="scrollpane_startpage" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -422,7 +422,7 @@
                                       <Component id="cancel_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="save_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="171" max="32767" attributes="0"/>
+                                  <EmptySpace pref="92" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -688,7 +688,7 @@
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="return_button" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rental_ScrollPane" alignment="0" pref="514" max="32767" attributes="0"/>
+                                      <Component id="rental_ScrollPane" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -712,9 +712,9 @@
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Component id="btClear_rentals" min="-2" pref="63" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="rentallist_title" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="rentallist_title" alignment="0" pref="538" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -722,7 +722,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="rentallist_title" pref="98" max="32767" attributes="0"/>
+                                  <Component id="rentallist_title" pref="59" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -742,7 +742,7 @@
                                       <Component id="filterString_rentallist" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="rental_ScrollPane" pref="560" max="32767" attributes="0"/>
+                                  <Component id="rental_ScrollPane" pref="520" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Component id="return_button" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -811,7 +811,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Filern nach:"/>
+                            <Property name="text" type="java.lang.String" value="Filtern nach:"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="filterText_rentallist">
@@ -960,144 +960,10 @@
                         </Container>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="inventory_panel">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="d3" green="e5" red="dc" type="rgb"/>
-                        </Property>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[576, 800]"/>
-                        </Property>
-                      </Properties>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                          <CardConstraints cardName="card5"/>
-                        </Constraint>
-                      </Constraints>
-
-                      <Layout>
-                        <DimensionLayout dim="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jScrollPane4" pref="496" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="filter_options_inventory" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Component id="searchfilter_inventory" min="-2" pref="172" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="newdevice_button" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
-                                      <Component id="inventory_title" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace pref="50" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                        </DimensionLayout>
-                        <DimensionLayout dim="1">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="inventory_title" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Component id="newdevice_button" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="filter_options_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="searchfilter_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" min="-2" pref="623" max="-2" attributes="0"/>
-                                  <EmptySpace pref="70" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                        </DimensionLayout>
-                      </Layout>
-                      <SubComponents>
-                        <Component class="javax.swing.JButton" name="newdevice_button">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Neues Device anlegen"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="inventory_title">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="1"/>
-                            </Property>
-                            <Property name="horizontalAlignment" type="int" value="0"/>
-                            <Property name="text" type="java.lang.String" value="Inventar"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JComboBox" name="searchfilter_inventory">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="4">
-                                <StringItem index="0" value="Item 1"/>
-                                <StringItem index="1" value="Item 2"/>
-                                <StringItem index="2" value="Item 3"/>
-                                <StringItem index="3" value="Item 4"/>
-                              </StringArray>
-                            </Property>
-                          </Properties>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                          </AuxValues>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="filter_options_inventory">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Filterungs- und Sortierm&#xf6;glichkeiten:"/>
-                          </Properties>
-                        </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="d3" green="e5" red="dc" type="rgb"/>
-                            </Property>
-                          </Properties>
-
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                          <SubComponents>
-                            <Component class="javax.swing.JTable" name="inventory_table">
-                              <Properties>
-                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="1" rowCount="4">
-                                    <Column editable="true" title="Inventar" type="java.lang.Object"/>
-                                  </Table>
-                                </Property>
-                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                                  <TableColumnModel selectionModel="0">
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                      <Title/>
-                                      <Editor/>
-                                      <Renderer/>
-                                    </Column>
-                                  </TableColumnModel>
-                                </Property>
-                                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                          </SubComponents>
-                        </Container>
-                      </SubComponents>
-                    </Container>
                     <Container class="javax.swing.JPanel" name="return_panel">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="d3" green="e5" red="dc" type="rgb"/>
-                        </Property>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[576, 840]"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1109,119 +975,128 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="userMail_return" min="-2" pref="190" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="return_title" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                                      <Component id="productname_return" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <Component id="manufacturer_return" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <Component id="userID_return" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <Component id="returnDate_return" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <Component id="notes_return" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <Component id="factorysettings_return" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <Component id="inventorynumber_return" min="-2" pref="190" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="userPhone_return" alignment="1" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                                                  <Component id="save_return" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="re_userPhone" min="-2" pref="272" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="re_manufacturer" pref="272" max="32767" attributes="0"/>
-                                                      <Component id="re_productname" pref="272" max="32767" attributes="0"/>
-                                                      <Component id="re_inventroyNumber" alignment="0" pref="272" max="32767" attributes="0"/>
-                                                      <Component id="re_UserID" alignment="0" pref="272" max="32767" attributes="0"/>
-                                                      <Component id="returndate" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="yes" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="save_return" min="-2" pref="105" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                                          <Component id="cancel_return" min="-2" pref="105" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="re_userName" alignment="0" pref="272" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="returnDate_return" max="32767" attributes="0"/>
+                                                      <Component id="inventorynumber_return" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="userID_return" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="userName_return" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="userPhone_return" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="userMail_return" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="notes_return" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="manufacturer_return" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="productname_return" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="factorysettings_return" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <Component id="re_userMail" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
-                                                  <Component id="re_notes" min="-2" pref="269" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="yes" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="re_productname" max="32767" attributes="0"/>
+                                                              <Component id="re_manufacturer" max="32767" attributes="0"/>
+                                                              <Component id="re_inventroyNumber" max="32767" attributes="0"/>
+                                                              <Component id="re_UserID" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="re_userName" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="re_userPhone" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="re_userMail" max="32767" attributes="0"/>
+                                                              <Component id="re_notes" alignment="0" pref="260" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <Component id="returndate" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="cancel_return" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <Component id="userName_return" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="return_title" min="-2" pref="575" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace pref="59" max="32767" attributes="0"/>
+                                  <EmptySpace min="130" pref="1117" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="return_title" min="-2" pref="70" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="re_productname" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="productname_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="re_manufacturer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="manufacturer_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="re_inventroyNumber" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="inventorynumber_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="re_UserID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="userID_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="userName_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="re_userName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="userPhone_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="re_userPhone" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="userMail_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="re_userMail" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="return_title" min="-2" pref="60" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="returndate" max="-2" attributes="0"/>
-                                      <Component id="returnDate_return" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Component id="notes_return" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="productname_return" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="manufacturer_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="re_manufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="re_notes" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="re_productname" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="yes" min="-2" max="-2" attributes="0"/>
-                                      <Component id="factorysettings_return" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="save_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cancel_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inventorynumber_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="re_inventroyNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="userID_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="re_UserID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="userName_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="re_userName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="userPhone_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="re_userPhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="userMail_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="re_userMail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="notes_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="re_notes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="returndate" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="yes" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="save_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cancel_return" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                          <Component id="returnDate_return" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
+                                          <Component id="factorysettings_return" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1405,7 +1280,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="newdevice_panel">
+                    <Container class="javax.swing.JPanel" name="inventory_update_panel">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="d3" green="e5" red="dc" type="rgb"/>
@@ -1426,49 +1301,372 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="manufacturer_newdevice1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="devicename_newdevice1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="inventorynumber_newdevice1" alignment="0" pref="144" max="32767" attributes="0"/>
+                                              <Component id="IMEInumber_newdevice1" alignment="0" pref="144" max="32767" attributes="0"/>
+                                              <Component id="room_newdevice1" alignment="0" pref="144" max="32767" attributes="0"/>
+                                              <Component id="notes_newdevice1" alignment="1" pref="144" max="32767" attributes="0"/>
+                                              <Component id="administrator_newdevice1" alignment="0" pref="144" max="32767" attributes="0"/>
+                                              <Component id="acquisitionvalue_newdevice1" alignment="0" pref="144" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="InvUpd_TfManufacturer" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="InvUpd_TfProductname" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="InvUpd_TfInventoryNumber" alignment="1" pref="307" max="32767" attributes="0"/>
+                                              <Component id="InvUpd_TfImei" alignment="0" pref="307" max="32767" attributes="0"/>
+                                              <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="InvUpd_CbAdmini" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="InvUpd_TfLocation" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="InvUpd_TfAcqValue" alignment="1" pref="307" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="55" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="newdevice_title1" alignment="0" min="-2" pref="504" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="acquisitiondate_newdevice1" min="-2" pref="144" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="InvUpd_AcqDate" alignment="0" max="-2" attributes="0"/>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="InvUpd_BtnSave" min="-2" pref="105" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="InvUpd_BtnCancel" min="-2" pref="105" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="newdevice_title1" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="devicename_newdevice1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="InvUpd_TfProductname" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="InvUpd_TfManufacturer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="manufacturer_newdevice1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="inventorynumber_newdevice1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="InvUpd_TfInventoryNumber" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="IMEInumber_newdevice1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="InvUpd_TfImei" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="room_newdevice1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="InvUpd_TfLocation" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="notes_newdevice1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane3" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="InvUpd_CbAdmini" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="administrator_newdevice1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="acquisitionvalue_newdevice1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="InvUpd_TfAcqValue" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="acquisitiondate_newdevice1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="InvUpd_AcqDate" alignment="0" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="InvUpd_BtnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="InvUpd_BtnSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="newdevice_title1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="Eintrag bearbeiten"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="devicename_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Ger&#xe4;tename"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="manufacturer_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Herstellerbezeichnung"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="inventorynumber_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Inventarnummer"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="IMEInumber_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="IMEI Nummer"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="acquisitiondate_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Anschaffungsdatum"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.raven.datechooser.DateChooser" name="InvUpd_AcqDate">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="32" green="79" red="57" type="rgb"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="InvUpd_TfManufacturer">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte den Hersteller eingeben (max. 30 Zeichen)"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="InvUpd_TfProductname">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte den Ger&#xe4;tenamen eingeben (max. 45 Zeichen)"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="InvUpd_TfInventoryNumber">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte die Inventarnummer eingeben (max. 11 Ziffern)"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="InvUpd_TfImei">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Nur bei GSM/UMTS-f&#xe4;higen Devices vorhanden; Bitte genau 15 Ziffern eingeben"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="room_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Raum"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="InvUpd_TfLocation">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte den Aufbewahrungsort des Ger&#xe4;tes angeben (max. 45 Zeichen)"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="notes_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Notizen"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextArea" name="InvUpd_TaNotes">
+                              <Properties>
+                                <Property name="columns" type="int" value="20"/>
+                                <Property name="rows" type="int" value="5"/>
+                                <Property name="toolTipText" type="java.lang.String" value="Anmerkungen zum Ger&#xe4;t"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="administrator_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Administrator"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="InvUpd_CbAdmini">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Item 1"/>
+                                <StringItem index="1" value="Item 2"/>
+                                <StringItem index="2" value="Item 3"/>
+                                <StringItem index="3" value="Item 4"/>
+                              </StringArray>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte den Verwalter des Ger&#xe4;tes ausw&#xe4;hlen"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="acquisitionvalue_newdevice1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Anschaffungswert"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="InvUpd_TfAcqValue">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte max. 7 Vor- und 2 Nachkommastellen mit . als Trennzeichen eingeben"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="InvUpd_BtnCancel">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Verwerfen"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InvUpd_BtnCancelActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="InvUpd_BtnSave">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Speichern"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InvUpd_BtnSaveActionPerformed"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="inventory_new_panel">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="d3" green="e5" red="dc" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="card7"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="manufacturer_newdevice" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="devicename_newdevice" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="inventorynumber_newdevice" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="IMEInumber_newdevice" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="room_newdevice" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="notes_newdevice" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="administrator_newdevice" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="acquisitionvalue_newdevice" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="invNew_manufacturer" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="invNew_productname" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="invNew_inventoryNumber" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="invNew_imei" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="invNew_administrator" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="invNew_location" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="invNew_acquisitionValue" alignment="1" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="newdevice_title" alignment="0" min="-2" pref="504" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="acquisitiondate_newdevice" min="-2" pref="144" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="save_newdevice" min="-2" pref="105" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                  <Component id="cancel_newdevice" min="-2" pref="105" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                                  <Component id="invNew_save" min="-2" pref="105" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="invNew_cancel" min="-2" pref="105" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="acquisitionDate" alignment="0" max="-2" attributes="0"/>
+                                              <Component id="invNew_acquisitionDate" alignment="0" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="newdevice_title" alignment="0" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="manufacturer_newdevice" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="devicename_newdevice" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="inventorynumber_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                                      <Component id="IMEInumber_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                                      <Component id="room_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                                      <Component id="notes_newdevice" alignment="1" pref="144" max="32767" attributes="0"/>
-                                                      <Component id="administrator_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                                      <Component id="acquisitionvalue_newdevice" alignment="0" pref="144" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="manufacturer" max="32767" attributes="0"/>
-                                                      <Component id="productname" max="32767" attributes="0"/>
-                                                      <Component id="inventoryNumber" alignment="1" pref="307" max="32767" attributes="0"/>
-                                                      <Component id="imei" alignment="0" pref="307" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPane2" max="32767" attributes="0"/>
-                                                      <Component id="administrator" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="location" max="32767" attributes="0"/>
-                                                      <Component id="acquisitionValue" alignment="1" pref="307" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="0" pref="65" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace min="0" pref="1297" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1480,52 +1678,52 @@
                                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="devicename_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="productname" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="invNew_productname" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="manufacturer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="invNew_manufacturer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="manufacturer_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="inventorynumber_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="inventoryNumber" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="invNew_inventoryNumber" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="IMEInumber_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="imei" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="invNew_imei" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="room_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="location" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="invNew_location" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="notes_newdevice" min="-2" max="-2" attributes="0"/>
+                                      <Component id="notes_newdevice" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPane2" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="administrator" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="invNew_administrator" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="administrator_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="acquisitionvalue_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="acquisitionValue" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="invNew_acquisitionValue" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="acquisitiondate_newdevice" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="acquisitionDate" alignment="0" max="-2" attributes="0"/>
+                                      <Component id="invNew_acquisitionDate" alignment="0" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="save_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cancel_newdevice" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invNew_save" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invNew_cancel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
                               </Group>
@@ -1587,7 +1785,7 @@
                             <Property name="text" type="java.lang.String" value="Anschaffungsdatum"/>
                           </Properties>
                         </Component>
-                        <Component class="com.raven.datechooser.DateChooser" name="acquisitionDate">
+                        <Component class="com.raven.datechooser.DateChooser" name="invNew_acquisitionDate">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="32" green="79" red="57" type="rgb"/>
@@ -1597,48 +1795,36 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JToggleButton" name="save_newdevice">
+                        <Component class="javax.swing.JTextField" name="invNew_manufacturer">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Speichern"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte den Hersteller eingeben (max. 30 Zeichen)"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JToggleButton" name="cancel_newdevice">
+                        <Component class="javax.swing.JTextField" name="invNew_productname">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Abbrechen"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte den Ger&#xe4;tenamen eingeben (max. 45 Zeichen)"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="manufacturer">
+                        <Component class="javax.swing.JTextField" name="invNew_inventoryNumber">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte die Inventarnummer eingeben (max. 11 Ziffern)"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="productname">
+                        <Component class="javax.swing.JTextField" name="invNew_imei">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="inventoryNumber">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="12" style="0"/>
-                            </Property>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="imei">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="12" style="0"/>
-                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Nur bei GSM/UMTS-f&#xe4;higen Devices vorhanden; Bitte genau 15 Ziffern eingeben"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="room_newdevice">
@@ -1650,11 +1836,12 @@
                             <Property name="text" type="java.lang.String" value="Raum"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="location">
+                        <Component class="javax.swing.JTextField" name="invNew_location">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte den Aufbewahrungsort des Ger&#xe4;tes angeben (max. 45 Zeichen)"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="notes_newdevice">
@@ -1673,10 +1860,11 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextArea" name="notes">
+                            <Component class="javax.swing.JTextArea" name="invNew_notes">
                               <Properties>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
+                                <Property name="toolTipText" type="java.lang.String" value="Anmerkungen zum Ger&#xe4;t"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -1690,7 +1878,7 @@
                             <Property name="text" type="java.lang.String" value="Administrator"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="administrator">
+                        <Component class="javax.swing.JComboBox" name="invNew_administrator">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
@@ -1703,6 +1891,7 @@
                                 <StringItem index="3" value="Item 4"/>
                               </StringArray>
                             </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte den Verwalter des Ger&#xe4;tes ausw&#xe4;hlen"/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -1717,12 +1906,37 @@
                             <Property name="text" type="java.lang.String" value="Anschaffungswert"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="acquisitionValue">
+                        <Component class="javax.swing.JTextField" name="invNew_acquisitionValue">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte max. 7 Vor- und 2 Nachkommastellen mit . als Trennzeichen eingeben"/>
                           </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="invNew_save">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Speichern"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invNew_saveActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="invNew_cancel">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Abbrechen"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                            <Property name="opaque" type="boolean" value="false"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invNew_cancelActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1748,7 +1962,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="archive_title" pref="552" max="32767" attributes="0"/>
+                                          <Component id="archive_title" pref="564" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -1777,13 +1991,13 @@
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                                  <Component id="archive_ScrollPane" pref="514" max="32767" attributes="0"/>
+                                                  <Component id="archive_ScrollPane" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1791,8 +2005,8 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="archive_title" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="archive_title" min="-2" pref="64" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="search_options_archive" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="searchfilter_archive" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -1807,7 +2021,7 @@
                                       <Component id="btClear_archive" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="archive_ScrollPane" pref="606" max="32767" attributes="0"/>
+                                  <Component id="archive_ScrollPane" pref="527" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1991,6 +2205,309 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="inventory_panel">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="d3" green="e5" red="dc" type="rgb"/>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[576, 800]"/>
+                        </Property>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="card4"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="inventar_title" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="search_options_inventory" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                                                      <Component id="filter_options_inventory" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="inventory_searchfilter" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                                      <Component id="inventory_filterText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="inventory_asc" min="-2" pref="55" max="-2" attributes="0"/>
+                                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                                          <Component id="inventory_desc" min="-2" pref="60" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="inventory_btFilter" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                                  <Component id="inventory_btClear" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="inventory_btUpdate" min="-2" pref="120" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="inventory_btDelete" min="-2" pref="114" max="-2" attributes="0"/>
+                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="inventory_ScrollPane1" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="inventar_title" min="-2" pref="64" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="search_options_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inventory_searchfilter" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="inventory_asc" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="inventory_desc" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="filter_options_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inventory_filterText" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inventory_btFilter" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="inventory_btClear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <Component id="inventory_ScrollPane1" pref="527" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="inventory_btUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inventory_btDelete" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="inventar_title">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="Inventar"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="inventory_searchfilter">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Item 1"/>
+                                <StringItem index="1" value="Item 2"/>
+                                <StringItem index="2" value="Item 3"/>
+                                <StringItem index="3" value="Item 4"/>
+                              </StringArray>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Tabelle in der gefiltert/sortiert werden soll "/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="search_options_inventory">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Filter- und Sortieroptionen"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="filter_options_inventory">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Filtern nach:"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[90, 20]"/>
+                            </Property>
+                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[90, 20]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="inventory_filterText">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value="Wert nach dem gefiltert werden soll"/>
+                            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[125, 30]"/>
+                            </Property>
+                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[70, 30]"/>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[70, 30]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="inventory_asc">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="ASC"/>
+                            <Property name="toolTipText" type="java.lang.String" value="aufsteigende Sortierung"/>
+                            <Property name="alignmentX" type="float" value="0.5"/>
+                            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[55, 30]"/>
+                            </Property>
+                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[55, 30]"/>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[55, 30]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JRadioButton" name="inventory_desc">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="DESC"/>
+                            <Property name="toolTipText" type="java.lang.String" value="absteigende Sortierung"/>
+                            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[60, 30]"/>
+                            </Property>
+                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[60, 30]"/>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[60, 30]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="inventory_btFilter">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Filter anwenden"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[125, 32]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="inventory_btClear">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Clear"/>
+                            <Property name="alignmentX" type="float" value="0.2"/>
+                            <Property name="alignmentY" type="float" value="0.2"/>
+                            <Property name="horizontalTextPosition" type="int" value="0"/>
+                            <Property name="iconTextGap" type="int" value="2"/>
+                            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[65, 30]"/>
+                            </Property>
+                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[65, 30]"/>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[65, 30]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="inventory_ScrollPane1">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="d3" green="e5" red="dc" type="rgb"/>
+                            </Property>
+                            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+                          </Properties>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTable" name="inventory_table1">
+                              <Properties>
+                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                  <Table columnCount="1" rowCount="4">
+                                    <Column editable="true" title="Archiv" type="java.lang.Object"/>
+                                  </Table>
+                                </Property>
+                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                  <TableColumnModel selectionModel="0">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
+                                  </TableColumnModel>
+                                </Property>
+                                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[514, 64]"/>
+                                </Property>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[514, 64]"/>
+                                </Property>
+                                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JButton" name="inventory_btUpdate">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Update"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inventory_btUpdateActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="inventory_btDelete">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
+                            <Property name="actionCommand" type="java.lang.String" value="L&#xf6;schen"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inventory_btDeleteActionPerformed"/>
+                          </Events>
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>

@@ -19,10 +19,10 @@ public class RentalDateComparator implements Comparator<Rentals>{
         return c;
     }
 
-    @Override
+    /*@Override
     public Comparator<Rentals> reversed() {
-        return Comparator.super.reversed(); 
-    }
+    return Comparator.super.reversed();
+    }*/
     
     
 }
