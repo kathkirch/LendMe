@@ -10,13 +10,13 @@ import java.time.LocalDate;
  *
  * @author linda, katharina
  */
-public class Rentallist extends Rentals{
+public class RentalList extends Rentals{
     
     private String productName;
     private String manufacturer;
     private int lentDays;
     
-    public Rentallist(String productName, String manufacturer, 
+    public RentalList(String productName, String manufacturer, 
                 LocalDate rentalDate, long device_inventoryNumber, 
                 int administrators_AdminID, long users_UserID) {
        super(rentalDate, device_inventoryNumber, administrators_AdminID, users_UserID);

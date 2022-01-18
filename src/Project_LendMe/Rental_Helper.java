@@ -447,9 +447,12 @@ public final class Rental_Helper {
                 email.isBlank() || id.isBlank()){
             JOptionPane.showMessageDialog(null, 
                     "Achtung! Ein oder mehrere Felder sind leer!"
-                            + " Bitte alles ausfüllen!");
+                            + " Bitte alles ausfüllen!", 
+                            "Error", 
+                            JOptionPane.ERROR_MESSAGE);
         
         }else {
+            
             if ( val.isAlpha(firstname) &&  val.isAlpha(lastname)){
                 nameV = true;
             }
@@ -471,7 +474,9 @@ public final class Rental_Helper {
                                 email, year);
             } else {
                 JOptionPane.showMessageDialog(null, 
-                    "Eingabefehler, Formatvorlage beachten!");
+                    "Eingabefehler, Formatvorlage beachten!", 
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             }
         }
         return user;
@@ -505,14 +510,15 @@ public final class Rental_Helper {
             String adminID = (String) boxAdminID.getSelectedItem();
             
             if (inventoryNumb.isBlank() || userID.isBlank() || adminID.isBlank()){
-                JOptionPane.showMessageDialog(null, "Ein oder mehrere Felder sind leer!"
-                        + " Bitte ausfüllen!");
+                JOptionPane.showMessageDialog(null, 
+                        "Ein oder mehrere Felder sind leer!"
+                        + " Bitte ausfüllen!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             } else {
                 Rentals rental = new Rentals(date, Long.parseLong(inventoryNumb),
                             Integer.parseInt(adminID),
                            Long.parseLong(userID));
-                
-                
                 try {
                     hp.insertNewRental_DB(rental);
                     JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
@@ -520,7 +526,10 @@ public final class Rental_Helper {
                 } catch (UserException ex){
                     System.out.println(ex);
                     System.out.println("createNewRental in Rental_Helper");
-                    JOptionPane.showMessageDialog(null, "Überprüfen der Eingabe notwendig!");
+                    JOptionPane.showMessageDialog(null, 
+                            "Überprüfen der Eingabe notwendig!",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
             
@@ -547,7 +556,10 @@ public final class Rental_Helper {
                 
                 if (jCBuserID.getSelectedItem().toString().isBlank()){
                     JOptionPane
-                            .showMessageDialog(null, "Bitte UserID angeben!");
+                            .showMessageDialog(null, 
+                                    "Bitte UserID angeben!",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE);
                 }else {
                 
                     String userID = jCBuserID.getEditor().getItem().toString();
@@ -571,8 +583,11 @@ public final class Rental_Helper {
                                 System.out.println(ex);
                                 System.out.println("saveNewRental in Rental_Helper");
                                 JOptionPane
-                                .showMessageDialog(null, "Fehler beim hinzufügen "
-                                        + "eines neuen Users");
+                                .showMessageDialog(null, 
+                                        "Fehler beim hinzufügen "
+                                        + "eines neuen Users",
+                                        "Error",
+                                        JOptionPane.ERROR_MESSAGE);
                             }
                         }
 

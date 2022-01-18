@@ -5,23 +5,23 @@
  */
 package Comparators;
 
-import Project_LendMe.Rentallist;
+import Project_LendMe.RentalList;
 import java.util.Comparator;
 
 /**
  *
  * @author Katharina
  */
-public class RentallistManuNameComparator implements Comparator <Rentallist> {
+public class RentallistManuNameComparator implements Comparator <RentalList> {
 
     @Override
-    public int compare(Rentallist r1, Rentallist r2) {
+    public int compare(RentalList r1, RentalList r2) {
        int c = r1.getManufacturer().compareTo(r2.getManufacturer());
        return c;
     }
 
     @Override
-    public Comparator<Rentallist> reversed() {
+    public Comparator<RentalList> reversed() {
         return Comparator.super.reversed(); 
     }
     

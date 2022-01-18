@@ -6,7 +6,6 @@
 package Project_LendMe;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -486,7 +485,7 @@ public class DatabaseHelper {
             rs = stmt.executeQuery(query);
             
             while (rs.next()){
-                long userID = rs.getInt("userID");
+                long userID = rs.getLong("userID");
                 userIDs.add(String.valueOf(userID));
             }
         } catch (SQLException ex) {
@@ -938,14 +937,14 @@ public class DatabaseHelper {
      * @return the filtered list of Rentals-Objects if filtering was successful
      * or an empty list if filtering had no result
      */
-    public List<Rentallist> filterRentals2(int whereClause, String filterString) {
+    public List<RentalList> filterRentals2(int whereClause, String filterString) {
 
         stmt = null;
         rs = null;
         String table = "rentals";
         String joinTable = "devices";
         String where = "";
-        ArrayList<Rentallist> filteredRentallist = new ArrayList<>();
+        ArrayList<RentalList> filteredRentallist = new ArrayList<>();
 
         switch (whereClause) {
             case 0:
@@ -989,7 +988,7 @@ public class DatabaseHelper {
                 String manufacturer = rs.getString("manufacturer");
                 String productname = rs.getString("productname");
 
-                Rentallist ren = new Rentallist(productname, manufacturer,
+                RentalList ren = new RentalList(productname, manufacturer,
                         rentalDate, devices_inventoryNumber,
                         administrators_AdminID, users_UserID);
                 ren.setRentalID(rentalID);
@@ -1142,9 +1141,9 @@ public class DatabaseHelper {
      *
      * @author linda
      */
-    public List<Rentallist> displayRentallist() {
+    public List<RentalList> displayRentallist() {
        
-    ArrayList <Rentallist> Rentallist = new ArrayList <>();
+    ArrayList <RentalList> Rentallist = new ArrayList <>();
         
         String query = "SELECT rentalID, rentalDate, administrators_adminID "
                 + ",rentals.users_UserID, rentals.devices_inventoryNumber, "
@@ -1167,7 +1166,7 @@ public class DatabaseHelper {
                 String manufacturer = rs.getString("manufacturer");
                 String productname = rs.getString("productname");
 
-                Rentallist ren = new Rentallist(productname, manufacturer,
+                RentalList ren = new RentalList(productname, manufacturer,
                         rentalDate, devices_inventoryNumber,
                         administrators_AdminID, users_UserID);
                 ren.setRentalID(rentalID);

@@ -5,7 +5,6 @@
  */
 package Project_LendMe;
 
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -15,7 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -32,7 +30,7 @@ abstract public class MyTableHelper {
     JButton filterBT;
     JButton clearBT;
     
-    static List <Rentallist> rentalList;
+    static List <RentalList> rentalList;
     static List <Rentals> allRentals;
     static List <Devices> allDevices;
     String [] columns;
@@ -85,16 +83,16 @@ abstract public class MyTableHelper {
         
         table.setModel(model);
         
-        /**
-        * simple implementation of a TableRowSorter to sort the table with a clock on the columns
-        */
-        
-        //initialize a new Sorter
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
-        //tell the table about the sorter
-        table.setRowSorter(sorter);
-        //tell the sorter about the data to be sorted
-        sorter.setModel(model);
+//        /**
+//        * simple implementation of a TableRowSorter to sort the table with a clock on the columns
+//        */
+//        
+//        //initialize a new Sorter
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
+//        //tell the table about the sorter
+//        table.setRowSorter(sorter);
+//        //tell the sorter about the data to be sorted
+//        sorter.setModel(model);
         
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         
@@ -135,15 +133,15 @@ abstract public class MyTableHelper {
     
      /**
      *
-     * @param rentallist as a List of Rentallist-Objects 
-     * needed to put items within the list 
-     * into a double object array to display for each Object it's attributes
+     * @param rentallist as a List of RentalList-Objects 
+ needed to put items within the list 
+ into a double object array to display for each Object it's attributes
      * @return Object [][]
      */
-    public Object [][] initRentalList (List <Rentallist> rentallist){
+    public Object [][] initRentalList (List <RentalList> rentallist){
         Object [][] datalist = new Object [rentallist.size()] [];
         int i = 0;
-        for(Rentallist r : rentallist){
+        for(RentalList r : rentallist){
             datalist[i] = new Object []{r.getRentalID(),
                                         r.getDevice_inventoryNumber(),
                                         r.getProductName(),

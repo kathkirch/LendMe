@@ -77,7 +77,10 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Users{" + "userID=" + userID + ", userFirstName=" + userFirstName + ", userLastName=" + userLastName + ", userEmail=" + userEmail + ", userPhone=" + userPhone + ", year=" + year + '}';
+        return "Users{" + "userID=" + userID + ", userFirstName=" + 
+                userFirstName + ", userLastName=" + userLastName + 
+                ", userEmail=" + userEmail + ", userPhone=" 
+                + userPhone + ", year=" + year + '}';
     }
     
     
