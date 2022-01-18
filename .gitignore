@@ -63,3 +63,5 @@ build/built-jar.properties
 nbproject/private/private.xml
 build/built-jar.properties
 *.properties
+*.properties
+*.class

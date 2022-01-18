@@ -30,7 +30,7 @@ abstract public class MyTableHelper {
     JButton filterBT;
     JButton clearBT;
     
-    static List <Rentallist> rentalList;
+    static List <RentalList> rentalList;
     static List <Rentals> allRentals;
     static List <Devices> allDevices;
     String [] columns;
@@ -133,15 +133,15 @@ abstract public class MyTableHelper {
     
      /**
      *
-     * @param rentallist as a List of Rentallist-Objects 
-     * needed to put items within the list 
-     * into a double object array to display for each Object it's attributes
+     * @param rentallist as a List of RentalList-Objects 
+ needed to put items within the list 
+ into a double object array to display for each Object it's attributes
      * @return Object [][]
      */
-    public Object [][] initRentalList (List <Rentallist> rentallist){
+    public Object [][] initRentalList (List <RentalList> rentallist){
         Object [][] datalist = new Object [rentallist.size()] [];
         int i = 0;
-        for(Rentallist r : rentallist){
+        for(RentalList r : rentallist){
             datalist[i] = new Object []{r.getRentalID(),
                                         r.getDevice_inventoryNumber(),
                                         r.getProductName(),

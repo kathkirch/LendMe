@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  *
  * @author linda, Katharina
  */
-public class ReturnHelper {
+public class Return_Helper {
     
     JPanel panel;
     JTextField productname;
@@ -45,9 +45,7 @@ public class ReturnHelper {
     
     List <Devices> devices = dbH.getDevices();
    
-    
-
-    public ReturnHelper(JPanel panel, JLayeredPane lp, JPanel home) {
+    public Return_Helper(JPanel panel, JLayeredPane lp, JPanel home) {
         
         this.panel = panel;
         this.productname = (JTextField) panel.getComponent(12);
@@ -81,12 +79,12 @@ public class ReturnHelper {
         
         String notes = null;
         
-        productname.setText(Rentallist_Helper.RETURN_PRODUCTNAME);
-        manufacturer.setText(Rentallist_Helper.RETURN_MANUFACTURER);
-        inventoryNumber.setText(String.valueOf(Rentallist_Helper.RETURN_INVNUMBER));
-        userID.setText(String.valueOf(Rentallist_Helper.RETURN_USERID));
+        productname.setText(RentalList_Helper.RETURN_PRODUCTNAME);
+        manufacturer.setText(RentalList_Helper.RETURN_MANUFACTURER);
+        inventoryNumber.setText(String.valueOf(RentalList_Helper.RETURN_INVNUMBER));
+        userID.setText(String.valueOf(RentalList_Helper.RETURN_USERID));
         
-        Users user = dbH.checkUserID(String.valueOf(Rentallist_Helper.RETURN_USERID));
+        Users user = dbH.checkUserID(String.valueOf(RentalList_Helper.RETURN_USERID));
         
         String fullname = user.getUserFirstName() + " " + user.getUserLastName();
         userName.setText(fullname);
@@ -94,7 +92,7 @@ public class ReturnHelper {
         userEmail.setText(user.getUserEmail());
         
         for (Devices dev : devices) {
-            if (dev.getInventoryNumber() == Rentallist_Helper.RETURN_INVNUMBER){
+            if (dev.getInventoryNumber() == RentalList_Helper.RETURN_INVNUMBER){
                 
                 notes = dev.getNotes();
             }
@@ -135,7 +133,7 @@ public class ReturnHelper {
     
     public void createNewReturn (){
         
-        int returnID = Rentallist_Helper.RETURN_ID;
+        int returnID = RentalList_Helper.RETURN_ID;
         
         SelectedDate selectedDate = rDate.getSelectedDate();
         
@@ -158,7 +156,7 @@ public class ReturnHelper {
                 
             } catch (UserException ex){
                 JOptionPane.showMessageDialog(null, "Fehler bei Rückgabe \n"
-                        + "Eingabe prüfen");
+                        + "Eingabe prüfen", "Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println(ex + "\n createNewReturn in ReturnHelper");
             }
             
