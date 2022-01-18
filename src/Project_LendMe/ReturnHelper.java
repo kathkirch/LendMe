@@ -51,17 +51,17 @@ public class ReturnHelper {
         
         this.panel = panel;
         this.productname = (JTextField) panel.getComponent(12);
-        this.manufacturer = (JTextField) panel.getComponent(11);
-        this.inventoryNumber = (JTextField) panel.getComponent(13);
-        this.userID = (JTextField) panel.getComponent(14);
-        this.userName = (JTextField) panel.getComponent(19);
-        this.userPhone = (JTextField) panel.getComponent(10);
-        this.userEmail = (JTextField) panel.getComponent(20);
-        this.rNotes = (JTextArea) panel.getComponent(21);
-        this.rDate = (DateChooser) panel.getComponent(15);
-        this.yesBT = (JRadioButton) panel.getComponent(16);
-        this.rSave = (JButton) panel.getComponent(17);
-        this.rCancel = (JButton) panel.getComponent(18);
+        this.manufacturer = (JTextField) panel.getComponent(13);
+        this.inventoryNumber = (JTextField) panel.getComponent(14);
+        this.userID = (JTextField) panel.getComponent(15);
+        this.userName = (JTextField) panel.getComponent(16);
+        this.userPhone = (JTextField) panel.getComponent(17);
+        this.userEmail = (JTextField) panel.getComponent(18);
+        this.rNotes = (JTextArea) panel.getComponent(19);
+        this.rDate = (DateChooser) panel.getComponent(20);
+        this.yesBT = (JRadioButton) panel.getComponent(11);
+        this.rSave = (JButton) panel.getComponent(0);
+        this.rCancel = (JButton) panel.getComponent(21);
         this.lp = lp;
         this.home = home;
     }

@@ -5,7 +5,6 @@
  */
 package Project_LendMe;
 
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -15,7 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -85,16 +83,16 @@ abstract public class MyTableHelper {
         
         table.setModel(model);
         
-        /**
-        * simple implementation of a TableRowSorter to sort the table with a clock on the columns
-        */
-        
-        //initialize a new Sorter
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
-        //tell the table about the sorter
-        table.setRowSorter(sorter);
-        //tell the sorter about the data to be sorted
-        sorter.setModel(model);
+//        /**
+//        * simple implementation of a TableRowSorter to sort the table with a clock on the columns
+//        */
+//        
+//        //initialize a new Sorter
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
+//        //tell the table about the sorter
+//        table.setRowSorter(sorter);
+//        //tell the sorter about the data to be sorted
+//        sorter.setModel(model);
         
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         

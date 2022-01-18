@@ -1004,8 +1004,8 @@
                                                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                                               <Component id="re_productname" max="32767" attributes="0"/>
                                                               <Component id="re_manufacturer" max="32767" attributes="0"/>
-                                                              <Component id="re_inventroyNumber" max="32767" attributes="0"/>
-                                                              <Component id="re_UserID" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="re_inventoryNumber" max="32767" attributes="0"/>
+                                                              <Component id="re_userID" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="re_userName" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="re_userPhone" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="re_userMail" max="32767" attributes="0"/>
@@ -1050,12 +1050,12 @@
                                   <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="inventorynumber_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="re_inventroyNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="re_inventoryNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="userID_return" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="re_UserID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="re_userID" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1161,14 +1161,14 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="re_inventroyNumber">
+                        <Component class="javax.swing.JTextField" name="re_inventoryNumber">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="re_UserID">
+                        <Component class="javax.swing.JTextField" name="re_userID">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
@@ -2502,7 +2502,6 @@
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
-                            <Property name="actionCommand" type="java.lang.String" value="L&#xf6;schen"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inventory_btDeleteActionPerformed"/>

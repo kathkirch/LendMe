@@ -5,6 +5,7 @@
 package Project_LendMe;
 
 
+import javax.swing.JPanel;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -25,7 +26,6 @@ public class GUI extends javax.swing.JFrame {
         
         updateLAF();
         initComponents();
-
     }
     
     private void updateLAF(){ //Methode um Look and Feel einzustellen.
@@ -48,6 +48,16 @@ public class GUI extends javax.swing.JFrame {
         }
     }
 
+    
+    
+    public void switchPanel (JPanel panel){
+    
+        layerpane.removeAll();
+        layerpane.add(panel);
+        layerpane.repaint();
+        layerpane.revalidate();
+    
+    }
     
      
     /**
@@ -114,8 +124,8 @@ public class GUI extends javax.swing.JFrame {
         returndate = new com.raven.datechooser.DateChooser();
         yes = new javax.swing.JRadioButton();
         re_manufacturer = new javax.swing.JTextField();
-        re_inventroyNumber = new javax.swing.JTextField();
-        re_UserID = new javax.swing.JTextField();
+        re_inventoryNumber = new javax.swing.JTextField();
+        re_userID = new javax.swing.JTextField();
         manufacturer_return = new javax.swing.JLabel();
         userID_return = new javax.swing.JLabel();
         inventorynumber_return = new javax.swing.JLabel();
@@ -656,9 +666,9 @@ public class GUI extends javax.swing.JFrame {
 
         re_manufacturer.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        re_inventroyNumber.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        re_inventoryNumber.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        re_UserID.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        re_userID.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         manufacturer_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manufacturer_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -733,8 +743,8 @@ public class GUI extends javax.swing.JFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(re_productname)
                                             .addComponent(re_manufacturer)
-                                            .addComponent(re_inventroyNumber)
-                                            .addComponent(re_UserID)
+                                            .addComponent(re_inventoryNumber)
+                                            .addComponent(re_userID)
                                             .addComponent(re_userName)
                                             .addComponent(re_userPhone)
                                             .addComponent(re_userMail)
@@ -765,11 +775,11 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(154, 154, 154)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inventorynumber_return)
-                    .addComponent(re_inventroyNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(re_inventoryNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userID_return)
-                    .addComponent(re_UserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(re_userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userName_return)
@@ -1383,7 +1393,6 @@ public class GUI extends javax.swing.JFrame {
 
         inventory_btDelete.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         inventory_btDelete.setText("Löschen");
-        inventory_btDelete.setActionCommand("Löschen");
         inventory_btDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inventory_btDeleteActionPerformed(evt);
@@ -1483,39 +1492,43 @@ public class GUI extends javax.swing.JFrame {
 
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
          
+        switchPanel(newrental_panel);
         
-        layerpane.removeAll();
-        layerpane.add(newrental_panel);
-        layerpane.repaint();
-        layerpane.revalidate();
+//        layerpane.removeAll();
+//        layerpane.add(newrental_panel);
+//        layerpane.repaint();
+//        layerpane.revalidate();
         
         /**
         *
         * @author Katharina
         */
         
+        //initiate new Rental_Helper Object
         Rental_Helper rh = new Rental_Helper(newrental_panel);
         
-       
+        //Method to fill the Comboboxes with data from Database
         rh.fillBoxes();
         
+        //initate listener for JComboboxes in panel newrental_panel
         rh.listenForSelectionPN();
         rh.listenForSelectionM();
         rh.listenForSelectionIN();
         rh.listenForSelectionUID();
         rh.listenForSelectionAID();
         
+        //initiate listener for JButtons in panel newrental_panel
         rh.cancelButton();
         rh.saveNewRental();
-        
     }//GEN-LAST:event_newrentalActionPerformed
 
     private void rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentallistActionPerformed
 
-        layerpane.removeAll();
-        layerpane.add(rentallist_panel);
-        layerpane.repaint();
-        layerpane.revalidate();
+        switchPanel(rentallist_panel);
+//        layerpane.removeAll();
+//        layerpane.add(rentallist_panel);
+//        layerpane.repaint();
+//        layerpane.revalidate();
         
         
         
@@ -1523,44 +1536,71 @@ public class GUI extends javax.swing.JFrame {
         *
         * @author Katharina
         */
+        //initiate new Rentallist_Helper object
         Rentallist_Helper rListHelper = new Rentallist_Helper (rentallist_table,
                     rental_ScrollPane, searchfilter_rentallist, asc_rentallist,
                     desc_rentallist, filterText_rentallist, 
                     filterbutton_rentallist, btClear_rentals, return_button, 
                     layerpane, home_panel);
         
-        
+        //set other tables to null to only display rentallist
         MyTableHelper.allRentals = null;
         MyTableHelper.allDevices = null;
+        
+        //set up table with data
         rListHelper.populateTable();
+        
+        //initiate the JComboboxes needed for sort and filter
         rListHelper.fillBox();
+        
+        //method to filter the table with the given options from user in GUI
         rListHelper.filterTable();
+        
+        //method to sort table with the given options from user in GUI
         rListHelper.sortTable();
+        
+        //method to reset filter/sort options, initiate the table new
         rListHelper.clearSelection();
+        
+        //initiate lisener for the returnButton, to save a new return
         rListHelper.newReturn(layerpane, return_panel);
     }//GEN-LAST:event_rentallistActionPerformed
 
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
 
-        layerpane.removeAll();
-        layerpane.add(archive_panel);
-        layerpane.repaint();
-        layerpane.revalidate();
+        switchPanel(archive_panel);
+        
+//        layerpane.removeAll();
+//        layerpane.add(archive_panel);
+//        layerpane.repaint();
+//        layerpane.revalidate();
 
         /**
          *
          * @author Katharina
          */
+         //initiate new Archiv_Helper object
         ArchivHelper archHelper = new ArchivHelper(archive_table, archive_ScrollPane,
                 searchfilter_archive, asc_archive, desc_archive,
                 filterText_archive, filterButton_archive, btClear_archive);
 
+        //set other tables to null to only display rentallist
         MyTableHelper.rentalList = null;
         MyTableHelper.allDevices = null;
+        
+         //set up table with data
         archHelper.populateTable();
+       
+        //method to filter the table with the given options from user in GUI
         archHelper.fillBox();
+       
+        //method to sort table with the given options from user in GUI
         archHelper.sortTable();
+        
+        //method to filter table with the given options from user in GUI
         archHelper.filterTable();
+        
+        //method to reset filter/sort options, initiate the table new
         archHelper.clearSelection();
     }//GEN-LAST:event_archiveActionPerformed
 
@@ -1660,6 +1700,8 @@ public class GUI extends javax.swing.JFrame {
      *
      * @author Katharina
      */
+    
+    //set up options for WindowClosing, Close DB when window is closed
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         hp.closeDB();
         System.out.println("Connection to Database closed");
@@ -1846,11 +1888,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel parentpanel;
     private javax.swing.JComboBox<String> productname_newrental;
     private javax.swing.JLabel productname_return;
-    private javax.swing.JTextField re_UserID;
-    private javax.swing.JTextField re_inventroyNumber;
+    private javax.swing.JTextField re_inventoryNumber;
     private javax.swing.JTextField re_manufacturer;
     private javax.swing.JTextArea re_notes;
     private javax.swing.JTextField re_productname;
+    private javax.swing.JTextField re_userID;
     private javax.swing.JTextField re_userMail;
     private javax.swing.JTextField re_userName;
     private javax.swing.JTextField re_userPhone;
