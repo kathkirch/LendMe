@@ -5,6 +5,9 @@
  */
 package Project_LendMe;
 
+import javax.swing.SwingUtilities;
+
+
 /**
  *
  * @author Katharina
@@ -19,9 +22,13 @@ public class MainClass {
         
         DatabaseHelper.connectDB();
         
-        Runnable runnable = new GUI();
-        Thread thread = new Thread(runnable);
-        thread.start();
-        
+        SwingUtilities.invokeLater(new Runnable() {
+        @Override
+            
+            public void run() {
+                GUI g = new GUI();
+                g.setVisible(true); 
+            }
+        });
     }
 }

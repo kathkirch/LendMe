@@ -15,7 +15,7 @@ import java.util.Comparator;
 public class RentalInvComparator implements Comparator<Rentals>{
     @Override
     public int compare(Rentals r1, Rentals r2) {
-        int c = r1.getDevice_inventoryNumber() - r2.getDevice_inventoryNumber();
+        int c = (int) r1.getDevice_inventoryNumber() - (int) r2.getDevice_inventoryNumber();
         return c;
     }
 

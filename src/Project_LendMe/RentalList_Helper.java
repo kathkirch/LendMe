@@ -16,36 +16,55 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author Katharina
  */
-public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
+public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
     
     private final DatabaseHelper rlH = new DatabaseHelper();
-
-    public Rentallist_Helper(JTable table, JScrollPane js, JComboBox box, 
+    
+    public JButton returnBT;
+    public JLayeredPane lp;
+    public JPanel home;
+    public static int RETURN_ID;
+    public static String RETURN_PRODUCTNAME;
+    public static String RETURN_MANUFACTURER;
+    public static long RETURN_INVNUMBER;
+    public static long RETURN_USERID;
+    
+    public RentalList_Helper(JTable table, JScrollPane js, JComboBox box, 
                 JRadioButton ascRadio, JRadioButton descRadio, 
-                JTextField filterTF, JButton filterBT, JButton clearBT) {
+                JTextField filterTF, JButton filterBT, JButton clearBT, 
+                JButton returnBT, JLayeredPane lp, JPanel home) {
         super(table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
         
+        this.returnBT = returnBT;
+        
         this.rentalList = rlH.displayRentallist();
+        
         this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
                                 "Hersteller","Verliehen an" ,"Verliehene Tage"};
+        
+        this.lp = lp;
+        this.home = home;
         
     }
     
 
     @Override
-    public Object[][] initRentalList(List<Rentallist> rentallist) {
+    public Object[][] initRentalList(List<RentalList> rentallist) {
         Object [] [] data = super.initRentalList(rentallist);
         return data; 
     }
@@ -63,9 +82,6 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         colModel.getColumn(4).setPreferredWidth(90);
         colModel.getColumn(5).setPreferredWidth(105);
         
-        
-        System.out.println(table.getSize() + " rl table ");
-        
         table.setEnabled(true);
     }
 
@@ -78,9 +94,9 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
     /**
      *
      * @param list refresh the table with objects from the given list 
-     * of Rentallist-Objects
+ of RentalList-Objects
      */
-    public void refreshRentalTable (List<Rentallist> list){ 
+    public void refreshRentalTable (List<RentalList> list){ 
         data = initRentalList(list);
         model = new DefaultTableModel(data, columns);
         table.setModel(model);
@@ -100,6 +116,10 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
         }
         table.setEnabled(true);
         js.setVisible(true); 
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
+        table.setRowSorter(sorter);
+        sorter.setModel(model);
     }  
     
     /**
@@ -115,7 +135,7 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
-                List <Rentallist> wholeList = rlH.displayRentallist();
+                List <RentalList> wholeList = rlH.displayRentallist();
                 refreshRentalTable(wholeList);  
             }
         });
@@ -134,7 +154,7 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
             public void actionPerformed (ActionEvent aEv) {
                 int whereClause = box.getSelectedIndex();
                 String filterString = filterTF.getText();
-                List <Rentallist> filteredList = rlH.filterRentals2(whereClause, filterString);
+                List <RentalList> filteredList = rlH.filterRentals2(whereClause, filterString);
                 if (filteredList.size() >  0){
                     refreshRentalTable(filteredList);
                 } else {
@@ -142,6 +162,14 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
                 }
             }
         });
+    }
+    
+    public static void backToStart (JLayeredPane layeredpane, JPanel home_panel) {
+        layeredpane.removeAll();
+        layeredpane.add(home_panel);
+        layeredpane.repaint();
+        layeredpane.revalidate();
+
     }
     
     
@@ -212,6 +240,45 @@ public class Rentallist_Helper extends MyTableHelper implements FilterSortModel{
             } 
         });
     }
+    
+    
+    
+    public void newReturn (JLayeredPane layeredpane, JPanel return_panel) {
+        returnBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+               
+                if (!table.getSelectionModel().isSelectionEmpty()) {
+                    
+                    int index = table.getSelectedRow();
+                    int id = (int) model.getValueAt(index, 0);
+                    long inventorynumber = (long) model.getValueAt(index, 1);
+                    String productname = (String) model.getValueAt(index, 2);
+                    String manufacturer = (String) model.getValueAt(index, 3);
+                    long user = (long) model.getValueAt(index, 4);
+                    
+                    RETURN_ID = id;
+                    RETURN_PRODUCTNAME = productname;
+                    RETURN_MANUFACTURER = manufacturer;
+                    RETURN_INVNUMBER = inventorynumber;
+                    RETURN_USERID = user;
+                    
+                    layeredpane.removeAll();
+                    layeredpane.add(return_panel);
+                    layeredpane.repaint();
+                    layeredpane.revalidate();
+                    
+                    Return_Helper returnHelper = new Return_Helper(return_panel, lp, home);
+                    returnHelper.notEditable();
+                    returnHelper.showData();
+                    
+                    returnHelper.saveReturn();
+                    returnHelper.cancel();
+                    
+                }
+            }
+        });
+    } 
 }
     
 

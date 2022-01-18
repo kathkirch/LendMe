@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 /**
@@ -65,8 +66,6 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(4).setPreferredWidth(70);
         colModel.getColumn(5).setPreferredWidth(102);
         
-        System.out.println(table.getSize() + " arc table ");
-        
     }
 
     @Override
@@ -99,7 +98,11 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
             table.setPreferredSize(js.getPreferredSize());
         }
         table.setEnabled(false);
-        js.setVisible(true); 
+        js.setVisible(true);
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
+        table.setRowSorter(sorter);
+        sorter.setModel(model);
    }    
     
 

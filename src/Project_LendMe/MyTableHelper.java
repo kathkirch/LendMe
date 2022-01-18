@@ -30,8 +30,9 @@ abstract public class MyTableHelper {
     JButton filterBT;
     JButton clearBT;
     
-    static List <Rentallist> rentalList;
+    static List <RentalList> rentalList;
     static List <Rentals> allRentals;
+    static List <Devices> allDevices;
     String [] columns;
     
     Object [][] data;
@@ -54,6 +55,7 @@ abstract public class MyTableHelper {
         descRadio.setSelected(false);
         filterTF.setText("");
 
+        
     }
     
     /**
@@ -73,11 +75,24 @@ abstract public class MyTableHelper {
             data = initRentals(allRentals);
         } else if (rentalList != null){
             data = initRentalList(rentalList);
+        } else if (allDevices != null) {
+            data = initDeviceList(allDevices);
         }
         
         model = new DefaultTableModel(data, columns);
         
         table.setModel(model);
+        
+//        /**
+//        * simple implementation of a TableRowSorter to sort the table with a clock on the columns
+//        */
+//        
+//        //initialize a new Sorter
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
+//        //tell the table about the sorter
+//        table.setRowSorter(sorter);
+//        //tell the sorter about the data to be sorted
+//        sorter.setModel(model);
         
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         
@@ -87,12 +102,12 @@ abstract public class MyTableHelper {
         if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
             table.setPreferredSize(js.getPreferredSize());
         }
-        
+   
         table.setEnabled(false);
         js.setVisible(true); 
     }
     
-    
+       
      /**
      *
      * @param rentals as a List of Rentals-Objects 
@@ -118,15 +133,15 @@ abstract public class MyTableHelper {
     
      /**
      *
-     * @param rentallist as a List of Rentallist-Objects 
-     * needed to put items within the list 
-     * into a double object array to display for each Object it's attributes
+     * @param rentallist as a List of RentalList-Objects 
+ needed to put items within the list 
+ into a double object array to display for each Object it's attributes
      * @return Object [][]
      */
-    public Object [][] initRentalList (List <Rentallist> rentallist){
+    public Object [][] initRentalList (List <RentalList> rentallist){
         Object [][] datalist = new Object [rentallist.size()] [];
         int i = 0;
-        for(Rentallist r : rentallist){
+        for(RentalList r : rentallist){
             datalist[i] = new Object []{r.getRentalID(),
                                         r.getDevice_inventoryNumber(),
                                         r.getProductName(),
@@ -136,5 +151,33 @@ abstract public class MyTableHelper {
             i = i + 1;
         }
         return datalist;
+    }
+    
+    /**
+     * 
+     * @param devicelist
+     * @return 
+     */
+    public Object [][] initDeviceList (List <Devices> devicelist) {
+        
+        Object [][] deviceData = new Object [devicelist.size()] [];
+        int i = 0;
+        
+        for (Devices d : devicelist) {
+            deviceData[i] = new Object [] {d.getInventoryNumber(),
+                                           d.getManufacturer(),
+                                           d.getProductName(),
+                                           d.getNotes(),
+                                           d.getLocation(),
+                                           d.getStatus(),
+                                           d.getImei(),
+                                           d.getUsers_userID(),
+                                           d.getAquisitionValue(),
+                                           d.getAquistionDate(),
+                                           d.getAdmin()};
+            
+           i = i + 1;  
+        }
+        return deviceData;
     }
 }

@@ -11,14 +11,14 @@ package Project_LendMe;
  */
 public class Users {
     
-    private int userID;
+    private long userID;
     private String userFirstName;
     private String userLastName;
     private String userEmail;
     private String userPhone;
     private String year;
 
-    public Users(int userID, String userFirstName, String userLastName, String userEmail, String userPhone, String year) {
+    public Users(long userID, String userFirstName, String userLastName, String userEmail, String userPhone, String year) {
         this.userID = userID;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
@@ -27,7 +27,7 @@ public class Users {
         this.year = year;
     }
 
-    public int getUserID() {
+    public long getUserID() {
         return userID;
     }
 
@@ -74,5 +74,15 @@ public class Users {
     public void setYear(String year) {
         this.year = year;
     }
+
+    @Override
+    public String toString() {
+        return "Users{" + "userID=" + userID + ", userFirstName=" + 
+                userFirstName + ", userLastName=" + userLastName + 
+                ", userEmail=" + userEmail + ", userPhone=" 
+                + userPhone + ", year=" + year + '}';
+    }
+    
+    
     
 }
