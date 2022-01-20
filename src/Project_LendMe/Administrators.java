@@ -6,6 +6,9 @@
 package Project_LendMe;
 
 /**
+ * Class for building Administrators Objects has same properties as administrators
+ * table in the database; variables are accessible via getter and setter methods
+ * 
  *
  * @author Katharina
  */

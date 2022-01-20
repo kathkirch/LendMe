@@ -28,24 +28,28 @@ import javax.swing.table.TableRowSorter;
 
 
 /**
- *
+ *  Helper Class for the archive table with it's methods, 
+ *  inherits from MyTableHelper, implements FilterSortModel
+ *  
+ * 
  * @author Katharina
  */
-public class ArchivHelper extends MyTableHelper implements FilterSortModel {
+public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     
     
     private final DatabaseHelper dbH = new DatabaseHelper();
+    private static List <Rentals> filteredList = null;
     
    
-    public ArchivHelper(JTable table, JScrollPane js, 
+    public Archiv_Helper(JTable table, JScrollPane js, 
                     JComboBox box, JRadioButton ascRadio, JRadioButton descRadio, 
                     JTextField filterTF, JButton filterBT, JButton clearBT) {
         super( table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
         
-        this.allRentals = dbH.readRentals();
+        this.allRentals = dbH.getCompletedRentals();
         this.columns =  new String [] {"ID", "Verliehen am", 
                                         "Zurück am",  "Inventarnummer", 
-                                        "AdminID", "Matrikelnummer"};
+                                         "Matrikelnummer"};
     }
 
     @Override
@@ -63,8 +67,8 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(1).setPreferredWidth(93);
         colModel.getColumn(2).setPreferredWidth(91);
         colModel.getColumn(3).setPreferredWidth(102);
-        colModel.getColumn(4).setPreferredWidth(70);
-        colModel.getColumn(5).setPreferredWidth(102);
+        colModel.getColumn(4).setPreferredWidth(102);
+//        colModel.getColumn(5).setPreferredWidth(102);
         
     }
 
@@ -75,7 +79,8 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
     
     
      /**
-     *
+     * method to refresh the table with data from database
+     * 
      * @param list refresh the table with objects from the given list 
      * of Rentals-Objects
      */ 
@@ -88,17 +93,22 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(1).setPreferredWidth(93);
         colModel.getColumn(2).setPreferredWidth(91);
         colModel.getColumn(3).setPreferredWidth(102);
-        colModel.getColumn(4).setPreferredWidth(70);
-        colModel.getColumn(5).setPreferredWidth(102);
+        colModel.getColumn(4).setPreferredWidth(102);
+        
         
         table.setRowHeight(25);
         
+//        table.setPreferredScrollableViewportSize(new Dimension(514, 4000));
+
+        
         table.setFillsViewportHeight(true);
+        
         if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
             table.setPreferredSize(js.getPreferredSize());
         }
+        
         table.setEnabled(false);
-        js.setVisible(true);
+        //js.setVisible(true);
         
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
         table.setRowSorter(sorter);
@@ -119,7 +129,7 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
             public void actionPerformed (ActionEvent aev) {
                 int whereClause = box.getSelectedIndex();
                 String filterString = filterTF.getText();
-                List <Rentals> filteredList = dbH.filterRentals(whereClause, filterString);
+                filteredList = dbH.filterRentals(whereClause, filterString);
                 if (filteredList.size() > 0){
                     refreshArchiveTable(filteredList);
                 } else {
@@ -136,9 +146,17 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
      */
     @Override
     public void sortTable() {
+        
+       
+        
          ascRadio.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent aev) {
+                
+                if (filteredList != null && filteredList.size() > 0){
+                    allRentals = filteredList;
+                }
+                
                 if(ascRadio.isSelected()){
                     descRadio.setSelected(false);
                     int selected = box.getSelectedIndex(); 
@@ -155,10 +173,10 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
                         case 3 :
                             Collections.sort(allRentals, new RentalInvComparator());
                             break;
+//                        case 4 :
+//                            Collections.sort(allRentals, new RentalAdminIDComparator());
+//                            break;
                         case 4 :
-                            Collections.sort(allRentals, new RentalAdminIDComparator());
-                            break;
-                        case 5 :
                             Collections.sort(allRentals, new RentalUserIDComparator());
                             break;
                     }
@@ -170,6 +188,11 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
         descRadio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent aev) {
+                
+                if (filteredList != null && filteredList.size() > 0){
+                    allRentals = filteredList;
+                }
+                
                 if (descRadio.isSelected()){
                     ascRadio.setSelected(false);
                     int selected = box.getSelectedIndex();
@@ -186,10 +209,10 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
                         case 3 :
                             Collections.sort(allRentals, new RentalInvComparator().reversed());
                             break;
+//                        case 4 :
+//                            Collections.sort(allRentals, new RentalAdminIDComparator().reversed());
+//                            break;
                         case 4 :
-                            Collections.sort(allRentals, new RentalAdminIDComparator().reversed());
-                            break;
-                        case 5 :
                             Collections.sort(allRentals, new RentalUserIDComparator().reversed());
                             break;
                     }
@@ -213,7 +236,7 @@ public class ArchivHelper extends MyTableHelper implements FilterSortModel {
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
-                List <Rentals> wholeRentals = dbH.readRentals();
+                List <Rentals> wholeRentals = dbH.getCompletedRentals();
                 System.out.println(wholeRentals.toString());
                 refreshArchiveTable(wholeRentals);
             }
