@@ -37,6 +37,8 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
     private final JButton deleteRow;
     private static String[] selectedRow;
     private static Boolean openUpdatePanel;
+    
+    private static List<Devices> filteredList = null; //static List damit man von dieser Klasse aus immer zugreifen kann
 
     public Inventory_Helper(JTable table, JScrollPane js, JComboBox box,
             JRadioButton ascRadio, JRadioButton descRadio, JTextField filterTF,
@@ -46,7 +48,7 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
         this.updateRow = updateRow;
         this.deleteRow = deleteRow;
         // set up Table Data
-        this.allDevices = dbH.getAllDevices();
+        this.allDevices = dbH.getAllDevices2(); //changed to getAllDevices2 (Methode ohne administrators has devices table)
         // set up Column Names
         this.columns = new String[]{"InvNr.", "Hersteller",
             "Produktname", "Notizen",
@@ -148,7 +150,7 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
             public void actionPerformed(ActionEvent e) {
                 int filterByColumn = box.getSelectedIndex();
                 String filterByUserInput = filterTF.getText();
-                List<Devices> filteredList = dbH.filterInventory(filterByColumn, filterByUserInput);
+                filteredList = dbH.filterInventory(filterByColumn, filterByUserInput); // filtered list befuellen
                 if (filteredList.size() > 0) {
                     refreshDevicesTable(filteredList);
                 } else {
@@ -166,6 +168,14 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
         ascRadio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent aev) {
+                
+                // wenn etwas in filteredList drinnen ist, also zuvor gefiltered wurde
+                // initalisere allDevices list mit der filteredList
+                // so wird dann nur die filteredList sortiert
+                if (filteredList != null && filteredList.size() > 0){
+                    allDevices = filteredList;
+                }
+                
                 if (ascRadio.isSelected()) {
                     descRadio.setSelected(false);
                     int selected = box.getSelectedIndex();
@@ -203,6 +213,14 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
         descRadio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent aev) {
+                
+                // wenn etwas in filteredList drinnen ist, also zuvor gefiltered wurde
+                // initalisere allDevices list mit der filteredList
+                // so wird dann nur die filteredList sortiert
+                if (filteredList != null && filteredList.size() > 0){
+                    allDevices = filteredList;
+                }
+                
                 if (descRadio.isSelected()) {
                     ascRadio.setSelected(false);
                     int selected = box.getSelectedIndex();
@@ -250,7 +268,7 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
-                List<Devices> devs = dbH.getAllDevices();
+                List<Devices> devs = dbH.getAllDevices2(); //changed to getAllDevices2 (Methode ohne administrators has devices table)
                 refreshDevicesTable(devs);
             }
         });
@@ -327,7 +345,7 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                             JOptionPane.WARNING_MESSAGE);
                 }
                 //query for new Device-List, refresh table
-                List<Devices> devs = dbH.getAllDevices();
+                List<Devices> devs = dbH.getAllDevices2(); //changed to getAllDevices2 (Methode ohne administrators has devices table)
                 refreshDevicesTable(devs);
             }
         });

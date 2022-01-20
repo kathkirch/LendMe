@@ -19,28 +19,31 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 /**
- *
+ * Helper-class to initialize the newrental_panel with all it's 
+ * methods and listeners for JButtons or JComboBox in this component
+ * 
  * @author Katharina
  */
 public final class Rental_Helper {
     
-    JPanel panel;
-    JComboBox jCBname;
-    JComboBox jCBmanufacturer;
-    JComboBox jCBinvnumber;
-    JComboBox jCBuserID;
-    JTextField jTFfirstname;
-    JTextField jTFlastname;
-    JTextField jTFmail;
-    JTextField jTFphone;
-    JComboBox jCByear;
-    JComboBox jCBadminID;
-    JTextField jTFadminName;
-    DateChooser dcDate; 
-    JButton jBsave;
-    JButton jBcancel;
+    private JPanel panel;
+    private JComboBox jCBname;
+    private JComboBox jCBmanufacturer;
+    private JComboBox jCBinvnumber;
+    private JComboBox jCBuserID;
+    private JTextField jTFfirstname;
+    private JTextField jTFlastname;
+    private JTextField jTFmail;
+    private JTextField jTFphone;
+    private JComboBox jCByear;
+    private JTextField jTFadminID;
+    private JTextField jTFadminName;
+    private DateChooser dcDate; 
+    private JButton jBsave;
+    private JButton jBcancel;
    
     private DatabaseHelper hp = new DatabaseHelper();
     private final Validator val = new Validator();
@@ -48,24 +51,28 @@ public final class Rental_Helper {
     private final String lastItem = "";
     private static final String USER_CHANGE = "user_change";
     private static final String PROGRAM_CHANGE = "program_change";
+    private static String invNumb;
    
     public Rental_Helper(JPanel panel) {
         
         this.panel = panel;
-        this.jCBname = (JComboBox) panel.getComponent(10);
-        this.jCBmanufacturer = (JComboBox) panel.getComponent(11);
-        this.jCBinvnumber = (JComboBox) panel.getComponent(12);
-        this.jCBuserID = (JComboBox) panel.getComponent(7);
-        this.jTFfirstname = (JTextField) panel.getComponent(8);
-        this.jTFlastname = (JTextField) panel.getComponent(9);
-        this.jTFmail = (JTextField) panel.getComponent(6);
-        this.jTFphone = (JTextField) panel.getComponent(4);
-        this.jCByear = (JComboBox) panel.getComponent(5);
-        this.jCBadminID = (JComboBox) panel.getComponent(16);
-        this.jTFadminName = (JTextField) panel.getComponent(18);
-        this.dcDate = (DateChooser) panel.getComponent(17);
-        this.jBsave = (JButton) panel.getComponent(19);
-        this.jBcancel = (JButton) panel.getComponent(20);
+        this.jCBname = (JComboBox) panel.getComponent(17);
+        this.jCBmanufacturer = (JComboBox) panel.getComponent(18);
+        this.jCBinvnumber = (JComboBox) panel.getComponent(19);
+        this.jCBuserID = (JComboBox) panel.getComponent(14);
+        this.jTFfirstname = (JTextField) panel.getComponent(15);
+        this.jTFlastname = (JTextField) panel.getComponent(16);
+        this.jTFmail = (JTextField) panel.getComponent(13);
+        this.jTFphone = (JTextField) panel.getComponent(11);
+        this.jCByear = (JComboBox) panel.getComponent(12);
+        this.jTFadminID = (JTextField) panel.getComponent(6);
+        this.jTFadminName = (JTextField) panel.getComponent(5);
+        this.dcDate = (DateChooser) panel.getComponent(2);
+        this.jBsave = (JButton) panel.getComponent(3);
+        this.jBcancel = (JButton) panel.getComponent(4);
+        
+        jTFadminID.setEditable(false);
+        jTFadminName.setEditable(false);
         
     }
     
@@ -77,7 +84,7 @@ public final class Rental_Helper {
      */
     public void fillComboBox_Category (JComboBox box, String category){
         
-        List <Devices> list = hp.getDevices();
+        List <Devices> list = hp.getAvailableDevices();
         
         List <Object> oList = makeListForCategory(list, category);
         box.setModel(new DefaultComboBoxModel<>(oList.toArray((new String[0]))));
@@ -94,10 +101,11 @@ public final class Rental_Helper {
      */
     public void fillBoxes (){
         
+        //methods to fill the boxes with data from database for the given category
         fillComboBox_Category(jCBname, "productName");
         fillComboBox_Category(jCBinvnumber, "inventoryNumber");
         fillComboBox_Category(jCBmanufacturer, "manufacturer");
-        
+       
         List <String> u = hp.getUsersID();
         jCBuserID.setModel(new DefaultComboBoxModel<>(u.toArray((new String[0]))));
         //damit man in UserID Matrikelnummer eingeben kann
@@ -112,17 +120,40 @@ public final class Rental_Helper {
         jCByear.setSelectedItem("");
         AutoCompleteDecorator.decorate(jCByear);
         
-        jCBadminID.setModel(new DefaultComboBoxModel<>(hp.getAdminIDs().toArray((new String[0]))));
-        jCBadminID.setEditable(true);
-        jCBadminID.addItem(lastItem_e);
-        jCBadminID.setSelectedIndex(jCBadminID.getItemCount()-1);
-        AutoCompleteDecorator.decorate(jCBadminID);
+//        jCBadminID.setModel(new DefaultComboBoxModel<>(hp.getAdminIDs().toArray((new String[0]))));
+//        jCBadminID.setEditable(false);
+//        jCBadminID.addItem(lastItem_e);
+//        jCBadminID.setSelectedIndex(jCBadminID.getItemCount()-1);
+//        AutoCompleteDecorator.decorate(jCBadminID);
         
         
+        //set the ActionCommand to PROGRAM_CHANGE to differnciate between
+        // program-changes and user-changes in the listener for JComboBox
         jCBname.setActionCommand(PROGRAM_CHANGE);
         jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
         jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
         
+    }
+    
+    public void setAdminData() {
+        
+        
+        String invID = jCBinvnumber.getSelectedItem().toString();
+        
+        if (!invID.isBlank()) {
+            
+            // set admin values
+            String a_ID = hp.getDeviceAdminID(invID);
+            jTFadminID.setText(a_ID);
+            String name = hp.getAdminNameByID(a_ID);
+            jTFadminName.setText(name);
+        
+        }
+        
+        
+        
+    
+    
     }
    
     
@@ -130,25 +161,25 @@ public final class Rental_Helper {
      * adds an listener for adminID-JComboBox and sets the adminFullName
      * automatically based on selection in adminID-JComboBox
      */
-    public void listenForSelectionAID() {
-        jCBadminID.addItemListener(new ItemListener () {
-            public void itemStateChanged(ItemEvent e) {
-                
-                if(e.getItem().equals(lastItem_e)){
-                    jTFadminName.setText("Vor- und Nachname");
-                }
-                if (e.getStateChange() == ItemEvent.SELECTED ) {
-                    String selected = e.getItem().toString();
-                    
-                    if ((!selected.equals(lastItem_e) && val.isNumeric(selected))) {
-                        jTFadminName.setEditable(false);
-                        jTFadminName.setText(hp.getAdminNameByID(selected));
-                    } 
-                } 
-            }
-        });
-    }
-    
+//    public void listenForSelectionAID() {
+//        jCBadminID.addItemListener(new ItemListener () {
+//            public void itemStateChanged(ItemEvent e) {
+//                
+//                if(e.getItem().equals(lastItem_e)){
+//                    jTFadminName.setText("Vor- und Nachname");
+//                }
+//                if (e.getStateChange() == ItemEvent.SELECTED ) {
+//                    String selected = e.getItem().toString();
+//                    
+//                    if ((!selected.equals(lastItem_e) && val.isNumeric(selected))) {
+//                        jTFadminName.setEditable(false);
+//                        jTFadminName.setText(hp.getAdminNameByID(selected));
+//                    } 
+//                } 
+//            }
+//        });
+//    }
+//    
     /**
      * adds an listener for userID-JComboBox and sets 
      * userFirstName, userLastName, userPhone, userMail and userYear 
@@ -173,7 +204,7 @@ public final class Rental_Helper {
                     
                     if ((!selected.equals(lastItem_e) && val.isNumeric(selected))){
                        
-                        Users userToCheck = hp.checkUserID(selected);
+                        Users userToCheck = hp.getUserByID(selected);
                         
                         if (userToCheck != null && (!hp.isUserNew(Long.parseLong(selected)))) {
                             jTFfirstname.setText(userToCheck.getUserFirstName());
@@ -242,8 +273,11 @@ public final class Rental_Helper {
                                 jCBinvnumber.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
                                 jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
+                                setAdminData();
                             }
                         }
+                        // set admin values
+       
                     }
                 }
             }
@@ -294,6 +328,7 @@ public final class Rental_Helper {
                                 jCBinvnumber.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
                                 jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
+                                setAdminData();
                             }
                         }
                     }
@@ -351,23 +386,15 @@ public final class Rental_Helper {
                                 jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
                             }
                         }
+                        setAdminData();
+                        
                     }
                 }  
             }
         });
     }
     
-    public void removeListener() {
-        
-        Component [] comps = panel.getComponents();
-        for (Component field : comps){
-            if (field instanceof JComboBox){
-                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
-                    ((JComboBox) field).removeActionListener(al);
-                }
-            }
-        }
-    }
+    
     
     /**
      * adds an listener for the cancel-JButton and calls the deleteAll() Method
@@ -401,14 +428,16 @@ public final class Rental_Helper {
         
         jCByear.setEnabled(true);
         jCByear.setSelectedIndex(jCByear.getItemCount()-1);
-        jTFadminName.setText("Vor- und Nachname");
+        
         jTFfirstname.setText("Vorname");
         jTFlastname.setText("Nachname");
         jTFphone.setText("Telefon");
         jTFmail.setText("E-Mail");
         
         fillBoxes();
-         
+        
+        jTFadminID.setText("Admin ID");
+        jTFadminName.setText("Vor- und Nachname"); 
     }
     
     /**
@@ -483,17 +512,17 @@ public final class Rental_Helper {
     }
     
     /**
-     *
-     * @param chDate to get the rentalDate from the DateChosser
-     * @param boxInvNumber to get the InventoryNumber from the JComboBox
-     * @param boxUserID to get the userID from the JComboBox
-     * @param boxAdminID to get the adminID from the JComboBox
      * method to create a new rental object, uses a Thread.sleep for the case
      * a new user must be created 
      * inserts the rental-object in the database
+     * 
+     * @param chDate to get the rentalDate from the DateChosser
+     * @param boxInvNumber to get the InventoryNumber from the JComboBox
+     * @param boxUserID to get the userID from the JComboBox
+     * @param textAdminID to get the adminID from the JTextFiel
      */
     public void createNewRental (DateChooser chDate, JComboBox boxInvNumber,
-                                    JComboBox boxUserID, JComboBox boxAdminID){
+                                    JComboBox boxUserID, JTextField textAdminID){
         
         try {
             Thread.sleep(1000); // wird benoetigt wenn neuer User hinzugefuegt wird, sonst SQL Errer wegen Foreign KEY
@@ -507,7 +536,7 @@ public final class Rental_Helper {
         
             String userID = (String) boxUserID.getSelectedItem();
         
-            String adminID = (String) boxAdminID.getSelectedItem();
+            String adminID = (String) textAdminID.getText();
             
             if (inventoryNumb.isBlank() || userID.isBlank() || adminID.isBlank()){
                 JOptionPane.showMessageDialog(null, 
@@ -551,6 +580,8 @@ public final class Rental_Helper {
         jBsave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                System.out.println("called save");
                 
                 boolean validUser = true;
                 
@@ -600,7 +631,7 @@ public final class Rental_Helper {
                         }
                     }
                     if (validUser){
-                        createNewRental(dcDate, jCBinvnumber, jCBuserID, jCBadminID);
+                        createNewRental(dcDate, jCBinvnumber, jCBuserID, jTFadminID);
                         deleteAll();
                     }
                 }

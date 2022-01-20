@@ -8,7 +8,8 @@ package Project_LendMe;
 import java.util.regex.Pattern;
 
 /**
- *
+ * Class with validation methods
+ * 
  * @author Katharina
  */
 public class Validator {
@@ -72,7 +73,7 @@ public class Validator {
      * @return true if given String matches year pattern
      */
     public boolean isYear (String year) {
-        return year.matches("[GEB0-9 ]+");
+        return year.matches("[GEBgebEHTeht0-9 ]+");
     }
     
     /**

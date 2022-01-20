@@ -8,9 +8,10 @@ package Project_LendMe;
 import java.time.LocalDate;
 
 /**
- *
- * @author Katharina 
+ * Class to build a Rentals object, has the same properties as rentals
+ * table in the database; variables are accessible via getter and setter methods
  * 
+ * @author Katharina 
  */
 
 public class Rentals {
@@ -89,14 +90,5 @@ public class Rentals {
     public void setUsers_UserID(long users_UserID) {
         this.users_UserID = users_UserID;
     }
-
-    @Override
-    public String toString() {
-        
-        String string = rentalID + " | " + rentalDate + " | " + returnDate 
-                + " | " +  device_inventoryNumber + " | " + administrators_AdminID 
-                + " | " + users_UserID;
-        
-        return string; 
-    }
+    
 }

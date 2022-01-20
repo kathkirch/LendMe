@@ -6,7 +6,9 @@
 package Project_LendMe;
 
 /**
- *
+ *  Class for building Users Objects has same properties as users
+ *  table in the database; variables are accessible via getter and setter methods 
+ * 
  * @author Katharina
  */
 public class Users {
@@ -74,15 +76,4 @@ public class Users {
     public void setYear(String year) {
         this.year = year;
     }
-
-    @Override
-    public String toString() {
-        return "Users{" + "userID=" + userID + ", userFirstName=" + 
-                userFirstName + ", userLastName=" + userLastName + 
-                ", userEmail=" + userEmail + ", userPhone=" 
-                + userPhone + ", year=" + year + '}';
-    }
-    
-    
-    
 }

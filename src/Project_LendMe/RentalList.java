@@ -7,7 +7,10 @@ package Project_LendMe;
 import java.time.LocalDate;
 
 /**
- *
+ * Class to built a RentalList object, has properties from the rentals
+ * table and the device table in the database; 
+ * variables are accessible via getter and setter methods
+ * 
  * @author linda, katharina
  */
 public class RentalList extends Rentals{
