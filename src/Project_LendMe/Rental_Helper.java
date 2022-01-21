@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import com.raven.datechooser.SelectedDate;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -19,7 +18,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 /**
  * Helper-class to initialize the newrental_panel with all it's 
@@ -51,7 +49,7 @@ public final class Rental_Helper {
     private final String lastItem = "";
     private static final String USER_CHANGE = "user_change";
     private static final String PROGRAM_CHANGE = "program_change";
-    private static String invNumb;
+    
    
     public Rental_Helper(JPanel panel) {
         
@@ -95,7 +93,7 @@ public final class Rental_Helper {
     }
     
     /**
-     * fills the userID-, userYear-, adminID-, 
+     * fills the userID-, userYear-,  
      * productName-, manufacturer- and inventoryNumber-JComboBox with the 
      * suitable items
      */
@@ -119,14 +117,7 @@ public final class Rental_Helper {
         jCByear.setEditable(true);
         jCByear.setSelectedItem("");
         AutoCompleteDecorator.decorate(jCByear);
-        
-//        jCBadminID.setModel(new DefaultComboBoxModel<>(hp.getAdminIDs().toArray((new String[0]))));
-//        jCBadminID.setEditable(false);
-//        jCBadminID.addItem(lastItem_e);
-//        jCBadminID.setSelectedIndex(jCBadminID.getItemCount()-1);
-//        AutoCompleteDecorator.decorate(jCBadminID);
-        
-        
+  
         //set the ActionCommand to PROGRAM_CHANGE to differnciate between
         // program-changes and user-changes in the listener for JComboBox
         jCBname.setActionCommand(PROGRAM_CHANGE);
@@ -135,6 +126,11 @@ public final class Rental_Helper {
         
     }
     
+    /**
+     *method to set Text for Admin-Data with suitable data from Database
+     *every device has only one administrator,
+     * fields are not editable - just for user information
+     */
     public void setAdminData() {
         
         
@@ -150,36 +146,9 @@ public final class Rental_Helper {
         
         }
         
-        
-        
-    
-    
     }
    
     
-    /**
-     * adds an listener for adminID-JComboBox and sets the adminFullName
-     * automatically based on selection in adminID-JComboBox
-     */
-//    public void listenForSelectionAID() {
-//        jCBadminID.addItemListener(new ItemListener () {
-//            public void itemStateChanged(ItemEvent e) {
-//                
-//                if(e.getItem().equals(lastItem_e)){
-//                    jTFadminName.setText("Vor- und Nachname");
-//                }
-//                if (e.getStateChange() == ItemEvent.SELECTED ) {
-//                    String selected = e.getItem().toString();
-//                    
-//                    if ((!selected.equals(lastItem_e) && val.isNumeric(selected))) {
-//                        jTFadminName.setEditable(false);
-//                        jTFadminName.setText(hp.getAdminNameByID(selected));
-//                    } 
-//                } 
-//            }
-//        });
-//    }
-//    
     /**
      * adds an listener for userID-JComboBox and sets 
      * userFirstName, userLastName, userPhone, userMail and userYear 
@@ -276,7 +245,6 @@ public final class Rental_Helper {
                                 setAdminData();
                             }
                         }
-                        // set admin values
        
                     }
                 }
@@ -519,7 +487,7 @@ public final class Rental_Helper {
      * @param chDate to get the rentalDate from the DateChosser
      * @param boxInvNumber to get the InventoryNumber from the JComboBox
      * @param boxUserID to get the userID from the JComboBox
-     * @param textAdminID to get the adminID from the JTextFiel
+     * @param textAdminID to get the adminID from the JTextField
      */
     public void createNewRental (DateChooser chDate, JComboBox boxInvNumber,
                                     JComboBox boxUserID, JTextField textAdminID){
@@ -675,6 +643,5 @@ public final class Rental_Helper {
             default :
                 return itemArray;  
         } 
-    }
-    
+    } 
 }

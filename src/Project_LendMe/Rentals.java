@@ -27,7 +27,6 @@ public class Rentals {
     public Rentals(LocalDate rentalDate, long device_inventoryNumber, 
                         int administrators_AdminID, long users_UserID) {
         this.rentalDate = rentalDate;
-        this.returnDate = returnDate;
         this.device_inventoryNumber = device_inventoryNumber;
         this.administrators_AdminID = administrators_AdminID;
         this.users_UserID = users_UserID;

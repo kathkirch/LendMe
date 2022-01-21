@@ -87,18 +87,6 @@ abstract public class MyTableHelper {
         table.setModel(model);
         table.setRowHeight(25);
         
-//        /**
-//        * simple implementation of a TableRowSorter to sort the table with a clock on the columns
-//        */
-//        
-//        //initialize a new Sorter
-//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
-//        //tell the table about the sorter
-//        table.setRowSorter(sorter);
-//        //tell the sorter about the data to be sorted
-//        sorter.setModel(model);
-        
-        
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setFillsViewportHeight(true);  
         table.setPreferredScrollableViewportSize(new Dimension(570, 4000));
@@ -110,7 +98,7 @@ abstract public class MyTableHelper {
             table.setPreferredSize(js.getPreferredSize());
         }
    
-        table.setEnabled(false);
+        table.setEnabled(true);
         js.setVisible(true); 
     }
     

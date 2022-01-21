@@ -137,7 +137,6 @@ public class Validator {
             JOptionPane.showMessageDialog(null, 
                     "Rückgabedatum darf nicht vor dem Verleihdatum sein!");
         }
-        
         return valid;
     }
 }

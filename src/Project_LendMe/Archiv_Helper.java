@@ -18,10 +18,15 @@ import Comparators.RentalIDComparator;
 import Comparators.RentalDateComparator;
 import Comparators.ReturnDateComparator;
 import Comparators.RentalInvComparator;
-import Comparators.RentalAdminIDComparator;
 import Comparators.RentalUserIDComparator;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -40,16 +45,27 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     private final DatabaseHelper dbH = new DatabaseHelper();
     private static List <Rentals> filteredList = null;
     
+    public static int RENTALID_ARCHIVE;
+    public static long USERID_ARCHIVE;
+    public static long INVNUMB_ARCHIVE;
+    
+    JLayeredPane lp;
+    JPanel archive_panel;
+    
    
     public Archiv_Helper(JTable table, JScrollPane js, 
                     JComboBox box, JRadioButton ascRadio, JRadioButton descRadio, 
-                    JTextField filterTF, JButton filterBT, JButton clearBT) {
+                    JTextField filterTF, JButton filterBT, JButton clearBT, 
+                    JLayeredPane lp, JPanel archive_panel) {
         super( table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
         
         this.allRentals = dbH.getCompletedRentals();
         this.columns =  new String [] {"ID", "Verliehen am", 
-                                        "Zurück am",  "Inventarnummer", 
+                                        "Zurück am", "Inventarnummer", 
                                          "Matrikelnummer"};
+        
+        this.lp = lp;
+        this.archive_panel = archive_panel;
     }
 
     @Override
@@ -68,8 +84,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(2).setPreferredWidth(91);
         colModel.getColumn(3).setPreferredWidth(102);
         colModel.getColumn(4).setPreferredWidth(102);
-//        colModel.getColumn(5).setPreferredWidth(102);
-        
+
     }
 
     @Override
@@ -87,6 +102,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     public void refreshArchiveTable (List<Rentals> list){ 
         data = initRentals(list);
         model = new DefaultTableModel(data, columns);
+        
         table.setModel(model);
         TableColumnModel colModel = table.getColumnModel();
         colModel.getColumn(0).setPreferredWidth(40);
@@ -98,21 +114,18 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
         
         table.setRowHeight(25);
         
-//        table.setPreferredScrollableViewportSize(new Dimension(514, 4000));
-
-        
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setFillsViewportHeight(true);
+        table.setPreferredScrollableViewportSize(new Dimension(570, 4000));
+        
+        table.setPreferredSize(new Dimension(524, 4000));
         
         if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
             table.setPreferredSize(js.getPreferredSize());
         }
         
-        table.setEnabled(false);
-        //js.setVisible(true);
-        
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
-        table.setRowSorter(sorter);
-        sorter.setModel(model);
+        table.setEnabled(true);
+        js.setVisible(true);
    }    
     
 
@@ -147,8 +160,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     @Override
     public void sortTable() {
         
-       
-        
          ascRadio.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent aev) {
@@ -173,9 +184,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                         case 3 :
                             Collections.sort(allRentals, new RentalInvComparator());
                             break;
-//                        case 4 :
-//                            Collections.sort(allRentals, new RentalAdminIDComparator());
-//                            break;
                         case 4 :
                             Collections.sort(allRentals, new RentalUserIDComparator());
                             break;
@@ -209,14 +217,63 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                         case 3 :
                             Collections.sort(allRentals, new RentalInvComparator().reversed());
                             break;
-//                        case 4 :
-//                            Collections.sort(allRentals, new RentalAdminIDComparator().reversed());
-//                            break;
                         case 4 :
                             Collections.sort(allRentals, new RentalUserIDComparator().reversed());
                             break;
                     }
                     refreshArchiveTable(allRentals);
+                }
+            }
+        });
+    }
+    
+    /**
+     * method to initialize a doubleClick-MouseListener 
+     * gets the selected row, opens a new panel --> info_archive_panel
+     * to show more information about the selected rental/row
+     * 
+     * @param info_archive_panel to have access to this panel 
+     */
+    public void rowDoubleMousClick(JPanel info_archive_panel) {
+        table.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table =(JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    int index = row;
+                    
+                    int rentalID = (int) model.getValueAt(index, 0 );
+                    long invNumber = (long) model.getValueAt(index, 3);
+                    long userID = (long) model.getValueAt(index, 4);
+                    
+                    // set this static attributes with data from the selected row
+                    // to get data via id values
+                    RENTALID_ARCHIVE = rentalID;
+                    USERID_ARCHIVE = userID;
+                    INVNUMB_ARCHIVE = invNumber;
+                    
+                    lp.removeAll();
+                    lp.add(info_archive_panel);
+                    lp.repaint();
+                    lp.revalidate();
+                    
+                    //remove all listener in this panel to avoid muliple listener
+                    GUI.removeListener(info_archive_panel);
+                    
+                    //initialize a ArchiveInfo_Object
+                    ArchiveInfo_Helper aih = new ArchiveInfo_Helper
+                                        (info_archive_panel, lp, archive_panel);
+                    
+                    //method to make textfields not editable
+                    aih.notEditable();
+                    //method to initialize Textfields with Data from Database
+                    //depending on selected rental/row
+                    aih.showData();
+                    //method to initialize a Listener for 'Abbrechen" button 
+                    //in info_archive_panel to go back to the archive_panel
+                    aih.cancel();
                 }
             }
         });

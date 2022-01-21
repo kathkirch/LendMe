@@ -64,8 +64,6 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         this.lp = lp;
         this.home = home;
         
-        
-        
     }
     
 
@@ -169,14 +167,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
             }
         });
     }
-    
-//    public static void backToStart (JLayeredPane layeredpane, JPanel home_panel) {
-//        layeredpane.removeAll();
-//        layeredpane.add(home_panel);
-//        layeredpane.repaint();
-//        layeredpane.revalidate();
-//
-//    }
+
     
     
     /**
@@ -263,10 +254,9 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
      * "Geraetereuckgabe"-Button set the textfields in given return_panel with values from 
      * selected row in table, initialize the return_panel 
      * 
-     * @param layeredpane needed to access the layeredpane in the return_panel
      * @param return_panel needed to initialize the return_panel 
      */
-    public void newReturn (JLayeredPane layeredpane, JPanel return_panel) {
+    public void newReturn ( JPanel return_panel) {
         
         if (returnBT.getActionListeners().length == 0){
             
@@ -289,10 +279,10 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
                         RETURN_INVNUMBER = inventorynumber;
                         RETURN_USERID = user;
 
-                        layeredpane.removeAll();
-                        layeredpane.add(return_panel);
-                        layeredpane.repaint();
-                        layeredpane.revalidate();
+                        lp.removeAll();
+                        lp.add(return_panel);
+                        lp.repaint();
+                        lp.revalidate();
                         
                         //to remove ActionListener in this panel, 
                         //to avoid multiple ActionListener
