@@ -6,6 +6,7 @@
 package Project_LendMe;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,6 +34,9 @@ public class DatabaseHelper {
     ////////////////////////CONNECTION METHODS//////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * method to connect to the database in load the JDBC-Driver
+     */
     public static void connectDB() {
         con = null;
         try {
@@ -47,6 +51,9 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * method to close the connection to the database
+     */
     public void closeDB() {
         try {
             if (con != null) {
@@ -540,6 +547,121 @@ public class DatabaseHelper {
             }
         }
         return user;
+    }
+    
+    /**
+     * method to search for a rentals entry in database with 
+     * a specific rentalID
+     * 
+     * @param rentalID as int needed to search in the Database
+     * @return the Rentals-Object with the given rentalID
+     */
+    public Rentals getRentalByID (int rentalID){
+        
+        String query = "SELECT * FROM rentals"
+                        + " WHERE rentalID=" + rentalID + ";";
+        
+        Rentals rental = null;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
+                Date returnDate = rs.getDate("returnDate");
+                long inventoryNumb = rs.getLong("devices_inventoryNumber");
+                int adminID = rs.getInt("administrators_adminID");
+                long userID = rs.getLong("users_UserID");
+                
+                
+               rental = new Rentals (rentalDate, 
+                                            inventoryNumb, adminID, userID);
+               
+               if (returnDate != null){
+                   
+                   LocalDate retDate = returnDate.toLocalDate();
+                   
+                   rental.setReturnDate(retDate);
+               }
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            System.out.println("getRentalByID");
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return rental;
+    }
+    
+    /**
+     ** method to search for a devices entry in database with 
+     *  a specific inventroyNumber
+     * 
+     * @param invNumb as String needed to search in the Database
+     * @return a Devices Object with the given invNumber
+     */
+    public Devices getDeviceByID(String invNumb) {
+        
+        long l = Long.parseLong(invNumb);
+        
+        String query = "SELECT * FROM devices"
+                        + " WHERE inventoryNumber=" + l + ";";
+        
+        Devices dev = null;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                long invNo = rs.getLong(1);
+                String manuf = rs.getString(2);
+                String prodN = rs.getString(3);
+                String notes = rs.getString(4);
+                String location = rs.getString(5);
+                int stat = rs.getInt(6);
+                String im = rs.getString(7);
+                long usID = rs.getLong(8);
+                double acV = rs.getDouble(9);
+                LocalDate acD = rs.getDate(10).toLocalDate();
+                int admin = rs.getInt(11);
+                
+                dev = new Devices ();
+                dev.setInventoryNumber(invNo);
+                dev.setManufacturer(manuf);
+                dev.setProductName(prodN);
+                dev.setNotes(notes);
+                dev.setLocation(location);
+                dev.setStatus(stat);
+                dev.setImei(im);
+                dev.setUsers_userID(usID);
+                dev.setAquisitionValue(acV);
+                dev.setAquistionDate(acD);
+                dev.setAdminID(admin); 
+
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            System.out.println("getDeviceByID");
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return dev;
     }
 
     
@@ -1077,9 +1199,6 @@ public class DatabaseHelper {
             case 3:
                 where = "devices_inventoryNumber";
                 break;
-//            case 4:
-//                where = "administrators_adminID";
-//                break;
             case 4:
                 where = "users_userID";
                 break;

@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import com.raven.datechooser.SelectedDate;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -19,7 +18,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 /**
  * Helper-class to initialize the newrental_panel with all it's 
@@ -51,7 +49,7 @@ public final class Rental_Helper {
     private final String lastItem = "";
     private static final String USER_CHANGE = "user_change";
     private static final String PROGRAM_CHANGE = "program_change";
-    private static String invNumb;
+    
    
     public Rental_Helper(JPanel panel) {
         
@@ -95,7 +93,7 @@ public final class Rental_Helper {
     }
     
     /**
-     * fills the userID-, userYear-, adminID-, 
+     * fills the userID-, userYear-,  
      * productName-, manufacturer- and inventoryNumber-JComboBox with the 
      * suitable items
      */
@@ -119,14 +117,7 @@ public final class Rental_Helper {
         jCByear.setEditable(true);
         jCByear.setSelectedItem("");
         AutoCompleteDecorator.decorate(jCByear);
-        
-//        jCBadminID.setModel(new DefaultComboBoxModel<>(hp.getAdminIDs().toArray((new String[0]))));
-//        jCBadminID.setEditable(false);
-//        jCBadminID.addItem(lastItem_e);
-//        jCBadminID.setSelectedIndex(jCBadminID.getItemCount()-1);
-//        AutoCompleteDecorator.decorate(jCBadminID);
-        
-        
+  
         //set the ActionCommand to PROGRAM_CHANGE to differnciate between
         // program-changes and user-changes in the listener for JComboBox
         jCBname.setActionCommand(PROGRAM_CHANGE);
@@ -135,6 +126,11 @@ public final class Rental_Helper {
         
     }
     
+    /**
+     *method to set Text for Admin-Data with suitable data from Database
+     *every device has only one administrator,
+     * fields are not editable - just for user information
+     */
     public void setAdminData() {
         
         
@@ -150,36 +146,9 @@ public final class Rental_Helper {
         
         }
         
-        
-        
-    
-    
     }
    
     
-    /**
-     * adds an listener for adminID-JComboBox and sets the adminFullName
-     * automatically based on selection in adminID-JComboBox
-     */
-//    public void listenForSelectionAID() {
-//        jCBadminID.addItemListener(new ItemListener () {
-//            public void itemStateChanged(ItemEvent e) {
-//                
-//                if(e.getItem().equals(lastItem_e)){
-//                    jTFadminName.setText("Vor- und Nachname");
-//                }
-//                if (e.getStateChange() == ItemEvent.SELECTED ) {
-//                    String selected = e.getItem().toString();
-//                    
-//                    if ((!selected.equals(lastItem_e) && val.isNumeric(selected))) {
-//                        jTFadminName.setEditable(false);
-//                        jTFadminName.setText(hp.getAdminNameByID(selected));
-//                    } 
-//                } 
-//            }
-//        });
-//    }
-//    
     /**
      * adds an listener for userID-JComboBox and sets 
      * userFirstName, userLastName, userPhone, userMail and userYear 
@@ -276,7 +245,6 @@ public final class Rental_Helper {
                                 setAdminData();
                             }
                         }
-                        // set admin values
        
                     }
                 }
@@ -519,52 +487,58 @@ public final class Rental_Helper {
      * @param chDate to get the rentalDate from the DateChosser
      * @param boxInvNumber to get the InventoryNumber from the JComboBox
      * @param boxUserID to get the userID from the JComboBox
-     * @param textAdminID to get the adminID from the JTextFiel
+     * @param textAdminID to get the adminID from the JTextField
      */
     public void createNewRental (DateChooser chDate, JComboBox boxInvNumber,
                                     JComboBox boxUserID, JTextField textAdminID){
         
-        try {
-            Thread.sleep(1000); // wird benoetigt wenn neuer User hinzugefuegt wird, sonst SQL Errer wegen Foreign KEY
-
-            SelectedDate selectedDate = chDate.getSelectedDate();
-            LocalDate date = 
+        SelectedDate selectedDate = chDate.getSelectedDate();
+        LocalDate date = 
                 LocalDate.of(selectedDate.getYear(), 
                 selectedDate.getMonth(), selectedDate.getDay());
         
-            String inventoryNumb = (String) boxInvNumber.getSelectedItem();
+        boolean valid = val.validRentalDate(date);
         
-            String userID = (String) boxUserID.getSelectedItem();
-        
-            String adminID = (String) textAdminID.getText();
-            
-            if (inventoryNumb.isBlank() || userID.isBlank() || adminID.isBlank()){
-                JOptionPane.showMessageDialog(null, 
-                        "Ein oder mehrere Felder sind leer!"
-                        + " Bitte ausfüllen!",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } else {
-                Rentals rental = new Rentals(date, Long.parseLong(inventoryNumb),
-                            Integer.parseInt(adminID),
-                           Long.parseLong(userID));
-                try {
-                    hp.insertNewRental_DB(rental);
-                    JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
                 
-                } catch (UserException ex){
-                    System.out.println(ex);
-                    System.out.println("createNewRental in Rental_Helper");
+        if (valid) {
+            
+            try {
+                Thread.sleep(1000); // wird benoetigt wenn neuer User hinzugefuegt wird, sonst SQL Errer wegen Foreign KEY
+                
+                String inventoryNumb = (String) boxInvNumber.getSelectedItem();
+                String userID = (String) boxUserID.getSelectedItem();
+                String adminID = (String) textAdminID.getText();
+
+                if (inventoryNumb.isBlank() || userID.isBlank() || adminID.isBlank()){
                     JOptionPane.showMessageDialog(null, 
-                            "Überprüfen der Eingabe notwendig!",
+                            "Ein oder mehrere Felder sind leer!"
+                            + " Bitte ausfüllen!",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Rentals rental = new Rentals(date, Long.parseLong(inventoryNumb),
+                                Integer.parseInt(adminID),
+                               Long.parseLong(userID));
+                    try {
+                        hp.insertNewRental_DB(rental);
+                        JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
+                        deleteAll();
+
+                        
+                    } catch (UserException ex){
+                        System.out.println(ex);
+                        System.out.println("createNewRental in Rental_Helper");
+                        JOptionPane.showMessageDialog(null, 
+                                "Überprüfen der Eingabe notwendig!",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (InterruptedException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
+        
     }
     
     /**
@@ -580,8 +554,6 @@ public final class Rental_Helper {
         jBsave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                System.out.println("called save");
                 
                 boolean validUser = true;
                 
@@ -632,7 +604,7 @@ public final class Rental_Helper {
                     }
                     if (validUser){
                         createNewRental(dcDate, jCBinvnumber, jCBuserID, jTFadminID);
-                        deleteAll();
+//                        deleteAll();
                     }
                 }
             }
@@ -675,6 +647,5 @@ public final class Rental_Helper {
             default :
                 return itemArray;  
         } 
-    }
-    
+    } 
 }

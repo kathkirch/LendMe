@@ -44,6 +44,7 @@ public class Return_Helper {
     JPanel home;
  
     private final static DatabaseHelper dbH = new DatabaseHelper();
+    private final static Validator val = new Validator();
     
     List <Devices> devices = dbH.getAllDevices2();
    
@@ -122,7 +123,8 @@ public class Return_Helper {
    
 
     /**
-     *initialize a listener to go back to the start/home-screen
+     *initialize a listener for the "Abbrechen" Button 
+     * to go back to the start/home-screen
      */
     public void cancel () {
         rCancel.addActionListener(new ActionListener() {
@@ -159,13 +161,19 @@ public class Return_Helper {
                                 selectedDate.getMonth(),
                                 selectedDate.getDay()); 
         
+        Rentals rental = dbH.getRentalByID(returnID);
+        
+        boolean valid = val.validReturnDate(returnDate, rental.getRentalDate());
+        
         String notes = rNotes.getText();
         
         long invNumb = Long.valueOf(inventoryNumber.getText());
         
         if (yesBT.isSelected()) {
-            System.out.println("doble?");
-            try {
+            
+            if (valid){
+                
+                try {
                 dbH.updateRentals(returnID, returnDate);
                 dbH.setDevice_NotLent(invNumb, notes);
                 JOptionPane.showMessageDialog(null, "Gerätestatus aktualisert"
@@ -173,10 +181,11 @@ public class Return_Helper {
                 yesBT.setSelected(false);
                 backToStart();
                 
-            } catch (UserException ex){
-                JOptionPane.showMessageDialog(null, "Fehler bei Rückgabe \n"
-                        + "Eingabe prüfen", "Error", JOptionPane.ERROR_MESSAGE);
-                System.out.println(ex + "\n createNewReturn in ReturnHelper");
+                } catch (UserException ex){
+                    JOptionPane.showMessageDialog(null, "Fehler bei Rückgabe \n"
+                            + "Eingabe prüfen", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.out.println(ex + "\n createNewReturn in ReturnHelper");
+                }
             }
             
         } else {

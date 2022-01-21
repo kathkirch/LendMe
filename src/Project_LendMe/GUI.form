@@ -293,7 +293,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="879" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -429,7 +429,7 @@
                                       <Component id="cancel_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="save_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="92" max="32767" attributes="0"/>
+                                  <EmptySpace pref="241" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -738,10 +738,10 @@
                                       <Component id="filterString_rentallist" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="rental_ScrollPane" pref="439" max="32767" attributes="0"/>
+                                  <Component id="rental_ScrollPane" pref="501" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Component id="return_button" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="135" max="32767" attributes="0"/>
+                                  <EmptySpace pref="222" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2253,7 +2253,7 @@
                                       <Component id="inventory_btClear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="inventory_ScrollPane1" pref="512" max="32767" attributes="0"/>
+                                  <Component id="inventory_ScrollPane1" pref="661" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="inventory_btUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2476,6 +2476,390 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newdevice_buttonActionPerformed"/>
                           </Events>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="info_archive_panel">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="d3" green="e5" red="dc" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="card6"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="Informationen" min="-2" pref="575" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="archInfo_cancel" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="archInfo_invNumber" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_userName" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_userPhone" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_userMail" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_notesTF" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_manufacturer" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_productName" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_rentalDate" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_adminName" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_returnDate" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_userID" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_adminID" alignment="1" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="archInfo_admin" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_productnameTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_manufacturerTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_invNumberTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_userIDTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_userNameTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_userPhoneTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_userMailTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_notes" alignment="0" pref="260" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_adminIDTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_rentalDateTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_returnDateTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_adminNameTF" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_user" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archiInfo_deviceInfo" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="archInfo_zeitraum" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="130" pref="1240" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Informationen" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Component id="archiInfo_deviceInfo" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_productName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_productnameTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_manufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_manufacturerTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_invNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_invNumberTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="archInfo_notesTF" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_notes" min="-2" pref="55" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="archInfo_user" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_userID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_userIDTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_userNameTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_userName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_userPhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_userPhoneTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_userMail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_userMailTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="archInfo_admin" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_adminID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_adminIDTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_adminName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_adminNameTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="archInfo_zeitraum" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_rentalDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_rentalDateTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="archInfo_returnDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="archInfo_returnDateTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="archInfo_cancel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="284" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JTextArea" name="archInfo_notes">
+                          <Properties>
+                            <Property name="columns" type="int" value="20"/>
+                            <Property name="rows" type="int" value="5"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_productName">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Produktname"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[135, 20]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_productnameTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                          <AccessibilityProperties>
+                            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="pName"/>
+                          </AccessibilityProperties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="Informationen">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_manufacturerTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_invNumberTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_userIDTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_manufacturer">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Herstellerbezeichnung"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_user">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="User"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_invNumber">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Inventarnummer"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_notesTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Notizen"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archiInfo_deviceInfo">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="Ger&#xe4;teinformation"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_userName">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Name"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_userPhone">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Telefonnummer"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_userMail">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="E-Mail"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_userNameTF">
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_userPhoneTF">
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_userMailTF">
+                        </Component>
+                        <Component class="javax.swing.JButton" name="archInfo_cancel">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Abbrechen"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_adminID">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Admin ID"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_admin">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="Administrator"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_rentalDate">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Verleihdatum"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_userID">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Matrikelnummer"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_adminName">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Name"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_returnDate">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="R&#xfc;ckgabedatum"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_adminIDTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_rentalDateTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_returnDateTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="archInfo_adminNameTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="archInfo_zeitraum">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="Zeitraum"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>

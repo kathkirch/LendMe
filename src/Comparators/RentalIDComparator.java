@@ -13,16 +13,17 @@ import java.util.Comparator;
  * @author Katharina
  */
 public class RentalIDComparator implements Comparator<Rentals>{
+    
     @Override
     public int compare(Rentals r1, Rentals r2) {
         int c = r1.getRentalID() - r2.getRentalID();
         return c;
     }
 
-    /*@Override
+    @Override
     public Comparator<Rentals> reversed() {
-    return Comparator.super.reversed();
-    }*/
+        return Comparator.super.reversed();
+    }
     
     
 }
