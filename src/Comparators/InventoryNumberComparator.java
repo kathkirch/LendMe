@@ -16,11 +16,22 @@ public class InventoryNumberComparator implements Comparator<Devices>{
 
     @Override
     public int compare(Devices o1, Devices o2) {
-        long val = o1.getInventoryNumber() - o2.getInventoryNumber();
         
-        int c = (int) val;
+        //liefert sonst falsche sortierung falls wirklich ein long verglichen wird
+        long i = o1.getInventoryNumber();
+        long j = o2.getInventoryNumber();
+        int c = Long.compare(i, j);
         
         return c;
+        
+        
+//        long val = o1.getInventoryNumber() - o2.getInventoryNumber();
+//        
+//        int c = (int) val;
+//        
+//        return c;
     }
+    
+    
     
 }

@@ -15,7 +15,11 @@ import java.util.Comparator;
 public class RentalUserIDComparator implements Comparator<Rentals>{
     @Override
     public int compare(Rentals r1, Rentals r2) {
-        int c = (int) r1.getUsers_UserID() -  (int) r2.getUsers_UserID();
+        long i = r1.getUsers_UserID();
+        long j = r2.getUsers_UserID();
+        
+        int c = Long.compare(i, j);
+        
         return c;
     }
 

@@ -16,9 +16,13 @@ public class InventoryUserIDComparator implements Comparator<Devices> {
     @Override
     public int compare(Devices o1, Devices o2) {
         
-        long val = o1.getUsers_userID() - o2.getUsers_userID();
+        //muss mit Long.compare verglichen werden da sonst fehlerhafte sortierung kommt
+        long i = o1.getUsers_userID();
+        long j = o2.getUsers_userID();
+        int c = Long.compare(i, j);
         
-        int c = (int) val;
+//        long val = o1.getUsers_userID() - o2.getUsers_userID();
+//        int c = (int) val;
         
         return c;
     }
