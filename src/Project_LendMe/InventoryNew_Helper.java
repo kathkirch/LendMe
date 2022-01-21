@@ -70,8 +70,6 @@ public class InventoryNew_Helper {
 
         //query DB for all existing admins
         List<String> adminIDs = dbh.getAdminIDs();
-        //set first entry to blank to enable user to deselect an Admin-ID
-        adminIDs.add(0, "");
 
         //set Model, make it searchable by user, set first entry to blank
         admin.setModel(new DefaultComboBoxModel<>(adminIDs.toArray((new String[0]))));
@@ -116,24 +114,25 @@ public class InventoryNew_Helper {
     public void concatInsertStringCallInsertMethod() {
 
         //initialize String Array with Values from User Input
-        String[] values = new String[8];
+        String[] values = new String[9];
         values[0] = inventoryNumber.getText();
         values[1] = manufacturer.getText();
         values[2] = productname.getText();
         values[3] = notes.getText();
         values[4] = location.getText();
+        values[5] = admin.getSelectedItem().toString();
 
-        //get Acquisition Value and format it for SQL
-        values[5] = acqValue.getText();
-        values[5] = values[5].replaceAll("[,]", "");
+        //get Acquisition Value in SQL-Syntax
+        values[6] = acqValue.getText();
+        values[6] = values[6].replaceAll("[,]", "");
 
         //get the entered Date as String
         SelectedDate sd = acqDate.getSelectedDate();
         LocalDate acqDate = LocalDate.of(sd.getYear(), sd.getMonth(), sd.getDay());
-        values[6] = acqDate.toString();
+        values[7] = acqDate.toString();
 
         //imei as last value in the Array to allow for easy access
-        values[7] = imei.getText();
+        values[8] = imei.getText();
 
         /*
     fields left blank by user are passed as blank String
@@ -141,7 +140,7 @@ public class InventoryNew_Helper {
     if YES we ignore it in our query, SQL will automatically null it
     if NO we pass the value as usually
          */
-        boolean noImei = values[7].isBlank();
+        boolean noImei = values[8].isBlank();
 
         //initialize String to query DB
         String valuesToPass = "";
@@ -180,25 +179,7 @@ public class InventoryNew_Helper {
                         "SQL-Error", 0);
                 System.out.println(ex);
             }
-
-            //get value of Admin-ComboBox
-            String adminValue = admin.getSelectedItem().toString();
-
-            //check if a value was entered
-            //if yes, call corresponding method passing adminID and inventoryNumber
-            if (!adminValue.isBlank()) {
-                String toPass = adminValue + ", " + values[0];
-                try {
-                    dbh.insertAdminHasDevice(toPass);
-                } catch (SQLException ex) {
-                    Logger.getLogger(InventoryNew_Helper.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println(ex);
-                    JOptionPane.showMessageDialog(null, "Ein Fehler ist beim Datenbankzugriff aufgetreten",
-                            "SQL-Error", 0);
-                }
-            }
         }
-
     }
 
     //reset all fields in the New Device Panel
@@ -211,7 +192,7 @@ public class InventoryNew_Helper {
         notes.setText("");
         acqValue.setText("0.0");
 
-        admin.setSelectedItem("");
+        admin.setSelectedIndex(0);
 
         Date today = new Date();
         acqDate.setSelectedDate(today);

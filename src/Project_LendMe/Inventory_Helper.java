@@ -2,6 +2,7 @@ package Project_LendMe;
 
 import Comparators.InventoryAcqDateComparator;
 import Comparators.InventoryAcqValueComparator;
+import Comparators.InventoryAdminIdComparator;
 import Comparators.InventoryLocationComparator;
 import Comparators.InventoryManufacturerComparator;
 import Comparators.InventoryNumberComparator;
@@ -95,7 +96,7 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
     public void fillBox() {
         String[] sortableBy = new String[]{"Inventarnummer", "Hersteller",
             "Produktname", "Ort", "Status", "Verliehen an",
-            "Anschaffungswert", "Anschaffungsdat."};
+            "Anschaffungswert", "Anschaffungsdat.", "Admin"};
         box.setModel(new DefaultComboBoxModel<>(sortableBy));
     }
 
@@ -204,6 +205,9 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                         case 7:
                             Collections.sort(allDevices, new InventoryAcqDateComparator());
                             break;
+                        case 8:
+                            Collections.sort(allDevices, new InventoryAdminIdComparator());
+                            break;
                     }
                     refreshDevicesTable(allDevices);
                 }
@@ -248,6 +252,9 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                             break;
                         case 7:
                             Collections.sort(allDevices, new InventoryAcqDateComparator().reversed());
+                            break;
+                        case 8:
+                            Collections.sort(allDevices, new InventoryAdminIdComparator().reversed());
                             break;
                     }
                     refreshDevicesTable(allDevices);
@@ -325,13 +332,8 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                 String invNo = table.getValueAt(indexRow, 0).toString();
 
                 try {
-                    if (table.getValueAt(indexRow, 10) == null) {
-                        dbH.deleteDevice(invNo, "", false);
-                    } else {
-                        String adHasDev = table.getValueAt(indexRow, 10).toString();
-                        System.out.println("Hat Admin");
-                        dbH.deleteDevice(invNo, adHasDev, true);
-                    }
+                    dbH.deleteDevice(invNo);
+                    
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
@@ -345,7 +347,7 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                             JOptionPane.WARNING_MESSAGE);
                 }
                 //query for new Device-List, refresh table
-                List<Devices> devs = dbH.getAllDevices2(); //changed to getAllDevices2 (Methode ohne administrators has devices table)
+                List<Devices> devs = dbH.getAllDevices2(); 
                 refreshDevicesTable(devs);
             }
         });

@@ -180,7 +180,7 @@ abstract public class MyTableHelper {
                                            d.getUsers_userID(),
                                            d.getAquisitionValue(),
                                            d.getAquistionDate(),
-                                           d.getAdminID()}; //changed to getAdminID as (int)
+                                           d.getAdminID()}; 
             
            i = i + 1;  
         }

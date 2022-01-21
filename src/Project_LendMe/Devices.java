@@ -39,15 +39,6 @@ public class Devices implements Rentable {
     public void setAdminID(int adminID) {
         this.adminID = adminID;
     }
-    
-    
-//    public String getAdmin() {
-//        return admin;
-//    }
-//
-//    public void setAdmin(String admin) {
-//        this.admin = admin;
-//    }
 
     public long getInventoryNumber() {
         return inventoryNumber;
