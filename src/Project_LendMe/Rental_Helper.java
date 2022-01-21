@@ -492,47 +492,53 @@ public final class Rental_Helper {
     public void createNewRental (DateChooser chDate, JComboBox boxInvNumber,
                                     JComboBox boxUserID, JTextField textAdminID){
         
-        try {
-            Thread.sleep(1000); // wird benoetigt wenn neuer User hinzugefuegt wird, sonst SQL Errer wegen Foreign KEY
-
-            SelectedDate selectedDate = chDate.getSelectedDate();
-            LocalDate date = 
+        SelectedDate selectedDate = chDate.getSelectedDate();
+        LocalDate date = 
                 LocalDate.of(selectedDate.getYear(), 
                 selectedDate.getMonth(), selectedDate.getDay());
         
-            String inventoryNumb = (String) boxInvNumber.getSelectedItem();
+        boolean valid = val.validRentalDate(date);
         
-            String userID = (String) boxUserID.getSelectedItem();
-        
-            String adminID = (String) textAdminID.getText();
-            
-            if (inventoryNumb.isBlank() || userID.isBlank() || adminID.isBlank()){
-                JOptionPane.showMessageDialog(null, 
-                        "Ein oder mehrere Felder sind leer!"
-                        + " Bitte ausfüllen!",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } else {
-                Rentals rental = new Rentals(date, Long.parseLong(inventoryNumb),
-                            Integer.parseInt(adminID),
-                           Long.parseLong(userID));
-                try {
-                    hp.insertNewRental_DB(rental);
-                    JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
                 
-                } catch (UserException ex){
-                    System.out.println(ex);
-                    System.out.println("createNewRental in Rental_Helper");
+        if (valid) {
+            
+            try {
+                Thread.sleep(1000); // wird benoetigt wenn neuer User hinzugefuegt wird, sonst SQL Errer wegen Foreign KEY
+                
+                String inventoryNumb = (String) boxInvNumber.getSelectedItem();
+                String userID = (String) boxUserID.getSelectedItem();
+                String adminID = (String) textAdminID.getText();
+
+                if (inventoryNumb.isBlank() || userID.isBlank() || adminID.isBlank()){
                     JOptionPane.showMessageDialog(null, 
-                            "Überprüfen der Eingabe notwendig!",
+                            "Ein oder mehrere Felder sind leer!"
+                            + " Bitte ausfüllen!",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Rentals rental = new Rentals(date, Long.parseLong(inventoryNumb),
+                                Integer.parseInt(adminID),
+                               Long.parseLong(userID));
+                    try {
+                        hp.insertNewRental_DB(rental);
+                        JOptionPane.showMessageDialog(null, "Device verliehen! Status aktualisiert");
+                        deleteAll();
+
+                        
+                    } catch (UserException ex){
+                        System.out.println(ex);
+                        System.out.println("createNewRental in Rental_Helper");
+                        JOptionPane.showMessageDialog(null, 
+                                "Überprüfen der Eingabe notwendig!",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (InterruptedException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
+        
     }
     
     /**
@@ -548,8 +554,6 @@ public final class Rental_Helper {
         jBsave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                System.out.println("called save");
                 
                 boolean validUser = true;
                 
@@ -600,7 +604,7 @@ public final class Rental_Helper {
                     }
                     if (validUser){
                         createNewRental(dcDate, jCBinvnumber, jCBuserID, jTFadminID);
-                        deleteAll();
+//                        deleteAll();
                     }
                 }
             }

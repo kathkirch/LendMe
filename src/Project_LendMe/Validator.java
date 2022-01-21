@@ -139,4 +139,21 @@ public class Validator {
         }
         return valid;
     }
+    
+    public boolean validRentalDate (LocalDate rentalDate){
+
+       boolean valid = true;
+
+       LocalDate currentDate = LocalDate.now();
+
+       boolean futureDate = rentalDate.isAfter(currentDate);
+
+
+       if ( futureDate ) {
+           valid = false;
+           JOptionPane.showMessageDialog(null, 
+                   "Verleihdatum darf nicht in der Zukunft liegen!");
+       } 
+       return valid;
+    }
 }
