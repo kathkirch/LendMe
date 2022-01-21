@@ -6,6 +6,7 @@
 package Project_LendMe;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -1077,9 +1078,6 @@ public class DatabaseHelper {
             case 3:
                 where = "devices_inventoryNumber";
                 break;
-//            case 4:
-//                where = "administrators_adminID";
-//                break;
             case 4:
                 where = "users_userID";
                 break;
@@ -1327,5 +1325,51 @@ public class DatabaseHelper {
             }
         }
         return userNEW;
+    }
+    
+    
+    public Rentals getRentalByID (int rentalID){
+        
+        String query = "SELECT * FROM rentals"
+                        + " WHERE rentalID=" + rentalID + ";";
+        
+        Rentals rental = null;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
+                Date returnDate = rs.getDate("returnDate");
+                long inventoryNumb = rs.getLong("devices_inventoryNumber");
+                int adminID = rs.getInt("administrators_adminID");
+                long userID = rs.getLong("users_UserID");
+                
+                
+               rental = new Rentals (rentalDate, 
+                                            inventoryNumb, adminID, userID);
+               
+               if (returnDate != null){
+                   
+                   LocalDate retDate = returnDate.toLocalDate();
+                   
+                   rental.setReturnDate(retDate);
+               }
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            System.out.println("getRentalByID");
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return rental;
     }
 }
