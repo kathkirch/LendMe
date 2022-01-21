@@ -8,8 +8,8 @@ package Project_LendMe;
 import java.time.LocalDate;
 
 /**
- * Helper-Class for building Devices Objects has same properties as devices
- * table in the database variables are accessable via getter and setter methods
+ * Class for building Devices Objects has same properties as devices
+ * table in the database variables are accessible via getter and setter methods
  *
  * @author Katharina
  */
@@ -20,7 +20,8 @@ public class Devices implements Rentable {
     private String productName;
     private String notes;
     private String location;
-    private String admin;
+//    private String admin;
+    private int adminID; //changed to int adminID
     private int status;
     private String imei;
     private long users_userID;
@@ -31,13 +32,22 @@ public class Devices implements Rentable {
     
     }
 
-    public String getAdmin() {
-        return admin;
+    public int getAdminID() {
+        return adminID;
     }
 
-    public void setAdmin(String admin) {
-        this.admin = admin;
+    public void setAdminID(int adminID) {
+        this.adminID = adminID;
     }
+    
+    
+//    public String getAdmin() {
+//        return admin;
+//    }
+//
+//    public void setAdmin(String admin) {
+//        this.admin = admin;
+//    }
 
     public long getInventoryNumber() {
         return inventoryNumber;
@@ -119,16 +129,6 @@ public class Devices implements Rentable {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return inventoryNumber + " | " + manufacturer + " | " + productName
-                + " | " + notes + " | " + location + " | " + status + " | "
-                + imei + " | " + users_userID + " | " + acquisitionValue
-                + " | " + acquistionDate;
-    }
-
-    
-    
 }   
 
 interface Rentable {
@@ -136,8 +136,7 @@ interface Rentable {
     static final int lent = 1;
 
     static final int not_lent = 0;
-
-  
+    
 }
     
 

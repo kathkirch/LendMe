@@ -20,8 +20,10 @@ public class MainClass {
      */
     public static void main(String[] args) {
         
+        //Connect to Database
         DatabaseHelper.connectDB();
         
+        // Start gui in a second thread
         SwingUtilities.invokeLater(new Runnable() {
         @Override
             

@@ -28,12 +28,16 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 /**
- *
+ *  Helper Class for the rentallist table with it's methods, 
+ *  inherits from MyTableHelper, implements FilterSortModel
+ * 
  * @author Katharina
  */
 public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
     
     private final DatabaseHelper rlH = new DatabaseHelper();
+    
+    private static List <RentalList> filteredList = null;
     
     public JButton returnBT;
     public JLayeredPane lp;
@@ -52,7 +56,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         
         this.returnBT = returnBT;
         
-        this.rentalList = rlH.displayRentallist();
+        this.rentalList = rlH.getRentallist();
         
         this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
                                 "Hersteller","Verliehen an" ,"Verliehene Tage"};
@@ -94,7 +98,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
     /**
      *
      * @param list refresh the table with objects from the given list 
- of RentalList-Objects
+     *  of RentalList-Objects
      */
     public void refreshRentalTable (List<RentalList> list){ 
         data = initRentalList(list);
@@ -135,7 +139,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
-                List <RentalList> wholeList = rlH.displayRentallist();
+                List <RentalList> wholeList = rlH.getRentallist();
                 refreshRentalTable(wholeList);  
             }
         });
@@ -154,7 +158,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
             public void actionPerformed (ActionEvent aEv) {
                 int whereClause = box.getSelectedIndex();
                 String filterString = filterTF.getText();
-                List <RentalList> filteredList = rlH.filterRentals2(whereClause, filterString);
+                filteredList = rlH.filterRentals2(whereClause, filterString);
                 if (filteredList.size() >  0){
                     refreshRentalTable(filteredList);
                 } else {
@@ -163,14 +167,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
             }
         });
     }
-    
-    public static void backToStart (JLayeredPane layeredpane, JPanel home_panel) {
-        layeredpane.removeAll();
-        layeredpane.add(home_panel);
-        layeredpane.repaint();
-        layeredpane.revalidate();
 
-    }
     
     
     /**
@@ -179,9 +176,15 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
      */
     @Override
     public void sortTable() {
-         ascRadio.addActionListener(new ActionListener(){
+        
+        ascRadio.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                
+                if (filteredList != null && filteredList.size() > 0 ) {
+                    rentalList = filteredList;
+                }
+                
                 if (ascRadio.isSelected()){
                     descRadio.setSelected(false);
                     int selected = box.getSelectedIndex();
@@ -212,6 +215,11 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         descRadio.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                if (filteredList != null && filteredList.size() > 0 ) {
+                    rentalList = filteredList;
+                }
+                
                 if (descRadio.isSelected()){
                     ascRadio.setSelected(false);
                     int selected = box.getSelectedIndex();
@@ -241,43 +249,55 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         });
     }
     
-    
-    
-    public void newReturn (JLayeredPane layeredpane, JPanel return_panel) {
-        returnBT.addActionListener(new ActionListener() {
+    /**
+     * method to initialize the return_panel per click on the 
+     * "Geraetereuckgabe"-Button set the textfields in given return_panel with values from 
+     * selected row in table, initialize the return_panel 
+     * 
+     * @param return_panel needed to initialize the return_panel 
+     */
+    public void newReturn ( JPanel return_panel) {
+        
+        if (returnBT.getActionListeners().length == 0){
+            
+            returnBT.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
-               
-                if (!table.getSelectionModel().isSelectionEmpty()) {
-                    
-                    int index = table.getSelectedRow();
-                    int id = (int) model.getValueAt(index, 0);
-                    long inventorynumber = (long) model.getValueAt(index, 1);
-                    String productname = (String) model.getValueAt(index, 2);
-                    String manufacturer = (String) model.getValueAt(index, 3);
-                    long user = (long) model.getValueAt(index, 4);
-                    
-                    RETURN_ID = id;
-                    RETURN_PRODUCTNAME = productname;
-                    RETURN_MANUFACTURER = manufacturer;
-                    RETURN_INVNUMBER = inventorynumber;
-                    RETURN_USERID = user;
-                    
-                    layeredpane.removeAll();
-                    layeredpane.add(return_panel);
-                    layeredpane.repaint();
-                    layeredpane.revalidate();
-                    
-                    Return_Helper returnHelper = new Return_Helper(return_panel, lp, home);
-                    returnHelper.notEditable();
-                    returnHelper.showData();
-                    
-                    returnHelper.saveReturn();
-                    returnHelper.cancel();
-                    
+                public void actionPerformed(ActionEvent arg0) {
+
+                    if (!table.getSelectionModel().isSelectionEmpty()) {
+
+                        int index = table.getSelectedRow();
+                        int id = (int) model.getValueAt(index, 0);
+                        long inventorynumber = (long) model.getValueAt(index, 1);
+                        String productname = (String) model.getValueAt(index, 2);
+                        String manufacturer = (String) model.getValueAt(index, 3);
+                        long user = (long) model.getValueAt(index, 4);
+
+                        RETURN_ID = id;
+                        RETURN_PRODUCTNAME = productname;
+                        RETURN_MANUFACTURER = manufacturer;
+                        RETURN_INVNUMBER = inventorynumber;
+                        RETURN_USERID = user;
+
+                        lp.removeAll();
+                        lp.add(return_panel);
+                        lp.repaint();
+                        lp.revalidate();
+                        
+                        //to remove ActionListener in this panel, 
+                        //to avoid multiple ActionListener
+                        GUI.removeListener(return_panel);
+
+                        Return_Helper returnHelper = new Return_Helper(return_panel, lp, home);
+                        returnHelper.notEditable();
+                        returnHelper.showData();
+
+                        returnHelper.saveReturn();
+                        returnHelper.cancel();
+                    }
                 }
-            }
-        });
+            });
+        } 
     } 
 }
     

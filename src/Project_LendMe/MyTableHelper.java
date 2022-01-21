@@ -5,6 +5,7 @@
  */
 package Project_LendMe;
 
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -16,8 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Katharina
+ * Superclass of the archive_helper, rentallist_helper and the inventory_helper 
+ * 
+ * @author Katharina, bstra
  */
 abstract public class MyTableHelper {
   
@@ -33,6 +35,7 @@ abstract public class MyTableHelper {
     static List <RentalList> rentalList;
     static List <Rentals> allRentals;
     static List <Devices> allDevices;
+    
     String [] columns;
     
     Object [][] data;
@@ -82,39 +85,31 @@ abstract public class MyTableHelper {
         model = new DefaultTableModel(data, columns);
         
         table.setModel(model);
-        
-//        /**
-//        * simple implementation of a TableRowSorter to sort the table with a clock on the columns
-//        */
-//        
-//        //initialize a new Sorter
-//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
-//        //tell the table about the sorter
-//        table.setRowSorter(sorter);
-//        //tell the sorter about the data to be sorted
-//        sorter.setModel(model);
+        table.setRowHeight(25);
         
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setFillsViewportHeight(true);  
+        table.setPreferredScrollableViewportSize(new Dimension(570, 4000));
         
-        table.setFillsViewportHeight(true);
-        table.setRowHeight(25);
+        
+        table.setPreferredSize(new Dimension(524, 4000));
         
         if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
             table.setPreferredSize(js.getPreferredSize());
         }
    
-        table.setEnabled(false);
+        table.setEnabled(true);
         js.setVisible(true); 
     }
     
        
-     /**
-     *
-     * @param rentals as a List of Rentals-Objects 
-     * needed to put items within the list 
-     * into a double object array to display for each Object it's attributes
-     * @return Object [][]
-     */
+    /**
+    *
+    * @param rentals as a List of Rentals-Objects 
+    * needed to put items within the list 
+    * into a double object array to display for each Object it's attributes
+    * @return Object [][]
+    */
     public Object [][] initRentals (List <Rentals> rentals){
        Object [][] data = new Object [rentals.size()] [];
        int i = 0;
@@ -123,7 +118,6 @@ abstract public class MyTableHelper {
                                    r.getRentalDate(),
                                    r.getReturnDate(), 
                                    r.getDevice_inventoryNumber(),
-                                   r.getAdministrators_AdminID(), 
                                    r.getUsers_UserID()};
            i = i + 1;
        }
@@ -134,8 +128,8 @@ abstract public class MyTableHelper {
      /**
      *
      * @param rentallist as a List of RentalList-Objects 
- needed to put items within the list 
- into a double object array to display for each Object it's attributes
+     *  needed to put items within the list 
+     *  into a double object array to display for each Object it's attributes
      * @return Object [][]
      */
     public Object [][] initRentalList (List <RentalList> rentallist){
@@ -174,7 +168,7 @@ abstract public class MyTableHelper {
                                            d.getUsers_userID(),
                                            d.getAquisitionValue(),
                                            d.getAquistionDate(),
-                                           d.getAdmin()};
+                                           d.getAdminID()}; //changed to getAdminID as (int)
             
            i = i + 1;  
         }

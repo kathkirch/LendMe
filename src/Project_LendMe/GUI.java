@@ -4,9 +4,27 @@
  */
 package Project_LendMe;
 
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 
+
+/**
+ * Class for building Administrators Objects has same properties as administrators
+ * table in the database; variables are accessible via getter and setter methods
+ * 
+ *
+ * @author Katharina, bstra
+ */
 
 public class GUI extends javax.swing.JFrame {
     
@@ -22,6 +40,7 @@ public class GUI extends javax.swing.JFrame {
         
         updateLAF();
         initComponents();
+        
     }
     
     //methode to set up look and feel settings
@@ -46,7 +65,7 @@ public class GUI extends javax.swing.JFrame {
     }
 
     
-    //method to show panel depending on userclick on button in gui
+    //method to show panel depending on button the user clicks in gui
     public void switchPanel (JPanel panel){
     
         layerpane.removeAll();
@@ -94,12 +113,12 @@ public class GUI extends javax.swing.JFrame {
         userEmail = new javax.swing.JTextField();
         userPhone = new javax.swing.JTextField();
         year_newrental = new javax.swing.JComboBox<>();
-        administrator_newrental = new javax.swing.JComboBox<>();
         date = new javax.swing.JLabel();
         rentalDate_newrental = new com.raven.datechooser.DateChooser();
         adminFullName = new javax.swing.JTextField();
         save_newrental = new javax.swing.JButton();
         cancel_newrental = new javax.swing.JButton();
+        adminID = new javax.swing.JTextField();
         rentallist_panel = new javax.swing.JPanel();
         rentallist_title = new javax.swing.JLabel();
         searchfilter_rentallist = new javax.swing.JComboBox<>();
@@ -210,6 +229,37 @@ public class GUI extends javax.swing.JFrame {
         inventory_btUpdate = new javax.swing.JButton();
         inventory_btDelete = new javax.swing.JButton();
         newdevice_button = new javax.swing.JButton();
+        info_archive_panel = new javax.swing.JPanel();
+        archInfo_notes = new javax.swing.JTextArea();
+        archInfo_productName = new javax.swing.JLabel();
+        archInfo_productnameTF = new javax.swing.JTextField();
+        Informationen = new javax.swing.JLabel();
+        archInfo_manufacturerTF = new javax.swing.JTextField();
+        archInfo_invNumberTF = new javax.swing.JTextField();
+        archInfo_userIDTF = new javax.swing.JTextField();
+        archInfo_manufacturer = new javax.swing.JLabel();
+        archInfo_user = new javax.swing.JLabel();
+        archInfo_invNumber = new javax.swing.JLabel();
+        archInfo_notesTF = new javax.swing.JLabel();
+        archiInfo_deviceInfo = new javax.swing.JLabel();
+        archInfo_userName = new javax.swing.JLabel();
+        archInfo_userPhone = new javax.swing.JLabel();
+        archInfo_userMail = new javax.swing.JLabel();
+        archInfo_userNameTF = new javax.swing.JTextField();
+        archInfo_userPhoneTF = new javax.swing.JTextField();
+        archInfo_userMailTF = new javax.swing.JTextField();
+        archInfo_cancel = new javax.swing.JButton();
+        archInfo_adminID = new javax.swing.JLabel();
+        archInfo_admin = new javax.swing.JLabel();
+        archInfo_rentalDate = new javax.swing.JLabel();
+        archInfo_userID = new javax.swing.JLabel();
+        archInfo_adminName = new javax.swing.JLabel();
+        archInfo_returnDate = new javax.swing.JLabel();
+        archInfo_adminIDTF = new javax.swing.JTextField();
+        archInfo_rentalDateTF = new javax.swing.JTextField();
+        archInfo_returnDateTF = new javax.swing.JTextField();
+        archInfo_adminNameTF = new javax.swing.JTextField();
+        archInfo_zeitraum = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -338,7 +388,7 @@ public class GUI extends javax.swing.JFrame {
         );
         home_panelLayout.setVerticalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 879, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
 
         layerpane.add(home_panel, "card9");
@@ -402,10 +452,6 @@ public class GUI extends javax.swing.JFrame {
         year_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         year_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jahrgang" }));
 
-        administrator_newrental.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        administrator_newrental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        administrator_newrental.setToolTipText("Admin-ID");
-
         date.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         date.setText("Datum");
@@ -421,6 +467,9 @@ public class GUI extends javax.swing.JFrame {
 
         cancel_newrental.setText("Abbrechen");
 
+        adminID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        adminID.setText("Admin ID");
+
         javax.swing.GroupLayout newrental_panelLayout = new javax.swing.GroupLayout(newrental_panel);
         newrental_panel.setLayout(newrental_panelLayout);
         newrental_panelLayout.setHorizontalGroup(
@@ -428,6 +477,20 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(newrental_panelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newrental_panelLayout.createSequentialGroup()
+                        .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rentedby, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rentalDate_newrental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(newrental_panelLayout.createSequentialGroup()
+                                .addComponent(save_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cancel_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(adminFullName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                                .addComponent(adminID))))
                     .addGroup(newrental_panelLayout.createSequentialGroup()
                         .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(manufacturername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -449,20 +512,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(productname_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(manufacturer_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(inventorynumber_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(newrentaltitle, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(newrental_panelLayout.createSequentialGroup()
-                        .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rentedby, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(administrator_newrental, 0, 307, Short.MAX_VALUE)
-                            .addComponent(rentalDate_newrental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(adminFullName)
-                            .addGroup(newrental_panelLayout.createSequentialGroup()
-                                .addComponent(save_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cancel_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(newrentaltitle, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         newrental_panelLayout.setVerticalGroup(
@@ -496,10 +546,13 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(year_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rentedby)
-                    .addComponent(administrator_newrental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newrental_panelLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(rentedby))
+                    .addGroup(newrental_panelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(adminID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(adminFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -510,7 +563,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancel_newrental)
                     .addComponent(save_newrental))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         layerpane.add(newrental_panel, "card2");
@@ -644,10 +697,10 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(filterText_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterString_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
                 .addGap(21, 21, 21)
                 .addComponent(return_button)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         layerpane.add(rentallist_panel, "card3");
@@ -660,8 +713,14 @@ public class GUI extends javax.swing.JFrame {
         productname_return.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         productname_return.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         productname_return.setText("Produktname");
+        productname_return.setPreferredSize(new java.awt.Dimension(135, 20));
 
         re_productname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        re_productname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                re_productnameActionPerformed(evt);
+            }
+        });
 
         return_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         return_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -771,22 +830,19 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(return_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(return_title, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(return_panelLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(productname_return)
-                        .addGap(6, 6, 6)
-                        .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(manufacturer_return)
-                            .addComponent(re_manufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(return_panelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(re_productname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(154, 154, 154)
+                .addGap(22, 22, 22)
+                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(productname_return, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(re_productname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manufacturer_return)
+                    .addComponent(re_manufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inventorynumber_return)
                     .addComponent(re_inventoryNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(6, 6, 6)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userID_return)
                     .addComponent(re_userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -798,7 +854,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userPhone_return)
                     .addComponent(re_userPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addGroup(return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userMail_return)
                     .addComponent(re_userMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1264,36 +1320,33 @@ public class GUI extends javax.swing.JFrame {
         archive_panel.setLayout(archive_panelLayout);
         archive_panelLayout.setHorizontalGroup(
             archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(archive_panelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, archive_panelLayout.createSequentialGroup()
                 .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(archive_panelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(archive_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(archive_panelLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(search_options_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filter_options_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(searchfilter_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filterText_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
                         .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(archive_panelLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(search_options_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filter_options_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(searchfilter_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filterText_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(archive_panelLayout.createSequentialGroup()
-                                        .addComponent(asc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(desc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(filterButton_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(archive_panelLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(archive_ScrollPane)))
-                        .addGap(36, 36, 36)))
-                .addGap(24, 24, 24))
+                                .addComponent(asc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(desc_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(filterButton_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(archive_panelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(archive_title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(archive_ScrollPane))))
+                .addGap(50, 50, 50))
         );
         archive_panelLayout.setVerticalGroup(
             archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1421,40 +1474,39 @@ public class GUI extends javax.swing.JFrame {
         inventory_panel.setLayout(inventory_panelLayout);
         inventory_panelLayout.setHorizontalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inventory_panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(inventar_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(inventory_panelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventory_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, inventory_panelLayout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(search_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(filter_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(6, 6, 6)
-                            .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inventory_searchfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inventory_filterText, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(6, 6, 6)
-                            .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(inventar_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, inventory_panelLayout.createSequentialGroup()
+                        .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, inventory_panelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(search_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(filter_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6)
+                                .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inventory_searchfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inventory_filterText, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6)
+                                .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(inventory_panelLayout.createSequentialGroup()
+                                        .addComponent(inventory_asc, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(inventory_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(inventory_btFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6)
+                                .addComponent(inventory_btClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(newdevice_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(inventory_panelLayout.createSequentialGroup()
-                                    .addComponent(inventory_asc, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, 0)
-                                    .addComponent(inventory_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(inventory_btFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(6, 6, 6)
-                            .addComponent(inventory_btClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(newdevice_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(inventory_panelLayout.createSequentialGroup()
-                            .addComponent(inventory_btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(inventory_btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(60, 60, 60))
+                                    .addComponent(inventory_btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(inventory_btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(50, 50, 50))
         );
         inventory_panelLayout.setVerticalGroup(
             inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1474,7 +1526,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(inventory_btFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inventory_btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inventory_btUpdate)
@@ -1485,6 +1537,215 @@ public class GUI extends javax.swing.JFrame {
         );
 
         layerpane.add(inventory_panel, "card4");
+
+        info_archive_panel.setBackground(new java.awt.Color(220, 229, 211));
+
+        archInfo_notes.setColumns(20);
+        archInfo_notes.setRows(5);
+
+        archInfo_productName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_productName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_productName.setText("Produktname");
+        archInfo_productName.setPreferredSize(new java.awt.Dimension(135, 20));
+
+        archInfo_productnameTF.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        Informationen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Informationen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        archInfo_manufacturerTF.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        archInfo_invNumberTF.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        archInfo_userIDTF.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        archInfo_manufacturer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_manufacturer.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_manufacturer.setText("Herstellerbezeichnung");
+
+        archInfo_user.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        archInfo_user.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        archInfo_user.setText("User");
+
+        archInfo_invNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_invNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_invNumber.setText("Inventarnummer");
+
+        archInfo_notesTF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_notesTF.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_notesTF.setText("Notizen");
+
+        archiInfo_deviceInfo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        archiInfo_deviceInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        archiInfo_deviceInfo.setText("Geräteinformation");
+
+        archInfo_userName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_userName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_userName.setText("Name");
+
+        archInfo_userPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_userPhone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_userPhone.setText("Telefonnummer");
+
+        archInfo_userMail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_userMail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_userMail.setText("E-Mail");
+
+        archInfo_cancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_cancel.setText("Abbrechen");
+
+        archInfo_adminID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_adminID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_adminID.setText("Admin ID");
+
+        archInfo_admin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        archInfo_admin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        archInfo_admin.setText("Administrator");
+
+        archInfo_rentalDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_rentalDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_rentalDate.setText("Verleihdatum");
+
+        archInfo_userID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_userID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_userID.setText("Matrikelnummer");
+
+        archInfo_adminName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_adminName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_adminName.setText("Name");
+
+        archInfo_returnDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archInfo_returnDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        archInfo_returnDate.setText("Rückgabedatum");
+
+        archInfo_adminIDTF.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        archInfo_rentalDateTF.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        archInfo_returnDateTF.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        archInfo_adminNameTF.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        archInfo_zeitraum.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        archInfo_zeitraum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        archInfo_zeitraum.setText("Zeitraum");
+
+        javax.swing.GroupLayout info_archive_panelLayout = new javax.swing.GroupLayout(info_archive_panel);
+        info_archive_panel.setLayout(info_archive_panelLayout);
+        info_archive_panelLayout.setHorizontalGroup(
+            info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(info_archive_panelLayout.createSequentialGroup()
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(info_archive_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Informationen, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(info_archive_panelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(archInfo_cancel)
+                            .addGroup(info_archive_panelLayout.createSequentialGroup()
+                                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(archInfo_invNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_userName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_userPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_userMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_notesTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_manufacturer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_productName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_rentalDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_adminName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_returnDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_userID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_adminID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(35, 35, 35)
+                                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(archInfo_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_productnameTF)
+                                    .addComponent(archInfo_manufacturerTF)
+                                    .addComponent(archInfo_invNumberTF)
+                                    .addComponent(archInfo_userIDTF)
+                                    .addComponent(archInfo_userNameTF)
+                                    .addComponent(archInfo_userPhoneTF)
+                                    .addComponent(archInfo_userMailTF)
+                                    .addComponent(archInfo_notes, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                    .addComponent(archInfo_adminIDTF)
+                                    .addComponent(archInfo_rentalDateTF)
+                                    .addComponent(archInfo_returnDateTF)
+                                    .addComponent(archInfo_adminNameTF)
+                                    .addComponent(archInfo_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archiInfo_deviceInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(archInfo_zeitraum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addGap(130, 1240, Short.MAX_VALUE))
+        );
+        info_archive_panelLayout.setVerticalGroup(
+            info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(info_archive_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Informationen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(archiInfo_deviceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_productName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(archInfo_productnameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_manufacturer)
+                    .addComponent(archInfo_manufacturerTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_invNumber)
+                    .addComponent(archInfo_invNumberTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(archInfo_notesTF)
+                    .addComponent(archInfo_notes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(archInfo_user)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_userID)
+                    .addComponent(archInfo_userIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_userNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(archInfo_userName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_userPhone)
+                    .addComponent(archInfo_userPhoneTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_userMail)
+                    .addComponent(archInfo_userMailTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(archInfo_admin)
+                .addGap(4, 4, 4)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_adminID)
+                    .addComponent(archInfo_adminIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_adminName)
+                    .addComponent(archInfo_adminNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(archInfo_zeitraum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_rentalDate)
+                    .addComponent(archInfo_rentalDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archInfo_returnDate)
+                    .addComponent(archInfo_returnDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(archInfo_cancel)
+                .addContainerGap(284, Short.MAX_VALUE))
+        );
+
+        archInfo_productnameTF.getAccessibleContext().setAccessibleName("pName");
+
+        layerpane.add(info_archive_panel, "card6");
 
         scrollpane_startpage.setViewportView(layerpane);
 
@@ -1508,10 +1769,16 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //with click on the "neuer Verleih" button in gui this method is called
+    // the newrental_panel is shown to insert a new rental
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
         
-        //sitch panel to selected panel
+        //switch panel to selected panel
         switchPanel(newrental_panel);
+        
+        //to remove ActionListener in this panel, 
+        //to avoid multiple ActionListener
+        removeListener(newrental_panel);
         
         //initiate new Rental_Helper Object
         Rental_Helper rh = new Rental_Helper(newrental_panel);
@@ -1524,17 +1791,23 @@ public class GUI extends javax.swing.JFrame {
         rh.listenForSelectionM();
         rh.listenForSelectionIN();
         rh.listenForSelectionUID();
-        rh.listenForSelectionAID();
+
         
         //initiate listener for JButtons in panel newrental_panel
         rh.cancelButton();
         rh.saveNewRental();
     }//GEN-LAST:event_newrentalActionPerformed
 
+    //with click on the "Verleihliste" button in gui this method is called, 
+    //the the rentallist_panel is shown with the rentallist table
     private void rentallistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentallistActionPerformed
         
         //switch panel to selected panel
         switchPanel(rentallist_panel);
+        
+        //to remove ActionListener in this panel, 
+        //to avoid multiple ActionListener
+        removeListener(rentallist_panel);
 
         //initiate new RentalList_Helper object
         RentalList_Helper rListHelper = new RentalList_Helper (rentallist_table,
@@ -1563,18 +1836,26 @@ public class GUI extends javax.swing.JFrame {
         rListHelper.clearSelection();
         
         //initiate lisener for the returnButton, to save a new return
-        rListHelper.newReturn(layerpane, return_panel);
+        rListHelper.newReturn(return_panel);
     }//GEN-LAST:event_rentallistActionPerformed
 
+    //with click on the "Archiv" button in gui this method is called, 
+    //the archive_panel is shown with tha archive table
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
 
+        
         //switch panel to selected panel
         switchPanel(archive_panel);
+        
+        //to remove ActionListener in this panel, 
+        //to avoid multiple ActionListener
+        removeListener(archive_panel);
 
         //initiate new Archiv_Helper object
-        ArchivHelper archHelper = new ArchivHelper(archive_table, archive_ScrollPane,
+        Archiv_Helper archHelper = new Archiv_Helper(archive_table, archive_ScrollPane,
                 searchfilter_archive, asc_archive, desc_archive,
-                filterText_archive, filterButton_archive, btClear_archive);
+                filterText_archive, filterButton_archive, btClear_archive, 
+                layerpane, archive_panel);
 
         //set other tables to null to only display rentallist
         MyTableHelper.rentalList = null;
@@ -1592,6 +1873,10 @@ public class GUI extends javax.swing.JFrame {
         //method to filter table with the given options from user in GUI
         archHelper.filterTable();
         
+        //method to initialize a Listener for doublemousClick on a Row to show 
+        // informations about the selected rental
+        archHelper.rowDoubleMousClick(info_archive_panel);
+        
         //method to reset filter/sort options, initiate the table new
         archHelper.clearSelection();
     }//GEN-LAST:event_archiveActionPerformed
@@ -1600,6 +1885,7 @@ public class GUI extends javax.swing.JFrame {
      * this method handles click on Button 'Inventar' in main navigation panel
      */
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
+
 
         //initialize layout
         layerpane.removeAll();
@@ -1732,11 +2018,16 @@ public class GUI extends javax.swing.JFrame {
         devHelper.delete();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void re_productnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_productnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_re_productnameActionPerformed
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IMEInumber_newdevice;
     private javax.swing.JLabel IMEInumber_newdevice1;
+    private javax.swing.JLabel Informationen;
     private com.raven.datechooser.DateChooser InvUpd_AcqDate;
     private javax.swing.JButton InvUpd_BtnCancel;
     private javax.swing.JButton InvUpd_BtnSave;
@@ -1753,9 +2044,38 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel acquisitionvalue_newdevice;
     private javax.swing.JLabel acquisitionvalue_newdevice1;
     private javax.swing.JTextField adminFullName;
+    private javax.swing.JTextField adminID;
     private javax.swing.JLabel administrator_newdevice;
     private javax.swing.JLabel administrator_newdevice1;
-    private javax.swing.JComboBox<String> administrator_newrental;
+    private javax.swing.JLabel archInfo_admin;
+    private javax.swing.JLabel archInfo_adminID;
+    private javax.swing.JTextField archInfo_adminIDTF;
+    private javax.swing.JLabel archInfo_adminName;
+    private javax.swing.JTextField archInfo_adminNameTF;
+    private javax.swing.JButton archInfo_cancel;
+    private javax.swing.JLabel archInfo_invNumber;
+    private javax.swing.JTextField archInfo_invNumberTF;
+    private javax.swing.JLabel archInfo_manufacturer;
+    private javax.swing.JTextField archInfo_manufacturerTF;
+    private javax.swing.JTextArea archInfo_notes;
+    private javax.swing.JLabel archInfo_notesTF;
+    private javax.swing.JLabel archInfo_productName;
+    private javax.swing.JTextField archInfo_productnameTF;
+    private javax.swing.JLabel archInfo_rentalDate;
+    private javax.swing.JTextField archInfo_rentalDateTF;
+    private javax.swing.JLabel archInfo_returnDate;
+    private javax.swing.JTextField archInfo_returnDateTF;
+    private javax.swing.JLabel archInfo_user;
+    private javax.swing.JLabel archInfo_userID;
+    private javax.swing.JTextField archInfo_userIDTF;
+    private javax.swing.JLabel archInfo_userMail;
+    private javax.swing.JTextField archInfo_userMailTF;
+    private javax.swing.JLabel archInfo_userName;
+    private javax.swing.JTextField archInfo_userNameTF;
+    private javax.swing.JLabel archInfo_userPhone;
+    private javax.swing.JTextField archInfo_userPhoneTF;
+    private javax.swing.JLabel archInfo_zeitraum;
+    private javax.swing.JLabel archiInfo_deviceInfo;
     private javax.swing.JButton archive;
     private javax.swing.JScrollPane archive_ScrollPane;
     private javax.swing.JPanel archive_panel;
@@ -1783,6 +2103,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel filter_options_rentallist;
     private javax.swing.JButton filterbutton_rentallist;
     private javax.swing.JPanel home_panel;
+    private javax.swing.JPanel info_archive_panel;
     private com.raven.datechooser.DateChooser invNew_acquisitionDate;
     private javax.swing.JTextField invNew_acquisitionValue;
     private javax.swing.JComboBox<String> invNew_administrator;
@@ -1881,4 +2202,25 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton yes;
     // End of variables declaration//GEN-END:variables
 
+    
+    public static void removeListener(JPanel panel) {
+        
+        Component [] comps = panel.getComponents();
+        for (Component field : comps){
+            
+            if (field instanceof JComboBox){
+                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
+                    ((JComboBox) field).removeActionListener(al);
+                }
+            } else if (field instanceof JButton) {
+                for ( ActionListener alb : ((JButton) field).getActionListeners()) {
+                    ((JButton) field).removeActionListener(alb);
+                }
+            } else if (field instanceof JRadioButton) {
+                for (ActionListener alr : ((JRadioButton) field).getActionListeners()) {
+                    ((JRadioButton) field).removeActionListener(alr);
+                }
+            }
+        }
+    }
 }
