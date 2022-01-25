@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  * Helper Class for all the CRUD methods to the database
@@ -698,19 +699,20 @@ public class DatabaseHelper {
 
     }
 
-    public void deleteDevice(String deviceToDelete) throws SQLException {
+    public int deleteDevice(String deviceToDelete) throws SQLException {
 
         stmt = con.createStatement();
 
         String queryDevice = "DELETE FROM devices WHERE "
                 + "(inventoryNumber = " + deviceToDelete + ");";
         stmt = con.createStatement();
-        stmt.executeUpdate(queryDevice);
+        int i = stmt.executeUpdate(queryDevice);
         System.out.println(queryDevice);
 
         if (stmt != null) {
             stmt.close();
         }
+        return i;
     }
 
     public ArrayList<String> allInventoryNumbers() {
@@ -1274,5 +1276,61 @@ public class DatabaseHelper {
             }
         }
         return userNEW;
+    }
+    
+    public Devices getDeviceByID(String invNumb) {
+        
+        long l = Long.parseLong(invNumb);
+        
+        String query = "SELECT * FROM devices"
+                        + " WHERE inventoryNumber=" + l + ";";
+        
+        Devices dev = null;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                long invNo = rs.getLong(1);
+                String manuf = rs.getString(2);
+                String prodN = rs.getString(3);
+                String notes = rs.getString(4);
+                String location = rs.getString(5);
+                int stat = rs.getInt(6);
+                String im = rs.getString(7);
+                long usID = rs.getLong(8);
+                double acV = rs.getDouble(9);
+                LocalDate acD = rs.getDate(10).toLocalDate();
+                int admin = rs.getInt(11);
+                
+                dev = new Devices ();
+                dev.setInventoryNumber(invNo);
+                dev.setManufacturer(manuf);
+                dev.setProductName(prodN);
+                dev.setNotes(notes);
+                dev.setLocation(location);
+                dev.setStatus(stat);
+                dev.setImei(im);
+                dev.setUsers_userID(usID);
+                dev.setAquisitionValue(acV);
+                dev.setAquistionDate(acD);
+                dev.setAdminID(admin); 
+
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            System.out.println("getDeviceByID");
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return dev;
     }
 }

@@ -224,6 +224,32 @@ public class GUI extends javax.swing.JFrame {
         inventory_btUpdate = new javax.swing.JButton();
         inventory_btDelete = new javax.swing.JButton();
         newdevice_button = new javax.swing.JButton();
+        inventory_info_panel = new javax.swing.JPanel();
+        invInfo_invNo = new javax.swing.JLabel();
+        invInfo_tfInventoryNumber = new javax.swing.JTextField();
+        Informationen = new javax.swing.JLabel();
+        invInfo_tfProductName = new javax.swing.JTextField();
+        invInfo_tfManufacturer = new javax.swing.JTextField();
+        invInfo_tfAcquisitionDate = new javax.swing.JTextField();
+        invInfo_pn = new javax.swing.JLabel();
+        invInfo_manu = new javax.swing.JLabel();
+        invInfo_notesTF = new javax.swing.JLabel();
+        invInfo_deviceInfo = new javax.swing.JLabel();
+        invInfo_acqD = new javax.swing.JLabel();
+        invInfo_loc = new javax.swing.JLabel();
+        invInfo_tfAcquisitionValue = new javax.swing.JTextField();
+        invInfo_tfImei = new javax.swing.JTextField();
+        invInfo_btnBack = new javax.swing.JButton();
+        invInfo_adminID = new javax.swing.JLabel();
+        invInfo_admin = new javax.swing.JLabel();
+        invInfo_acqV = new javax.swing.JLabel();
+        invInfo_adminName = new javax.swing.JLabel();
+        invInfo_tfAdminID = new javax.swing.JTextField();
+        invInfo_tfAdminName = new javax.swing.JTextField();
+        invInfo_tfLocation = new javax.swing.JTextField();
+        invInfo_imei = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        invInfo_taNotes = new javax.swing.JTextArea();
 
         jButton1.setText("jButton1");
 
@@ -348,11 +374,11 @@ public class GUI extends javax.swing.JFrame {
         home_panel.setLayout(home_panelLayout);
         home_panelLayout.setHorizontalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 1825, Short.MAX_VALUE)
         );
         home_panelLayout.setVerticalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 879, Short.MAX_VALUE)
+            .addGap(0, 959, Short.MAX_VALUE)
         );
 
         layerpane.add(home_panel, "card9");
@@ -477,7 +503,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(manufacturer_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(inventorynumber_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(newrentaltitle, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(1291, Short.MAX_VALUE))
         );
         newrental_panelLayout.setVerticalGroup(
             newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,7 +553,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancel_newrental)
                     .addComponent(save_newrental))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         layerpane.add(newrental_panel, "card2");
@@ -661,10 +687,10 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(filterText_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterString_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
                 .addGap(21, 21, 21)
                 .addComponent(return_button)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
 
         layerpane.add(rentallist_panel, "card3");
@@ -787,7 +813,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(return_panelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(return_title, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(130, 1117, Short.MAX_VALUE))
+                .addGap(130, 1240, Short.MAX_VALUE))
         );
         return_panelLayout.setVerticalGroup(
             return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -961,7 +987,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(InvUpd_CbAdmini, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(InvUpd_TfLocation)
                             .addComponent(InvUpd_TfAcqValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
-                        .addGap(0, 55, Short.MAX_VALUE))
+                        .addGap(0, 1304, Short.MAX_VALUE))
                     .addGroup(inventory_update_panelLayout.createSequentialGroup()
                         .addGroup(inventory_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newdevice_title1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1154,7 +1180,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(invNew_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(invNew_acquisitionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 1297, Short.MAX_VALUE))
+                .addGap(0, 1301, Short.MAX_VALUE))
         );
         inventory_new_panelLayout.setVerticalGroup(
             inventory_new_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1330,7 +1356,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(filterButton_archive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                 .addGap(100, 100, 100))
         );
 
@@ -1490,7 +1516,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(inventory_btFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inventory_btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inventory_btUpdate)
@@ -1501,6 +1527,187 @@ public class GUI extends javax.swing.JFrame {
         );
 
         layerpane.add(inventory_panel, "card4");
+
+        inventory_info_panel.setBackground(new java.awt.Color(220, 229, 211));
+
+        invInfo_invNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_invNo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_invNo.setText("Inventarnummer");
+        invInfo_invNo.setPreferredSize(new java.awt.Dimension(135, 20));
+
+        invInfo_tfInventoryNumber.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        Informationen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Informationen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        invInfo_tfProductName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        invInfo_tfManufacturer.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        invInfo_tfAcquisitionDate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        invInfo_pn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_pn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_pn.setText("Produktname");
+
+        invInfo_manu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_manu.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_manu.setText("Hersteller");
+
+        invInfo_notesTF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_notesTF.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_notesTF.setText("Notizen");
+
+        invInfo_deviceInfo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        invInfo_deviceInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        invInfo_deviceInfo.setText("Geräteinformation");
+
+        invInfo_acqD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_acqD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_acqD.setText("Anschaffungsdatum");
+
+        invInfo_loc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_loc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_loc.setText("Aufbewahrungsort");
+
+        invInfo_tfAcquisitionValue.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        invInfo_tfImei.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        invInfo_btnBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_btnBack.setText("Zurück");
+
+        invInfo_adminID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_adminID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_adminID.setText("Admin ID");
+
+        invInfo_admin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        invInfo_admin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        invInfo_admin.setText("Administrator");
+
+        invInfo_acqV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_acqV.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_acqV.setText("Anschaffungwert");
+
+        invInfo_adminName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_adminName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_adminName.setText("Name");
+
+        invInfo_tfAdminID.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        invInfo_tfAdminName.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        invInfo_tfLocation.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        invInfo_imei.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        invInfo_imei.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        invInfo_imei.setText("Imei");
+
+        invInfo_taNotes.setEditable(false);
+        invInfo_taNotes.setColumns(20);
+        invInfo_taNotes.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        invInfo_taNotes.setRows(5);
+        jScrollPane1.setViewportView(invInfo_taNotes);
+
+        javax.swing.GroupLayout inventory_info_panelLayout = new javax.swing.GroupLayout(inventory_info_panel);
+        inventory_info_panel.setLayout(inventory_info_panelLayout);
+        inventory_info_panelLayout.setHorizontalGroup(
+            inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inventory_info_panelLayout.createSequentialGroup()
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inventory_info_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Informationen, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(inventory_info_panelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(invInfo_btnBack)
+                            .addGroup(inventory_info_panelLayout.createSequentialGroup()
+                                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(invInfo_manu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(invInfo_acqD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(invInfo_notesTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(invInfo_pn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(invInfo_invNo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(invInfo_adminName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(invInfo_acqV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(invInfo_adminID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(invInfo_imei, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(invInfo_loc, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(25, 25, 25)
+                                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(invInfo_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(invInfo_tfProductName)
+                                    .addComponent(invInfo_tfManufacturer)
+                                    .addComponent(invInfo_tfImei)
+                                    .addComponent(invInfo_tfAdminID)
+                                    .addComponent(invInfo_tfAdminName)
+                                    .addComponent(invInfo_deviceInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(invInfo_tfLocation)
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(invInfo_tfAcquisitionDate)
+                                    .addComponent(invInfo_tfAcquisitionValue)
+                                    .addComponent(invInfo_tfInventoryNumber))))))
+                .addGap(1240, 1240, 1240))
+        );
+        inventory_info_panelLayout.setVerticalGroup(
+            inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inventory_info_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Informationen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(invInfo_deviceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_invNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(invInfo_tfInventoryNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_pn)
+                    .addComponent(invInfo_tfProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_manu)
+                    .addComponent(invInfo_tfManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_tfImei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(invInfo_imei))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_tfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(invInfo_loc))
+                .addGap(7, 7, 7)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_tfAcquisitionValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(invInfo_acqV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_tfAcquisitionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(invInfo_acqD))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(inventory_info_panelLayout.createSequentialGroup()
+                        .addComponent(invInfo_notesTF)
+                        .addGap(85, 85, 85))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(invInfo_admin)
+                .addGap(4, 4, 4)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_tfAdminID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(invInfo_adminID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invInfo_adminName)
+                    .addComponent(invInfo_tfAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(invInfo_btnBack)
+                .addContainerGap(420, Short.MAX_VALUE))
+        );
+
+        layerpane.add(inventory_info_panel, "card6");
 
         scrollpane_startpage.setViewportView(layerpane);
 
@@ -1647,7 +1854,8 @@ public class GUI extends javax.swing.JFrame {
         devHelper = new Inventory_Helper(inventory_table1,
                 inventory_ScrollPane1, inventory_searchfilter, inventory_asc,
                 inventory_desc, inventory_filterText, inventory_btFilter,
-                inventory_btClear, inventory_btUpdate, inventory_btDelete);
+                inventory_btClear, inventory_btUpdate, inventory_btDelete,
+                layerpane, inventory_panel);
 
         //set other tables null to only display inventory-table
         MyTableHelper.rentalList = null;
@@ -1665,6 +1873,12 @@ public class GUI extends javax.swing.JFrame {
         devHelper.clearSelection();
         //listen for click on Button 'Bearbeiten' to initalize Update-Panel
         devHelper.update();
+        
+        devHelper.rowDoubleClick(inventory_info_panel, invInfo_tfInventoryNumber,
+                invInfo_tfProductName, invInfo_tfManufacturer, invInfo_tfImei,
+                invInfo_tfLocation, invInfo_tfAcquisitionValue, invInfo_tfAcquisitionDate,
+                invInfo_taNotes, invInfo_tfAdminID, invInfo_tfAdminName, invInfo_btnBack);
+        
     }//GEN-LAST:event_inventoryActionPerformed
 
     /**
@@ -1777,6 +1991,7 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IMEInumber_newdevice;
     private javax.swing.JLabel IMEInumber_newdevice1;
+    private javax.swing.JLabel Informationen;
     private com.raven.datechooser.DateChooser InvUpd_AcqDate;
     private javax.swing.JButton InvUpd_BtnCancel;
     private javax.swing.JButton InvUpd_BtnSave;
@@ -1823,6 +2038,29 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel filter_options_rentallist;
     private javax.swing.JButton filterbutton_rentallist;
     private javax.swing.JPanel home_panel;
+    private javax.swing.JLabel invInfo_acqD;
+    private javax.swing.JLabel invInfo_acqV;
+    private javax.swing.JLabel invInfo_admin;
+    private javax.swing.JLabel invInfo_adminID;
+    private javax.swing.JLabel invInfo_adminName;
+    private javax.swing.JButton invInfo_btnBack;
+    private javax.swing.JLabel invInfo_deviceInfo;
+    private javax.swing.JLabel invInfo_imei;
+    private javax.swing.JLabel invInfo_invNo;
+    private javax.swing.JLabel invInfo_loc;
+    private javax.swing.JLabel invInfo_manu;
+    private javax.swing.JLabel invInfo_notesTF;
+    private javax.swing.JLabel invInfo_pn;
+    private javax.swing.JTextArea invInfo_taNotes;
+    private javax.swing.JTextField invInfo_tfAcquisitionDate;
+    private javax.swing.JTextField invInfo_tfAcquisitionValue;
+    private javax.swing.JTextField invInfo_tfAdminID;
+    private javax.swing.JTextField invInfo_tfAdminName;
+    private javax.swing.JTextField invInfo_tfImei;
+    private javax.swing.JTextField invInfo_tfInventoryNumber;
+    private javax.swing.JTextField invInfo_tfLocation;
+    private javax.swing.JTextField invInfo_tfManufacturer;
+    private javax.swing.JTextField invInfo_tfProductName;
     private com.raven.datechooser.DateChooser invNew_acquisitionDate;
     private javax.swing.JTextField invNew_acquisitionValue;
     private javax.swing.JComboBox<String> invNew_administrator;
@@ -1844,6 +2082,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton inventory_btUpdate;
     private javax.swing.JRadioButton inventory_desc;
     private javax.swing.JTextField inventory_filterText;
+    private javax.swing.JPanel inventory_info_panel;
     private javax.swing.JPanel inventory_new_panel;
     private javax.swing.JLabel inventory_number;
     private javax.swing.JPanel inventory_panel;
@@ -1855,6 +2094,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> inventorynumber_newrental;
     private javax.swing.JLabel inventorynumber_return;
     private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLayeredPane layerpane;
