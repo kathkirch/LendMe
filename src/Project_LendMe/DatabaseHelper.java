@@ -1398,6 +1398,7 @@ public class DatabaseHelper {
         return userNEW;
     }
     
+    /*
     public Devices getDeviceByID(String invNumb) {
         
         long l = Long.parseLong(invNumb);
@@ -1453,4 +1454,5 @@ public class DatabaseHelper {
         }
         return dev;
     }
+*/
 }
