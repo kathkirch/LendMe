@@ -119,8 +119,12 @@ public class InventoryUpdate_Helper {
             }
 
         };
-        inventoryNumber.addKeyListener(l);
-        imei.addKeyListener(l);
+
+        //check if KeyListener is already active before initializing
+        if (inventoryNumber.getKeyListeners() == null) {
+            inventoryNumber.addKeyListener(l);
+            imei.addKeyListener(l);
+        }
     }
 
     /**
@@ -146,7 +150,9 @@ public class InventoryUpdate_Helper {
                 invNos, imeis);
 
         //set Input Verifiers
-        acquisitionValue.setText("0.0");
+        if (acquisitionValue.getText().isBlank()) 
+            acquisitionValue.setText("0.0");
+        
         inventoryNumber.setInputVerifier(iv);
         manufacturer.setInputVerifier(iv);
         productname.setInputVerifier(iv);
@@ -162,8 +168,6 @@ public class InventoryUpdate_Helper {
 
         //helper booleans to determine which query to run
         boolean updateBefore = false;
-        boolean adminUpdate = false;
-        boolean adminInsert = false;
 
         //save original InventoryNumber
         String invNoToUpdate = blub[0];
@@ -229,12 +233,14 @@ public class InventoryUpdate_Helper {
                 updateBefore = true;
             }
         }
-        if (!acquisitionValue.getText().equals(blub[8])) {
+        
+        String acqValToCheck = acquisitionValue.getText().replaceAll("[,]", "");
+        if (!acqValToCheck.equals(blub[8])) {
             if (updateBefore) {
                 queryToPass = queryToPass + separator + "acquisitionValue = '"
-                        + acquisitionValue.getText() + "'";
+                        + acqValToCheck + "'";
             } else {
-                queryToPass = "acquisitionValue = '" + acquisitionValue.getText() + "'";
+                queryToPass = "acquisitionValue = '" + acqValToCheck + "'";
                 updateBefore = true;
             }
         }
@@ -255,58 +261,25 @@ public class InventoryUpdate_Helper {
                 updateBefore = true;
             }
         }
-
-        /*Admin-Combobox-Check
-        This value is queried form a different DB than the device-values
         
-        since it is possible for devices to exist without being assigned
-        to an Admin, in addition to comparing new and old value, we need
-        to check if an entry previously existed:
-        if YES we run an UPDATE-Query
-        if NO we run an INSERT INTO-Query
-         */
+        /* Admin-Check
+        get selected Admin-ID from ComboBox
+        */
         String adminToCheck = administrator.getSelectedItem().toString();
         if (!adminToCheck.equals(blub[10])) {
-            if (blub[10].equals("")) {
-                adminInsert = true;
+            if (updateBefore) {
+                queryToPass = queryToPass + separator + "administrators_adminID = '" + adminToCheck + "'";
             } else {
-                adminUpdate = true;
+                queryToPass = "acquisitionDate = '" + dateToString + "'";
+                updateBefore = true;
             }
         }
 
-        /*SQL-Queries
-        run suitable SQL-Queries depending on which fields got updated
-        Show Confirmation/Error Message to User, depending on Result
-        
-        6 possible scenarios to consider:
-            1. existing Admin-Value gets updated and one or more Device-Values get updated
-            2. only one or more Device-Values get updated
-            3. only existing Admin-Value gets updated
-            4. non-existing Admin-Value gets inserted
-            5: non-existing Admin-Value gets inserted and one or more Device-Values get updated
-            6: No Updates detected
-         */
         try {
-            if (adminUpdate && updateBefore) {
-                dbh.updateAdminHasDevice(adminToCheck, blub[10], invNoToUpdate);
-                dbh.updateDevice(queryToPass, invNoToUpdate);
-                JOptionPane.showMessageDialog(null, "Device und Admin Felder geändert", "Success", 1);
-            } else if (adminInsert && updateBefore) {
-                dbh.updateDevice(queryToPass, invNoToUpdate);
-                String insertAdminHasDevice = adminToCheck + ", " + inventoryNumber.getText();
-                dbh.insertAdminHasDevice(insertAdminHasDevice);
-                blub[10] = adminToCheck;
-            } else if (updateBefore) {
+
+            if (updateBefore) {
                 dbh.updateDevice(queryToPass, invNoToUpdate);
                 JOptionPane.showMessageDialog(null, "Device Feld(er) geändert", "Success", 1);
-            } else if (adminUpdate) {
-                dbh.updateAdminHasDevice(adminToCheck, blub[10], invNoToUpdate);
-                JOptionPane.showMessageDialog(null, "Admin Feld geändert", "Success", 1);
-            } else if (adminInsert) {
-                String insertAdminHasDevice = adminToCheck + ", " + inventoryNumber.getText();
-                dbh.insertAdminHasDevice(insertAdminHasDevice);
-                blub[10] = adminToCheck;
-                JOptionPane.showMessageDialog(null, "Neuer Eintrag in admin has devices", "Success", 1);
             } else {
                 JOptionPane.showMessageDialog(null, //no owner frame
                         "Keine Änderungen am Datensatz festgestellt", //text to display

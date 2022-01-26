@@ -288,12 +288,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="576" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1825" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="959" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -366,7 +366,7 @@
                                       </Group>
                                       <Component id="newrentaltitle" alignment="0" min="-2" pref="504" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                                  <EmptySpace pref="1291" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -429,7 +429,7 @@
                                       <Component id="cancel_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="save_newrental" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="241" max="32767" attributes="0"/>
+                                  <EmptySpace pref="277" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -738,10 +738,10 @@
                                       <Component id="filterString_rentallist" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="rental_ScrollPane" pref="501" max="32767" attributes="0"/>
+                                  <Component id="rental_ScrollPane" pref="522" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Component id="return_button" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="222" max="32767" attributes="0"/>
+                                  <EmptySpace pref="219" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -989,7 +989,7 @@
                                           <Component id="return_title" min="-2" pref="575" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="130" pref="1117" max="32767" attributes="0"/>
+                                  <EmptySpace min="130" pref="1240" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1290,7 +1290,7 @@
                                               <Component id="InvUpd_TfLocation" alignment="0" max="32767" attributes="0"/>
                                               <Component id="InvUpd_TfAcqValue" alignment="1" pref="307" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="0" pref="55" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="1304" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -1633,7 +1633,7 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="0" pref="1297" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="1301" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1983,7 +1983,7 @@
                                       <Component id="btClear_archive" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="archive_ScrollPane" pref="527" max="32767" attributes="0"/>
+                                  <Component id="archive_ScrollPane" pref="686" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2253,7 +2253,7 @@
                                       <Component id="inventory_btClear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="inventory_ScrollPane1" pref="661" max="32767" attributes="0"/>
+                                  <Component id="inventory_ScrollPane1" pref="689" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="inventory_btUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2479,6 +2479,350 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Container class="javax.swing.JPanel" name="inventory_info_panel">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="d3" green="e5" red="dc" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="card6"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="Informationen" min="-2" pref="575" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="invInfo_btnBack" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="invInfo_manu" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="invInfo_acqD" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="invInfo_notesTF" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="invInfo_pn" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="invInfo_invNo" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="invInfo_adminName" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="invInfo_acqV" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="invInfo_adminID" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="invInfo_imei" alignment="0" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="invInfo_loc" min="-2" pref="135" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="invInfo_admin" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfProductName" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfManufacturer" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfImei" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfAdminID" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfAdminName" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_deviceInfo" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfLocation" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfAcquisitionDate" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfAcquisitionValue" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="invInfo_tfInventoryNumber" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="1240" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Informationen" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Component id="invInfo_deviceInfo" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_invNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invInfo_tfInventoryNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_pn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invInfo_tfProductName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_manu" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invInfo_tfManufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_tfImei" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invInfo_imei" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_tfLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invInfo_loc" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_tfAcquisitionValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invInfo_acqV" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_tfAcquisitionDate" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="invInfo_acqD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="invInfo_notesTF" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane1" min="-2" pref="100" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="invInfo_admin" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_tfAdminID" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="invInfo_adminID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="invInfo_adminName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="invInfo_tfAdminName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Component id="invInfo_btnBack" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="420" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="invInfo_invNo">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Inventarnummer"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[135, 20]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfInventoryNumber">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                          <AccessibilityProperties>
+                            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="pName"/>
+                          </AccessibilityProperties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="Informationen">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfProductName">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfManufacturer">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfAcquisitionDate">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_pn">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Produktname"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_manu">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Hersteller"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_notesTF">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Notizen"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_deviceInfo">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="Ger&#xe4;teinformation"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_acqD">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Anschaffungsdatum"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_loc">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Aufbewahrungsort"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfAcquisitionValue">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfImei">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="invInfo_btnBack">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Zur&#xfc;ck"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_adminID">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Admin ID"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_admin">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="Administrator"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_acqV">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Anschaffungwert"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_adminName">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Name"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfAdminID">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfAdminName">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="invInfo_tfLocation">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="0"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="invInfo_imei">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="14" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Imei"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextArea" name="invInfo_taNotes">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="columns" type="int" value="20"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="10" style="0"/>
+                                </Property>
+                                <Property name="rows" type="int" value="5"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
                     <Container class="javax.swing.JPanel" name="info_archive_panel">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -2498,7 +2842,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="Informationen" min="-2" pref="575" max="-2" attributes="0"/>
+                                          <Component id="Informationen1" min="-2" pref="575" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
@@ -2550,7 +2894,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="Informationen" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="Informationen1" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                   <Component id="archiInfo_deviceInfo" min="-2" pref="20" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -2655,7 +2999,7 @@
                             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="pName"/>
                           </AccessibilityProperties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="Informationen">
+                        <Component class="javax.swing.JLabel" name="Informationen1">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>

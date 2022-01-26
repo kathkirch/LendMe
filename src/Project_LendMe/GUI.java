@@ -384,7 +384,7 @@ public class GUI extends javax.swing.JFrame {
         home_panel.setLayout(home_panelLayout);
         home_panelLayout.setHorizontalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 1825, Short.MAX_VALUE)
         );
         home_panelLayout.setVerticalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +513,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(manufacturer_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(inventorynumber_newrental, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(newrentaltitle, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(1291, Short.MAX_VALUE))
         );
         newrental_panelLayout.setVerticalGroup(
             newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -823,7 +823,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(return_panelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(return_title, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(130, 1117, Short.MAX_VALUE))
+                .addGap(130, 1240, Short.MAX_VALUE))
         );
         return_panelLayout.setVerticalGroup(
             return_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -997,7 +997,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(InvUpd_CbAdmini, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(InvUpd_TfLocation)
                             .addComponent(InvUpd_TfAcqValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
-                        .addGap(0, 55, Short.MAX_VALUE))
+                        .addGap(0, 1304, Short.MAX_VALUE))
                     .addGroup(inventory_update_panelLayout.createSequentialGroup()
                         .addGroup(inventory_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newdevice_title1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1190,7 +1190,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(invNew_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(invNew_acquisitionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 1297, Short.MAX_VALUE))
+                .addGap(0, 1301, Short.MAX_VALUE))
         );
         inventory_new_panelLayout.setVerticalGroup(
             inventory_new_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1366,7 +1366,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(filterButton_archive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                 .addGap(100, 100, 100))
         );
 
@@ -1526,7 +1526,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(inventory_btFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inventory_btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inventory_btUpdate)
@@ -1897,7 +1897,8 @@ public class GUI extends javax.swing.JFrame {
         devHelper = new Inventory_Helper(inventory_table1,
                 inventory_ScrollPane1, inventory_searchfilter, inventory_asc,
                 inventory_desc, inventory_filterText, inventory_btFilter,
-                inventory_btClear, inventory_btUpdate, inventory_btDelete);
+                inventory_btClear, inventory_btUpdate, inventory_btDelete,
+                layerpane, inventory_panel);
 
         //set other tables null to only display inventory-table
         MyTableHelper.rentalList = null;
@@ -1915,6 +1916,12 @@ public class GUI extends javax.swing.JFrame {
         devHelper.clearSelection();
         //listen for click on Button 'Bearbeiten' to initalize Update-Panel
         devHelper.update();
+        
+        devHelper.rowDoubleClick(inventory_info_panel, invInfo_tfInventoryNumber,
+                invInfo_tfProductName, invInfo_tfManufacturer, invInfo_tfImei,
+                invInfo_tfLocation, invInfo_tfAcquisitionValue, invInfo_tfAcquisitionDate,
+                invInfo_taNotes, invInfo_tfAdminID, invInfo_tfAdminName, invInfo_btnBack);
+        
     }//GEN-LAST:event_inventoryActionPerformed
 
     /**
@@ -2125,6 +2132,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton inventory_btUpdate;
     private javax.swing.JRadioButton inventory_desc;
     private javax.swing.JTextField inventory_filterText;
+    private javax.swing.JPanel inventory_info_panel;
     private javax.swing.JPanel inventory_new_panel;
     private javax.swing.JLabel inventory_number;
     private javax.swing.JPanel inventory_panel;
@@ -2136,6 +2144,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> inventorynumber_newrental;
     private javax.swing.JLabel inventorynumber_return;
     private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLayeredPane layerpane;
