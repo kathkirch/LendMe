@@ -450,7 +450,7 @@ public final class Rental_Helper {
         
         }else {
             
-            if ( val.isAlpha(firstname) &&  val.isAlpha(lastname)){
+            if ( val.isName(firstname) &&  val.isName(lastname)){
                 nameV = true;
             }
             if ( val.isEmail(email)) {
@@ -462,19 +462,20 @@ public final class Rental_Helper {
             if ( val.isYear(year)) {
                 yearV = true;
             }
-            if ( val.isNumeric(id)) {
+            if ( val.isUserID(id)) {
                 idV = true;
             }
             
             if (nameV && emailV && phoneV && yearV && idV) {
                 user = new Users(Integer.parseInt(id), firstname, lastname, phone, 
                                 email, year);
-            } else {
-                JOptionPane.showMessageDialog(null, 
-                    "Eingabefehler, Formatvorlage beachten!", 
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            }
+            } 
+//            else {
+//                JOptionPane.showMessageDialog(null, 
+//                    "Eingabefehler, Formatvorlage beachten!", 
+//                    "Error",
+//                    JOptionPane.ERROR_MESSAGE);
+//            }
         }
         return user;
     }
@@ -563,9 +564,10 @@ public final class Rental_Helper {
                                     "Bitte UserID angeben!",
                                     "Error",
                                     JOptionPane.ERROR_MESSAGE);
-                }else {
+                } if (val.isUserID(jCBuserID.getSelectedItem().toString())){
                 
                     String userID = jCBuserID.getEditor().getItem().toString();
+                    
                     long id = Long.parseLong(userID);
 
                     if (hp.isUserNew(id)){

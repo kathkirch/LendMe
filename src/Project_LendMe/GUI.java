@@ -742,7 +742,7 @@ public class GUI extends javax.swing.JFrame {
         productname_return.setPreferredSize(new java.awt.Dimension(135, 20));
 
         re_productname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-      
+        
 
         return_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         return_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

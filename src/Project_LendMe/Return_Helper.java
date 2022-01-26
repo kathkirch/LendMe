@@ -100,6 +100,13 @@ public class Return_Helper {
         for (Devices dev : devices) {
             if (dev.getInventoryNumber() == RentalList_Helper.RETURN_INVNUMBER){
                 notes = dev.getNotes();
+                
+                if (val.isAlphaNumeric(notes)) {
+                    notes = dev.getNotes();
+                } else {
+                    JOptionPane.showMessageDialog(null, 
+                   "Feld \"Notizen\" darf keine Sonderzeichen enthalten");
+                }
             }
         }
         
@@ -163,17 +170,20 @@ public class Return_Helper {
         
         Rentals rental = dbH.getRentalByID(returnID);
         
-        boolean valid = val.validReturnDate(returnDate, rental.getRentalDate());
-        
         String notes = rNotes.getText();
+        
+        boolean validDate = val.validReturnDate(returnDate, rental.getRentalDate());
+        boolean validNotes = val.validNotes(notes);
         
         long invNumb = Long.valueOf(inventoryNumber.getText());
         
         if (yesBT.isSelected()) {
             
-            if (valid){
+            // check if returnDate and notes are valid fields
+            if (validDate == true && validNotes == true){
                 
                 try {
+                    
                 dbH.updateRentals(returnID, returnDate);
                 dbH.setDevice_NotLent(invNumb, notes);
                 JOptionPane.showMessageDialog(null, "Gerätestatus aktualisert"
