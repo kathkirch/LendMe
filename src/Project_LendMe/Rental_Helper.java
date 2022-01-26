@@ -45,6 +45,8 @@ public final class Rental_Helper {
    
     private DatabaseHelper hp = new DatabaseHelper();
     private final Validator val = new Validator();
+    
+    
     private final String lastItem_e = "";
     private final String lastItem = "";
     private static final String USER_CHANGE = "user_change";
@@ -131,21 +133,19 @@ public final class Rental_Helper {
      *every device has only one administrator,
      * fields are not editable - just for user information
      */
-    public void setAdminData() {
+    public void setAdminData() throws NullPointerException {
         
         
-        String invID = jCBinvnumber.getSelectedItem().toString();
+        String invID = jCBinvnumber.getSelectedItem().toString();  
         
-        if (!invID.isBlank()) {
-            
-            // set admin values
-            String a_ID = hp.getDeviceAdminID(invID);
-            jTFadminID.setText(a_ID);
-            String name = hp.getAdminNameByID(a_ID);
-            jTFadminName.setText(name);
-        
+        if (!invID.isBlank() && val.isNumeric(invID)) {
+
+        // set admin values
+        String a_ID = hp.getDeviceAdminID(invID);
+        jTFadminID.setText(a_ID);
+        String name = hp.getAdminNameByID(a_ID);
+        jTFadminName.setText(name);
         }
-        
     }
    
     
@@ -242,7 +242,12 @@ public final class Rental_Helper {
                                 jCBinvnumber.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
                                 jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
-                                setAdminData();
+                                
+                                try{
+                                    setAdminData();
+                                }catch (java.lang.NullPointerException npEx){
+                                    System.out.println(npEx + "setAdminData");
+                                }
                             }
                         }
        
@@ -296,7 +301,11 @@ public final class Rental_Helper {
                                 jCBinvnumber.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
                                 jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
-                                setAdminData();
+                                try{
+                                    setAdminData();
+                                }catch (java.lang.NullPointerException npEx){
+                                    System.out.println(npEx + "setAdminData");
+                                }
                             }
                         }
                     }
@@ -354,8 +363,11 @@ public final class Rental_Helper {
                                 jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
                             }
                         }
-                        setAdminData();
-                        
+                        try{
+                            setAdminData();
+                        }catch (java.lang.NullPointerException npEx){
+                            System.out.println(npEx + "setAdminData");
+                        }
                     }
                 }  
             }
@@ -467,7 +479,7 @@ public final class Rental_Helper {
             }
             
             if (nameV && emailV && phoneV && yearV && idV) {
-                user = new Users(Integer.parseInt(id), firstname, lastname, phone, 
+                user = new Users(Long.parseLong(id), firstname, lastname, phone, 
                                 email, year);
             } 
 //            else {
@@ -514,6 +526,14 @@ public final class Rental_Helper {
                     JOptionPane.showMessageDialog(null, 
                             "Ein oder mehrere Felder sind leer!"
                             + " Bitte ausfüllen!",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                
+                } else if (!val.isNumeric(inventoryNumb)|| !val.isNumeric(userID) 
+                           || !val.isNumeric(adminID)) {
+                
+                     JOptionPane.showMessageDialog(null, 
+                            "Eingabe prüfen!",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
@@ -573,7 +593,7 @@ public final class Rental_Helper {
                     if (hp.isUserNew(id)){
 
                         Users user = createUser(jCBuserID, jTFfirstname, 
-                                    jTFlastname, jTFphone, jTFmail, jCByear);
+                                    jTFlastname, jTFmail, jTFphone, jCByear);
 
                         if (user == null){
                             validUser = false;

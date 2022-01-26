@@ -131,15 +131,20 @@ public class Validator {
         
         Pattern pat = Pattern.compile(emailRegex);
         
-        if (email != null && pat.matcher(email).matches() && email.length() < 46 ){
+        if (email != null && pat.matcher(email).matches()){
             validEmail = true;
+            
         } else if (email == null) {
             validEmail = false;
              JOptionPane.showMessageDialog(null, "Falsche Eingabe bei "
                     + "\"Email\"! \nDarf nicht leer sein");
+             validEmail = false;
+             
         } else if (pat.matcher(email).matches() == false){
             JOptionPane.showMessageDialog(null, "Falsche Eingabe bei "
                     + "\"Email\"! \n Bitte eine valide Email-Adresse angeben!");
+            validEmail = false;
+            
         } 
         else if (email.length() > 45){
             JOptionPane.showMessageDialog(null, "Falsche Eingabe bei "
@@ -296,16 +301,22 @@ public class Validator {
     public boolean validNotes (String notes){
         boolean valide = false;
         
-        if (notes != null && notes.matches("^[a-zA-Z0-9 "
-                                                + "\\u00c4\\u00e4"
-                                                + "\\u00d6\\u00f6"
-                                                + "\\u00dc\\u00fc"
-                                                + "\\u00df"
-                                                + "]*$")){
+        String notesRegex = "^[a-zA-Z0-9 "
+                                + "\\u00c4\\u00e4"
+                                + "\\u00d6\\u00f6"
+                                + "\\u00dc\\u00fc"
+                                + "\\u00df"
+                                + "\\|\\-\\:\\(\\)"
+                                + "\\,\\;\\.\\?\n ]*$";
+        
+        Pattern pat = Pattern.compile(notesRegex);
+
+        if (notes != null && pat.matcher(notes).matches()){
             valide = true;
-        } else {
+        } else if ( !pat.matcher(notes).matches() ){
           JOptionPane.showMessageDialog(null, 
-                   "Textfeld \"Notizen\" darf keine Sonderzeichen enthalten");
+                   "Falsche Eingabe bei \"Notizen\" darf keine "
+                           + "Sonderzeichen enthalten außer (),.;:|/?");
         }
         return valide;
     }

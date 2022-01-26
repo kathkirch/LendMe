@@ -101,12 +101,12 @@ public class Return_Helper {
             if (dev.getInventoryNumber() == RentalList_Helper.RETURN_INVNUMBER){
                 notes = dev.getNotes();
                 
-                if (val.isAlphaNumeric(notes)) {
-                    notes = dev.getNotes();
-                } else {
-                    JOptionPane.showMessageDialog(null, 
-                   "Feld \"Notizen\" darf keine Sonderzeichen enthalten");
-                }
+//                if (val.isAlphaNumeric(notes)) {
+//                    notes = dev.getNotes();
+//                } else {
+//                    JOptionPane.showMessageDialog(null, 
+//                   "Feld \"Notizen\" darf keine Sonderzeichen enthalten");
+//                }
             }
         }
         
