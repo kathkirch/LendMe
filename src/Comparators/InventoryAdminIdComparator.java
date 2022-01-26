@@ -11,11 +11,13 @@ import java.util.Comparator;
  *
  * @author bstra
  */
-public class InventoryLocationComparator implements Comparator<Devices>{
+public class InventoryAdminIdComparator implements Comparator<Devices>{
 
     @Override
     public int compare(Devices o1, Devices o2) {
-        return o1.getLocation().compareToIgnoreCase(o2.getLocation());
+        return o1.getAdminID() - o2.getAdminID();
     }
+    
+    
     
 }

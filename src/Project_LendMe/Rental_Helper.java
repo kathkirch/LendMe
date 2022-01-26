@@ -604,7 +604,6 @@ public final class Rental_Helper {
                     }
                     if (validUser){
                         createNewRental(dcDate, jCBinvnumber, jCBuserID, jTFadminID);
-//                        deleteAll();
                     }
                 }
             }

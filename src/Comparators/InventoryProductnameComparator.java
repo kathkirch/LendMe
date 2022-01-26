@@ -16,7 +16,7 @@ public class InventoryProductnameComparator implements Comparator<Devices> {
 
     @Override
     public int compare(Devices o1, Devices o2) {
-        return o1.getProductName().compareTo(o2.getProductName());
+        return o1.getProductName().compareToIgnoreCase(o2.getProductName());
     }
     
 }
