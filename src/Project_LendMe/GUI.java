@@ -5,16 +5,25 @@
 package Project_LendMe;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.EventListener;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 
 
@@ -32,6 +41,7 @@ public class GUI extends javax.swing.JFrame {
     private InventoryUpdate_Helper invu;
     private Inventory_Helper devHelper;
     private InventoryNew_Helper invNew;
+    
 
     /**
      * Creates new form GUI
@@ -40,6 +50,8 @@ public class GUI extends javax.swing.JFrame {
         
         updateLAF();
         initComponents();
+//        setSmallLogo();
+        setBigLogo();
         
     }
     
@@ -61,6 +73,39 @@ public class GUI extends javax.swing.JFrame {
                 System.err.println(ie.toString());
         } catch (IllegalAccessException iae){
                 System.err.println(iae.toString());
+        }
+    }
+    
+//    public void setSmallLogo(){
+//        
+//        BufferedImage smallPic = null;
+//        
+//        try {
+//            smallPic = ImageIO.read(new File("small.png"));
+//            ImageIcon iconS = new ImageIcon(smallPic);
+//            Image im = iconS.getImage();
+//            Image scaledImage = im.getScaledInstance(60, 45, java.awt.Image.SCALE_SMOOTH);
+//            iconS = new ImageIcon(scaledImage);
+//            label_smallLogo.setIcon(iconS);  
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+    
+    public void setBigLogo(){
+        
+        BufferedImage smallPic = null;
+       
+        try {
+            smallPic = ImageIO.read(new File("big.png"));
+            ImageIcon iconS = new ImageIcon(smallPic);
+            Image im = iconS.getImage();
+            Image scaledImage = im.getScaledInstance(295, 45, java.awt.Image.SCALE_SMOOTH);
+            iconS = new ImageIcon(scaledImage);
+            label_bigLogo.setIcon(iconS); 
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,6 +132,8 @@ public class GUI extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         toppenal = new javax.swing.JPanel();
+        label_smallLogo = new javax.swing.JLabel();
+        label_bigLogo = new javax.swing.JLabel();
         parentpanel = new javax.swing.JPanel();
         sidepanel = new javax.swing.JPanel();
         newrental = new javax.swing.JButton();
@@ -305,11 +352,21 @@ public class GUI extends javax.swing.JFrame {
         toppenal.setLayout(toppenalLayout);
         toppenalLayout.setHorizontalGroup(
             toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 802, Short.MAX_VALUE)
+            .addGroup(toppenalLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(label_smallLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(278, 278, 278)
+                .addComponent(label_bigLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         toppenalLayout.setVerticalGroup(
             toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            .addGroup(toppenalLayout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addGroup(toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_smallLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_bigLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         getContentPane().add(toppenal, java.awt.BorderLayout.PAGE_START);
@@ -742,7 +799,6 @@ public class GUI extends javax.swing.JFrame {
         productname_return.setPreferredSize(new java.awt.Dimension(135, 20));
 
         re_productname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        
 
         return_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         return_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1978,6 +2034,7 @@ public class GUI extends javax.swing.JFrame {
     // the newrental_panel is shown to insert a new rental
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
         
+        
         //switch panel to selected panel
         switchPanel(newrental_panel);
         
@@ -1999,8 +2056,9 @@ public class GUI extends javax.swing.JFrame {
 
         
         //initiate listener for JButtons in panel newrental_panel
-        rh.cancelButton();
         rh.saveNewRental();
+        rh.cancelButton();
+        
     }//GEN-LAST:event_newrentalActionPerformed
 
     //with click on the "Verleihliste" button in gui this method is called, 
@@ -2372,6 +2430,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel label_bigLogo;
+    private javax.swing.JLabel label_smallLogo;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JLabel manufacturer_newdevice;
     private javax.swing.JLabel manufacturer_newdevice1;
@@ -2443,9 +2503,13 @@ public class GUI extends javax.swing.JFrame {
         for (Component field : comps){
             
             if (field instanceof JComboBox){
-                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
-                    ((JComboBox) field).removeActionListener(al);
-                }
+           
+               JComboBox box = (JComboBox) field;
+               int i  = box.getItemListeners().length;
+               if (i != 0){
+                   box.removeItemListener(box.getItemListeners()[box.getItemListeners().length-1]);
+               }
+               
             } else if (field instanceof JButton) {
                 for ( ActionListener alb : ((JButton) field).getActionListeners()) {
                     ((JButton) field).removeActionListener(alb);

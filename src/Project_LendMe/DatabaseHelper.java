@@ -15,9 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+
 
 /**
  * Helper Class for all the CRUD methods to the database
@@ -78,7 +79,7 @@ public class DatabaseHelper {
 
         try {
             stmt = con.createStatement();
-            String query = "SELECT * FROM devices WHERE status=0";
+            String query = "SELECT * FROM devices WHERE status=0;";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -513,12 +514,15 @@ public class DatabaseHelper {
 
         Users user = null;
 
-        String query = "SELECT * FROM users WHERE userID=" + "'"
-                + Long.parseLong(userID)
-                + "';";
+        String query = "SELECT * FROM users WHERE userID = ? ";
+       
+        long id = Long.parseLong(userID);
+                
         try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
+
+            PreparedStatement prep = con.prepareStatement(query);
+            prep.setLong(1, id);
+            rs = prep.executeQuery();
 
             while (rs.next()) {
                 String userFirstName = rs.getString("userFirstName");
@@ -527,12 +531,12 @@ public class DatabaseHelper {
                 String userPhone = rs.getString("userPhone");
                 String userYear = rs.getString("userYear");
 
-                user = new Users(Long.parseLong(userID), userFirstName,
+                user = new Users(id, userFirstName,
                         userLastName, userEmail, userPhone, userYear);
             }
         } catch (SQLException ex) {
             System.out.println(ex);
-            System.out.println("checkUserID");
+            System.out.println("getUserByID");
         } finally {
             if (stmt != null) {
                 try {
@@ -889,21 +893,22 @@ public class DatabaseHelper {
      */
     public void insertNewUser(Users user) throws UserException {
 
+        String insert = "INSERT INTO users (userID, userFirstName, "
+                        + "userLastName, userEmail, userPhone, userYear) values"
+                        + " (?, ?, ?, ?, ?, ?);";
+        
         if (user != null) {
             try {
-                stmt = con.createStatement();
-                String query = "INSERT INTO users (userID, userFirstName, "
-                        + "userLastName, userEmail, userPhone, userYear) values ('"
-                        + user.getUserID() + "', '" + user.getUserFirstName() + "', '"
-                        + user.getUserLastName() + "', '" + user.getUserEmail()
-                        + "', '" + user.getUserPhone() + "', '" + user.getYear()
-                        + "');";
-
-                System.out.println("insertString" + query);
-
-                stmt.executeUpdate(query);
-
-                System.out.println("User hinzugefuegt");
+                PreparedStatement prep = con.prepareStatement(insert);
+ 
+                prep.setLong(1, user.getUserID());
+                prep.setString(2, user.getUserFirstName());
+                prep.setString(3, user.getUserLastName());
+                prep.setString(4, user.getUserEmail());
+                prep.setString(5, user.getUserPhone());
+                prep.setString(6, user.getYear());
+                
+                prep.executeUpdate();
 
             } catch (SQLException ex) {
                 System.out.println(ex);
@@ -931,15 +936,25 @@ public class DatabaseHelper {
      *
      */
     public void insertNewRental_DB(Rentals rental) throws UserException {
+        
+       String dateSt = rental.getRentalDate().toString();
+        
+        String insert = "INSERT INTO rentals "
+                    + "(rentalDate, devices_inventoryNumber, "
+                    + "administrators_adminID, users_userID) "
+                    + "values (?, ?, ?, ?);";
+        
         try {
-            stmt = con.createStatement();
-            String string = "insert into rentals (rentalDate, "
-                    + "devices_inventoryNumber, administrators_adminID, "
-                    + "users_userID) values ('" + rental.getRentalDate()
-                    + "', '" + rental.getDevice_inventoryNumber()
-                    + "', '" + rental.getAdministrators_AdminID()
-                    + "', '" + rental.getUsers_UserID() + "');";
-            stmt.executeUpdate(string);
+            PreparedStatement prep = con.prepareStatement(insert);
+            
+            prep.setString(1, dateSt);
+            prep.setLong(2, rental.getDevice_inventoryNumber());
+            prep.setInt(3, rental.getAdministrators_AdminID());
+            prep.setLong(4, rental.getUsers_UserID());
+            
+            System.out.println(prep);
+            
+            prep.executeUpdate();
 
             setDevice_Lent(rental.getDevice_inventoryNumber(),
                     rental.getUsers_UserID());

@@ -89,5 +89,12 @@ public class Rentals {
     public void setUsers_UserID(long users_UserID) {
         this.users_UserID = users_UserID;
     }
+
+    @Override
+    public String toString() {
+        return "Rentals{" + "rentalID=" + rentalID + ", rentalDate=" + rentalDate + ", returnDate=" + returnDate + ", device_inventoryNumber=" + device_inventoryNumber + ", administrators_AdminID=" + administrators_AdminID + ", users_UserID=" + users_UserID + '}';
+    }
+    
+    
     
 }
