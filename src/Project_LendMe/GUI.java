@@ -7,21 +7,15 @@ package Project_LendMe;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.EventListener;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -41,7 +35,7 @@ public class GUI extends javax.swing.JFrame {
     private InventoryUpdate_Helper invu;
     private Inventory_Helper devHelper;
     private InventoryNew_Helper invNew;
-    Rental_Helper rh;
+    private Rental_Helper rh;
     
 
     /**
@@ -51,7 +45,6 @@ public class GUI extends javax.swing.JFrame {
         
         updateLAF();
         initComponents();
-//        setSmallLogo();
         setBigLogo();
         
     }
@@ -76,31 +69,17 @@ public class GUI extends javax.swing.JFrame {
                 System.err.println(iae.toString());
         }
     }
-    
-//    public void setSmallLogo(){
-//        
-//        BufferedImage smallPic = null;
-//        
-//        try {
-//            smallPic = ImageIO.read(new File("small.png"));
-//            ImageIcon iconS = new ImageIcon(smallPic);
-//            Image im = iconS.getImage();
-//            Image scaledImage = im.getScaledInstance(60, 45, java.awt.Image.SCALE_SMOOTH);
-//            iconS = new ImageIcon(scaledImage);
-//            label_smallLogo.setIcon(iconS);  
-//            
-//        } catch (IOException ex) {
-//            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    
-    public void setBigLogo(){
+
+    /**
+     * method to place the logo in the top_panel
+     */
+    public final void setBigLogo(){
         
-        BufferedImage smallPic = null;
+        BufferedImage pic = null;
        
         try {
-            smallPic = ImageIO.read(new File("big.png"));
-            ImageIcon iconS = new ImageIcon(smallPic);
+            pic = ImageIO.read(new File("big.png"));
+            ImageIcon iconS = new ImageIcon(pic);
             Image im = iconS.getImage();
             Image scaledImage = im.getScaledInstance(295, 45, java.awt.Image.SCALE_SMOOTH);
             iconS = new ImageIcon(scaledImage);
@@ -108,6 +87,27 @@ public class GUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    /**
+     * method to get the small icon from project file directory
+     * to set it as icon in Main-Frame
+     * @return the small icon 
+     */
+    public static Image getImage() {
+        
+        BufferedImage ic = null;
+        Image im = null;
+        
+        try {
+            ic = ImageIO.read(new File("small.png"));
+            ImageIcon iconS = new ImageIcon(ic);
+            im = iconS.getImage();
+
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return im;
     }
 
     
@@ -131,9 +131,7 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         toppenal = new javax.swing.JPanel();
-        label_smallLogo = new javax.swing.JLabel();
         label_bigLogo = new javax.swing.JLabel();
         parentpanel = new javax.swing.JPanel();
         sidepanel = new javax.swing.JPanel();
@@ -335,9 +333,8 @@ public class GUI extends javax.swing.JFrame {
         archInfo_adminNameTF = new javax.swing.JTextField();
         archInfo_zeitraum = new javax.swing.JLabel();
 
-        jButton1.setText("jButton1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getImage());
         setPreferredSize(new java.awt.Dimension(826, 878));
         setSize(new java.awt.Dimension(0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -354,9 +351,7 @@ public class GUI extends javax.swing.JFrame {
         toppenalLayout.setHorizontalGroup(
             toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(toppenalLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(label_smallLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(278, 278, 278)
+                .addGap(386, 386, 386)
                 .addComponent(label_bigLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(121, Short.MAX_VALUE))
         );
@@ -364,9 +359,7 @@ public class GUI extends javax.swing.JFrame {
             toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(toppenalLayout.createSequentialGroup()
                 .addContainerGap(31, Short.MAX_VALUE)
-                .addGroup(toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_smallLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_bigLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                .addComponent(label_bigLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -1961,7 +1954,7 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(archInfo_notesTF)
-                    .addComponent(archInfo_notes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(archInfo_notes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(archInfo_user)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2002,7 +1995,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(archInfo_returnDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(archInfo_cancel)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         archInfo_productnameTF.getAccessibleContext().setAccessibleName("pName");
@@ -2058,7 +2051,6 @@ public class GUI extends javax.swing.JFrame {
         rh.listenForSelectionM();
         rh.listenForSelectionIN();
         rh.listenForSelectionUID();
-
         
         //initiate listener for JButtons in panel newrental_panel
         rh.saveNewRental();
@@ -2427,12 +2419,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel inventorynumber_newdevice1;
     private javax.swing.JComboBox<String> inventorynumber_newrental;
     private javax.swing.JLabel inventorynumber_return;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel label_bigLogo;
-    private javax.swing.JLabel label_smallLogo;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JLabel manufacturer_newdevice;
     private javax.swing.JLabel manufacturer_newdevice1;

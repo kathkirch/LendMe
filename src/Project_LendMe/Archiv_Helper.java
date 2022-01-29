@@ -111,7 +111,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(3).setPreferredWidth(102);
         colModel.getColumn(4).setPreferredWidth(102);
         
-        
         table.setRowHeight(25);
         
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -235,6 +234,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
      * @param info_archive_panel to have access to this panel 
      */
     public void rowDoubleMousClick(JPanel info_archive_panel) {
+        
         table.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 JTable table =(JTable) mouseEvent.getSource();
@@ -243,16 +243,44 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                 
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     int index = row;
+                   
+                    int rentalID = 0;
+                    long invNumber = 0;
+                    long userID = 0;
                     
-                    int rentalID = (int) model.getValueAt(index, 0 );
-                    long invNumber = (long) model.getValueAt(index, 3);
-                    long userID = (long) model.getValueAt(index, 4);
+                    try {
+                        rentalID = (int) model.getValueAt(index, 0);
+                     } catch (java.lang.ClassCastException exe){
+                        System.out.println("it happend again wtf");
+                        System.out.println(exe);
+                        String rentalIdAsString = (String) model.getValueAt(index, 0);
+                        rentalID = Integer.parseInt(rentalIdAsString);
+                    }
+                    try{
+                        invNumber = (long) model.getValueAt(index, 3);
+                    } catch (java.lang.ClassCastException exe){
+                        System.out.println("it happend again wtf");
+                        System.out.println(exe);
+                        String invNumberAsString = (String) model.getValueAt(index, 3);
+                        invNumber = Long.parseLong(invNumberAsString);
+                    }
+                    try{
+                        userID = (long) model.getValueAt(index, 4);
+                    } catch (java.lang.ClassCastException exe){
+                        System.out.println("it happend again wtf");
+                        System.out.println(exe);
+                        String userIdAsString = (String) model.getValueAt(index, 4);
+                        invNumber = Long.parseLong(userIdAsString);
+                    }
                     
                     // set this static attributes with data from the selected row
                     // to get data via id values
-                    RENTALID_ARCHIVE = rentalID;
-                    USERID_ARCHIVE = userID;
-                    INVNUMB_ARCHIVE = invNumber;
+                    if (rentalID != 0 && userID != 0 && invNumber != 0){
+                        RENTALID_ARCHIVE = rentalID;
+                        USERID_ARCHIVE = userID;
+                        INVNUMB_ARCHIVE = invNumber;
+                    }
+                    
                     
                     lp.removeAll();
                     lp.add(info_archive_panel);

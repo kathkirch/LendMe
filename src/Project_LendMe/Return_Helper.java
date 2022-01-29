@@ -16,6 +16,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -36,6 +38,7 @@ public class Return_Helper {
     JTextField userPhone;
     JTextField userEmail;
     DateChooser rDate; 
+    JScrollPane js;
     JTextArea rNotes;
     JButton rSave;
     JButton rCancel;
@@ -98,8 +101,10 @@ public class Return_Helper {
         userEmail.setText(user.getUserEmail());
         
         for (Devices dev : devices) {
+            
             if (dev.getInventoryNumber() == RentalList_Helper.RETURN_INVNUMBER){
                 notes = dev.getNotes();
+                
                 
 //                if (val.isAlphaNumeric(notes)) {
 //                    notes = dev.getNotes();
@@ -109,10 +114,20 @@ public class Return_Helper {
 //                }
             }
         }
-        
+//        js = new JScrollPane(rNotes, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+//                        JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        panel.add(js);
+
+        rNotes.setLineWrap(true);
         rNotes.setText(notes);
         
+        
+//        js.setVisible(true);
+//        
     }
+    
+    
+    
     
     /**
      *initiates a listener for the "Speichern" button 
