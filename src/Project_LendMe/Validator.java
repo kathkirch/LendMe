@@ -100,7 +100,7 @@ public class Validator {
         
         if (userID != null  && pat.matcher(userID).matches()) {
             validUserID = true;
-        } else if (userID == null){
+        } else if (userID == null || userID.isBlank()){
             JOptionPane.showMessageDialog(null, "Falsche Eingabe bei "
                     + "\"UserID\"! \nDarf nicht leer sein");
             validUserID = false;

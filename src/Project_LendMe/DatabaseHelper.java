@@ -952,8 +952,6 @@ public class DatabaseHelper {
             prep.setInt(3, rental.getAdministrators_AdminID());
             prep.setLong(4, rental.getUsers_UserID());
             
-            System.out.println(prep);
-            
             prep.executeUpdate();
 
             setDevice_Lent(rental.getDevice_inventoryNumber(),
@@ -1165,12 +1163,15 @@ public class DatabaseHelper {
                 where = "users_userID";
                 break;
         }
+        
+        String query = "SELECT * FROM " + table
+                    + " WHERE " + where + " LIKE ? "
+                    + "AND returnDate IS NOT NULL;";
 
         try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM " + table
-                    + " WHERE " + where + " LIKE '%" + filterString
-                    + "%' AND returnDate IS NOT NULL;");
+            PreparedStatement prep = con.prepareStatement(query);
+            prep.setString(1, "%"+filterString+"%");
+            rs = prep.executeQuery();
 
             while (rs.next()) {
 
@@ -1188,7 +1189,6 @@ public class DatabaseHelper {
                 rental.setReturnDate(returnDate);
 
                 filteredRentals.add(rental);
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -1242,24 +1242,35 @@ public class DatabaseHelper {
                 where = "rentalDate";
                 break;
         }
-        String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
+//        String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
+//                + "rentals.users_UserID, devices_inventoryNumber, "
+//                + "manufacturer, productname "
+//                + "FROM " + table
+//                + " JOIN " + joinTable
+//                + " ON devices_inventoryNumber = devices.inventoryNumber "
+//                + "WHERE " + where + " LIKE '%" + filterString
+//                + "%' AND returnDate IS NULL;";
+        
+         String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
                 + "rentals.users_UserID, devices_inventoryNumber, "
                 + "manufacturer, productname "
                 + "FROM " + table
                 + " JOIN " + joinTable
                 + " ON devices_inventoryNumber = devices.inventoryNumber "
-                + "WHERE " + where + " LIKE '%" + filterString
-                + "%' AND returnDate IS NULL;";
+                + "WHERE " + where + " LIKE ? AND returnDate IS NULL;";
 
         try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
+            PreparedStatement prep = con.prepareStatement(query);
+            prep.setString(1, "%"+filterString+"%");
+            rs = prep.executeQuery();
+//            stmt = con.createStatement();
+//            rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 int rentalID = rs.getInt("rentalID");
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
-                int users_UserID = rs.getInt("users_UserID");
-                int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
+                long users_UserID = rs.getLong("users_UserID");
+                long devices_inventoryNumber = rs.getLong("devices_inventoryNumber");
                 int administrators_AdminID = rs.getInt("administrators_adminID");
                 String manufacturer = rs.getString("manufacturer");
                 String productname = rs.getString("productname");
@@ -1389,11 +1400,15 @@ public class DatabaseHelper {
     public boolean isUserNew(long userID) {
 
         boolean userNEW = true;
-        String query = "SELECT * FROM users WHERE userID=" + userID + ";";
+//        String query = "SELECT * FROM users WHERE userID=" + userID + ";";
+        String query = "SELECT * FROM users WHERE userID = ?;";
 
         try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
+            PreparedStatement prep = con.prepareStatement(query);
+            prep.setLong(1, userID);
+            rs = prep.executeQuery();
+//            stmt = con.createStatement();
+//            rs = stmt.executeQuery(query);
 
             if (rs.next()) {
                 userNEW = false;
@@ -1412,62 +1427,4 @@ public class DatabaseHelper {
         }
         return userNEW;
     }
-    
-    /*
-    public Devices getDeviceByID(String invNumb) {
-        
-        long l = Long.parseLong(invNumb);
-        
-        String query = "SELECT * FROM devices"
-                        + " WHERE inventoryNumber=" + l + ";";
-        
-        Devices dev = null;
-        
-        try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                long invNo = rs.getLong(1);
-                String manuf = rs.getString(2);
-                String prodN = rs.getString(3);
-                String notes = rs.getString(4);
-                String location = rs.getString(5);
-                int stat = rs.getInt(6);
-                String im = rs.getString(7);
-                long usID = rs.getLong(8);
-                double acV = rs.getDouble(9);
-                LocalDate acD = rs.getDate(10).toLocalDate();
-                int admin = rs.getInt(11);
-                
-                dev = new Devices ();
-                dev.setInventoryNumber(invNo);
-                dev.setManufacturer(manuf);
-                dev.setProductName(prodN);
-                dev.setNotes(notes);
-                dev.setLocation(location);
-                dev.setStatus(stat);
-                dev.setImei(im);
-                dev.setUsers_userID(usID);
-                dev.setAquisitionValue(acV);
-                dev.setAquistionDate(acD);
-                dev.setAdminID(admin); 
-
-            }
-            
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            System.out.println("getDeviceByID");
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-        return dev;
-    }
-*/
 }

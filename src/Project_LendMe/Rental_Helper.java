@@ -173,7 +173,8 @@ public final class Rental_Helper {
                     jCByear.setEnabled(true);
                 }
                 
-                if (e.getStateChange() == ItemEvent.SELECTED){
+                if (e.getStateChange() == ItemEvent.SELECTED 
+                        && !e.getItem().toString().equals(lastItem)){
                     String selected = e.getItem().toString();
                     
                     if ((!selected.equals(lastItem_e) && val.isNumeric(selected))){
@@ -208,13 +209,11 @@ public final class Rental_Helper {
      */
     public void listenForSelectionPN () {
         
-        
         jCBname.addItemListener(new ItemListener () {
             public void itemStateChanged(ItemEvent e) {
                 
                 String selected = lastItem;
              
-                
                 if (e.getStateChange() == ItemEvent.SELECTED &&
                        (  jCBname.getSelectedIndex() != jCBname.getItemCount()-1) ) {
                     
@@ -424,6 +423,7 @@ public final class Rental_Helper {
         
         jTFadminID.setText("Admin ID");
         jTFadminName.setText("Vor- und Nachname"); 
+        
     }
     
     /**

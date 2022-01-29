@@ -41,6 +41,7 @@ public class GUI extends javax.swing.JFrame {
     private InventoryUpdate_Helper invu;
     private Inventory_Helper devHelper;
     private InventoryNew_Helper invNew;
+    Rental_Helper rh;
     
 
     /**
@@ -2034,16 +2035,20 @@ public class GUI extends javax.swing.JFrame {
     // the newrental_panel is shown to insert a new rental
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
         
+        //to remove ActionListener in this panel, 
+        //to avoid multiple ActionListener/ItemListener
+        removeListener(newrental_panel);
+        
+        //to delete selection in case a selection where made but not deleted before
+        if (rh!=null){
+            rh.deleteAll();
+        }
         
         //switch panel to selected panel
         switchPanel(newrental_panel);
         
-        //to remove ActionListener in this panel, 
-        //to avoid multiple ActionListener
-        removeListener(newrental_panel);
-        
         //initiate new Rental_Helper Object
-        Rental_Helper rh = new Rental_Helper(newrental_panel);
+        rh = new Rental_Helper(newrental_panel);
         
         //Method to fill the Comboboxes with data from Database
         rh.fillBoxes();
@@ -2106,7 +2111,6 @@ public class GUI extends javax.swing.JFrame {
     //the archive_panel is shown with tha archive table
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
 
-        
         //switch panel to selected panel
         switchPanel(archive_panel);
         
@@ -2149,12 +2153,9 @@ public class GUI extends javax.swing.JFrame {
      */
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
 
-
-        //initialize layout
-        layerpane.removeAll();
-        layerpane.add(inventory_panel);
-        layerpane.repaint();
-        layerpane.revalidate();
+        switchPanel(inventory_panel);
+        
+        removeListener(inventory_panel);
 
         //instantiate Inventory Helper
         devHelper = new Inventory_Helper(inventory_table1,
