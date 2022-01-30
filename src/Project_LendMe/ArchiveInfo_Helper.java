@@ -104,6 +104,9 @@ public class ArchiveInfo_Helper {
         returnDate.setText(r.getReturnDate().toString());
         notes.setText(d.getNotes());
         
+        notes.setLineWrap(true);
+        notes.setWrapStyleWord(true);
+        
     }
     
     /**
