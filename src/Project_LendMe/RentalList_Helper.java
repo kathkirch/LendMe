@@ -56,7 +56,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         
         this.returnBT = returnBT;
         
-        this.rentalList = rlH.getRentallist();
+        MyTableHelper.rentalList = rlH.getRentallist();
         
         this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
                                 "Hersteller","Verliehen an" ,"Verliehene Tage"};
