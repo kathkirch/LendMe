@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.UnsupportedLookAndFeelException;
 
 
@@ -2146,8 +2148,6 @@ public class GUI extends javax.swing.JFrame {
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
 
         switchPanel(inventory_panel);
-        
-        removeListener(inventory_panel);
 
         //instantiate Inventory Helper
         devHelper = new Inventory_Helper(inventory_table1,
@@ -2213,7 +2213,7 @@ public class GUI extends javax.swing.JFrame {
 
     
     private void inventory_btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventory_btUpdateActionPerformed
-        
+  
         //checks if a row to update is selected
             //if YES: initialize layout
         if (Inventory_Helper.getOpenUpdatePanel()) {
@@ -2494,13 +2494,11 @@ public class GUI extends javax.swing.JFrame {
         for (Component field : comps){
             
             if (field instanceof JComboBox){
-           
                JComboBox box = (JComboBox) field;
                int i  = box.getItemListeners().length;
                if (i != 0){
                    box.removeItemListener(box.getItemListeners()[box.getItemListeners().length-1]);
                }
-               
             } else if (field instanceof JButton) {
                 for ( ActionListener alb : ((JButton) field).getActionListeners()) {
                     ((JButton) field).removeActionListener(alb);
@@ -2509,7 +2507,7 @@ public class GUI extends javax.swing.JFrame {
                 for (ActionListener alr : ((JRadioButton) field).getActionListeners()) {
                     ((JRadioButton) field).removeActionListener(alr);
                 }
-            }
+            } 
         }
     }
 }

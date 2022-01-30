@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
+
 
 
 /**
@@ -51,7 +51,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     
     JLayeredPane lp;
     JPanel archive_panel;
-    
    
     public Archiv_Helper(JTable table, JScrollPane js, 
                     JComboBox box, JRadioButton ascRadio, JRadioButton descRadio, 
@@ -59,7 +58,8 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                     JLayeredPane lp, JPanel archive_panel) {
         super( table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
         
-        this.allRentals = dbH.getCompletedRentals();
+        MyTableHelper.allRentals = dbH.getCompletedRentals();
+        
         this.columns =  new String [] {"ID", "Verliehen am", 
                                         "Zurück am", "Inventarnummer", 
                                          "Matrikelnummer"};
@@ -102,7 +102,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     public void refreshArchiveTable (List<Rentals> list){ 
         data = initRentals(list);
         model = new DefaultTableModel(data, columns);
-        
         table.setModel(model);
         TableColumnModel colModel = table.getColumnModel();
         colModel.getColumn(0).setPreferredWidth(40);
@@ -123,7 +122,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
             table.setPreferredSize(js.getPreferredSize());
         }
         
-        table.setEnabled(true);
+//        table.setEnabled(true);
         js.setVisible(true);
    }    
     
@@ -235,9 +234,14 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
      */
     public void rowDoubleMousClick(JPanel info_archive_panel) {
         
-        table.addMouseListener(new MouseAdapter() {
+        int i = table.getMouseListeners().length;
+        
+        if (i <= 2 && i < 4 ){
+            
+            this.table.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
-                JTable table =(JTable) mouseEvent.getSource();
+                DefaultTableModel actual_model = (DefaultTableModel) table.getModel(); 
+                table = (JTable) mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
                 
@@ -249,28 +253,22 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                     long userID = 0;
                     
                     try {
-                        rentalID = (int) model.getValueAt(index, 0);
-                     } catch (java.lang.ClassCastException exe){
-                        System.out.println("it happend again wtf");
-                        System.out.println(exe);
-                        String rentalIdAsString = (String) model.getValueAt(index, 0);
+                        rentalID = (int) actual_model.getValueAt(index, 0);
+                    } catch (java.lang.ClassCastException exe ){
+                        String rentalIdAsString = (String) actual_model.getValueAt(index, 0);
                         rentalID = Integer.parseInt(rentalIdAsString);
                     }
                     try{
-                        invNumber = (long) model.getValueAt(index, 3);
+                        invNumber = (long) actual_model.getValueAt(index, 3);
                     } catch (java.lang.ClassCastException exe){
-                        System.out.println("it happend again wtf");
-                        System.out.println(exe);
-                        String invNumberAsString = (String) model.getValueAt(index, 3);
+                        String invNumberAsString = (String) actual_model.getValueAt(index, 3);
                         invNumber = Long.parseLong(invNumberAsString);
                     }
                     try{
-                        userID = (long) model.getValueAt(index, 4);
+                        userID = (long) actual_model.getValueAt(index, 4);
                     } catch (java.lang.ClassCastException exe){
-                        System.out.println("it happend again wtf");
-                        System.out.println(exe);
-                        String userIdAsString = (String) model.getValueAt(index, 4);
-                        invNumber = Long.parseLong(userIdAsString);
+                        String userIdAsString = (String) actual_model.getValueAt(index, 4);
+                        userID = Long.parseLong(userIdAsString);
                     }
                     
                     // set this static attributes with data from the selected row
@@ -302,12 +300,13 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                     //method to initialize a Listener for 'Abbrechen" button 
                     //in info_archive_panel to go back to the archive_panel
                     aih.cancel();
+                    }
                 }
-            }
-        });
+            });
+        }
+            
     }
-
-    
+        
      /**
      * adds an Listener for the clearBT, deletes all filter and search options 
      * in the frame
@@ -322,7 +321,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                 descRadio.setSelected(false);
                 filterTF.setText("");
                 List <Rentals> wholeRentals = dbH.getCompletedRentals();
-                System.out.println(wholeRentals.toString());
                 refreshArchiveTable(wholeRentals);
             }
         }); 

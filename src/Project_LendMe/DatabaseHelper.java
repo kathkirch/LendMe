@@ -1110,7 +1110,7 @@ public class DatabaseHelper {
                 prepStat.setString(1, returnDate.toString());
                 prepStat.setInt(2, rentalID);
                 prepStat.executeUpdate();
-                System.out.println("RentalDate was set successfully");
+                System.out.println("ReturnDate was set successfully");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);

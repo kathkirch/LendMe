@@ -104,26 +104,12 @@ public class Return_Helper {
             
             if (dev.getInventoryNumber() == RentalList_Helper.RETURN_INVNUMBER){
                 notes = dev.getNotes();
-                
-                
-//                if (val.isAlphaNumeric(notes)) {
-//                    notes = dev.getNotes();
-//                } else {
-//                    JOptionPane.showMessageDialog(null, 
-//                   "Feld \"Notizen\" darf keine Sonderzeichen enthalten");
-//                }
             }
         }
-//        js = new JScrollPane(rNotes, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-//                        JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//        panel.add(js);
-
+        
         rNotes.setLineWrap(true);
         rNotes.setText(notes);
         
-        
-//        js.setVisible(true);
-//        
     }
     
     
