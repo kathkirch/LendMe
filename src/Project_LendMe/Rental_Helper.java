@@ -27,6 +27,7 @@ import javax.swing.JPanel;
  */
 public final class Rental_Helper {
     
+    //components
     private JPanel panel;
     private JComboBox jCBname;
     private JComboBox jCBmanufacturer;
@@ -43,12 +44,15 @@ public final class Rental_Helper {
     private JButton jBsave;
     private JButton jBcancel;
    
+    //DatabaseHelper Object and Validator Object
     private DatabaseHelper hp = new DatabaseHelper();
     private final Validator val = new Validator();
     
     
     private final String lastItem_e = "";
     private final String lastItem = "";
+    
+    //static final string attributes for actionevent
     private static final String USER_CHANGE = "user_change";
     private static final String PROGRAM_CHANGE = "program_change";
     
@@ -85,16 +89,14 @@ public final class Rental_Helper {
     public void fillComboBox_Category (JComboBox box, String category){
         
         List <Devices> list = hp.getAvailableDevices();
-        
         List <Object> oList = makeListForCategory(list, category);
         box.setModel(new DefaultComboBoxModel<>(oList.toArray((new String[0]))));
         box.setEditable(true);
-        box.addItem(lastItem);
-        box.setSelectedIndex(box.getItemCount()-1);
+        box.setSelectedItem(lastItem);
         AutoCompleteDecorator.decorate(box);  
         
         //set the ActionCommand to PROGRAM_CHANGE to differnciate between
-        // program-changes and user-changes in the listener for JComboBox
+        //program-changes and user-changes in the listener for JComboBox
         jCBname.setActionCommand(PROGRAM_CHANGE);
         jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
         jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
@@ -127,7 +129,7 @@ public final class Rental_Helper {
         AutoCompleteDecorator.decorate(jCByear);
   
         //set the ActionCommand to PROGRAM_CHANGE to differnciate between
-        // program-changes and user-changes in the listener for JComboBox
+        //program-changes and user-changes in the listener for JComboBox
         jCBname.setActionCommand(PROGRAM_CHANGE);
         jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
         jCBmanufacturer.setActionCommand(PROGRAM_CHANGE);
@@ -186,7 +188,7 @@ public final class Rental_Helper {
                             jTFlastname.setText(userToCheck.getUserLastName());
                             jTFphone.setText(userToCheck.getUserPhone());
                             jTFmail.setText(userToCheck.getUserEmail());
-                            jCByear.setSelectedItem(userToCheck.getYear().toString());
+                            jCByear.setSelectedItem(userToCheck.getYear());
                             jCByear.setEnabled(false);
                         } else if (hp.isUserNew(Long.parseLong(selected))) {
                             jTFfirstname.setText("");
@@ -210,29 +212,21 @@ public final class Rental_Helper {
     public void listenForSelectionPN () {
         
         jCBname.addItemListener(new ItemListener () {
+            
             public void itemStateChanged(ItemEvent e) {
                 
                 String selected = lastItem;
              
-                if (e.getStateChange() == ItemEvent.SELECTED &&
-                       (  jCBname.getSelectedIndex() != jCBname.getItemCount()-1) ) {
+                if (e.getStateChange() == ItemEvent.SELECTED 
+                        && !jCBname.getSelectedItem().equals(lastItem)) {
                     
                     selected = e.getItem().toString();
-                
-                    if ( !e.getItem().equals(lastItem) && 
-                        (!jCBmanufacturer.getActionCommand().equals(USER_CHANGE)) &&
-                        (!jCBinvnumber.getActionCommand().equals(USER_CHANGE))) {
-                       
-                        jCBname.setActionCommand(USER_CHANGE);
-                    }
+                    jCBname.setActionCommand(USER_CHANGE);
                 }
-                if ( ! jCBname.getActionCommand().equals(PROGRAM_CHANGE)){
-//                    if (jCBname.getItemCount() == 0 ){
-//                        fillComboBox_Category(jCBname, "productName");
-//
-//                    }
+                
+                if ( jCBname.getActionCommand().equals(USER_CHANGE)){
 
-                    if (!selected.isBlank() && val.isAlphaNumeric(selected)){
+                    if (!selected.isBlank() && val.isDeviceString(selected)){
 
                         List <Devices> list = hp.getItemByProductName(selected);
                         String [] categories = new String [] {"manufacturer", "inventoryNumber"};
@@ -248,7 +242,7 @@ public final class Rental_Helper {
                                 jCBinvnumber.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
                                 jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
-                                
+
                                 try{
                                     setAdminData();
                                 }catch (java.lang.NullPointerException npEx){
@@ -268,29 +262,40 @@ public final class Rental_Helper {
      * selection for manufacturer
      */
     public void listenForSelectionM () {
+        
         jCBmanufacturer.addItemListener(new ItemListener () {
+            
             public void itemStateChanged(ItemEvent e) {
                 
-                String selected = "";
+                String selected = lastItem;
                 
                 if (e.getStateChange() == ItemEvent.SELECTED &&
                        (! jCBmanufacturer.getSelectedItem().equals(lastItem))){
                     
                     selected = e.getItem().toString();
-                    
-                    if ( !e.getItem().equals(lastItem) && 
-                        ( !jCBname.getActionCommand().equals(USER_CHANGE)) &&
-                        ( !jCBinvnumber.getActionCommand().equals(USER_CHANGE))){
+                   
+                    if ( !e.getItem().equals(lastItem) &&
+                        (!jCBname.getActionCommand().equals(USER_CHANGE)) &&
+                        (!jCBinvnumber.getActionCommand().equals(USER_CHANGE))){
                          
+                        jCBmanufacturer.setActionCommand(USER_CHANGE);
+                    }
+                    
+                    // for the case a second device has the same productname
+                    // the listener for productname puts only devices in the combobox
+                    // with selected device-productname, but the combobox for productname 
+                    // is filled with all devices 
+                    else if ( !e.getItem().equals(lastItem) &&
+                            jCBname.getItemCount() > jCBmanufacturer.getItemCount() &&
+                            jCBmanufacturer.getItemCount() == jCBinvnumber.getItemCount()){
+                        
                         jCBmanufacturer.setActionCommand(USER_CHANGE);
                     }
                 }
                 
-                if ( ! jCBmanufacturer.getActionCommand().equals(PROGRAM_CHANGE)){
-//                    if (jCBmanufacturer.getItemCount() == 0 ){
-//                        fillComboBox_Category(jCBmanufacturer, "manufacturer");
-//                    }
-                    if (!selected.isBlank() && val.isAlphaNumeric(selected) ){
+                if ( jCBmanufacturer.getActionCommand().equals(USER_CHANGE)){
+
+                    if (!selected.isBlank() && val.isDeviceString(selected)){
 
                         List <Devices> list = hp.getItemByManufacturer(selected);
                         String [] categories = new String [] {"productName", "inventoryNumber"};
@@ -306,6 +311,7 @@ public final class Rental_Helper {
                                 jCBinvnumber.setModel
                                 (new DefaultComboBoxModel<>(oList.toArray((new String [0]))));
                                 jCBinvnumber.setActionCommand(PROGRAM_CHANGE);
+
                                 try{
                                     setAdminData();
                                 }catch (java.lang.NullPointerException npEx){
@@ -345,11 +351,7 @@ public final class Rental_Helper {
                 }
                  
                 if ( ! jCBinvnumber.getActionCommand().equals(PROGRAM_CHANGE)){
-                    
-//                    if (jCBinvnumber.getItemCount() == 0 ){
-//                        fillComboBox_Category(jCBinvnumber, "inventoryNumber");
-//                    }
-                    
+                                        
                     if (!selected.isBlank() && val.isNumeric(selected)){
 
                         List <Devices> list = hp.getItemByInvNumber(selected);
@@ -488,13 +490,7 @@ public final class Rental_Helper {
             if (nameV && emailV && phoneV && yearV && idV) {
                 user = new Users(Long.parseLong(id), firstname, lastname, email, 
                                 phone, year);
-            } 
-//            else {
-//                JOptionPane.showMessageDialog(null, 
-//                    "Eingabefehler, Formatvorlage beachten!", 
-//                    "Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//            }
+            }
         }
         return user;
     }
@@ -671,5 +667,5 @@ public final class Rental_Helper {
             default :
                 return itemArray;  
         } 
-    } 
+    }
 }

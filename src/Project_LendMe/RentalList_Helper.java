@@ -139,6 +139,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
+                filteredList = null;
                 List <RentalList> wholeList = rlH.getRentallist();
                 refreshRentalTable(wholeList);  
             }
@@ -156,13 +157,19 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
          filterBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent aEv) {
-                int whereClause = box.getSelectedIndex();
-                String filterString = filterTF.getText();
-                filteredList = rlH.filterRentals2(whereClause, filterString);
-                if (filteredList.size() >  0){
-                    refreshRentalTable(filteredList);
+                
+                if (box.getSelectedIndex() == box.getItemCount()-1) {
+                   JOptionPane.showMessageDialog(null, "In dieser Spalte kein Filtern möglich");  
                 } else {
-                    JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
+                    int whereClause = box.getSelectedIndex();
+                    String filterString = filterTF.getText();
+                    filteredList = rlH.filterRentals2(whereClause, filterString);
+                    
+                    if (filteredList != null && filteredList.size() >  0){
+                    refreshRentalTable(filteredList);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
+                    }
                 }
             }
         });

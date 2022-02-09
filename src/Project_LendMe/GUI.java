@@ -18,8 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.UnsupportedLookAndFeelException;
 
 
@@ -2487,7 +2485,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton yes;
     // End of variables declaration//GEN-END:variables
 
-    
+    /**
+     * method to delete ItemListener from JComboBox 
+     * and ActionListener from JButton and JRadioButton
+     * in the given JPanel
+     * 
+     * @param panel in which the Listeners should be removed
+     */
     public static void removeListener(JPanel panel) {
         
         Component [] comps = panel.getComponents();
