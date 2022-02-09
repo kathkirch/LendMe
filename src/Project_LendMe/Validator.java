@@ -43,14 +43,21 @@ public class Validator {
     }
     
     /**
-     * method to check if given string is alphanumeric
+     * method to check if given string is suitable for productname or manufacturer
+     * allows digits, letters, empty space and the '-' sign and umlaute
      * @param str String to check
      * @return true if String is alphanumeric numeric or alpha only
      * return false if String has special characters
      */
-    public boolean isAlphaNumeric (String str){
-        return str != null && str.matches("^[a-zA-Z0-9 ]*$");
+    public boolean isDeviceString (String str){
+        return str != null && str.matches("[A-Za-z0-9\\- "
+                            + "\\u00c4\\u00e4"      
+                            + "\\u00d6\\u00f6"
+                            + "\\u00dc\\u00fc"
+                            + "\\u00df]*$");
     }
+    
+    
     
     /**
      * method to check if given String for name is valid value for namefield

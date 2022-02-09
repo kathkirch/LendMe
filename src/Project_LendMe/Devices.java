@@ -20,8 +20,7 @@ public class Devices implements Rentable {
     private String productName;
     private String notes;
     private String location;
-//    private String admin;
-    private int adminID; //changed to int adminID
+    private int adminID; 
     private int status;
     private String imei;
     private long users_userID;
@@ -119,7 +118,6 @@ public class Devices implements Rentable {
     public void setStatus(int status) {
         this.status = status;
     }
-
 }   
 
 interface Rentable {

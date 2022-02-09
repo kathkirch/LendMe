@@ -122,7 +122,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
             table.setPreferredSize(js.getPreferredSize());
         }
         
-//        table.setEnabled(true);
         js.setVisible(true);
    }    
     
@@ -238,7 +237,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
         
         if (i <= 2 && i < 4 ){
             
-            this.table.addMouseListener(new MouseAdapter() {
+            table.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 DefaultTableModel actual_model = (DefaultTableModel) table.getModel(); 
                 table = (JTable) mouseEvent.getSource();
@@ -303,8 +302,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                     }
                 }
             });
-        }
-            
+        }  
     }
         
      /**
@@ -320,6 +318,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
+                filteredList = null;
                 List <Rentals> wholeRentals = dbH.getCompletedRentals();
                 refreshArchiveTable(wholeRentals);
             }
