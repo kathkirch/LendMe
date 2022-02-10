@@ -22,7 +22,9 @@ public class RentalList extends Rentals{
     public RentalList(String productName, String manufacturer, 
                 LocalDate rentalDate, long device_inventoryNumber, 
                 int administrators_AdminID, long users_UserID) {
+       
        super(rentalDate, device_inventoryNumber, administrators_AdminID, users_UserID);
+       
        this.productName = productName;
        this.manufacturer = manufacturer;
        this.lentDays = countDays(rentalDate);
@@ -52,7 +54,7 @@ public class RentalList extends Rentals{
      * to get the difference
      * @return difference between rentalDate and currentDate as int
      */
-    public int countDays (LocalDate rentalDate) {
+    private int countDays (LocalDate rentalDate) {
         Validator val = new Validator();
         
         LocalDate currentDate = LocalDate.now();

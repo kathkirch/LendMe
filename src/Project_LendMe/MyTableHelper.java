@@ -39,7 +39,7 @@ abstract public class MyTableHelper {
     String [] columns;
     
     Object [][] data;
-    DefaultTableModel model;
+    public DefaultTableModel model;
 
     public MyTableHelper(JTable table, JScrollPane js, JComboBox box, 
                         JRadioButton ascRadio, JRadioButton descRadio, 
@@ -173,5 +173,5 @@ abstract public class MyTableHelper {
            i = i + 1;  
         }
         return deviceData;
-    }
+    }  
 }

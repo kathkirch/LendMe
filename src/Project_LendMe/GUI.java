@@ -5,16 +5,19 @@
 package Project_LendMe;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 
 
@@ -32,6 +35,8 @@ public class GUI extends javax.swing.JFrame {
     private InventoryUpdate_Helper invu;
     private Inventory_Helper devHelper;
     private InventoryNew_Helper invNew;
+    private Rental_Helper rh;
+    
 
     /**
      * Creates new form GUI
@@ -40,6 +45,7 @@ public class GUI extends javax.swing.JFrame {
         
         updateLAF();
         initComponents();
+        setBigLogo();
         
     }
     
@@ -64,6 +70,46 @@ public class GUI extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * method to place the logo in the top_panel
+     */
+    public final void setBigLogo(){
+        
+        BufferedImage pic = null;
+       
+        try {
+            pic = ImageIO.read(new File("big.png"));
+            ImageIcon iconS = new ImageIcon(pic);
+            Image im = iconS.getImage();
+            Image scaledImage = im.getScaledInstance(295, 45, java.awt.Image.SCALE_SMOOTH);
+            iconS = new ImageIcon(scaledImage);
+            label_bigLogo.setIcon(iconS); 
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * method to get the small icon from project file directory
+     * to set it as icon in Main-Frame
+     * @return the small icon 
+     */
+    public static Image getImage() {
+        
+        BufferedImage ic = null;
+        Image im = null;
+        
+        try {
+            ic = ImageIO.read(new File("small.png"));
+            ImageIcon iconS = new ImageIcon(ic);
+            im = iconS.getImage();
+
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return im;
+    }
+
     
     //method to show panel depending on button the user clicks in gui
     public void switchPanel (JPanel panel){
@@ -85,8 +131,8 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         toppenal = new javax.swing.JPanel();
+        label_bigLogo = new javax.swing.JLabel();
         parentpanel = new javax.swing.JPanel();
         sidepanel = new javax.swing.JPanel();
         newrental = new javax.swing.JButton();
@@ -287,9 +333,8 @@ public class GUI extends javax.swing.JFrame {
         archInfo_adminNameTF = new javax.swing.JTextField();
         archInfo_zeitraum = new javax.swing.JLabel();
 
-        jButton1.setText("jButton1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getImage());
         setPreferredSize(new java.awt.Dimension(826, 878));
         setSize(new java.awt.Dimension(0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -305,11 +350,17 @@ public class GUI extends javax.swing.JFrame {
         toppenal.setLayout(toppenalLayout);
         toppenalLayout.setHorizontalGroup(
             toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 802, Short.MAX_VALUE)
+            .addGroup(toppenalLayout.createSequentialGroup()
+                .addGap(386, 386, 386)
+                .addComponent(label_bigLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         toppenalLayout.setVerticalGroup(
             toppenalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            .addGroup(toppenalLayout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(label_bigLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         getContentPane().add(toppenal, java.awt.BorderLayout.PAGE_START);
@@ -742,7 +793,6 @@ public class GUI extends javax.swing.JFrame {
         productname_return.setPreferredSize(new java.awt.Dimension(135, 20));
 
         re_productname.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-      
 
         return_title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         return_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1904,7 +1954,7 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(archInfo_notesTF)
-                    .addComponent(archInfo_notes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(archInfo_notes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(archInfo_user)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1945,7 +1995,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(archInfo_returnDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(archInfo_cancel)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         archInfo_productnameTF.getAccessibleContext().setAccessibleName("pName");
@@ -1978,15 +2028,20 @@ public class GUI extends javax.swing.JFrame {
     // the newrental_panel is shown to insert a new rental
     private void newrentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newrentalActionPerformed
         
+        //to remove ActionListener in this panel, 
+        //to avoid multiple ActionListener/ItemListener
+        removeListener(newrental_panel);
+        
+        //to delete selection in case a selection where made but not deleted before
+        if (rh!=null){
+            rh.deleteAll();
+        }
+        
         //switch panel to selected panel
         switchPanel(newrental_panel);
         
-        //to remove ActionListener in this panel, 
-        //to avoid multiple ActionListener
-        removeListener(newrental_panel);
-        
         //initiate new Rental_Helper Object
-        Rental_Helper rh = new Rental_Helper(newrental_panel);
+        rh = new Rental_Helper(newrental_panel);
         
         //Method to fill the Comboboxes with data from Database
         rh.fillBoxes();
@@ -1996,11 +2051,11 @@ public class GUI extends javax.swing.JFrame {
         rh.listenForSelectionM();
         rh.listenForSelectionIN();
         rh.listenForSelectionUID();
-
         
         //initiate listener for JButtons in panel newrental_panel
-        rh.cancelButton();
         rh.saveNewRental();
+        rh.cancelButton();
+        
     }//GEN-LAST:event_newrentalActionPerformed
 
     //with click on the "Verleihliste" button in gui this method is called, 
@@ -2048,7 +2103,6 @@ public class GUI extends javax.swing.JFrame {
     //the archive_panel is shown with tha archive table
     private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
 
-        
         //switch panel to selected panel
         switchPanel(archive_panel);
         
@@ -2091,12 +2145,7 @@ public class GUI extends javax.swing.JFrame {
      */
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
 
-
-        //initialize layout
-        layerpane.removeAll();
-        layerpane.add(inventory_panel);
-        layerpane.repaint();
-        layerpane.revalidate();
+        switchPanel(inventory_panel);
 
         //instantiate Inventory Helper
         devHelper = new Inventory_Helper(inventory_table1,
@@ -2162,7 +2211,7 @@ public class GUI extends javax.swing.JFrame {
 
     
     private void inventory_btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventory_btUpdateActionPerformed
-        
+  
         //checks if a row to update is selected
             //if YES: initialize layout
         if (Inventory_Helper.getOpenUpdatePanel()) {
@@ -2368,10 +2417,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel inventorynumber_newdevice1;
     private javax.swing.JComboBox<String> inventorynumber_newrental;
     private javax.swing.JLabel inventorynumber_return;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel label_bigLogo;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JLabel manufacturer_newdevice;
     private javax.swing.JLabel manufacturer_newdevice1;
@@ -2436,16 +2485,24 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton yes;
     // End of variables declaration//GEN-END:variables
 
-    
+    /**
+     * method to delete ItemListener from JComboBox 
+     * and ActionListener from JButton and JRadioButton
+     * in the given JPanel
+     * 
+     * @param panel in which the Listeners should be removed
+     */
     public static void removeListener(JPanel panel) {
         
         Component [] comps = panel.getComponents();
         for (Component field : comps){
             
             if (field instanceof JComboBox){
-                for ( ActionListener al : ((JComboBox) field).getActionListeners()) {
-                    ((JComboBox) field).removeActionListener(al);
-                }
+               JComboBox box = (JComboBox) field;
+               int i  = box.getItemListeners().length;
+               if (i != 0){
+                   box.removeItemListener(box.getItemListeners()[box.getItemListeners().length-1]);
+               }
             } else if (field instanceof JButton) {
                 for ( ActionListener alb : ((JButton) field).getActionListeners()) {
                     ((JButton) field).removeActionListener(alb);
@@ -2454,7 +2511,7 @@ public class GUI extends javax.swing.JFrame {
                 for (ActionListener alr : ((JRadioButton) field).getActionListeners()) {
                     ((JRadioButton) field).removeActionListener(alr);
                 }
-            }
+            } 
         }
     }
 }

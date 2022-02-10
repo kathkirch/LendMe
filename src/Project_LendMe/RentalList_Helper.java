@@ -56,7 +56,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         
         this.returnBT = returnBT;
         
-        this.rentalList = rlH.getRentallist();
+        MyTableHelper.rentalList = rlH.getRentallist();
         
         this.columns = new String [] {"ID", "Inventarnummer","Produktname", 
                                 "Hersteller","Verliehen an" ,"Verliehene Tage"};
@@ -139,6 +139,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
+                filteredList = null;
                 List <RentalList> wholeList = rlH.getRentallist();
                 refreshRentalTable(wholeList);  
             }
@@ -156,13 +157,19 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
          filterBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent aEv) {
-                int whereClause = box.getSelectedIndex();
-                String filterString = filterTF.getText();
-                filteredList = rlH.filterRentals2(whereClause, filterString);
-                if (filteredList.size() >  0){
-                    refreshRentalTable(filteredList);
+                
+                if (box.getSelectedIndex() == box.getItemCount()-1) {
+                   JOptionPane.showMessageDialog(null, "In dieser Spalte kein Filtern möglich");  
                 } else {
-                    JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
+                    int whereClause = box.getSelectedIndex();
+                    String filterString = filterTF.getText();
+                    filteredList = rlH.filterRentals2(whereClause, filterString);
+                    
+                    if (filteredList != null && filteredList.size() >  0){
+                    refreshRentalTable(filteredList);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
+                    }
                 }
             }
         });
@@ -267,17 +274,38 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
                     if (!table.getSelectionModel().isSelectionEmpty()) {
 
                         int index = table.getSelectedRow();
-                        int id = (int) model.getValueAt(index, 0);
-                        long inventorynumber = (long) model.getValueAt(index, 1);
+
+                        int id = 0;
+                        long invNumber = 0;
+                        long userID = 0;
+
                         String productname = (String) model.getValueAt(index, 2);
                         String manufacturer = (String) model.getValueAt(index, 3);
-                        long user = (long) model.getValueAt(index, 4);
+
+                        try {
+                            id = (int) model.getValueAt(index, 0);
+                        } catch (java.lang.ClassCastException exe ){
+                            String rentalIdAsString = (String) model.getValueAt(index, 0);
+                            id = Integer.parseInt(rentalIdAsString);
+                        }
+                        try{
+                            invNumber = (long) model.getValueAt(index, 1);
+                        } catch (java.lang.ClassCastException exe){
+                            String invNumberAsString = (String) model.getValueAt(index, 1);
+                            invNumber = Long.parseLong(invNumberAsString);
+                        }
+                        try{
+                            userID = (long) model.getValueAt(index, 4);
+                        } catch (java.lang.ClassCastException exe){
+                            String userIdAsString = (String) model.getValueAt(index, 4);
+                            userID = Long.parseLong(userIdAsString);
+                        }
 
                         RETURN_ID = id;
                         RETURN_PRODUCTNAME = productname;
                         RETURN_MANUFACTURER = manufacturer;
-                        RETURN_INVNUMBER = inventorynumber;
-                        RETURN_USERID = user;
+                        RETURN_INVNUMBER = invNumber;
+                        RETURN_USERID = userID;
 
                         lp.removeAll();
                         lp.add(return_panel);

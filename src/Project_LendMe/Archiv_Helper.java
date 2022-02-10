@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
+
 
 
 /**
@@ -51,7 +51,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     
     JLayeredPane lp;
     JPanel archive_panel;
-    
    
     public Archiv_Helper(JTable table, JScrollPane js, 
                     JComboBox box, JRadioButton ascRadio, JRadioButton descRadio, 
@@ -59,7 +58,8 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                     JLayeredPane lp, JPanel archive_panel) {
         super( table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
         
-        this.allRentals = dbH.getCompletedRentals();
+        MyTableHelper.allRentals = dbH.getCompletedRentals();
+        
         this.columns =  new String [] {"ID", "Verliehen am", 
                                         "Zurück am", "Inventarnummer", 
                                          "Matrikelnummer"};
@@ -102,7 +102,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     public void refreshArchiveTable (List<Rentals> list){ 
         data = initRentals(list);
         model = new DefaultTableModel(data, columns);
-        
         table.setModel(model);
         TableColumnModel colModel = table.getColumnModel();
         colModel.getColumn(0).setPreferredWidth(40);
@@ -110,7 +109,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(2).setPreferredWidth(91);
         colModel.getColumn(3).setPreferredWidth(102);
         colModel.getColumn(4).setPreferredWidth(102);
-        
         
         table.setRowHeight(25);
         
@@ -124,7 +122,6 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
             table.setPreferredSize(js.getPreferredSize());
         }
         
-        table.setEnabled(true);
         js.setVisible(true);
    }    
     
@@ -235,24 +232,52 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
      * @param info_archive_panel to have access to this panel 
      */
     public void rowDoubleMousClick(JPanel info_archive_panel) {
-        table.addMouseListener(new MouseAdapter() {
+        
+        int i = table.getMouseListeners().length;
+        
+        if (i <= 2 && i < 4 ){
+            
+            table.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
-                JTable table =(JTable) mouseEvent.getSource();
+                DefaultTableModel actual_model = (DefaultTableModel) table.getModel(); 
+                table = (JTable) mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
                 
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     int index = row;
+                   
+                    int rentalID = 0;
+                    long invNumber = 0;
+                    long userID = 0;
                     
-                    int rentalID = (int) model.getValueAt(index, 0 );
-                    long invNumber = (long) model.getValueAt(index, 3);
-                    long userID = (long) model.getValueAt(index, 4);
+                    try {
+                        rentalID = (int) actual_model.getValueAt(index, 0);
+                    } catch (java.lang.ClassCastException exe ){
+                        String rentalIdAsString = (String) actual_model.getValueAt(index, 0);
+                        rentalID = Integer.parseInt(rentalIdAsString);
+                    }
+                    try{
+                        invNumber = (long) actual_model.getValueAt(index, 3);
+                    } catch (java.lang.ClassCastException exe){
+                        String invNumberAsString = (String) actual_model.getValueAt(index, 3);
+                        invNumber = Long.parseLong(invNumberAsString);
+                    }
+                    try{
+                        userID = (long) actual_model.getValueAt(index, 4);
+                    } catch (java.lang.ClassCastException exe){
+                        String userIdAsString = (String) actual_model.getValueAt(index, 4);
+                        userID = Long.parseLong(userIdAsString);
+                    }
                     
                     // set this static attributes with data from the selected row
                     // to get data via id values
-                    RENTALID_ARCHIVE = rentalID;
-                    USERID_ARCHIVE = userID;
-                    INVNUMB_ARCHIVE = invNumber;
+                    if (rentalID != 0 && userID != 0 && invNumber != 0){
+                        RENTALID_ARCHIVE = rentalID;
+                        USERID_ARCHIVE = userID;
+                        INVNUMB_ARCHIVE = invNumber;
+                    }
+                    
                     
                     lp.removeAll();
                     lp.add(info_archive_panel);
@@ -274,12 +299,12 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                     //method to initialize a Listener for 'Abbrechen" button 
                     //in info_archive_panel to go back to the archive_panel
                     aih.cancel();
+                    }
                 }
-            }
-        });
+            });
+        }  
     }
-
-    
+        
      /**
      * adds an Listener for the clearBT, deletes all filter and search options 
      * in the frame
@@ -293,8 +318,8 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
+                filteredList = null;
                 List <Rentals> wholeRentals = dbH.getCompletedRentals();
-                System.out.println(wholeRentals.toString());
                 refreshArchiveTable(wholeRentals);
             }
         }); 

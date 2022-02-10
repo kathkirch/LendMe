@@ -16,6 +16,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -36,6 +38,7 @@ public class Return_Helper {
     JTextField userPhone;
     JTextField userEmail;
     DateChooser rDate; 
+    JScrollPane js;
     JTextArea rNotes;
     JButton rSave;
     JButton rCancel;
@@ -98,14 +101,19 @@ public class Return_Helper {
         userEmail.setText(user.getUserEmail());
         
         for (Devices dev : devices) {
+            
             if (dev.getInventoryNumber() == RentalList_Helper.RETURN_INVNUMBER){
                 notes = dev.getNotes();
             }
         }
         
+        rNotes.setLineWrap(true);
         rNotes.setText(notes);
         
     }
+    
+    
+    
     
     /**
      *initiates a listener for the "Speichern" button 
@@ -163,17 +171,20 @@ public class Return_Helper {
         
         Rentals rental = dbH.getRentalByID(returnID);
         
-        boolean valid = val.validReturnDate(returnDate, rental.getRentalDate());
-        
         String notes = rNotes.getText();
+        
+        boolean validDate = val.validReturnDate(returnDate, rental.getRentalDate());
+        boolean validNotes = val.validNotes(notes);
         
         long invNumb = Long.valueOf(inventoryNumber.getText());
         
         if (yesBT.isSelected()) {
             
-            if (valid){
+            // check if returnDate and notes are valid fields
+            if (validDate == true && validNotes == true){
                 
                 try {
+                    
                 dbH.updateRentals(returnID, returnDate);
                 dbH.setDevice_NotLent(invNumb, notes);
                 JOptionPane.showMessageDialog(null, "Gerätestatus aktualisert"

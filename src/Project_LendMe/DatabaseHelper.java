@@ -17,7 +17,7 @@ import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+
 
 /**
  * Helper Class for all the CRUD methods to the database
@@ -78,7 +78,7 @@ public class DatabaseHelper {
 
         try {
             stmt = con.createStatement();
-            String query = "SELECT * FROM devices WHERE status=0";
+            String query = "SELECT * FROM devices WHERE status=0;";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -513,12 +513,15 @@ public class DatabaseHelper {
 
         Users user = null;
 
-        String query = "SELECT * FROM users WHERE userID=" + "'"
-                + Long.parseLong(userID)
-                + "';";
+        String query = "SELECT * FROM users WHERE userID = ? ";
+       
+        long id = Long.parseLong(userID);
+                
         try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
+
+            PreparedStatement prep = con.prepareStatement(query);
+            prep.setLong(1, id);
+            rs = prep.executeQuery();
 
             while (rs.next()) {
                 String userFirstName = rs.getString("userFirstName");
@@ -527,12 +530,12 @@ public class DatabaseHelper {
                 String userPhone = rs.getString("userPhone");
                 String userYear = rs.getString("userYear");
 
-                user = new Users(Long.parseLong(userID), userFirstName,
+                user = new Users(id, userFirstName,
                         userLastName, userEmail, userPhone, userYear);
             }
         } catch (SQLException ex) {
             System.out.println(ex);
-            System.out.println("checkUserID");
+            System.out.println("getUserByID");
         } finally {
             if (stmt != null) {
                 try {
@@ -889,21 +892,22 @@ public class DatabaseHelper {
      */
     public void insertNewUser(Users user) throws UserException {
 
+        String insert = "INSERT INTO users (userID, userFirstName, "
+                        + "userLastName, userEmail, userPhone, userYear) values"
+                        + " (?, ?, ?, ?, ?, ?);";
+        
         if (user != null) {
             try {
-                stmt = con.createStatement();
-                String query = "INSERT INTO users (userID, userFirstName, "
-                        + "userLastName, userEmail, userPhone, userYear) values ('"
-                        + user.getUserID() + "', '" + user.getUserFirstName() + "', '"
-                        + user.getUserLastName() + "', '" + user.getUserEmail()
-                        + "', '" + user.getUserPhone() + "', '" + user.getYear()
-                        + "');";
-
-                System.out.println("insertString" + query);
-
-                stmt.executeUpdate(query);
-
-                System.out.println("User hinzugefuegt");
+                PreparedStatement prep = con.prepareStatement(insert);
+ 
+                prep.setLong(1, user.getUserID());
+                prep.setString(2, user.getUserFirstName());
+                prep.setString(3, user.getUserLastName());
+                prep.setString(4, user.getUserEmail());
+                prep.setString(5, user.getUserPhone());
+                prep.setString(6, user.getYear());
+                
+                prep.executeUpdate();
 
             } catch (SQLException ex) {
                 System.out.println(ex);
@@ -931,15 +935,23 @@ public class DatabaseHelper {
      *
      */
     public void insertNewRental_DB(Rentals rental) throws UserException {
+        
+       String dateSt = rental.getRentalDate().toString();
+        
+        String insert = "INSERT INTO rentals "
+                    + "(rentalDate, devices_inventoryNumber, "
+                    + "administrators_adminID, users_userID) "
+                    + "values (?, ?, ?, ?);";
+        
         try {
-            stmt = con.createStatement();
-            String string = "insert into rentals (rentalDate, "
-                    + "devices_inventoryNumber, administrators_adminID, "
-                    + "users_userID) values ('" + rental.getRentalDate()
-                    + "', '" + rental.getDevice_inventoryNumber()
-                    + "', '" + rental.getAdministrators_AdminID()
-                    + "', '" + rental.getUsers_UserID() + "');";
-            stmt.executeUpdate(string);
+            PreparedStatement prep = con.prepareStatement(insert);
+            
+            prep.setString(1, dateSt);
+            prep.setLong(2, rental.getDevice_inventoryNumber());
+            prep.setInt(3, rental.getAdministrators_AdminID());
+            prep.setLong(4, rental.getUsers_UserID());
+            
+            prep.executeUpdate();
 
             setDevice_Lent(rental.getDevice_inventoryNumber(),
                     rental.getUsers_UserID());
@@ -1097,7 +1109,7 @@ public class DatabaseHelper {
                 prepStat.setString(1, returnDate.toString());
                 prepStat.setInt(2, rentalID);
                 prepStat.executeUpdate();
-                System.out.println("RentalDate was set successfully");
+                System.out.println("ReturnDate was set successfully");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -1150,12 +1162,15 @@ public class DatabaseHelper {
                 where = "users_userID";
                 break;
         }
+        
+        String query = "SELECT * FROM " + table
+                    + " WHERE " + where + " LIKE ? "
+                    + "AND returnDate IS NOT NULL;";
 
         try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM " + table
-                    + " WHERE " + where + " LIKE '%" + filterString
-                    + "%' AND returnDate IS NOT NULL;");
+            PreparedStatement prep = con.prepareStatement(query);
+            prep.setString(1, "%"+filterString+"%");
+            rs = prep.executeQuery();
 
             while (rs.next()) {
 
@@ -1173,7 +1188,6 @@ public class DatabaseHelper {
                 rental.setReturnDate(returnDate);
 
                 filteredRentals.add(rental);
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -1227,24 +1241,35 @@ public class DatabaseHelper {
                 where = "rentalDate";
                 break;
         }
-        String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
+//        String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
+//                + "rentals.users_UserID, devices_inventoryNumber, "
+//                + "manufacturer, productname "
+//                + "FROM " + table
+//                + " JOIN " + joinTable
+//                + " ON devices_inventoryNumber = devices.inventoryNumber "
+//                + "WHERE " + where + " LIKE '%" + filterString
+//                + "%' AND returnDate IS NULL;";
+        
+         String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
                 + "rentals.users_UserID, devices_inventoryNumber, "
                 + "manufacturer, productname "
                 + "FROM " + table
                 + " JOIN " + joinTable
                 + " ON devices_inventoryNumber = devices.inventoryNumber "
-                + "WHERE " + where + " LIKE '%" + filterString
-                + "%' AND returnDate IS NULL;";
+                + "WHERE " + where + " LIKE ? AND returnDate IS NULL;";
 
         try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
+            PreparedStatement prep = con.prepareStatement(query);
+            prep.setString(1, "%"+filterString+"%");
+            rs = prep.executeQuery();
+//            stmt = con.createStatement();
+//            rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 int rentalID = rs.getInt("rentalID");
                 LocalDate rentalDate = rs.getDate("rentalDate").toLocalDate();
-                int users_UserID = rs.getInt("users_UserID");
-                int devices_inventoryNumber = rs.getInt("devices_inventoryNumber");
+                long users_UserID = rs.getLong("users_UserID");
+                long devices_inventoryNumber = rs.getLong("devices_inventoryNumber");
                 int administrators_AdminID = rs.getInt("administrators_adminID");
                 String manufacturer = rs.getString("manufacturer");
                 String productname = rs.getString("productname");
@@ -1374,11 +1399,15 @@ public class DatabaseHelper {
     public boolean isUserNew(long userID) {
 
         boolean userNEW = true;
-        String query = "SELECT * FROM users WHERE userID=" + userID + ";";
+//        String query = "SELECT * FROM users WHERE userID=" + userID + ";";
+        String query = "SELECT * FROM users WHERE userID = ?;";
 
         try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
+            PreparedStatement prep = con.prepareStatement(query);
+            prep.setLong(1, userID);
+            rs = prep.executeQuery();
+//            stmt = con.createStatement();
+//            rs = stmt.executeQuery(query);
 
             if (rs.next()) {
                 userNEW = false;
@@ -1397,62 +1426,4 @@ public class DatabaseHelper {
         }
         return userNEW;
     }
-    
-    /*
-    public Devices getDeviceByID(String invNumb) {
-        
-        long l = Long.parseLong(invNumb);
-        
-        String query = "SELECT * FROM devices"
-                        + " WHERE inventoryNumber=" + l + ";";
-        
-        Devices dev = null;
-        
-        try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                long invNo = rs.getLong(1);
-                String manuf = rs.getString(2);
-                String prodN = rs.getString(3);
-                String notes = rs.getString(4);
-                String location = rs.getString(5);
-                int stat = rs.getInt(6);
-                String im = rs.getString(7);
-                long usID = rs.getLong(8);
-                double acV = rs.getDouble(9);
-                LocalDate acD = rs.getDate(10).toLocalDate();
-                int admin = rs.getInt(11);
-                
-                dev = new Devices ();
-                dev.setInventoryNumber(invNo);
-                dev.setManufacturer(manuf);
-                dev.setProductName(prodN);
-                dev.setNotes(notes);
-                dev.setLocation(location);
-                dev.setStatus(stat);
-                dev.setImei(im);
-                dev.setUsers_userID(usID);
-                dev.setAquisitionValue(acV);
-                dev.setAquistionDate(acD);
-                dev.setAdminID(admin); 
-
-            }
-            
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            System.out.println("getDeviceByID");
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-        return dev;
-    }
-*/
 }
