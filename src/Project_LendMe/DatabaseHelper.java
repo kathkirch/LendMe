@@ -401,6 +401,11 @@ public class DatabaseHelper {
         return userYears;
     }
 
+    /**
+     * 
+     * @param invNumber Device to query DB
+     * @return AdminID managing Device
+     */
     public String getDeviceAdminID(String invNumber) {
 
         long number = Long.parseLong(invNumber);
@@ -663,70 +668,55 @@ public class DatabaseHelper {
         }
         return dev;
     }
+    
+    /**
+     *  similiar to getDeviceByID() but returning a String Array with results
+     *  instead of a Device-Object; the String [] lets us handle results
+     *  more elegantly in the calling method
+     * @param invNo inventoryNumber to query DB with
+     * @return return Query-Results as String Array
+     */
+    public String[] getDeviceByID2 (String invNo) {
+        
+        String[] deviceData = new String[9];
+        
+        String query = "SELECT * FROM devices WHERE "
+                + "inventoryNumber = " + invNo +";";
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                deviceData[0] = rs.getString(1); // Inventory Number
+                deviceData[1] = rs.getString(2); // Manufacturer
+                deviceData[2] = rs.getString(3); // Productname
+                deviceData[3] = rs.getString(4); // Notes
+                deviceData[4] = rs.getString(5); // Location
+                deviceData[5] = rs.getString(7); // Imei
+                deviceData[6] = rs.getString(9); // Acquisition Value
+                deviceData[7] = rs.getString(10); // Acquisition Date
+                deviceData[8] = rs.getString(11); // Admin ID
+            }
+         } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return deviceData;
+    }
 
     /**
      * **************** QUERYS HANDLING INVENTORY/DEVICES *******************
      */
-//    /**
-//     * @return returns all Devices saved in the database
-//     */
-//    public ArrayList<Devices> getAllDevices() {
-//
-//        ArrayList<Devices> allDevices = new ArrayList<>();
-//
-//        String query = "SELECT inventoryNumber, manufacturer, productname, "
-//                + "notes, location, status, imei, users_userID, "
-//                + "acquisitionValue, acquisitionDate, administrators_adminID "
-//                + "FROM devices LEFT JOIN administrators_has_devices "
-//                + "ON devices.inventoryNumber = "
-//                + "administrators_has_devices.devices_inventoryNumber";
-//        try {
-//            stmt = con.createStatement();
-//            rs = stmt.executeQuery(query);
-//            while (rs.next()) {
-//
-//                long invNo = rs.getLong(1);
-//                String manuf = rs.getString(2);
-//                String prodN = rs.getString(3);
-//                String notes = rs.getString(4);
-//                String location = rs.getString(5);
-//                int stat = rs.getInt(6);
-//                String im = rs.getString(7);
-//                long usID = rs.getLong(8);
-//                double acV = rs.getDouble(9);
-//                LocalDate acD = rs.getDate(10).toLocalDate();
-//                String admin = rs.getString(11);
-//
-//                Devices device = new Devices();
-//
-//                device.setInventoryNumber(invNo);
-//                device.setManufacturer(manuf);
-//                device.setProductName(prodN);
-//                device.setNotes(notes);
-//                device.setLocation(location);
-//                device.setStatus(stat);
-//                device.setImei(im);
-//                device.setUsers_userID(usID);
-//                device.setAquisitionValue(acV);
-//                device.setAquistionDate(acD);
-//                device.setAdmin(admin);
-//
-//                allDevices.add(device);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            if (stmt != null) {
-//                try {
-//                    stmt.close();
-//                } catch (SQLException ex) {
-//                    System.out.println(ex);
-//                }
-//            }
-//        }
-//
-//        return allDevices;
-//    }
+
+  
     /**
      * @return returns all Devices saved in the database
      */
@@ -783,22 +773,30 @@ public class DatabaseHelper {
         return allDevices;
     }
 
+    /**
+     * prepares and executes Update Query
+     * @param toUpdate which and how many columns to update
+     * @param invNo which device to update
+     * @throws SQLException Errors are handled in caller method
+     */
     public void updateDevice(String toUpdate, String invNo) throws SQLException {
 
+        
         String query = "UPDATE devices SET " + toUpdate
                 + " WHERE inventoryNumber = " + invNo + ";";
 
+        System.out.println(query);
+        
         stmt = con.createStatement();
         stmt.executeUpdate(query);
-        System.out.println(query);
+        
 
         if (stmt != null) {
             stmt.close();
         }
     }
 
-    //inserts new entry into devices table
-    //SQLExceptions are handled in caller method
+  
     public void insertNewDevice(String toInsert, boolean noImei) throws SQLException {
 
         String query;
@@ -816,7 +814,7 @@ public class DatabaseHelper {
                     + "VALUES (" + toInsert + ");";
         }
 
-        //System.out.println(query);
+        
         stmt = con.createStatement();
         stmt.executeUpdate(query);
 
@@ -826,6 +824,13 @@ public class DatabaseHelper {
 
     }
 
+    /**
+     * prepares and executes Delete From Query
+     * @param deviceToDelete InventoryNumber of Device to delete
+     * @return returns number of successfully deleted datasets; will be 1 or 0
+     *      is used to display confirmation or error message to user
+     * @throws SQLException 
+     */
     public int deleteDevice(String deviceToDelete) throws SQLException {
 
         stmt = con.createStatement();
@@ -834,7 +839,7 @@ public class DatabaseHelper {
                 + "(inventoryNumber = " + deviceToDelete + ");";
         stmt = con.createStatement();
         int i = stmt.executeUpdate(queryDevice);
-        System.out.println(queryDevice);
+        
 
         if (stmt != null) {
             stmt.close();
@@ -842,6 +847,13 @@ public class DatabaseHelper {
         return i;
     }
 
+    
+    /**
+     * get all existing Inventory Numbers in DB
+     * @return return them as String Array
+     * called in Update-Device Class to ascertain newly entered Inventory-ID
+     * is UNIQUE
+     */
     public ArrayList<String> allInventoryNumbers() {
 
         ArrayList<String> allInvNos = new ArrayList<>();
@@ -861,6 +873,11 @@ public class DatabaseHelper {
         return allInvNos;
     }
 
+    /**
+     * get all existing IMEI-Numbers in DB
+     * @return return them as String Array
+     * called in Update-Device Class to ascertain newly entered IMEI is UNIQUE
+     */
     public ArrayList<String> allImeiNumbers() {
 
         ArrayList<String> allImeis = new ArrayList<>();
@@ -1297,13 +1314,20 @@ public class DatabaseHelper {
         return filteredRentallist;
     }
 
-    public List<Devices> filterInventory(int column, String filterBy) {
+    /**
+     * builds and executes a Query to DB with passed Params
+     * @param column Which Column to filter by
+     * @param filterBy Value to filter by
+     * @param filterOption Option (<, >, =) to filter by
+     * @return 
+     */
+    public List<Devices> filterInventory(int column, String filterBy, int filterOption) {
 
         stmt = null;
         rs = null;
         String where = "";
+        String option = "";
         ArrayList<Devices> filteredInventory = new ArrayList<>();
-
         switch (column) {
             case 0:
                 where = "inventoryNumber";
@@ -1315,28 +1339,26 @@ public class DatabaseHelper {
                 where = "productname";
                 break;
             case 3:
-                where = "location";
-                break;
-            case 4:
-                where = "status";
-                break;
-            case 5:
-                where = "users_userID";
-                break;
-            case 6:
-                where = "acquisitionValue";
-                break;
-            case 7:
-                where = "acquisitionDate";
-                break;
-            case 8:
                 where = "administrators_adminID";
+                break;
 
         }
+        
+        switch (filterOption) {
+            case 1:
+                option = " LIKE '%" + filterBy +"%'";
+                break;
+            case 2:
+                option = " < " + filterBy;
+                break;
+            case 3:
+                option = " > " +filterBy;
+                break;
+        }
 
-        String query = "SELECT * FROM devices WHERE " + where + " LIKE '%"
-                + filterBy + "%'";
+        String query = "SELECT * FROM devices WHERE " + where + option + ";";
 
+        System.out.println(query);
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
@@ -1346,13 +1368,6 @@ public class DatabaseHelper {
                 long invNo = rs.getLong(1);
                 String manuf = rs.getString(2);
                 String prodN = rs.getString(3);
-                String notes = rs.getString(4);
-                String location = rs.getString(5);
-                int stat = rs.getInt(6);
-                String im = rs.getString(7);
-                long usID = rs.getLong(8);
-                double acV = rs.getDouble(9);
-                LocalDate acD = rs.getDate(10).toLocalDate();
                 int admin = rs.getInt(11);
 
                 Devices device = new Devices();
@@ -1360,13 +1375,6 @@ public class DatabaseHelper {
                 device.setInventoryNumber(invNo);
                 device.setManufacturer(manuf);
                 device.setProductName(prodN);
-                device.setNotes(notes);
-                device.setLocation(location);
-                device.setStatus(stat);
-                device.setImei(im);
-                device.setUsers_userID(usID);
-                device.setAquisitionValue(acV);
-                device.setAquistionDate(acD);
                 device.setAdminID(admin);
 
                 filteredInventory.add(device);

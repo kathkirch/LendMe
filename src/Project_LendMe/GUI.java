@@ -277,6 +277,9 @@ public class GUI extends javax.swing.JFrame {
         inventory_btUpdate = new javax.swing.JButton();
         inventory_btDelete = new javax.swing.JButton();
         newdevice_button = new javax.swing.JButton();
+        inventory_equals = new javax.swing.JRadioButton();
+        inventory_larger = new javax.swing.JRadioButton();
+        inventory_lower = new javax.swing.JRadioButton();
         inventory_info_panel = new javax.swing.JPanel();
         invInfo_invNo = new javax.swing.JLabel();
         invInfo_tfInventoryNumber = new javax.swing.JTextField();
@@ -467,7 +470,7 @@ public class GUI extends javax.swing.JFrame {
         );
         home_panelLayout.setVerticalGroup(
             home_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 959, Short.MAX_VALUE)
+            .addGap(0, 962, Short.MAX_VALUE)
         );
 
         layerpane.add(home_panel, "card9");
@@ -642,7 +645,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(newrental_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancel_newrental)
                     .addComponent(save_newrental))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
 
         layerpane.add(newrental_panel, "card2");
@@ -776,10 +779,10 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(filterText_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterString_rentallist, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                .addComponent(rental_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
                 .addGap(21, 21, 21)
                 .addComponent(return_button)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         layerpane.add(rentallist_panel, "card3");
@@ -1440,7 +1443,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(filterButton_archive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btClear_archive, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                .addComponent(archive_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
                 .addGap(100, 100, 100))
         );
 
@@ -1462,7 +1465,7 @@ public class GUI extends javax.swing.JFrame {
         search_options_inventory.setToolTipText("");
 
         filter_options_inventory.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        filter_options_inventory.setText("Filtern nach:");
+        filter_options_inventory.setText("Filtern:");
         filter_options_inventory.setToolTipText("");
         filter_options_inventory.setMaximumSize(new java.awt.Dimension(90, 20));
         filter_options_inventory.setMinimumSize(new java.awt.Dimension(90, 20));
@@ -1537,12 +1540,36 @@ public class GUI extends javax.swing.JFrame {
         });
 
         newdevice_button.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        newdevice_button.setText("neues Device anlegen");
+        newdevice_button.setText("Neues Device anlegen");
         newdevice_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newdevice_buttonActionPerformed(evt);
             }
         });
+
+        inventory_equals.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        inventory_equals.setText("=");
+        inventory_equals.setToolTipText("aufsteigende Sortierung");
+        inventory_equals.setAlignmentX(0.5F);
+        inventory_equals.setMaximumSize(new java.awt.Dimension(55, 30));
+        inventory_equals.setMinimumSize(new java.awt.Dimension(55, 30));
+        inventory_equals.setPreferredSize(new java.awt.Dimension(55, 30));
+
+        inventory_larger.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        inventory_larger.setText(">");
+        inventory_larger.setToolTipText("aufsteigende Sortierung");
+        inventory_larger.setAlignmentX(0.5F);
+        inventory_larger.setMaximumSize(new java.awt.Dimension(55, 30));
+        inventory_larger.setMinimumSize(new java.awt.Dimension(55, 30));
+        inventory_larger.setPreferredSize(new java.awt.Dimension(55, 30));
+
+        inventory_lower.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        inventory_lower.setText("<");
+        inventory_lower.setToolTipText("aufsteigende Sortierung");
+        inventory_lower.setAlignmentX(0.5F);
+        inventory_lower.setMaximumSize(new java.awt.Dimension(55, 30));
+        inventory_lower.setMinimumSize(new java.awt.Dimension(55, 30));
+        inventory_lower.setPreferredSize(new java.awt.Dimension(55, 30));
 
         javax.swing.GroupLayout inventory_panelLayout = new javax.swing.GroupLayout(inventory_panel);
         inventory_panel.setLayout(inventory_panelLayout);
@@ -1558,9 +1585,18 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, inventory_panelLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(search_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filter_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
+                                    .addGroup(inventory_panelLayout.createSequentialGroup()
+                                        .addComponent(filter_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(inventory_lower, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inventory_larger, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inventory_equals, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(inventory_panelLayout.createSequentialGroup()
+                                        .addComponent(search_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(14, 14, 14)))
                                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(inventory_searchfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(inventory_filterText, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1579,7 +1615,7 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(inventory_btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(inventory_btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 1251, Short.MAX_VALUE)))
                 .addGap(50, 50, 50))
         );
         inventory_panelLayout.setVerticalGroup(
@@ -1593,14 +1629,23 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(inventory_searchfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inventory_asc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inventory_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filter_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inventory_filterText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inventory_btFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inventory_btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inventory_panelLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(filter_options_inventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inventory_filterText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inventory_btFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inventory_btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))
+                    .addGroup(inventory_panelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(inventory_lower, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inventory_larger, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inventory_equals, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(inventory_ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inventory_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inventory_btUpdate)
@@ -1689,7 +1734,7 @@ public class GUI extends javax.swing.JFrame {
 
         invInfo_taNotes.setEditable(false);
         invInfo_taNotes.setColumns(20);
-        invInfo_taNotes.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        invInfo_taNotes.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         invInfo_taNotes.setRows(5);
         jScrollPane1.setViewportView(invInfo_taNotes);
 
@@ -1780,7 +1825,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(invInfo_admin)
                 .addGap(4, 4, 4)
                 .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(invInfo_tfAdminID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(invInfo_tfAdminID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(invInfo_adminID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(inventory_info_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1798,6 +1843,7 @@ public class GUI extends javax.swing.JFrame {
         info_archive_panel.setBackground(new java.awt.Color(220, 229, 211));
 
         archInfo_notes.setColumns(20);
+        archInfo_notes.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         archInfo_notes.setRows(5);
 
         archInfo_productName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1917,7 +1963,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addGap(35, 35, 35)
                                 .addGroup(info_archive_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(archInfo_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(archInfo_productnameTF)
+                                    .addComponent(archInfo_productnameTF, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                                     .addComponent(archInfo_manufacturerTF)
                                     .addComponent(archInfo_invNumberTF)
                                     .addComponent(archInfo_userIDTF)
@@ -1925,7 +1971,7 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(archInfo_userPhoneTF)
                                     .addComponent(archInfo_userMailTF)
                                     .addComponent(archInfo_notes, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                                    .addComponent(archInfo_adminIDTF)
+                                    .addComponent(archInfo_adminIDTF, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                                     .addComponent(archInfo_rentalDateTF)
                                     .addComponent(archInfo_returnDateTF)
                                     .addComponent(archInfo_adminNameTF)
@@ -1997,7 +2043,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(archInfo_returnDateTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(archInfo_cancel)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
 
         archInfo_productnameTF.getAccessibleContext().setAccessibleName("pName");
@@ -2143,18 +2189,21 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_archiveActionPerformed
 
     /**
-     * this method handles click on Button 'Inventar' in main navigation panel
+     * builds and populates Inventory-Table
+     * Sets Listeners for Filter Options
+     * Initializes Instances for info and update panels
      */
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
 
         switchPanel(inventory_panel);
-
+        
         //instantiate Inventory Helper
         devHelper = new Inventory_Helper(inventory_table1,
                 inventory_ScrollPane1, inventory_searchfilter, inventory_asc,
                 inventory_desc, inventory_filterText, inventory_btFilter,
                 inventory_btClear, inventory_btUpdate, inventory_btDelete,
-                layerpane, inventory_panel);
+                layerpane, inventory_panel, inventory_equals, inventory_lower,
+                inventory_larger);
 
         //set other tables null to only display inventory-table
         MyTableHelper.rentalList = null;
@@ -2170,8 +2219,12 @@ public class GUI extends javax.swing.JFrame {
         devHelper.filterTable();
         //listen for clicks on clear selection option
         devHelper.clearSelection();
+        devHelper.setFilterButtons();
         //listen for click on Button 'Bearbeiten' to initalize Update-Panel
-        devHelper.update();
+        devHelper.update(inventory_update_panel, InvUpd_TfInventoryNumber, 
+                InvUpd_TfManufacturer, InvUpd_TfProductname, InvUpd_TaNotes,
+                InvUpd_TfLocation, InvUpd_TfImei, InvUpd_TfAcqValue, InvUpd_AcqDate,
+                InvUpd_CbAdmini, InvUpd_BtnSave, InvUpd_BtnCancel);
         
         
         devHelper.rowDoubleClick(inventory_info_panel, invInfo_tfInventoryNumber,
@@ -2191,7 +2244,7 @@ public class GUI extends javax.swing.JFrame {
         layerpane.add(inventory_new_panel);
         layerpane.repaint();
         layerpane.revalidate();
-
+        
         //instantiate InventoryNew_Helper
         invNew = new InventoryNew_Helper(invNew_productname, invNew_manufacturer,
                 invNew_inventoryNumber, invNew_imei, invNew_location, invNew_notes,
@@ -2202,6 +2255,7 @@ public class GUI extends javax.swing.JFrame {
         invNew.setInputVerifiers();
         //fill Admin-Combobox with values from DB
         invNew.fillCbAdmin();
+        
     }//GEN-LAST:event_newdevice_buttonActionPerformed
 
     
@@ -2214,24 +2268,7 @@ public class GUI extends javax.swing.JFrame {
     
     private void inventory_btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventory_btUpdateActionPerformed
   
-        //checks if a row to update is selected
-            //if YES: initialize layout
-        if (Inventory_Helper.getOpenUpdatePanel()) {
-            layerpane.removeAll();
-            layerpane.add(inventory_update_panel);
-            layerpane.repaint();
-            layerpane.revalidate();
-
-            //initialize Inventory Update Helper
-            invu = new InventoryUpdate_Helper(InvUpd_TfInventoryNumber,
-                    InvUpd_TfManufacturer, InvUpd_TfProductname, InvUpd_TaNotes, InvUpd_TfLocation,
-                    InvUpd_TfImei, InvUpd_TfAcqValue, InvUpd_AcqDate, InvUpd_CbAdmini, InvUpd_BtnSave,
-                    InvUpd_BtnCancel);
-            //fill Textfields with existing values
-            invu.fillTFs();
-            //set up input verifiers for textfields
-            invu.setInputVerifiers();
-        }
+        
     }//GEN-LAST:event_inventory_btUpdateActionPerformed
 
     /**
@@ -2240,7 +2277,7 @@ public class GUI extends javax.swing.JFrame {
      */
     private void InvUpd_BtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InvUpd_BtnSaveActionPerformed
         
-        invu.checkForUpdate();
+        
         
     }//GEN-LAST:event_InvUpd_BtnSaveActionPerformed
 
@@ -2261,6 +2298,7 @@ public class GUI extends javax.swing.JFrame {
     private void invNew_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invNew_saveActionPerformed
 
         invNew.concatInsertStringCallInsertMethod();
+        invNew.resetNewDeviceTextfields();
 
     }//GEN-LAST:event_invNew_saveActionPerformed
 
@@ -2407,8 +2445,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton inventory_btFilter;
     private javax.swing.JButton inventory_btUpdate;
     private javax.swing.JRadioButton inventory_desc;
+    private javax.swing.JRadioButton inventory_equals;
     private javax.swing.JTextField inventory_filterText;
     private javax.swing.JPanel inventory_info_panel;
+    private javax.swing.JRadioButton inventory_larger;
+    private javax.swing.JRadioButton inventory_lower;
     private javax.swing.JPanel inventory_new_panel;
     private javax.swing.JLabel inventory_number;
     private javax.swing.JPanel inventory_panel;

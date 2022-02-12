@@ -161,13 +161,6 @@ abstract public class MyTableHelper {
             deviceData[i] = new Object [] {d.getInventoryNumber(),
                                            d.getManufacturer(),
                                            d.getProductName(),
-                                           d.getNotes(),
-                                           d.getLocation(),
-                                           d.getStatus(),
-                                           d.getImei(),
-                                           d.getUsers_userID(),
-                                           d.getAquisitionValue(),
-                                           d.getAquistionDate(),
                                            d.getAdminID()}; 
             
            i = i + 1;  
