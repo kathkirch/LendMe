@@ -135,10 +135,10 @@ public class InventoryNew_Helper {
         values[8] = imei.getText();
 
         /*
-    fields left blank by user are passed as blank String
-    since IMEI is UNIQUE we need to check if it was left blank
-    if YES we ignore it in our query, SQL will automatically null it
-    if NO we pass the value as usually
+        fields left blank by user are passed as blank String;
+        since IMEI is UNIQUE we need to check if it was left blank
+        if YES we ignore it in our query to avoid SQLException (SQL will automatically null it9
+        if NO we pass the value as usually
          */
         boolean noImei = values[8].isBlank();
 
