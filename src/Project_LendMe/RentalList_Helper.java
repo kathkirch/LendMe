@@ -25,7 +25,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *  Helper Class for the rentallist table with it's methods, 
@@ -37,7 +36,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
     
     private final DatabaseHelper rlH = new DatabaseHelper();
     
-    private static List <RentalList> filteredList = null;
+    private List <RentalList> filteredList_rentals = null;
     
     public JButton returnBT;
     public JLayeredPane lp;
@@ -86,7 +85,6 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         colModel.getColumn(4).setPreferredWidth(90);
         colModel.getColumn(5).setPreferredWidth(105);
         
-        table.setEnabled(true);
     }
 
     @Override
@@ -119,12 +117,8 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         if (table.getPreferredSize().getHeight() < js.getPreferredSize().getHeight()){
             table.setPreferredSize(js.getPreferredSize());
         }
-        table.setEnabled(true);
-        js.setVisible(true); 
         
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
-        table.setRowSorter(sorter);
-        sorter.setModel(model);
+        js.setVisible(true);
     }  
     
     /**
@@ -140,7 +134,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
-                filteredList = null;
+                filteredList_rentals = null;
                 List <RentalList> wholeList = rlH.getRentallist();
                 refreshRentalTable(wholeList);  
             }
@@ -164,10 +158,10 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
                 } else {
                     int whereClause = box.getSelectedIndex();
                     String filterString = filterTF.getText();
-                    filteredList = rlH.filterRentals2(whereClause, filterString);
+                    filteredList_rentals = rlH.filterRentals2(whereClause, filterString);
                     
-                    if (filteredList != null && filteredList.size() >  0){
-                    refreshRentalTable(filteredList);
+                    if (filteredList_rentals != null && filteredList_rentals.size() >  0){
+                    refreshRentalTable(filteredList_rentals);
                     } else {
                         JOptionPane.showMessageDialog(null, "Filteroption liefert keine Ergebnisse"); 
                     }
@@ -189,8 +183,8 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
             @Override
             public void actionPerformed(ActionEvent e){
                 
-                if (filteredList != null && filteredList.size() > 0 ) {
-                    rentalList = filteredList;
+                if (filteredList_rentals != null && filteredList_rentals.size() > 0 ) {
+                    rentalList = filteredList_rentals;
                 }
                 
                 if (ascRadio.isSelected()){
@@ -224,8 +218,8 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                if (filteredList != null && filteredList.size() > 0 ) {
-                    rentalList = filteredList;
+                if (filteredList_rentals != null && filteredList_rentals.size() > 0 ) {
+                    rentalList = filteredList_rentals;
                 }
                 
                 if (descRadio.isSelected()){

@@ -43,7 +43,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     
     
     private final DatabaseHelper dbH = new DatabaseHelper();
-    private static List <Rentals> filteredList = null;
+    private List <Rentals> filteredList = null;
     
     public static int RENTALID_ARCHIVE;
     public static long USERID_ARCHIVE;
