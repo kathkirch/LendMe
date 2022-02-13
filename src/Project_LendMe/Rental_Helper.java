@@ -575,57 +575,61 @@ public final class Rental_Helper {
      * if userValid is true the createNewRental() Method is called
      */
     public void saveNewRental () {
-        jBsave.addActionListener((ActionEvent e) -> {
-            boolean validUser = true;
-            
-            if (jCBuserID.getSelectedItem().toString().isBlank()){
-                JOptionPane
-                        .showMessageDialog(null,
-                                "Bitte UserID angeben!",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
-            } if (val.isUserID(jCBuserID.getSelectedItem().toString())){
+        jBsave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean validUser = true;
                 
-                String userID = jCBuserID.getEditor().getItem().toString();
-                
-                long id = Long.parseLong(userID);
-                
-                if (hp.isUserNew(id)){
+                if (jCBuserID.getSelectedItem().toString().isBlank()){
+                    JOptionPane
+                            .showMessageDialog(null,
+                                    "Bitte UserID angeben!",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                } if (val.isUserID(jCBuserID.getSelectedItem().toString())){
                     
-                    Users user = createUser(jCBuserID, jTFfirstname,
-                            jTFlastname, jTFmail, jTFphone, jCByear);
+                    String userID = jCBuserID.getEditor().getItem().toString();
                     
-                    if (user == null){
-                        validUser = false;
-                    }
-                    if (validUser){
-                        try {
-                            hp.insertNewUser(user);
-                            JOptionPane
-                                    .showMessageDialog(null, "Neuen User hinzugefügt");
-                            
-                        }catch(UserException ex) {
-                            System.out.println(ex);
-                            System.out.println("saveNewRental in Rental_Helper");
-                            JOptionPane
-                                    .showMessageDialog(null,
-                                            "Fehler beim hinzufügen "
-                                                    + "eines neuen Users",
-                                            "Error",
-                                            JOptionPane.ERROR_MESSAGE);
+                    long id = Long.parseLong(userID);
+                    
+                    if (hp.isUserNew(id)){
+                        
+                        Users user = createUser(jCBuserID, jTFfirstname,
+                                jTFlastname, jTFmail, jTFphone, jCByear);
+                        
+                        if (user == null){
+                            validUser = false;
+                        }
+                        if (validUser){
+                            try {
+                                hp.insertNewUser(user);
+                                JOptionPane
+                                        .showMessageDialog(null, "Neuen User hinzugefügt");
+                                
+                            }catch(UserException ex) {
+                                System.out.println(ex);
+                                System.out.println("saveNewRental in Rental_Helper");
+                                JOptionPane
+                                        .showMessageDialog(null,
+                                                "Fehler beim hinzufügen "
+                                                        + "eines neuen Users",
+                                                "Error",
+                                                JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        
+                    } else {
+                        Users user = createUser(jCBuserID, jTFfirstname,
+                                jTFlastname, jTFmail, jTFphone, jCByear);
+                        
+                        if (user == null){
+                            validUser = false;
                         }
                     }
                     
-                } else {
-                    Users user = createUser(jCBuserID, jTFfirstname,
-                            jTFlastname, jTFmail, jTFphone, jCByear);
-                    
-                    if (user == null){
-                        validUser = false;
+                    if (validUser){
+                        createNewRental(dcDate, jCBinvnumber, jCBuserID, jTFadminID);
                     }
-                }
-                if (validUser){
-                    createNewRental(dcDate, jCBinvnumber, jCBuserID, jTFadminID);
                 }
             }
         });
