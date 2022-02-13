@@ -10,8 +10,11 @@ import Comparators.RentalUserIDComparator;
 import Comparators.RentallistLentDaysComparator;
 import Comparators.RentallistManuNameComparator;
 import Comparators.RentallistProNameComparator;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
@@ -85,6 +88,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         colModel.getColumn(4).setPreferredWidth(90);
         colModel.getColumn(5).setPreferredWidth(105);
         
+        table.setDefaultEditor(Object.class, null);
     }
 
     @Override
@@ -119,6 +123,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         }
         
         js.setVisible(true);
+        table.setDefaultEditor(Object.class, null);
     }  
     
     /**
@@ -321,7 +326,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
                 }
             });
         } 
-    } 
+    }
 }
     
 

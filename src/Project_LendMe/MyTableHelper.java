@@ -83,7 +83,6 @@ abstract public class MyTableHelper {
         }
         
         model = new DefaultTableModel(data, columns);
-        
         table.setModel(model);
         table.setRowHeight(25);
         

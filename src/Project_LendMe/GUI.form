@@ -695,9 +695,9 @@
                                       <Component id="rental_ScrollPane" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
                                               <Component id="filter_options_rentallist" min="-2" max="-2" attributes="0"/>
-                                              <Component id="filterString_rentallist" max="32767" attributes="0"/>
+                                              <Component id="filterString_rentallist" min="-2" pref="166" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -727,14 +727,12 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="rentallist_title" min="-2" pref="64" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="searchfilter_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="asc_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="desc_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="filter_options_rentallist" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="searchfilter_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="asc_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="desc_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="filter_options_rentallist" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -742,14 +740,16 @@
                                           <Component id="filterbutton_rentallist" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                           <Component id="btClear_rentals" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="filterText_rentallist" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="filterString_rentallist" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="filterText_rentallist" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="filterString_rentallist" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="rental_ScrollPane" pref="523" max="32767" attributes="0"/>
+                                  <Component id="rental_ScrollPane" pref="442" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Component id="return_button" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="221" max="32767" attributes="0"/>
+                                  <EmptySpace pref="141" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1561,24 +1561,18 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
-                            <Property name="toolTipText" type="java.lang.String" value="Bitte max. 7 Vor- und 2 Nachkommastellen mit . als Trennzeichen eingeben"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte max. 7 Vor- und 2 Nachkommastellen mit . als Dezimaltrennzeichen eingeben"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="InvUpd_BtnCancel">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Verwerfen"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InvUpd_BtnCancelActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="InvUpd_BtnSave">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Speichern"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InvUpd_BtnSaveActionPerformed"/>
-                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1883,7 +1877,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
-                            <Property name="toolTipText" type="java.lang.String" value="Bitte max. 7 Vor- und 2 Nachkommastellen mit . als Trennzeichen eingeben"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Bitte max. 7 Vor- und 2 Nachkommastellen mit . als Dezimaltrennzeichen eingeben"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="invNew_save">
@@ -1893,9 +1887,6 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Speichern"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invNew_saveActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="invNew_cancel">
                           <Properties>
@@ -1906,9 +1897,6 @@
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                             <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invNew_cancelActionPerformed"/>
-                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2204,19 +2192,16 @@
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Component id="filter_options_inventory" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                           <Component id="inventory_lower" min="-2" pref="34" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="inventory_larger" min="-2" pref="34" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="inventory_equals" min="-2" pref="34" max="-2" attributes="0"/>
-                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="search_options_inventory" min="-2" pref="163" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                                      </Group>
+                                                      <Component id="search_options_inventory" min="-2" pref="163" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="inventory_searchfilter" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                                                       <Component id="inventory_filterText" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
@@ -2242,7 +2227,7 @@
                                                   </Group>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -2254,35 +2239,27 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="inventar_title" min="-2" pref="64" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="search_options_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="inventory_searchfilter" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="inventory_asc" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="inventory_desc" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="filter_options_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="inventory_filterText" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="inventory_btFilter" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="inventory_btClear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="inventory_lower" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="inventory_larger" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="inventory_equals" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="filter_options_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inventory_filterText" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inventory_btFilter" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="inventory_btClear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                          <Component id="inventory_lower" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="inventory_larger" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="inventory_equals" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="inventory_ScrollPane1" pref="690" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <Component id="inventory_ScrollPane1" pref="543" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="inventory_btUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2318,7 +2295,7 @@
                                 <StringItem index="3" value="Item 4"/>
                               </StringArray>
                             </Property>
-                            <Property name="toolTipText" type="java.lang.String" value="Tabelle in der gefiltert/sortiert werden soll "/>
+                            <Property name="toolTipText" type="java.lang.String" value="Spalte nach der gefiltert/sortiert werden soll "/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -2479,10 +2456,8 @@
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Update"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Ausgew&#xe4;hlten Datensatz bearbeiten"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inventory_btUpdateActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="inventory_btDelete">
                           <Properties>
@@ -2490,10 +2465,11 @@
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Ausgew&#xe4;hlten Datensatz l&#xf6;schen"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inventory_btDeleteActionPerformed"/>
-                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="GUI_inventory_btDelete"/>
+                          </AuxValues>
                         </Component>
                         <Component class="javax.swing.JButton" name="newdevice_button">
                           <Properties>
@@ -2501,10 +2477,8 @@
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Neues Device anlegen"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Neuen Datensatz anlegen"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newdevice_buttonActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="inventory_equals">
                           <Properties>
@@ -2512,7 +2486,7 @@
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="="/>
-                            <Property name="toolTipText" type="java.lang.String" value="aufsteigende Sortierung"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Ergebnisse gleich eingegebenem Wert"/>
                             <Property name="alignmentX" type="float" value="0.5"/>
                             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[55, 30]"/>
@@ -2531,7 +2505,7 @@
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="&gt;"/>
-                            <Property name="toolTipText" type="java.lang.String" value="aufsteigende Sortierung"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Ergebnisse gr&#xf6;&#xdf;er als eingegebener Wert"/>
                             <Property name="alignmentX" type="float" value="0.5"/>
                             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[55, 30]"/>
@@ -2550,7 +2524,7 @@
                               <Font name="Segoe UI" size="12" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="&lt;"/>
-                            <Property name="toolTipText" type="java.lang.String" value="aufsteigende Sortierung"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Ergebnisse kleiner als eingegebener Wert"/>
                             <Property name="alignmentX" type="float" value="0.5"/>
                             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[55, 30]"/>
