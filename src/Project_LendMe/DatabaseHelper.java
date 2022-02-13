@@ -65,7 +65,7 @@ public class DatabaseHelper {
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////READ/IN/DATABASE////////////////////////////////
+    ////////////////////////////READ IN DATABASE////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     /**
      * returns all devices from device table with the status 0 (not lent)
@@ -669,7 +669,7 @@ public class DatabaseHelper {
     }
     
     /**
-     *  similiar to getDeviceByID() but returning a String Array with results
+     *  similar to getDeviceByID() but returning a String Array with results
      *  instead of a Device-Object; the String [] lets us handle results
      *  more elegantly in the calling method
      * @param invNo inventoryNumber to query DB with
@@ -828,7 +828,7 @@ public class DatabaseHelper {
      * @param deviceToDelete InventoryNumber of Device to delete
      * @return returns number of successfully deleted datasets; will be 1 or 0
      *      is used to display confirmation or error message to user
-     * @throws SQLException 
+     * @throws SQLException handled in caller method
      */
     public int deleteDevice(String deviceToDelete) throws SQLException {
 
@@ -1258,16 +1258,8 @@ public class DatabaseHelper {
                 where = "rentalDate";
                 break;
         }
-//        String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
-//                + "rentals.users_UserID, devices_inventoryNumber, "
-//                + "manufacturer, productname "
-//                + "FROM " + table
-//                + " JOIN " + joinTable
-//                + " ON devices_inventoryNumber = devices.inventoryNumber "
-//                + "WHERE " + where + " LIKE '%" + filterString
-//                + "%' AND returnDate IS NULL;";
-        
-         String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
+     
+        String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID, "
                 + "rentals.users_UserID, devices_inventoryNumber, "
                 + "manufacturer, productname "
                 + "FROM " + table
@@ -1279,8 +1271,6 @@ public class DatabaseHelper {
             PreparedStatement prep = con.prepareStatement(query);
             prep.setString(1, "%"+filterString+"%");
             rs = prep.executeQuery();
-//            stmt = con.createStatement();
-//            rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 int rentalID = rs.getInt("rentalID");
@@ -1317,8 +1307,8 @@ public class DatabaseHelper {
      * builds and executes a Query to DB with passed Params
      * @param column Which Column to filter by
      * @param filterBy Value to filter by
-     * @param filterOption Option (<, >, =) to filter by
-     * @return 
+     * @param filterOption Option (&lt; &gt; =) to filter by
+     * @return a list only with filtered elements
      */
     public List<Devices> filterInventory(int column, String filterBy, int filterOption) {
 
@@ -1407,15 +1397,12 @@ public class DatabaseHelper {
     public boolean isUserNew(long userID) {
 
         boolean userNEW = true;
-//        String query = "SELECT * FROM users WHERE userID=" + userID + ";";
         String query = "SELECT * FROM users WHERE userID = ?;";
 
         try {
             PreparedStatement prep = con.prepareStatement(query);
             prep.setLong(1, userID);
             rs = prep.executeQuery();
-//            stmt = con.createStatement();
-//            rs = stmt.executeQuery(query);
 
             if (rs.next()) {
                 userNEW = false;

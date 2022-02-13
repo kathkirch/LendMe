@@ -96,7 +96,8 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
     
      
     /**
-     *
+     * method to refresh the table with the elements from given list
+     * 
      * @param list refresh the table with objects from the given list 
      *  of RentalList-Objects
      */

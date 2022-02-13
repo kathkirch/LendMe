@@ -9,7 +9,9 @@ import Project_LendMe.Rentals;
 import java.util.Comparator;
 
 /**
- *
+ * Comparator-Class used for sorting 
+ * methods called in archive-table and rental-list-table 
+ * 
  * @author Katharina
  */
 public class RentalAdminIDComparator implements Comparator<Rentals>{

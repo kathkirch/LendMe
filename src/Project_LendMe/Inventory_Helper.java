@@ -1,14 +1,9 @@
 package Project_LendMe;
 
-import Comparators.InventoryAcqDateComparator;
-import Comparators.InventoryAcqValueComparator;
 import Comparators.InventoryAdminIdComparator;
-import Comparators.InventoryLocationComparator;
 import Comparators.InventoryManufacturerComparator;
 import Comparators.InventoryNumberComparator;
 import Comparators.InventoryProductnameComparator;
-import Comparators.InventoryStatusComparator;
-import Comparators.InventoryUserIDComparator;
 import com.raven.datechooser.DateChooser;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -130,6 +125,7 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
      * get selected Button, assign a number depending on which Button is selected
      * since there is a default selection and all Buttons are in a Group, there
      * is no way that no button can be selected
+     * @return the int for the selected button
     */
     public int getSelectedFilterButton() {
         if(equals.isSelected())
@@ -187,7 +183,7 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                 int filterByColumn = box.getSelectedIndex();
                 String filterByUserInput = filterTF.getText();
                 //queries DB with Filter Options desired from the user
-                // passes Column to filter By, Value to Filter by, Option to Filter By (<, >, =)
+                //passes Column to filter By, Value to Filter by, Option to Filter By (<, >, =)
                 filteredList = dbH.filterInventory(filterByColumn, filterByUserInput,
                         getSelectedFilterButton()); // filtered list befuellen
                 if (filteredList.size() > 0) {
@@ -292,6 +288,18 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
     /**
      * Listener for Button 'Bearbeiten' in Inventory-Table fills String[] with
      * values of selected Row
+     * @param invUpdate_panel pass element to constructor
+     * @param invNo pass element to constructor 
+     * @param manu pass element to constructor
+     * @param pn pass element to constructor
+     * @param notes pass element to constructor
+     * @param loc pass element to constructor
+     * @param adminID pass element to constructor
+     * @param acqV pass element to constructor
+     * @param acqD pass element to constructor
+     * @param imei pass element to constructor
+     * @param save pass element to constructor
+     * @param cancel pass element to constructor
      */
     public void update(JPanel invUpdate_panel, JTextField invNo, JTextField manu,
             JTextField pn, JTextArea notes, JTextField loc, JTextField imei, 
@@ -362,7 +370,19 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
 
     /**
      * Displays additional Information for the row the user Double-Clicks on
-     * @params Pass GUI-Elements to constructor 
+     * @param invInfo_panel pass element to constructor
+     * @param invNo pass element to constructor
+     * @param productname pass element to constructor
+     * @param manufacturer pass element to constructor
+     * @param imei pass element to constructor
+     * @param location pass element to constructor
+     * @param acqValue pass element to constructor
+     * @param acqDate pass element to constructor
+     * @param notes pass element to constructor
+     * @param adminId pass element to constructor
+     * @param adminName pass element to constructor
+     * @param back pass element to constructor
+     *
      */
     public void rowDoubleClick(JPanel invInfo_panel, JTextField invNo, JTextField productname,
             JTextField manufacturer, JTextField imei, JTextField location,

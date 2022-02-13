@@ -104,10 +104,12 @@ abstract public class MyTableHelper {
     
        
     /**
-    *
+    * method to init the data from given List into a double object Array
+    * 
     * @param rentals as a List of Rentals-Objects 
     * needed to put items within the list 
     * into a double object array to display for each Object it's attributes
+    * 
     * @return Object [][]
     */
     public Object [][] initRentals (List <Rentals> rentals){
@@ -126,10 +128,11 @@ abstract public class MyTableHelper {
     
     
      /**
-     *
+     * method to init the data from given List into a double object Array
+     * 
      * @param rentallist as a List of RentalList-Objects 
-     *  needed to put items within the list 
-     *  into a double object array to display for each Object it's attributes
+     * needed to put items within the list 
+     * into a double object array to display for each Object it's attributes
      * @return Object [][]
      */
     public Object [][] initRentalList (List <RentalList> rentallist){
@@ -148,9 +151,10 @@ abstract public class MyTableHelper {
     }
     
     /**
+     * method to init the data from given List into a double object Array
      * 
-     * @param devicelist
-     * @return 
+     * @param devicelist as a List of Devices-object
+     * @return Object [] []
      */
     public Object [][] initDeviceList (List <Devices> devicelist) {
         

@@ -77,10 +77,4 @@ public class Users {
         this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return "Users{" + "userID=" + userID + ", userFirstName=" + userFirstName + ", userLastName=" + userLastName + ", userEmail=" + userEmail + ", userPhone=" + userPhone + ", year=" + year + '}';
-    }
-
-   
 }

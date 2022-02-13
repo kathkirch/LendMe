@@ -633,10 +633,11 @@ public final class Rental_Helper {
     
     
     /**
-     *
+     * method to get a Object List from the given List depending on given category
+     * 
      * @param list List of Devices Objects needed to create a object List 
      * @param itemCategory needed as a String to create the Objects List with the given itemCategory
-     * @return a Object List for created with the given parameters
+     * @return a Object List with the given parameters
      */
     public List <Object> makeListForCategory (List <Devices> list, 
                                             String itemCategory) {

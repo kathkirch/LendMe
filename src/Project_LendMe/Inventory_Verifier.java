@@ -63,7 +63,7 @@ public class Inventory_Verifier extends InputVerifier {
 
     /**
      * implement Logic for verification of user-input
-     * if user input is incorrect => display Error-Message, do not allow Focus
+     * if user input is incorrect - display Error-Message, do not allow Focus
      * lost from Textfield
      * @param input which Component is being checked
      * @return if user-input was correct or not

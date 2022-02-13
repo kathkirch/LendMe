@@ -226,7 +226,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     
     /**
      * method to initialize a doubleClick-MouseListener 
-     * gets the selected row, opens a new panel --> info_archive_panel
+     * gets the selected row, opens a new panel the info_archive_panel
      * to show more information about the selected rental/row
      * 
      * @param info_archive_panel to have access to this panel 

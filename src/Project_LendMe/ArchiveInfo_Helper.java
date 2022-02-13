@@ -15,7 +15,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- *
+ * Helper Class for ArchiveInfo_Panel 
+ * 
  * @author Katharina
  */
 public class ArchiveInfo_Helper {

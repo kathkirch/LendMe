@@ -26,7 +26,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * table in the database; variables are accessible via getter and setter methods
  * 
  *
- * @author Katharina, bstra
+ * @author Katharina, bstra,  anja, linda
  */
 
 public class GUI extends javax.swing.JFrame {
@@ -2194,6 +2194,8 @@ public class GUI extends javax.swing.JFrame {
     private void inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryActionPerformed
 
         switchPanel(inventory_panel);
+        
+        //removeListener(inventory_panel);
         
         //instantiate Inventory Helper
         devHelper = new Inventory_Helper(inventory_table1,
