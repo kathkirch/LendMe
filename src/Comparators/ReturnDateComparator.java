@@ -9,7 +9,9 @@ import Project_LendMe.Rentals;
 import java.util.Comparator;
 
 /**
- *
+ * Comparator-Class used for sorting 
+ * methods called in archive-table  
+ * 
  * @author Katharina
  */
 public class ReturnDateComparator implements Comparator<Rentals>{
@@ -23,6 +25,5 @@ public class ReturnDateComparator implements Comparator<Rentals>{
     public Comparator<Rentals> reversed() {
         return Comparator.super.reversed(); 
     }
-    
     
 }   

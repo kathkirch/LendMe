@@ -120,12 +120,17 @@ public class Devices implements Rentable {
     }
 }   
 
+/**
+ * interface Rentable to declare a device is rentable
+ * and it has the attributes 1 for lent and 0 for not_lent
+ * 
+ * @author Katharina
+ */
 interface Rentable {
 
-    static final int lent = 1;
+    static final int LENT = 1;
 
-    static final int not_lent = 0;
-    
+    static final int NOT_LENT = 0;
 }
     
 

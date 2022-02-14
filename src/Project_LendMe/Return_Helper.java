@@ -16,7 +16,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -72,7 +71,10 @@ public class Return_Helper {
     }
     
     
-    // method to make all the JTextFields in this panel not Editable
+    /**
+     * method to iterate through the panel and make all the textfields in 
+     * this panel not editable
+     */
     public void notEditable () {
         
         Component [] comps = panel.getComponents();
@@ -83,7 +85,11 @@ public class Return_Helper {
         }
     }
     
-    // method to fill the JTextFields with the values of device that is returned
+    /**
+     * method to fill the JTextFields with the values of device that is returned
+     * method calls methods getUserByID() to get the users data values
+     * also sets notes for the device
+     */
     public void showData (){
         
         String notes = null;
@@ -116,7 +122,7 @@ public class Return_Helper {
     
     
     /**
-     *initiates a listener for the "Speichern" button 
+     *initialize a listener for the "Speichern" button 
      *calls the createNewReturn method
      */
     public void saveReturn () {
@@ -131,7 +137,7 @@ public class Return_Helper {
    
 
     /**
-     *initialize a listener for the "Abbrechen" Button 
+     * initialize a listener for the "Abbrechen" Button 
      * to go back to the start/home-screen
      */
     public void cancel () {
@@ -144,7 +150,7 @@ public class Return_Helper {
     }
     
     /**
-     * method to load and pop up the home_panel 
+     * method to reload and pop up the home_panel 
      */
     public void backToStart () {
         
@@ -156,8 +162,9 @@ public class Return_Helper {
     }
     
     /**
-     *method to save a new return
-     *calls the 'updateRentals'-method and the 'setDevice_NotLent'-method
+     * method to store a new return in the database
+     * calls the updateRentals() and the setDevice_NotLent() to query the db
+     * 
      */
     public void createNewReturn (){
         

@@ -14,11 +14,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- *
+ * Handles Inventory Info Panel, displaying additional Information to the
+ * selected Device
  * @author Katharina, bstra
  */
 public class InventoryInfo_Helper {
     
+    //declaring GUI Elements
     private JPanel panel;
     private JLayeredPane lp;
     private JPanel inventory_panel;
@@ -34,8 +36,9 @@ public class InventoryInfo_Helper {
     private JTextField adminName;
     private JButton back;
     
+    // which Device to display; which Admin-Name to display
     private int adminIDtoCheck;
-    private long invNoToCheck;
+    private String invNoToCheck;
     
     private static final DatabaseHelper dbh = new DatabaseHelper();
 
@@ -44,7 +47,7 @@ public class InventoryInfo_Helper {
             JTextField imei, JTextField location, JTextField acqValue, 
             JTextField acqDate, JTextArea notes, JTextField adminId, 
             JTextField adminName, JButton back, int adminIDtoCheck, 
-            long invNoToCheck) {
+            String invNoToCheck) {
         
         this.panel = panel;
         this.lp = lp;
@@ -65,7 +68,7 @@ public class InventoryInfo_Helper {
     }
     
     /**
-     *cycle through all Components, set editable on JTextFields and JTextArea to false
+     *cycle through all Components, don't allow edits
      */
     public void notEditable () {
         
@@ -74,6 +77,9 @@ public class InventoryInfo_Helper {
             if (field instanceof JTextField) {
                 ((JTextField) field).setEditable(false);
             } 
+            if (field instanceof JTextArea) {
+                ((JTextArea) field).setEditable(false);
+            }
         }
     }
     
@@ -82,7 +88,7 @@ public class InventoryInfo_Helper {
      * @param adminIDtoCheck get selected adminID to query DB
      * @param invNoToCheck  get selected inventoryNumber to query DB
      */
-    public void getValuesToCheck (int adminIDtoCheck, long invNoToCheck) {
+    public void getValuesToCheck (int adminIDtoCheck, String invNoToCheck) {
         this.adminIDtoCheck = adminIDtoCheck;
         this.invNoToCheck = invNoToCheck;
     }

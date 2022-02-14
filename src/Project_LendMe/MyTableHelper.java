@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * 
  * @author Katharina, bstra
  */
-abstract public class MyTableHelper {
+abstract public class MyTableHelper implements FilterSortModel{
   
     JTable table;
     JScrollPane js;
@@ -36,9 +36,10 @@ abstract public class MyTableHelper {
     static List <Rentals> allRentals;
     static List <Devices> allDevices;
     
-    String [] columns;
+    public String [] columns;
     
-    Object [][] data;
+    public Object [][] data;
+    
     public DefaultTableModel model;
 
     public MyTableHelper(JTable table, JScrollPane js, JComboBox box, 
@@ -57,8 +58,6 @@ abstract public class MyTableHelper {
         ascRadio.setSelected(false);
         descRadio.setSelected(false);
         filterTF.setText("");
-
-        
     }
     
     /**
@@ -83,7 +82,6 @@ abstract public class MyTableHelper {
         }
         
         model = new DefaultTableModel(data, columns);
-        
         table.setModel(model);
         table.setRowHeight(25);
         
@@ -104,10 +102,12 @@ abstract public class MyTableHelper {
     
        
     /**
-    *
+    * method to init the data from given List into a double object Array
+    * 
     * @param rentals as a List of Rentals-Objects 
     * needed to put items within the list 
     * into a double object array to display for each Object it's attributes
+    * 
     * @return Object [][]
     */
     public Object [][] initRentals (List <Rentals> rentals){
@@ -126,10 +126,11 @@ abstract public class MyTableHelper {
     
     
      /**
-     *
+     * method to init the data from given List into a double object Array
+     * 
      * @param rentallist as a List of RentalList-Objects 
-     *  needed to put items within the list 
-     *  into a double object array to display for each Object it's attributes
+     * needed to put items within the list 
+     * into a double object array to display for each Object it's attributes
      * @return Object [][]
      */
     public Object [][] initRentalList (List <RentalList> rentallist){
@@ -148,9 +149,10 @@ abstract public class MyTableHelper {
     }
     
     /**
+     * method to init the data from given List into a double object Array
      * 
-     * @param devicelist
-     * @return 
+     * @param devicelist as a List of Devices-object
+     * @return Object [] []
      */
     public Object [][] initDeviceList (List <Devices> devicelist) {
         
@@ -161,13 +163,6 @@ abstract public class MyTableHelper {
             deviceData[i] = new Object [] {d.getInventoryNumber(),
                                            d.getManufacturer(),
                                            d.getProductName(),
-                                           d.getNotes(),
-                                           d.getLocation(),
-                                           d.getStatus(),
-                                           d.getImei(),
-                                           d.getUsers_userID(),
-                                           d.getAquisitionValue(),
-                                           d.getAquistionDate(),
                                            d.getAdminID()}; 
             
            i = i + 1;  

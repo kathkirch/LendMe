@@ -9,6 +9,9 @@ import Project_LendMe.Rentals;
 import java.util.Comparator;
 
 /**
+ * Comparator-Class used for sorting 
+ * methods called in archive-table 
+ * 
  *
  * @author Katharina
  */

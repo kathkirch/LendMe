@@ -1,14 +1,10 @@
 package Project_LendMe;
 
-import Comparators.InventoryAcqDateComparator;
-import Comparators.InventoryAcqValueComparator;
 import Comparators.InventoryAdminIdComparator;
-import Comparators.InventoryLocationComparator;
 import Comparators.InventoryManufacturerComparator;
 import Comparators.InventoryNumberComparator;
 import Comparators.InventoryProductnameComparator;
-import Comparators.InventoryStatusComparator;
-import Comparators.InventoryUserIDComparator;
+import com.raven.datechooser.DateChooser;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -30,7 +27,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  * Helper class handling logic connected to Inventory Table
@@ -42,32 +38,38 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
     private final DatabaseHelper dbH = new DatabaseHelper();
     private final JButton updateRow;
     private final JButton deleteRow;
-    private static String[] selectedRow;
-    private static Boolean openUpdatePanel;
+    private final JButton insertDevice;
+    private final JRadioButton equals;
+    private final JRadioButton lower;
+    private final JRadioButton larger;
 
     private JLayeredPane lp;
     private JPanel inventory_panel;
-
-    private static List<Devices> filteredList = null; //static List damit man von dieser Klasse aus immer zugreifen kann
+    private ButtonGroup pg = new ButtonGroup();
+    private List<Devices> filteredList = null;
 
     public Inventory_Helper(JTable table, JScrollPane js, JComboBox box,
             JRadioButton ascRadio, JRadioButton descRadio, JTextField filterTF,
             JButton filterBT, JButton clearBT, JButton updateRow, JButton deleteRow,
-            JLayeredPane lp, JPanel inventory_panel) {
+            JButton insertDevice, JLayeredPane lp, JPanel inventory_panel,
+            JRadioButton equals, JRadioButton lower, JRadioButton larger) {
         super(table, js, box, ascRadio, descRadio, filterTF, filterBT, clearBT);
 
         this.updateRow = updateRow;
         this.deleteRow = deleteRow;
+        this.insertDevice = insertDevice;
         this.lp = lp;
         this.inventory_panel = inventory_panel;
         // set up Table Data
-        this.allDevices = dbH.getAllDevices2(); //changed to getAllDevices2 (Methode ohne administrators has devices table)
+        this.allDevices = dbH.getAllDevices2();
         // set up Column Names
         this.columns = new String[]{"InvNr.", "Hersteller",
-            "Produktname", "Notizen",
-            "Ort", "Status", "IMEI", "Verliehen an",
-            "Ansch.-Wert", "Ansch.-Datum",
-            "Admin"};
+            "Produktname", "Admin"};
+        //set up additional Filter options
+        this.larger = larger;
+        this.lower = lower;
+        this.equals = equals;
+
     }
 
     //Override initDeviceList setting up correct data
@@ -89,15 +91,6 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(1).setPreferredWidth(100);
         colModel.getColumn(2).setPreferredWidth(125);
         colModel.getColumn(3).setPreferredWidth(50);
-        colModel.getColumn(4).setPreferredWidth(75);
-        colModel.getColumn(5).setPreferredWidth(50);
-        colModel.getColumn(6).setPreferredWidth(70);
-        colModel.getColumn(7).setPreferredWidth(80);
-        colModel.getColumn(8).setPreferredWidth(125);
-        colModel.getColumn(9).setPreferredWidth(125);
-        colModel.getColumn(10).setPreferredWidth(80);
-
-        table.setEnabled(true);
 
     }
 
@@ -107,9 +100,40 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
     @Override
     public void fillBox() {
         String[] sortableBy = new String[]{"Inventarnummer", "Hersteller",
-            "Produktname", "Ort", "Status", "Verliehen an",
-            "Anschaffungswert", "Anschaffungsdat.", "Admin"};
+            "Produktname", "Admin"};
         box.setModel(new DefaultComboBoxModel<>(sortableBy));
+        // "Ort", "Status", "Verliehen an", "Anschaffungswert", "Anschaffungsdat.",
+    }
+
+    /**
+     * initialize Filter Buttons add them to ButtonGroup
+     */
+    public void setFilterButtons() {
+
+        pg.add(equals);
+        pg.add(lower);
+        pg.add(larger);
+
+        //default: = option selected
+        equals.setSelected(true);
+
+    }
+
+    /**
+     * get selected Button, assign a number depending on which Button is
+     * selected since there is a default selection and all Buttons are in a
+     * Group, there is no way that no button can be selected
+     *
+     * @return the int for the selected button
+     */
+    public int getSelectedFilterButton() {
+        if (equals.isSelected()) {
+            return 1;
+        } else if (lower.isSelected()) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 
     /**
@@ -131,13 +155,6 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(1).setPreferredWidth(100);
         colModel.getColumn(2).setPreferredWidth(100);
         colModel.getColumn(3).setPreferredWidth(50);
-        colModel.getColumn(4).setPreferredWidth(50);
-        colModel.getColumn(5).setPreferredWidth(50);
-        colModel.getColumn(6).setPreferredWidth(70);
-        colModel.getColumn(7).setPreferredWidth(80);
-        colModel.getColumn(8).setPreferredWidth(125);
-        colModel.getColumn(9).setPreferredWidth(125);
-        colModel.getColumn(10).setPreferredWidth(125);
 
         table.setRowHeight(25);
 
@@ -148,10 +165,6 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
         table.setEnabled(true);
         js.setVisible(true);
 
-        //allow sorting by clicking on column names
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>();
-        table.setRowSorter(sorter);
-        sorter.setModel(model);
     }
 
     /**
@@ -164,7 +177,10 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
             public void actionPerformed(ActionEvent e) {
                 int filterByColumn = box.getSelectedIndex();
                 String filterByUserInput = filterTF.getText();
-                filteredList = dbH.filterInventory(filterByColumn, filterByUserInput); // filtered list befuellen
+                //queries DB with Filter Options desired from the user
+                //passes Column to filter By, Value to Filter by, Option to Filter By (<, >, =)
+                filteredList = dbH.filterInventory(filterByColumn, filterByUserInput,
+                        getSelectedFilterButton()); // filtered list befuellen
                 if (filteredList.size() > 0) {
                     refreshDevicesTable(filteredList);
                 } else {
@@ -204,21 +220,6 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                             Collections.sort(allDevices, new InventoryProductnameComparator());
                             break;
                         case 3:
-                            Collections.sort(allDevices, new InventoryLocationComparator());
-                            break;
-                        case 4:
-                            Collections.sort(allDevices, new InventoryStatusComparator());
-                            break;
-                        case 5:
-                            Collections.sort(allDevices, new InventoryUserIDComparator());
-                            break;
-                        case 6:
-                            Collections.sort(allDevices, new InventoryAcqValueComparator());
-                            break;
-                        case 7:
-                            Collections.sort(allDevices, new InventoryAcqDateComparator());
-                            break;
-                        case 8:
                             Collections.sort(allDevices, new InventoryAdminIdComparator());
                             break;
                     }
@@ -252,21 +253,6 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                             Collections.sort(allDevices, new InventoryProductnameComparator().reversed());
                             break;
                         case 3:
-                            Collections.sort(allDevices, new InventoryLocationComparator().reversed());
-                            break;
-                        case 4:
-                            Collections.sort(allDevices, new InventoryStatusComparator().reversed());
-                            break;
-                        case 5:
-                            Collections.sort(allDevices, new InventoryUserIDComparator().reversed());
-                            break;
-                        case 6:
-                            Collections.sort(allDevices, new InventoryAcqValueComparator().reversed());
-                            break;
-                        case 7:
-                            Collections.sort(allDevices, new InventoryAcqDateComparator().reversed());
-                            break;
-                        case 8:
                             Collections.sort(allDevices, new InventoryAdminIdComparator().reversed());
                             break;
                     }
@@ -288,47 +274,122 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                 ascRadio.setSelected(false);
                 descRadio.setSelected(false);
                 filterTF.setText("");
-                List<Devices> devs = dbH.getAllDevices2(); //changed to getAllDevices2 (Methode ohne administrators has devices table)
+                List<Devices> devs = dbH.getAllDevices2();
                 refreshDevicesTable(devs);
             }
         });
     }
 
     /**
-     * Listener for Button 'Bearbeiten' in Inventory-Table fills String[] with
+     * Listener for Button 'Bearbeiten' in Inventory-Table; fills String[] with
      * values of selected Row
+     *
+     * @param invUpdate_panel pass element to constructor
+     * @param invNo pass element to constructor
+     * @param manu pass element to constructor
+     * @param pn pass element to constructor
+     * @param notes pass element to constructor
+     * @param loc pass element to constructor
+     * @param adminID pass element to constructor
+     * @param acqV pass element to constructor
+     * @param acqD pass element to constructor
+     * @param imei pass element to constructor
+     * @param save pass element to constructor
+     * @param cancel pass element to constructor
      */
-    public void update() {
+    public void update(JPanel invUpdate_panel, JTextField invNo, JTextField manu,
+            JTextField pn, JTextArea notes, JTextField loc, JTextField imei,
+            JTextField acqV, DateChooser acqD, JComboBox adminID,
+            JButton save, JButton cancel) {
+
         updateRow.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                selectedRow = new String[11];
-
+                int indexRow = table.getSelectedRow();
                 try {
-                    int indexRow = table.getSelectedRow();
+                    String invNoToCheck = table.getValueAt(indexRow, 0).toString();
 
-                    for (int i = 0; i <= 10; i++) {
+                    InventoryUpdate_Helper invUpd_Helper = new InventoryUpdate_Helper(
+                            invNoToCheck, invNo, manu, pn, notes, loc, imei, acqV, acqD, adminID,
+                            save, cancel);
 
-                        if (table.getValueAt(indexRow, i) == null) {
-                            selectedRow[i] = "";
-                        } else {
-                            selectedRow[i] = table.getValueAt(indexRow, i).toString();
-                        }
+                    lp.removeAll();
+                    lp.add(invUpdate_panel);
+                    lp.repaint();
+                    lp.revalidate();
 
-                        //Helper Boolean: tells Click-Listener in GUI to initialize Inventory-Update-Panel
-                        openUpdatePanel = true;
-                    }
-                    //No Row Selected
-                } catch (IndexOutOfBoundsException ex) {
-                    JOptionPane.showMessageDialog(null, //no owner frame
-                            "Bitte eine Zeile auswählen", //text to display
-                            "Error", //title
-                            JOptionPane.WARNING_MESSAGE);
-                    openUpdatePanel = false;
+                    //remove Listeners to avoid multiple Listeners at once
+                    GUI.removeListener(invUpdate_panel);
+
+                    invUpd_Helper.fillTFs();
+                    invUpd_Helper.setKeyListener();
+                    invUpd_Helper.setInputVerifiers();
+                    invUpd_Helper.checkForUpdate();
+                    invUpd_Helper.resetTfs();
+
+                    /*
+                    If Update Button is clicked when no Device is selected, the method
+                    throws an ArrayIndexOutofBoundsException, which is handled here.
+                   */
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    System.out.println(ex);
                 }
 
             }
+        });
+
+    }
+
+    /**
+     * Handles click on 'Neues Device anlegen'
+     * @param invInsert_panel pass element to constructor
+     * @param insertPN pass element to constructor
+     * @param insertManu pass element to constructor
+     * @param insertInvNo pass element to constructor
+     * @param insertImei pass element to constructor
+     * @param insertLoc pass element to constructor
+     * @param insertNotes pass element to constructor
+     * @param insertAdmin pass element to constructor
+     * @param insertAV pass element to constructor
+     * @param insertAD pass element to constructor
+     * @param insertSave pass element to constructor
+     * @param insertClear pass element to constructor
+     * 
+     */
+    public void insert(JPanel invInsert_panel, JTextField insertPN, JTextField insertManu,
+            JTextField insertInvNo, JTextField insertImei, JTextField insertLoc,
+            JTextArea insertNotes, JComboBox insertAdmin, JTextField insertAV,
+            DateChooser insertAD, JButton insertSave, JButton insertClear) {
+
+        //set ClickListener
+        insertDevice.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                InventoryNew_Helper invNew = new InventoryNew_Helper(insertPN,
+                        insertManu, insertInvNo, insertImei, insertLoc, insertNotes,
+                        insertAdmin, insertAV, insertAD, insertSave, insertClear);
+
+                //repaint Panel
+                lp.removeAll();
+                lp.add(invInsert_panel);
+                lp.repaint();
+                lp.revalidate();
+
+                //remove Listeners
+                GUI.removeListener(invInsert_panel);
+
+                // set up input Verifiers for Textfields          
+                invNew.setInputVerifiers();
+                //fill Admin-Combobox with values from DB
+                invNew.fillCbAdmin();
+                //set up Click Listeners
+                invNew.saveClickListener();
+                invNew.clearClickListener();
+
+            }
+
         });
     }
 
@@ -339,8 +400,6 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
         deleteRow.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                selectedRow = new String[11];
                 int indexRow = table.getSelectedRow();
 
                 String invNo = table.getValueAt(indexRow, 0).toString();
@@ -366,64 +425,76 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
                 //query for new Device-List, refresh table
                 List<Devices> devs = dbH.getAllDevices2();
                 refreshDevicesTable(devs);
-            }
-        });
 
+            }
+
+        });
     }
 
+    /**
+     * Displays additional Information for the row the user Double-Clicks on
+     *
+     * @param invInfo_panel pass element to constructor
+     * @param invNo pass element to constructor
+     * @param productname pass element to constructor
+     * @param manufacturer pass element to constructor
+     * @param imei pass element to constructor
+     * @param location pass element to constructor
+     * @param acqValue pass element to constructor
+     * @param acqDate pass element to constructor
+     * @param notes pass element to constructor
+     * @param adminId pass element to constructor
+     * @param adminName pass element to constructor
+     * @param back pass element to constructor
+     *
+     */
     public void rowDoubleClick(JPanel invInfo_panel, JTextField invNo, JTextField productname,
             JTextField manufacturer, JTextField imei, JTextField location,
             JTextField acqValue, JTextField acqDate, JTextArea notes,
             JTextField adminId, JTextField adminName, JButton back) {
 
-        table.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent me) {
-                JTable table = (JTable) me.getSource();
-                Point point = me.getPoint();
-                int row = table.rowAtPoint(point);
+        int i = table.getMouseListeners().length;
+        
+        if (i <= 2 && i < 4 ){
+        
+            //add the double-click Listener
+            this.table.addMouseListener(new MouseAdapter() {
+                public void mousePressed(MouseEvent me) {
+                    DefaultTableModel actual_model = (DefaultTableModel) table.getModel();
+                    // on which table in which row did the user click?
+                    table = (JTable) me.getSource();
+                    Point point = me.getPoint();
+                    int row = table.rowAtPoint(point);
 
-                if (me.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    int index = row;
+                    if (me.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                        int index = row;
 
-                    long invNoToCheck = (long) model.getValueAt(index, 0);
-                    int adminID = (int) model.getValueAt(index, 10);
+                        String invNoToCheck = String.valueOf(actual_model.getValueAt(index, 0));
+                        int adminID = (int) actual_model.getValueAt(index, 3);
 
-                    lp.removeAll();
-                    lp.add(invInfo_panel);
-                    lp.repaint();
-                    lp.revalidate();
+                        //set up Information-Panel
+                        lp.removeAll();
+                        lp.add(invInfo_panel);
+                        lp.repaint();
+                        lp.revalidate();
 
-                    GUI.removeListener(invInfo_panel);
+                        //remove Listeners to avoid multiple Listeners
+                        GUI.removeListener(invInfo_panel);
 
-                    InventoryInfo_Helper invInfo = new InventoryInfo_Helper(invInfo_panel,
-                            lp, inventory_panel, invNo, productname, manufacturer, imei, location,
-                            acqValue, acqDate, notes, adminId, adminName, back, adminID, invNoToCheck);
+                        InventoryInfo_Helper invInfo = new InventoryInfo_Helper(invInfo_panel,
+                                lp, inventory_panel, invNo, productname, manufacturer, imei, location,
+                                acqValue, acqDate, notes, adminId, adminName, back, adminID, invNoToCheck);
 
-                    invInfo.notEditable();
-                    invInfo.showData();
-                    invInfo.back();
+                        invInfo.notEditable();
+                        invInfo.showData();
+                        invInfo.back();
+
+                    }
 
                 }
 
-            }
-
-        });
-    }
-
-    /**
-     *
-     * @return String [] filled with Data of selected Row in Inventory-Table
-     */
-    public static String[] getSelectedRow() {
-        return selectedRow;
-    }
-
-    /**
-     *
-     * @return helper boolean to check if a row was selected
-     */
-    public static Boolean getOpenUpdatePanel() {
-        return openUpdatePanel;
+            });
+        }
     }
 
 }

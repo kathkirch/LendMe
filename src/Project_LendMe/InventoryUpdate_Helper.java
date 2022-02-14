@@ -6,6 +6,8 @@ package Project_LendMe;
 
 import com.raven.datechooser.DateChooser;
 import com.raven.datechooser.SelectedDate;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
@@ -31,6 +33,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  */
 public class InventoryUpdate_Helper {
 
+    private String invNoToCheck;
     private JTextField inventoryNumber;
     private JTextField manufacturer;
     private JTextField productname;
@@ -42,18 +45,18 @@ public class InventoryUpdate_Helper {
     private JComboBox administrator;
     private JButton save;
     private JButton cancel;
+    private String[] blub = new String[8];
 
     //new DatabaseHelper instance to access methods
     private final DatabaseHelper dbh = new DatabaseHelper();
 
-    //gets values from selected row in Inventory-Table when Button "Bearbeiten" clicked
-    //used to compare potentially updated values from Update-Device-Panel with existing
-    //entries in DB
-    //used to populate Textfields in Update-Device-Panel
-    String[] blub = Inventory_Helper.getSelectedRow();
-
     //Constructor
-    public InventoryUpdate_Helper(JTextField inventoryNumber, JTextField manufacturer, JTextField productname, JTextArea notes, JTextField location, JTextField imei, JTextField acquisitionValue, DateChooser acquisitionDate, JComboBox administrator, JButton save, JButton cancel) {
+    public InventoryUpdate_Helper(String invNoToCheck, JTextField inventoryNumber,
+            JTextField manufacturer, JTextField productname, JTextArea notes,
+            JTextField location, JTextField imei, JTextField acquisitionValue,
+            DateChooser acquisitionDate, JComboBox administrator,
+            JButton save, JButton cancel) {
+        this.invNoToCheck = invNoToCheck;
         this.inventoryNumber = inventoryNumber;
         this.manufacturer = manufacturer;
         this.productname = productname;
@@ -68,42 +71,59 @@ public class InventoryUpdate_Helper {
     }
 
     /**
+     * initializes String Array with values from DB query; queries DB with
+     * inventory Number of the Row the user had selected
+     */
+    public void initializeArray() {
+        blub = dbh.getDeviceByID2(invNoToCheck);
+    }
+
+    /**
      * Populates TextFields with selected Values
      */
-    void fillTFs() {
-
+    public void fillTFs() {
+        
+        initializeArray();
         //set Textfields
         inventoryNumber.setText(blub[0]);
         manufacturer.setText(blub[1]);
         productname.setText(blub[2]);
         notes.setText(blub[3]);
         location.setText(blub[4]);
-        imei.setText(blub[6]);
-        acquisitionValue.setText(blub[8]);
+        imei.setText(blub[5]);
+        acquisitionValue.setText(blub[6]);
 
         //set values for administrator Combobox
         administrator.setModel(new DefaultComboBoxModel<>(dbh.getAdminIDs().toArray((new String[0]))));
         administrator.setEditable(false);
-        administrator.setSelectedItem(blub[10]);
+        administrator.setSelectedItem(blub[8]);
         AutoCompleteDecorator.decorate(administrator);
 
         //set Acquisition Date in Datechooser
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(blub[9]);
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(blub[7]);
             acquisitionDate.setSelectedDate(date);
 
         } catch (ParseException ex) {
             Logger.getLogger(InventoryUpdate_Helper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    /**
+     * set up Key Listners for IMEI and Inventory Number Textfields
+     * if user enters a new Imei/InvNo which is invalid, an error
+     * message is displayed and focus is not allowed to be lost from the Textfield
+     * this method allows the user to press ESC and restore the original value
+     * in order to avoid being stuck in the textfield with an invalid value
+     */
+    public void setKeyListener() {
+
         // set up Key Listener to allow user to restore initial Value for
         // Inventory Number and IMEI by pressing ESC
-        KeyListener l = new KeyListener() {
+        KeyListener kliInvNo = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    inventoryNumber.setText(blub[0]);
-                }
+
             }
 
             @Override
@@ -115,16 +135,39 @@ public class InventoryUpdate_Helper {
 
             @Override
             public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    inventoryNumber.setText(blub[0]);
+                }
+            }
 
+        };
+
+        KeyListener kliImei = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    imei.setText(blub[0]);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    imei.setText(blub[0]);
+                }
             }
 
         };
 
         //check if KeyListener is already active before initializing
-        if (inventoryNumber.getKeyListeners() == null) {
-            inventoryNumber.addKeyListener(l);
-            imei.addKeyListener(l);
-        }
+        inventoryNumber.addKeyListener(kliInvNo);
+        imei.addKeyListener(kliImei);
+
     }
 
     /**
@@ -136,23 +179,26 @@ public class InventoryUpdate_Helper {
 
         // query DB for all existing Inventory Numbers and Imeis
         // to ascertain that newly entered value is UNIQUE
-        // remove value to be updated
+        // remove existing value from the List, to avoid SQLException
         ArrayList<String> invNos = dbh.allInventoryNumbers();
-        invNos.remove(blub[0]);
+        invNos.remove(invNoToCheck);
         ArrayList<String> imeis = dbh.allImeiNumbers();
-        if (blub[6].isBlank()) {
-            imeis.remove(blub[6]);
+        if (blub[5] != null) {
+            if (!blub[5].isBlank()) {
+                imeis.remove(blub[5]);
+            }
         }
 
-        //instantiate Inventory Input Verifier    
+        //instantiate Inventory Input Verifier
         Inventory_Verifier iv = new Inventory_Verifier(productname, manufacturer,
                 inventoryNumber, imei, location, administrator, acquisitionValue,
                 invNos, imeis);
 
         //set Input Verifiers
-        if (acquisitionValue.getText().isBlank()) 
+        if (acquisitionValue.getText().isBlank()) {
             acquisitionValue.setText("0.0");
-        
+        }
+
         inventoryNumber.setInputVerifier(iv);
         manufacturer.setInputVerifier(iv);
         productname.setInputVerifier(iv);
@@ -163,134 +209,158 @@ public class InventoryUpdate_Helper {
 
     /**
      * Parses through TextFields and compares new values to existing values
+     * builds String and queries DB with updated Value(s)
      */
-    void checkForUpdate() {
+    public void checkForUpdate() {
 
-        //helper booleans to determine which query to run
-        boolean updateBefore = false;
+        save.addActionListener(new ActionListener() {
 
-        //save original InventoryNumber
-        String invNoToUpdate = blub[0];
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //helper booleans to determine which query to run
+                boolean updateBefore = false;
 
-        //helper Strings
-        String queryToPass = "";
-        final String separator = ", ";
+                //save original InventoryNumber
+                //String invNoToUpdate = blub[0];
+                //helper Strings
+                String queryToPass = "";
+                final String separator = ", ";
 
+                /* following if-checks:
+                check if value was changed by comparing current value with passed value
+                updates boolean to trigger corresponding SQL-query
+                updates query to pass to SQL-query
+                 */
+                if (!inventoryNumber.getText().equals(invNoToCheck)) {
+                    updateBefore = true;
+                    queryToPass = "inventoryNumber = '" + inventoryNumber.getText() + "'";
+                }
+                /*
+                starting here, additionally check if an entry before was already updated by
+                checking boolean updateBefore; if so, concatenate correct query-String
+                to pass to SQL-Update-Method
+                 */
+                if (!manufacturer.getText().equals(blub[1])) {
+                    if (updateBefore) {
+                        queryToPass = queryToPass + separator + "manufacturer = '"
+                                + manufacturer.getText() + "'";
+                    } else {
+                        queryToPass = "manufacturer = '" + manufacturer.getText() + "'";
+                        updateBefore = true;
+                    }
+                }
+                if (!productname.getText().equals(blub[2])) {
+                    if (updateBefore) {
+                        queryToPass = queryToPass + separator + "productname = '"
+                                + productname.getText() + "'";
+                    } else {
+                        queryToPass = "productname = '" + productname.getText() + "'";
+                        updateBefore = true;
+                    }
+                }
+                if (!notes.getText().equals(blub[3])) {
+                    if (updateBefore) {
+                        queryToPass = queryToPass + separator + "notes = '" + notes.getText() + "'";
+                    } else {
+                        queryToPass = "notes = '" + notes.getText() + "'";
+                        updateBefore = true;
+                    }
+                }
+                if (!location.getText().equals(blub[4])) {
+                    if (updateBefore) {
+                        queryToPass = queryToPass + separator + "location = '" + location.getText() + "'";
+                    } else {
+                        queryToPass = "location = '" + location.getText() + "'";
+                        updateBefore = true;
+                    }
+                }
 
-        /* following if-checks:
-        check if value was changed by comparing current value with passed value
-        updates boolean to trigger corresponding SQL-query
-        updates query to pass to SQL-query
-         */
-        if (!inventoryNumber.getText().equals(invNoToUpdate)) {
-            updateBefore = true;
-            queryToPass = "inventoryNumber = '" + inventoryNumber.getText() + "'";
-        }
-        /*
-        starting here, additionally check if an entry before was already updated by 
-        checking boolean updateBefore; if so, concatenate correct query-String 
-        to pass to SQL-Update-Method
-         */
-        if (!manufacturer.getText().equals(blub[1])) {
-            if (updateBefore) {
-                queryToPass = queryToPass + separator + "manufacturer = '"
-                        + manufacturer.getText() + "'";
-            } else {
-                queryToPass = "manufacturer = '" + manufacturer.getText() + "'";
-                updateBefore = true;
-            }
-        }
-        if (!productname.getText().equals(blub[2])) {
-            if (updateBefore) {
-                queryToPass = queryToPass + separator + "productname = '"
-                        + productname.getText() + "'";
-            } else {
-                queryToPass = "productname = '" + productname.getText() + "'";
-                updateBefore = true;
-            }
-        }
-        if (!notes.getText().equals(blub[3])) {
-            if (updateBefore) {
-                queryToPass = queryToPass + separator + "notes = '" + notes.getText() + "'";
-            } else {
-                queryToPass = "notes = '" + notes.getText() + "'";
-                updateBefore = true;
-            }
-        }
-        if (!location.getText().equals(blub[4])) {
-            if (updateBefore) {
-                queryToPass = queryToPass + separator + "location = '" + location.getText() + "'";
-            } else {
-                queryToPass = "location = '" + location.getText() + "'";
-                updateBefore = true;
-            }
-        }
-        if (!imei.getText().equals(blub[6])) {
-            if (updateBefore) {
-                queryToPass = queryToPass + separator + "imei = '" + imei.getText() + "'";
-            } else {
-                queryToPass = "imei = '" + imei.getText() + "'";
-                updateBefore = true;
-            }
-        }
-        
-        String acqValToCheck = acquisitionValue.getText().replaceAll("[,]", "");
-        if (!acqValToCheck.equals(blub[8])) {
-            if (updateBefore) {
-                queryToPass = queryToPass + separator + "acquisitionValue = '"
-                        + acqValToCheck + "'";
-            } else {
-                queryToPass = "acquisitionValue = '" + acqValToCheck + "'";
-                updateBefore = true;
-            }
-        }
+                String checkImei = imei.getText();
+                System.out.println(checkImei);
+                System.out.println(blub[5]);
+                if (!checkImei.isBlank()) {
+                    if (!checkImei.equals(blub[5])) {
+                        if (updateBefore) {
+                            queryToPass = queryToPass + separator + "imei = '" + checkImei + "'";
+                        } else {
+                            queryToPass = "imei = '" + imei.getText() + "'";
+                            updateBefore = true;
+                        }
+                    }
+                }
+                String acqValToCheck = acquisitionValue.getText().replaceAll("[,]", "");
+                if (!acqValToCheck.equals(blub[6])) {
+                    if (updateBefore) {
+                        queryToPass = queryToPass + separator + "acquisitionValue = '"
+                                + acqValToCheck + "'";
+                    } else {
+                        queryToPass = "acquisitionValue = '" + acqValToCheck + "'";
+                        updateBefore = true;
+                    }
+                }
 
-        /*Date-Check
-        proves more tricky; needs to get newly selected Date from Update-Device-Panel
-        and transform it into SQL-formatted String to run check if data changed and 
-        proceed as documented above
-         */
-        SelectedDate sd = acquisitionDate.getSelectedDate();
-        LocalDate dateToString = LocalDate.of(sd.getYear(), sd.getMonth(), sd.getDay());
-        String dts = dateToString.toString();
-        if (!dts.equals(blub[9])) {
-            if (updateBefore) {
-                queryToPass = queryToPass + separator + "acquisitionDate = '" + dateToString + "'";
-            } else {
-                queryToPass = "acquisitionDate = '" + dateToString + "'";
-                updateBefore = true;
-            }
-        }
-        
-        /* Admin-Check
-        get selected Admin-ID from ComboBox
-        */
-        String adminToCheck = administrator.getSelectedItem().toString();
-        if (!adminToCheck.equals(blub[10])) {
-            if (updateBefore) {
-                queryToPass = queryToPass + separator + "administrators_adminID = '" + adminToCheck + "'";
-            } else {
-                queryToPass = "acquisitionDate = '" + dateToString + "'";
-                updateBefore = true;
-            }
-        }
+                /*Date-Check
+                proves trickier; needs to get newly selected Date from Update-Device-Panel
+                and transform it into SQL-formatted String to run check if data changed and
+                proceed as documented above
+                 */
+                SelectedDate sd = acquisitionDate.getSelectedDate();
+                LocalDate dateToString = LocalDate.of(sd.getYear(), sd.getMonth(), sd.getDay());
+                String dts = dateToString.toString();
+                if (!dts.equals(blub[7])) {
+                    if (updateBefore) {
+                        queryToPass = queryToPass + separator + "acquisitionDate = '" + dateToString + "'";
+                    } else {
+                        queryToPass = "acquisitionDate = '" + dateToString + "'";
+                        updateBefore = true;
+                    }
+                }
 
-        try {
+                /* Admin-Check
+                get selected Admin-ID from ComboBox
+                 */
+                String adminToCheck = administrator.getSelectedItem().toString();
+                if (!adminToCheck.equals(blub[8])) {
+                    if (updateBefore) {
+                        queryToPass = queryToPass + separator + "administrators_adminID = '" + adminToCheck + "'";
+                    } else {
+                        queryToPass = "acquisitionDate = '" + dateToString + "'";
+                        updateBefore = true;
+                    }
+                }
 
-            if (updateBefore) {
-                dbh.updateDevice(queryToPass, invNoToUpdate);
-                JOptionPane.showMessageDialog(null, "Device Feld(er) geändert", "Success", 1);
-            } else {
-                JOptionPane.showMessageDialog(null, //no owner frame
-                        "Keine Änderungen am Datensatz festgestellt", //text to display
-                        "Error", //title
-                        JOptionPane.WARNING_MESSAGE);
+                try {
+
+                    if (updateBefore) {
+                        dbh.updateDevice(queryToPass, invNoToCheck);
+                        JOptionPane.showMessageDialog(null, "Device Feld(er) geändert", "Success", 1);
+                    } else {
+                        JOptionPane.showMessageDialog(null, //no owner frame
+                                "Keine Änderungen am Datensatz festgestellt", //text to display
+                                "Error", //title
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                    JOptionPane.showMessageDialog(null, "Ein Fehler ist beim Datenbankzugriff aufgetreten",
+                            "SQL-Error", 0);
+                }
+
             }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            JOptionPane.showMessageDialog(null, "Ein Fehler ist beim Datenbankzugriff aufgetreten",
-                    "SQL-Error", 0);
-        }
+
+        });
     }
 
+    /**
+     * allows user to reset Textfields to their original values
+     */
+    public void resetTfs() {
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fillTFs();
+            }
+        });
+
+    }
 }

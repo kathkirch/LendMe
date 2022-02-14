@@ -57,9 +57,17 @@ public class Inventory_Verifier extends InputVerifier {
      */
     private void setUpNumberFormat() {
         nf = NumberFormat.getNumberInstance();
+        nf.setMinimumFractionDigits(2);
         nf.setMaximumFractionDigits(2);
     }
 
+    /**
+     * implement Logic for verification of user-input
+     * if user input is incorrect - display Error-Message, do not allow Focus
+     * lost from Textfield
+     * @param input which Component is being checked
+     * @return if user-input was correct or not
+     */
     @Override
     public boolean verify(JComponent input) {
 
@@ -100,12 +108,18 @@ public class Inventory_Verifier extends InputVerifier {
             return false;
 
             // check if user input in JTF acquisiton Value matches the format
-            // 1-7 pre-decimal places, 0-2 decimal places and . as decimal delemiter
+            // 1-7 pre-decimal places, 0-2 decimal places
+            // allowing . as decimal delemiter and , as thousand delemiter
+            // resulting in an allowed format of #,###,###.##
         } else if (input == acqValue) {
             String getAcqValue = acqValue.getText();
 
-            if (!(getAcqValue.matches("[0-9]{1,7}[.]{1}[0-9]{0,2}")
-                    || getAcqValue.matches("[0-9]{1,7}"))) {
+            if (!(getAcqValue.matches("[0-9]{1,7}.[0-9]{1,2}")
+                    || getAcqValue.matches("[0-9]{1,7}")
+                    || getAcqValue.matches("[0-9]{1,3},[0-9]{3}")
+                    || getAcqValue.matches("[0-9]{1,3},[0-9]{3}.[0-9]{1,2}")
+                    || getAcqValue.matches("[0-9]{1},[0-9]{3},[0-9]{3}")
+                    || getAcqValue.matches("[0-9]{1},[0-9]{3},[0-9]{3}.[0-9]{1,2}"))) {
 
                 JOptionPane.showMessageDialog(null, //no owner frame
                         "Bitte max. 7 Vor- und 2 Nachkommastellen sowie . als Dezimaltrennzeichen eingeben", //text to display
@@ -114,7 +128,7 @@ public class Inventory_Verifier extends InputVerifier {
                 return false;
             } else {
                 //formats Input
-                Double asDbl = Double.parseDouble(getAcqValue);
+                Double asDbl = Double.parseDouble(getAcqValue.replaceAll("[,]", ""));
                 setUpNumberFormat();
                 acqValue.setText(nf.format(asDbl));
             }
@@ -127,8 +141,7 @@ public class Inventory_Verifier extends InputVerifier {
             //check if user input in JTF inventoryNumber is between 1 and 11 digits
             if (!invToCheck.matches("[0-9]{0,11}")) {
                 JOptionPane.showMessageDialog(null, //no owner frame
-                        "Bitte die max. 11-stellige Inventarnummer eingeben oder\n"
-                        + "das Feld freilassen, um automatisch eine zu generieren", //text to display
+                        "Bitte die max. 11-stellige Inventarnummer eingeben", //text to display
                         "Error", //title
                         JOptionPane.WARNING_MESSAGE);
 

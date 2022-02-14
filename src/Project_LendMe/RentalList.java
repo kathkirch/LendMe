@@ -47,7 +47,8 @@ public class RentalList extends Rentals{
     }
     
     /**
-     *
+     * method to get the number of days the device is already lent
+     * 
      * @param rentalDate as a LocalDate object needed to get difference
      * between rentalDate and currentDate
      * calls the isLeapYear method to proof if currentYear is Leap year 

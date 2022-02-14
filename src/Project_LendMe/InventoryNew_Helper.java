@@ -6,6 +6,8 @@ package Project_LendMe;
 
 import com.raven.datechooser.DateChooser;
 import com.raven.datechooser.SelectedDate;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -135,10 +137,10 @@ public class InventoryNew_Helper {
         values[8] = imei.getText();
 
         /*
-    fields left blank by user are passed as blank String
-    since IMEI is UNIQUE we need to check if it was left blank
-    if YES we ignore it in our query, SQL will automatically null it
-    if NO we pass the value as usually
+        fields left blank by user are passed as blank String;
+        since IMEI is UNIQUE we need to check if it was left blank
+        if YES we ignore it in our query to avoid SQLException (SQL will automatically null it9
+        if NO we pass the value as usually
          */
         boolean noImei = values[8].isBlank();
 
@@ -182,6 +184,8 @@ public class InventoryNew_Helper {
         }
     }
 
+    
+
     //reset all fields in the New Device Panel
     public void resetNewDeviceTextfields() {
         productname.setText("");
@@ -196,5 +200,29 @@ public class InventoryNew_Helper {
 
         Date today = new Date();
         acqDate.setSelectedDate(today);
+    }
+    
+    public void saveClickListener() {
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                concatInsertStringCallInsertMethod();
+                resetNewDeviceTextfields();
+
+            }
+
+        });
+
+    }
+    
+    public void clearClickListener() {
+        clear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetNewDeviceTextfields();
+            }
+            
+        });
     }
 }
