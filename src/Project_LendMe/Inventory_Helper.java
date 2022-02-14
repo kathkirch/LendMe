@@ -27,7 +27,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  * Helper class handling logic connected to Inventory Table
@@ -344,7 +343,19 @@ public class Inventory_Helper extends MyTableHelper implements FilterSortModel {
 
     /**
      * Handles click on 'Neues Device anlegen'
-     * @params
+     * @param invInsert_panel pass element to constructor
+     * @param insertPN pass element to constructor
+     * @param insertManu pass element to constructor
+     * @param insertInvNo pass element to constructor
+     * @param insertImei pass element to constructor
+     * @param insertLoc pass element to constructor
+     * @param insertNotes pass element to constructor
+     * @param insertAdmin pass element to constructor
+     * @param insertAV pass element to constructor
+     * @param insertAD pass element to constructor
+     * @param insertSave pass element to constructor
+     * @param insertClear pass element to constructor
+     * 
      */
     public void insert(JPanel invInsert_panel, JTextField insertPN, JTextField insertManu,
             JTextField insertInvNo, JTextField insertImei, JTextField insertLoc,

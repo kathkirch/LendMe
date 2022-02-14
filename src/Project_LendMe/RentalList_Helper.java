@@ -10,11 +10,8 @@ import Comparators.RentalUserIDComparator;
 import Comparators.RentallistLentDaysComparator;
 import Comparators.RentallistManuNameComparator;
 import Comparators.RentallistProNameComparator;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
@@ -68,14 +65,21 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         
     }
     
-
+    /**
+     * method to call the super method MyTableHelper.initRentalList()
+     * method is called in the refreshTable() method
+     * @param rentallist as a List of RentalList-Objects to iterate through
+     * @return a double object array 
+     */
     @Override
     public Object[][] initRentalList(List<RentalList> rentallist) {
-        Object [] [] data = super.initRentalList(rentallist);
-        return data; 
+        return super.initRentalList(rentallist);
     }
 
-    
+    /**
+     * override method to populate the table with its data
+     * overrides the column size 
+     */
     @Override
     public void populateTable() {
         super.populateTable();
@@ -91,6 +95,9 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
         table.setDefaultEditor(Object.class, null);
     }
 
+    /**
+     * method to call the super method MyTableHelper.fillBox()
+     */
     @Override
     public void fillBox() {
         super.fillBox(); 
@@ -101,7 +108,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
      * method to refresh the table with the elements from given list
      * 
      * @param list refresh the table with objects from the given list 
-     *  of RentalList-Objects
+     * of RentalList-Objects
      */
     public void refreshRentalTable (List<RentalList> list){ 
         data = initRentalList(list);
@@ -128,7 +135,7 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
     
     /**
      * adds an Listener for the clearBT, deletes all filter and search options 
-     * in the frame
+     * in the frame also sets the filteredList_rentals to null
      */
     @Override
     public void clearSelection(){
@@ -148,9 +155,12 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
     
   
     /**
-     * filters the data from database with the 
-     * whereClause(JComboBox) and filterString(JTextField) 
-     * and displays them in the table
+     * method to filter the data from database depending on  
+     * whereClause(JComboBox) = the table in which you want to filter/search
+     * and filterString(JTextField) representing the value to filter or search
+     * this method calls the filterRentals2() method to query the database
+     * if the filterRentals2() return any values this values are displayed in 
+     * the table 
      */
     @Override
     public void filterTable() {
@@ -180,6 +190,9 @@ public class RentalList_Helper extends MyTableHelper implements FilterSortModel{
     /**
      * adds an listener for radioButton asc and desc, depending on selection
      * it sorts the data in table
+     * before sorting the method checks if filteredList_rentals has elements in it
+     * if user has filtered the table before only the filteredList_rentals 
+     * would be sorted 
      */
     @Override
     public void sortTable() {

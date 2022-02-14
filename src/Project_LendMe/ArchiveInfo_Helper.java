@@ -15,7 +15,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- * Helper Class for ArchiveInfo_Panel 
+ * Helper-class for ArchiveInfo_Panel, builds all the components, listeners and 
+ * initialize the listeners for this panel
  * 
  * @author Katharina
  */
@@ -63,8 +64,9 @@ public class ArchiveInfo_Helper {
     }
     
     /**
-     *method to make all the textfield an textarea 
-     * in this component not editable
+     * method to iterate through the panel, 
+     * to get the JTextfields and JTextAreas and 
+     * set them not editable
      */
     public void notEditable () {
         
@@ -107,11 +109,10 @@ public class ArchiveInfo_Helper {
         
         notes.setLineWrap(true);
         notes.setWrapStyleWord(true);
-        
     }
     
     /**
-     * adds an Listiener for the 'Abbrechen' Button to go back to the 
+     * adds an Listener for the 'Abbrechen' Button to go back to the 
      * archive_panel
      */
     public void cancel () {

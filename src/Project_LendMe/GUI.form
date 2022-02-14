@@ -467,7 +467,7 @@
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="Herstellerbezeichnung"/>
+                            <Property name="text" type="java.lang.String" value="Hersteller"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="inventory_number">
@@ -746,10 +746,10 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="rental_ScrollPane" pref="442" max="32767" attributes="0"/>
+                                  <Component id="rental_ScrollPane" pref="437" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Component id="return_button" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="141" max="32767" attributes="0"/>
+                                  <EmptySpace pref="137" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -799,7 +799,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Filter- und Sortieroptionen:"/>
+                            <Property name="text" type="java.lang.String" value="Filter- und Sortieroptionen"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="return_button">
@@ -815,7 +815,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Filtern nach:"/>
+                            <Property name="text" type="java.lang.String" value="Filtern nach"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="filterText_rentallist">
@@ -1153,7 +1153,7 @@
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="Herstellerbezeichnung"/>
+                            <Property name="text" type="java.lang.String" value="Hersteller"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="userID_return">
@@ -2025,7 +2025,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Filtern nach:"/>
+                            <Property name="text" type="java.lang.String" value="Filtern nach"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[90, 20]"/>
@@ -2227,7 +2227,7 @@
                                                   </Group>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -2247,19 +2247,21 @@
                                       <Component id="inventory_desc" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="filter_options_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="inventory_filterText" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="inventory_btFilter" alignment="3" max="32767" attributes="0"/>
-                                      <Component id="inventory_btClear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                           <Component id="inventory_lower" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                           <Component id="inventory_larger" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                           <Component id="inventory_equals" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="filter_options_inventory" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="inventory_filterText" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="inventory_btFilter" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="inventory_btClear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="inventory_ScrollPane1" pref="543" max="32767" attributes="0"/>
+                                  <Component id="inventory_ScrollPane1" pref="527" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="inventory_btUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2315,7 +2317,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Filtern:"/>
+                            <Property name="text" type="java.lang.String" value="Filtern"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[90, 20]"/>
@@ -3097,7 +3099,7 @@
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="Herstellerbezeichnung"/>
+                            <Property name="text" type="java.lang.String" value="Hersteller"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="archInfo_user">

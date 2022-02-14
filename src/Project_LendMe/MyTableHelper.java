@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * 
  * @author Katharina, bstra
  */
-abstract public class MyTableHelper {
+abstract public class MyTableHelper implements FilterSortModel{
   
     JTable table;
     JScrollPane js;
@@ -36,9 +36,10 @@ abstract public class MyTableHelper {
     static List <Rentals> allRentals;
     static List <Devices> allDevices;
     
-    String [] columns;
+    public String [] columns;
     
-    Object [][] data;
+    public Object [][] data;
+    
     public DefaultTableModel model;
 
     public MyTableHelper(JTable table, JScrollPane js, JComboBox box, 
@@ -57,8 +58,6 @@ abstract public class MyTableHelper {
         ascRadio.setSelected(false);
         descRadio.setSelected(false);
         filterTF.setText("");
-
-        
     }
     
     /**

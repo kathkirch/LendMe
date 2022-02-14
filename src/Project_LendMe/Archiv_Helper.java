@@ -68,12 +68,22 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
         this.archive_panel = archive_panel;
     }
 
+    /**
+     * method to call the super method MyTableHelper.initRentals()
+     * method is called in the refreshTable() method
+     * @param rentals as a List of Rentals-Objects to iterate through
+     * @return a double object array 
+     */
     @Override
     public Object[][] initRentals(List<Rentals> rentals) {
         Object [] [] data = super.initRentals(rentals); 
         return data;
     }
 
+    /**
+     * override method to populate the table with its data
+     * overrides the column size 
+     */
     @Override
     public void populateTable() {
         super.populateTable(); 
@@ -84,21 +94,23 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
         colModel.getColumn(2).setPreferredWidth(91);
         colModel.getColumn(3).setPreferredWidth(102);
         colModel.getColumn(4).setPreferredWidth(102);
-
     }
 
+    /**
+     * method to call the super method MyTableHelper.fillBox()
+     */
     @Override
     public void fillBox() {
         super.fillBox(); 
     }
     
     
-     /**
-     * method to refresh the table with data from database
-     * 
-     * @param list refresh the table with objects from the given list 
-     * of Rentals-Objects
-     */ 
+    /**
+    * method to refresh the table with data from database
+    * 
+    * @param list refresh the table with objects from the given list 
+    * of Rentals-Objects
+    */ 
     public void refreshArchiveTable (List<Rentals> list){ 
         data = initRentals(list);
         model = new DefaultTableModel(data, columns);
@@ -128,9 +140,13 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
 
     
     /**
-     * filters the data from database with the 
-     * whereClause(JComboBox) and filterString(JTextField) 
-     * and displays them in the table
+     * method to filter the data from database with the 
+     * whereClause(JComboBox) you can define in which table you want to filter
+     * and with the filterString(JTextField) you can define the value you want to
+     * filter/search
+     * this method calls the filterRentals() method to query the database
+     * if filterRentals() returns any values this values are displayed in 
+     * the table 
      */
     @Override
     public void filterTable() {
@@ -153,6 +169,9 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     /**
      * adds an listener for radioButton asc and desc, depending on selection
      * it sorts the data in table
+     * before sorting the method checks if filteredList has elements in it
+     * if user has filtered the table before only the filteredList
+     * would be sorted
      */
     @Override
     public void sortTable() {
@@ -226,7 +245,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
     
     /**
      * method to initialize a doubleClick-MouseListener 
-     * gets the selected row, opens a new panel the info_archive_panel
+     * gets the selected row, opens a new panel the - info_archive_panel
      * to show more information about the selected rental/row
      * 
      * @param info_archive_panel to have access to this panel 
@@ -271,7 +290,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
                     }
                     
                     // set this static attributes with data from the selected row
-                    // to get data via id values
+                    // to get data via id values from the database
                     if (rentalID != 0 && userID != 0 && invNumber != 0){
                         RENTALID_ARCHIVE = rentalID;
                         USERID_ARCHIVE = userID;
@@ -307,7 +326,7 @@ public class Archiv_Helper extends MyTableHelper implements FilterSortModel {
         
      /**
      * adds an Listener for the clearBT, deletes all filter and search options 
-     * in the frame
+     * in the frame, also set the filteredList to null 
      */
     @Override
     public void clearSelection() {

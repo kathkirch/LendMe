@@ -113,12 +113,12 @@ public class DatabaseHelper {
 
     /**
      * method to return all active rentals joint with devices table to get
-     * manufacturer and productname      *
+     * manufacturer and productname
      * @return List with RentalList Objects
      */
     public List<RentalList> getRentallist() {
 
-        ArrayList<RentalList> Rentallist = new ArrayList<>();
+        ArrayList <RentalList> Rentallist = new ArrayList<>();
 
         String query = "SELECT rentalID, rentalDate, rentals.administrators_adminID "
                 + ",rentals.users_UserID, rentals.devices_inventoryNumber, "
@@ -127,8 +127,9 @@ public class DatabaseHelper {
                 + "join devices "
                 + "on devices_inventoryNumber = devices.inventoryNumber "
                 + "where returnDate IS NULL;";
-
+        
         try {
+            
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -294,7 +295,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * method to return devices with a specific invNumber
+     * method to return devices with a specific inventorynumber
      *
      * @param invNumber as a String needed to search for in the Database
      * @return Devices Objects as a List with the given invNumber
@@ -336,7 +337,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * method to return all userIDs saved in db
+     * method to return all userIDs stored in db
      *
      * @return List of Strings with all the UserID's in the Database
      */
@@ -369,7 +370,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * method to return all userYears saved in db
+     * method to return all userYears stored in db
      *
      * @return List of Strings with all UserYears from the database
      */
@@ -401,9 +402,10 @@ public class DatabaseHelper {
     }
 
     /**
+     * method to return the adminID of a specific device by its inventorynumber
      * 
-     * @param invNumber Device to query DB
-     * @return AdminID managing Device
+     * @param invNumber as a String to search for in the database
+     * @return the adminID as an String matching to the given inventorynumber
      */
     public String getDeviceAdminID(String invNumber) {
 
@@ -438,7 +440,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * method to return all AdminIDs saved in the db
+     * method to return all AdminIDs stored in the database
      *
      * @return List of Strings with all AdminID's from the database
      */
@@ -473,7 +475,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * method to return the Admin-Fullname for a given adminID
+     * method to return the Admin-Fullname by specific adminID
      *
      * @param adminID as a String needed to search for in the Database
      * @return adminName from the database with the given adminID
@@ -606,8 +608,8 @@ public class DatabaseHelper {
     }
     
     /**
-     ** method to search for a devices entry in database with 
-     *  a specific inventroyNumber
+     * method to search for a devices entry in database with 
+     * a specific inventroyNumber
      * 
      * @param invNumb as String needed to search in the Database
      * @return a Devices Object with the given invNumber
@@ -717,7 +719,9 @@ public class DatabaseHelper {
 
   
     /**
-     * @return returns all Devices saved in the database
+     * method to get all Devices stored in the Database
+     * 
+     * @return returns all Devices as a Devices-ArrayList
      */
     public ArrayList<Devices> getAllDevices2() {
 
@@ -768,7 +772,6 @@ public class DatabaseHelper {
                 }
             }
         }
-
         return allDevices;
     }
 
@@ -899,6 +902,7 @@ public class DatabaseHelper {
     ////////////////////////////////////////////////////////////////////////////
     /////////////////////////INSERT IN DATABASE/////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
+    
     /**
      * method to insert a new user in the database
      *
@@ -1018,7 +1022,7 @@ public class DatabaseHelper {
                 String s = "UPDATE " + table + " SET status = ?, users_UserID = ?"
                         + " WHERE inventoryNumber = ?;";
                 PreparedStatement prepStat = con.prepareStatement(s);
-                prepStat.setInt(1, Devices.lent);
+                prepStat.setInt(1, Devices.LENT);
                 prepStat.setLong(2, userID);
                 prepStat.setLong(3, device_inventoryNumber);
                 System.out.println(s);
@@ -1045,7 +1049,7 @@ public class DatabaseHelper {
      *
      * @param device_inventoryNumber needed to search for the device in the
      * database
-     * @param notes as a String, to save the notes in the notes field in
+     * @param notes as a String, to store the notes in the notes field in
      * database
      * @throws Project_LendMe.UserException caught in Return_Helper in method
      * 'createNewReturn'
@@ -1073,7 +1077,7 @@ public class DatabaseHelper {
                         + "WHERE inventoryNumber = ?";
 
                 PreparedStatement prepStat = con.prepareStatement(s);
-                prepStat.setInt(1, Devices.not_lent);
+                prepStat.setInt(1, Devices.NOT_LENT);
                 prepStat.setObject(2, nullLong);
                 prepStat.setString(3, notes);
                 prepStat.setLong(4, device_inventoryNumber);
@@ -1236,7 +1240,7 @@ public class DatabaseHelper {
         String table = "rentals";
         String joinTable = "devices";
         String where = "";
-        ArrayList<RentalList> filteredRentallist = new ArrayList<>();
+        ArrayList <RentalList> filteredRentallist = new ArrayList<>();
 
         switch (whereClause) {
             case 0:
@@ -1386,6 +1390,7 @@ public class DatabaseHelper {
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
+    
     /**
      * method to check wether user with given userID already exists in database
      * or not
