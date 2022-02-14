@@ -65,3 +65,13 @@ build/built-jar.properties
 *.properties
 *.properties
 *.class
+nbproject/project.properties
+build/built-jar.properties
+build/classes/Project_LendMe/Administrators.class
+build/classes/Project_LendMe/DatabaseHelper.class
+build/classes/Project_LendMe/Devices.class
+build/classes/Project_LendMe/GUI.class
+build/classes/Project_LendMe/MainClass.class
+build/classes/Project_LendMe/Rental_Helper.class
+build/classes/Project_LendMe/Rentals.class
+build/classes/Project_LendMe/Users.class
